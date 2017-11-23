@@ -19,8 +19,8 @@ namespace tiger
                 bool bind(uint32_t addr, int port);
                 bool bind(int port);
                 bool connect(uint32_t addr, int port);
-                int send(const uint8_t *buffer, int bufferSize);
-                int recv(uint8_t *buffer, int maxBytes);
+                int send(const uint8_t *buffer, size_t bufferSize);
+                int recv(uint8_t *buffer, size_t maxBytes);
                 void close();
 
 
@@ -29,7 +29,7 @@ namespace tiger
                 struct sockaddr_in  serverSockAddr;
                 struct sockaddr_in  clientSockAddr;
 
-                bool isSocketValid(){return pSocket != -1;}
+                bool isSocketValid() {return pSocket != -1;}
 
 
             };

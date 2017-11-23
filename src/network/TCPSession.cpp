@@ -1,54 +1,81 @@
-#include "TCPSession.h"
-
+#include "network/TCPSession.h"
+#include <stdio.h>
 
 using namespace tiger::trains::network;
 
 
-TCPSession::TCPSession():tcpSocket()
+TCPSession::TCPSession(std::string name, char *servAddr, int port):name(name), servAddr(servAddr), port(port)
 {
-    tcpSocket.init();
+
 }
 
 TCPSession::~TCPSession()
 {
-    tcpSocket.close();
+    uint8_t sendBuffer[8];
+    uint32_t cmd = 2;
+    size_t len = 0;
+
+    memcpy(sendBuffer, &cmd, 4);
+    memcpy(sendBuffer + 4, &len, 4);
+    send(sendBuffer, len + 8);
 }
 
-
-bool TCPSession::connect(const char* addr, int port)
+ResposeMessage* TCPSession::login()
 {
-    struct hostent *host = gethostbyname(addr);
-    if (host == nullptr)
-        return false;
-    uint32_t addrInt32 = ((in_addr*)host->h_addr_list[0])->s_addr;
 
-    return tcpSocket.connect(addrInt32, port);
-}
-
-int TCPSession::send(const uint8_t* buffer, int bufferSize)
-{
-    int sent = 0;
-    int lastSent = 0;
-    while (sent < bufferSize)
+    if (!tcpClient.connect(servAddr, port))
     {
-        lastSent = tcpSocket.send(buffer + sent, bufferSize - sent);
-        if (lastSent == -1) break;
-        sent += lastSent;
+       return nullptr;
+    }
+    char buffer[255];
+    size_t len = sprintf(buffer, "{\n \"name\": \"%s\"\n}", name.c_str());
+    uint8_t sendBuffer[8+len];
+    uint32_t cmd = 1;
+
+    memcpy(sendBuffer, &cmd, 4);
+    memcpy(sendBuffer + 4, &len, 4);
+    memcpy(sendBuffer + 8, buffer, len);
+
+    int retVal = send(sendBuffer, len + 8);
+
+
+    return recv();
+
+
+
+}
+
+bool TCPSession::send(const uint8_t *buffer, size_t bufferSize)
+{
+    int retVal = tcpClient.send(buffer, bufferSize);
+    return retVal == -1 ? false : true;
+}
+
+ResposeMessage* TCPSession::recv()
+{
+    int retVal;
+    uint8_t firstBuffer[8];
+    retVal = tcpClient.recv(firstBuffer, 8);
+    if (retVal == -1)
+    {
+        return nullptr;
     }
 
-    return lastSent == -1 ? -1 : sent;
-}
+    ResposeMessage *message = new ResposeMessage();
+    memcpy(&message->result, firstBuffer, 4);
+    memcpy(&message->dataLength, firstBuffer + 4, 4);
 
-int TCPSession::recv(uint8_t* buffer, int maxBytes)
-{
-    int received = 0;
-    int lastReceived = 0;
-    while (received < maxBytes)
+    uint8_t secondBuffer[message->dataLength];
+    retVal = tcpClient.recv(secondBuffer, message->dataLength);
+
+    message->data = new char[message->dataLength];
+    memcpy(message->data, secondBuffer, message->dataLength);
+
+    if (retVal == -1)
     {
-        lastReceived = tcpSocket.recv(buffer + received, maxBytes - received);
-        if (lastReceived == -1) break;
-        received += lastReceived;
+        delete message;
+        message = nullptr;
     }
 
-    return lastReceived == -1 ? -1 : received;
+    return message;
 }

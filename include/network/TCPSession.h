@@ -1,8 +1,10 @@
 #ifndef TCPSESSION_H
 #define TCPSESSION_H
 
-#include "TCPSocket.h"
-#include <netdb.h>
+#include <string>
+#include "network/TCPClient.h"
+#include "network/ResposeMessage.h"
+#include <cstring>
 
 namespace tiger
 {
@@ -13,21 +15,25 @@ namespace tiger
             class TCPSession
             {
                 public:
-                    TCPSession();
+
+                    TCPSession(std::string name, char *servAddr, int port);
                     virtual ~TCPSession();
-
-                    bool connect(const char* addr, int port);
-                    int send(const uint8_t *buffer, int bufferSize);
-                    int recv(uint8_t *buffer, int maxBytes);
-
-
-                protected:
+                    ResposeMessage* login();
+                    bool send(const uint8_t* buffer, size_t bufferSize);
+                    ResposeMessage* recv();
 
                 private:
-                    TCPSocket tcpSocket;
+                    std::string name;
+                    char *servAddr;
+                    int port;
+                    TCPClient tcpClient;
+
+
             };
 
         }
     }
 }
+
+
 #endif // TCPSESSION_H

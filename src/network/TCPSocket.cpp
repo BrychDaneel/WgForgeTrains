@@ -1,4 +1,4 @@
-#include "TCPSocket.h"
+#include "network/TCPSocket.h"
 
 using namespace tiger::trains::network;
 
@@ -19,7 +19,7 @@ bool TCPSocket::bind(uint32_t addr, int port)
 {
     clientSockAddr.sin_port = htons(port);
     clientSockAddr.sin_family = AF_INET;
-    clientSockAddr.sin_addr.s_addr = htonl(addr);
+    clientSockAddr.sin_addr.s_addr = addr;
     int retVal = ::bind(pSocket,(struct sockaddr*) &clientSockAddr, sizeof(clientSockAddr));
     return retVal == 0 ? true : false;
 }
@@ -40,7 +40,7 @@ bool TCPSocket::connect(uint32_t addr, int port)
     return retVal == 0 ? true : false;
 }
 
-int TCPSocket::send(const uint8_t* buffer, int bufferSize)
+int TCPSocket::send(const uint8_t* buffer, size_t bufferSize)
 {
     int bytesSend = -1;
     if (isSocketValid())
@@ -54,7 +54,7 @@ int TCPSocket::send(const uint8_t* buffer, int bufferSize)
     return bytesSend;
 }
 
-int TCPSocket::recv(uint8_t* buffer, int maxBytes = 1)
+int TCPSocket::recv(uint8_t* buffer, size_t maxBytes = 1)
 {
     int bytesRecieved = -1;
     if (isSocketValid())
