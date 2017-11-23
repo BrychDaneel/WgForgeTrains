@@ -5,6 +5,9 @@ namespace tiger{
 namespace trains{
 namespace models{
 
+    PointModel::PointModel(){
+    }
+
     PointModel::PointModel(const int idx, const int postId) :
         idx(idx), postId(postId){
     }
@@ -13,10 +16,13 @@ namespace models{
         return idx;
     }
 
-    const int PointModel::getPostId() const{
-        return postId;
+    void PointModel::setIdx(const int idx){
+        this->idx = idx;
     }
 
+    void PointModel::setPostId(const int postId){
+        this->postId = postId;
+    }
 }
 }
 }

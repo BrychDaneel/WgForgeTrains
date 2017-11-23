@@ -5,6 +5,9 @@ namespace tiger{
 namespace trains{
 namespace models{
 
+    DynamicMap::DynamicMap(){
+    }
+
     DynamicMap::DynamicMap(const int idx):
         idx(idx){
     }
@@ -27,6 +30,18 @@ namespace models{
 
     const vector<TrainModel> DynamicMap::getTrainList() const{
         return trainList;
+    }
+
+    void DynamicMap::setIdx(int idx){
+        this->idx = idx;
+    }
+
+    void DynamicMap::clearPostList(){
+        postList.clear();
+    }
+
+    void DynamicMap::clearTrainList(){
+        trainList.clear();
     }
 }
 }

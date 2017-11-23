@@ -18,10 +18,11 @@ namespace models{
 
     class DynamicMap{
         private:
-            const int idx;
+            int idx = 0;
             vector<PostModel> postList;
             vector<TrainModel> trainList;
         public:
+            DynamicMap();
             DynamicMap(const int idx);
 
             void addPost(const PostModel& post);
@@ -30,6 +31,10 @@ namespace models{
             const int getIdx() const;
             const vector<PostModel> getPostList() const;
             const vector<TrainModel> getTrainList() const;
+
+            void setIdx(int idx);
+            void clearPostList();
+            void clearTrainList();
     };
 }
 }

@@ -20,8 +20,8 @@ namespace models{
 
     class StaticMap{
         private:
-            const int idx;
-            const string name;
+            int idx = 0;
+            string name;
             vector<LineModel> lineList;
             vector<PointModel> pointList;
         public:
@@ -34,6 +34,11 @@ namespace models{
             const string getName() const;
             const vector<LineModel> getLineList() const;
             const vector<PointModel> getPointList() const;
+
+            void setIdx(const int idx) const;
+            void setName(const string name) const;
+            void clearLineList() const;
+            void clearPointList() const;
     };
 }
 }

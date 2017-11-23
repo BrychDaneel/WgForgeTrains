@@ -17,13 +17,14 @@ namespace models{
 
     class PostModel{
         private:
-            const int idx;
-            const PostType type;
-            const int armor;
-            const string name;
-            const int population;
-            const int product;
+            int idx = 0;
+            PostType type = PostType::UNKNOWN;
+            int armor = 0;
+            string name;
+            int population = 0;
+            int product = 0;
         public:
+            PostModel();
             PostModel(const int idx, const PostType type, const int armor, const string name,
                 const int population, const int product);
 
@@ -33,6 +34,13 @@ namespace models{
             const string getName() const;
             const int getPopulation() const;
             const int getProduct() const;
+
+            void setIdx(const int idx);
+            void setType(const PostType type);
+            void setArmor(const int armor);
+            void setName(const string name);
+            void setPopulation(const int population);
+            void setProduct(const int product);
     };
 }
 }

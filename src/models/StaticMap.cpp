@@ -1,4 +1,5 @@
 #include <models/StaticMap.h>
+#include <nlohmann/json.hpp>
 
 
 namespace tiger{
