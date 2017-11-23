@@ -1,6 +1,9 @@
 #include <convertors/json/MoveWriter.h>
 
 
+#include <nlohmann/json.hpp>
+
+
 namespace tiger{
 namespace trains{
 namespace convertors{
