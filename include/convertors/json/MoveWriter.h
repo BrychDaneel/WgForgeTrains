@@ -13,7 +13,7 @@ namespace json{
 
     class MoveWriter : public IMoveWriter{
         public:
-            const int writeMove(const models::MoveModel * move, char * buffer, const int bufferSize) const;
+            const int writeMove(const models::MoveModel * move, char * buffer,  int * bufferSize) const;
     };
 
 }

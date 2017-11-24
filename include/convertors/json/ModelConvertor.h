@@ -29,7 +29,7 @@ namespace json{
             const int readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const;
             const int readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const;
             const int readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const;
-            const int writeMove(const models::MoveModel * move, char * buffer, const int bufferSize) const;
+            const int writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const;
     };
 }
 }

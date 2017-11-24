@@ -9,17 +9,19 @@ namespace trains{
 namespace convertors{
 namespace json{
 
-    const int MoveWriter::writeMove(const models::MoveModel * move, char * buffer, const int bufferSize) const{
+    const int MoveWriter::writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const{
         nlohmann::json j;
         j["line_idx"] = move->getLineIdx();
         j["speed"] = move->getSpeedType();
         j["train_idx"] = move->getTrainIdx();
 
-        const char * cstr = j.dump().c_str();
+        std::string str = j.dump();
+        const char * cstr = str.c_str();
         int len = strlen(cstr);
-        if (len > bufferSize)
+        if (len > *bufferSize)
             return -1;
 
+        *bufferSize = len;
         for (int i=0; i<len; i++)
             buffer[i] = cstr[i];
 

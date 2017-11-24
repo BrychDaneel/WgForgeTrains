@@ -38,7 +38,7 @@ namespace json{
         return playerReader->readPlayer(buffer, bufferSize, playerModel);
     }
 
-    const int ModelConvertor::writeMove(const models::MoveModel * move, char * buffer, const int bufferSize) const{
+    const int ModelConvertor::writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const{
         return moveWriter->writeMove(move, buffer, bufferSize);
     }
 
