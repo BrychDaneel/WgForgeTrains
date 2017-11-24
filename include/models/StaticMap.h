@@ -25,6 +25,7 @@ namespace models{
             vector<LineModel> lineList;
             vector<PointModel> pointList;
         public:
+            StaticMap();
             StaticMap(const int idx, const string name);
 
             void addPoint(const PointModel& point);
@@ -35,10 +36,10 @@ namespace models{
             const vector<LineModel> getLineList() const;
             const vector<PointModel> getPointList() const;
 
-            void setIdx(const int idx) const;
-            void setName(const string name) const;
-            void clearLineList() const;
-            void clearPointList() const;
+            void setIdx(const int idx);
+            void setName(const string name);
+            void clearLineList();
+            void clearPointList();
     };
 }
 }

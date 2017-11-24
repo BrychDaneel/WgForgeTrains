@@ -22,6 +22,7 @@ namespace models{
             PointModel(const int idx, const int postId);
             const int getIdx() const;
             const int getPostId() const;
+            bool hasPost() const;
 
             void setIdx(const int idx);
             void setPostId(const int postId);

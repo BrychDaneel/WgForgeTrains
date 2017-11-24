@@ -8,11 +8,11 @@ namespace models{
     PlayerModel::PlayerModel(){
     }
 
-    PlayerModel::PlayerModel(const int idx, const int home, const string name) :
+    PlayerModel::PlayerModel(const string idx, const int home, const string name) :
         idx(idx), home(home), name(name){
     }
 
-    const int PlayerModel::getIdx() const{
+    const string PlayerModel::getIdx() const{
         return idx;
     }
 
@@ -24,7 +24,7 @@ namespace models{
         return name;
     }
 
-    void PlayerModel::setIdx(const int idx){
+    void PlayerModel::setIdx(const string idx){
         this->idx = idx;
     }
 

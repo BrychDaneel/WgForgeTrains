@@ -16,6 +16,14 @@ namespace models{
         return idx;
     }
 
+    const int PointModel::getPostId() const{
+        return postId;
+    }
+
+    bool PointModel::hasPost() const{
+        return postId != 0;
+    }
+
     void PointModel::setIdx(const int idx){
         this->idx = idx;
     }

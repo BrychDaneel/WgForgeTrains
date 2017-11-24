@@ -6,6 +6,9 @@ namespace tiger{
 namespace trains{
 namespace models{
 
+    StaticMap::StaticMap(){
+    }
+
     StaticMap::StaticMap(const int idx, const string name) :
         idx(idx), name(name)
     {
@@ -33,6 +36,22 @@ namespace models{
 
     const vector<PointModel> StaticMap::getPointList() const{
         return pointList;
+    }
+
+    void StaticMap::setIdx(const int idx){
+        this->idx = idx;
+    }
+
+    void StaticMap::setName(const string name){
+        this->name = name;
+    }
+
+    void StaticMap::clearLineList(){
+        lineList.clear();
+    }
+
+    void StaticMap::clearPointList(){
+        pointList.clear();
     }
 
 }

@@ -5,6 +5,10 @@
 
 #include <models/SpeedType.h>
 
+#include <string>
+
+using std::string;
+
 
 namespace tiger{
 namespace trains{
@@ -14,21 +18,23 @@ namespace models{
         private:
             int idx = 0;
             int lineIdx = 0;
-            int playerIdx = 0;
+            string playerIdx;
             int position = 0;
             SpeedType speed = SpeedType::STOP;
         public:
             TrainModel();
-            TrainModel(const int idx, const int lineIdx, const int playerIdx, const int position, const SpeedType speed);
+            TrainModel(const int idx, const int lineIdx, const string playerIdx, const int position, const SpeedType speed);
             const int getIdx() const;
             const int getLineIdx() const;
-            const int getPlayerIdx() const;
+            const string getPlayerIdx() const;
             const int getPosition() const;
             const SpeedType getSpeed() const;
 
+            bool isInLine() const;
+
             void setIdx(const int idx);
             void setLineIdx(const int lineIdx);
-            void setPlayerIdx(const int playerIdx);
+            void setPlayerIdx(const string playerIdx);
             void setPosition(const int position);
             void setSpeed(const SpeedType speed);
     };

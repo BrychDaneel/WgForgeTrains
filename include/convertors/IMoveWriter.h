@@ -13,7 +13,7 @@ namespace convertors{
     class IMoveWriter{
         public:
             virtual ~IMoveWriter(){};
-            virtual const int writeMove(const models::MoveModel * move, const char * buffer, const int bufferSize) const = 0;
+            virtual const int writeMove(const models::MoveModel * move, char * buffer, const int bufferSize) const = 0;
     };
 
 }

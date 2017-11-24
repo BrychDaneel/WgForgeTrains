@@ -15,6 +15,9 @@ namespace json{
         str.assign(buffer, bufferSize);
         auto j = nlohmann::json::parse(str);
 
+        staticMap->clearLineList();
+        staticMap->clearPointList();
+
         try{
             staticMap->setIdx(j["idx"]);
             staticMap->setName(j["name"]);
