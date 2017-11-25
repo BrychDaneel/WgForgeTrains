@@ -26,8 +26,8 @@ namespace world{
             int position;
         public:
             Train();
-            Train(const models::TrainModel& model, World* owner);
-            void upadte(models::TrainModel model);
+            Train(const models::TrainModel& model, World* world);
+            void update(models::TrainModel model);
 
             World* getWorld() const;
 

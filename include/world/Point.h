@@ -18,17 +18,18 @@ namespace world{
 
     class Point{
         private:
+            World * owner;
             int idx;
         public:
             Point();
-            Point(const models::PointModel& model, World * owner);
+            Point(const models::PointModel& model, World * world);
 
             World* getWorld() const;
 
             int getIdx() const;
             IPost* getPost() const;
             const std::vector<Line*>& getEdges() const;
-            const std::vector<Point*>& getNeighboards() const;
+            const std::vector<Point*> getNeighboards() const;
 
     };
 }
