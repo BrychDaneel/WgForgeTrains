@@ -74,7 +74,7 @@ ResposeMessage* TCPSession::recv()
     uint8_t secondBuffer[message->dataLength];
     retVal = tcpClient.recv(secondBuffer, message->dataLength);
 
-    message->data = new char[message->dataLength];
+    message->data = new char[message->dataLength + 1];
     memcpy(message->data, secondBuffer, message->dataLength + 1);
 
     if (retVal == -1)

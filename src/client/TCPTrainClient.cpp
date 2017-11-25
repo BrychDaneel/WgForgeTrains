@@ -105,7 +105,7 @@ void TCPTrainClient::turn()
 
 }
 
-void TCPTrainClient::move(const models::MoveModel &move)
+bool TCPTrainClient::move(const models::MoveModel &move)
 {
     char buffer[255];
     //size_t len = sprintf(buffer, "{\n\"line_idx\": 1,\n\"speed\": 1,\n\"train_idx\": 0\n}");
@@ -122,5 +122,12 @@ void TCPTrainClient::move(const models::MoveModel &move)
 
     network::ResposeMessage *message = tcpSession.recv();
 
+    bool bRetVal;
+    if (message->result == 0)
+        bRetVal = true;
+    else
+        bRetVal = false;
 
+    delete message;
+    return bRetVal;
 }

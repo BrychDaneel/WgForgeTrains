@@ -24,7 +24,7 @@ namespace tiger
                     virtual std::shared_ptr<const models::StaticMap> getStaticMap() = 0;
                     virtual std::shared_ptr<const models::DynamicMap> getDynamicMap() = 0;
                     virtual void turn() = 0;
-                    virtual void move(const models::MoveModel &move) = 0;
+                    virtual bool move(const models::MoveModel &move) = 0;
 
 
             };

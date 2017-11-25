@@ -27,7 +27,7 @@ namespace tiger
                     std::shared_ptr<const models::StaticMap> getStaticMap();
                     std::shared_ptr<const models::DynamicMap> getDynamicMap();
                     void turn();
-                    void move(const models::MoveModel &move);
+                    bool move(const models::MoveModel &move);
                     bool login();
 
                 private:
