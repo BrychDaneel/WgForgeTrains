@@ -24,11 +24,14 @@ namespace world{
     }
 
 
-    void World::init(const std::vector<models::PlayerModel>& playerModelList, const models::StaticMap& staticMap){
+    void World::init(const std::vector<models::PlayerModel>& playerModelList, const models::StaticMap& staticMap,  ICommandSender* commandSender){
+
+        this->commandSender = commandSender;
 
         for (models::PointModel pointModel : staticMap.getPointList()){
             Point* point = new Point(pointModel, this);
             pointMap[pointModel.getIdx()] = point;
+            pointList.push_back(point);
 
             std::vector<Line*> v;
             graph[point] = v;
@@ -82,6 +85,10 @@ namespace world{
                 trainsOfLine[lineMap[trainModel.getLineIdx()]].push_back( trainMap[trainModel.getIdx()] );
 
         }
+    }
+
+    ICommandSender* World::getCommandSender() const{
+        return commandSender;
     }
 
     const std::vector<Player*>& World::getPlayerList() const{
