@@ -2,7 +2,7 @@
 #ifndef _TIGER_TRAINS_WORLD_WORLD_H_
 #define _TIGER_TRAINS_WORLD_WORLD_H_
 
-
+#include <world/ICommandSender.h>
 #include <world/Point.h>
 #include <world/Line.h>
 #include <world/Player.h>
@@ -25,6 +25,8 @@ namespace world{
 
     class World{
         private:
+
+            ICommandSender* commandSender;
 
             std::map<int, IPost*> postMap;
             std::map<std::string, Player*> playerMap;
@@ -50,8 +52,10 @@ namespace world{
         public:
             virtual ~World();
 
-            void init(const std::vector<models::PlayerModel>& playerModelList, const models::StaticMap& staticMap);
+            void init(const std::vector<models::PlayerModel>& playerModelList, const models::StaticMap& staticMap, ICommandSender* commandSender=nullptr);
             void update(const models::DynamicMap& dynamicMap);
+
+            ICommandSender* getCommandSender() const;
 
             const std::vector<Player*>& getPlayerList() const;
             const std::vector<Train*>& getTrainList() const;

@@ -55,6 +55,11 @@ namespace world{
         return speed;
     }
 
+    void Train::move(Line* line, models::SpeedType speed){
+        models::MoveModel moveModel(idx, line->getIdx(), speed);
+        owner->getCommandSender()->move(moveModel);
+    }
+
 }
 }
 }

@@ -36,6 +36,8 @@ namespace world{
             Line * getLine() const;
             int getPosition() const;
             models::SpeedType getSpeed() const;
+
+            void move(Line* line, models::SpeedType speed);
     };
 }
 }
