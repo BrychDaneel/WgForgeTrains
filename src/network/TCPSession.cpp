@@ -4,7 +4,7 @@
 using namespace tiger::trains::network;
 
 
-TCPSession::TCPSession(std::string name, char *servAddr, int port):name(name), servAddr(servAddr), port(port)
+TCPSession::TCPSession(const char *name, const char *servAddr, int port):name(name), servAddr(servAddr), port(port)
 {
 
 }
@@ -28,7 +28,7 @@ ResposeMessage* TCPSession::login()
        return nullptr;
     }
     char buffer[255];
-    size_t len = sprintf(buffer, "{\n \"name\": \"%s\"\n}", name.c_str());
+    size_t len = sprintf(buffer, "{\n \"name\": \"%s\"\n}", name);
     uint8_t sendBuffer[8+len];
     uint32_t cmd = 1;
 
@@ -54,22 +54,28 @@ bool TCPSession::send(const uint8_t *buffer, size_t bufferSize)
 ResposeMessage* TCPSession::recv()
 {
     int retVal;
-    uint8_t firstBuffer[8];
-    retVal = tcpClient.recv(firstBuffer, 8);
+    uint8_t firstBuffer[4];
+    retVal = tcpClient.recv(firstBuffer, 4);
     if (retVal == -1)
     {
         return nullptr;
     }
 
+
     ResposeMessage *message = new ResposeMessage();
     memcpy(&message->result, firstBuffer, 4);
-    memcpy(&message->dataLength, firstBuffer + 4, 4);
+    retVal = tcpClient.recv(firstBuffer, 4);
+    if (retVal == -1)
+    {
+        return nullptr;
+    }
+    memcpy(&message->dataLength, firstBuffer, 4);
 
     uint8_t secondBuffer[message->dataLength];
     retVal = tcpClient.recv(secondBuffer, message->dataLength);
 
     message->data = new char[message->dataLength];
-    memcpy(message->data, secondBuffer, message->dataLength);
+    memcpy(message->data, secondBuffer, message->dataLength + 1);
 
     if (retVal == -1)
     {

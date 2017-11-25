@@ -20,8 +20,7 @@ bool TCPClient::connect(const char* addr, int port)
 {
     struct hostent *host = gethostbyname(addr);
     if (host == nullptr)
-        return false;
-    uint32_t addrInt32 = ((in_addr*)host->h_addr_list[0])->s_addr;
+        return false;    uint32_t addrInt32 = ((in_addr*)host->h_addr_list[0])->s_addr;
 
     return tcpSocket.connect(ntohl(addrInt32), port);
 }

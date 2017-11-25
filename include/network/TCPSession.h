@@ -16,15 +16,15 @@ namespace tiger
             {
                 public:
 
-                    TCPSession(std::string name, char *servAddr, int port);
+                    TCPSession(const char *name,const char *servAddr, int port);
                     virtual ~TCPSession();
                     ResposeMessage* login();
                     bool send(const uint8_t* buffer, size_t bufferSize);
                     ResposeMessage* recv();
 
                 private:
-                    std::string name;
-                    char *servAddr;
+                    const char *name;
+                    const char *servAddr;
                     int port;
                     TCPClient tcpClient;
 
