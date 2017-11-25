@@ -20,10 +20,10 @@ namespace json{
     }
 
     ModelConvertor::~ModelConvertor(){
-        free(dynamicMapReader);
-        free(staticMapReader);
-        free(playerReader);
-        free(moveWriter);
+        delete dynamicMapReader;
+        delete staticMapReader;
+        delete playerReader;
+        delete moveWriter;
     }
 
     const int ModelConvertor::readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const{
