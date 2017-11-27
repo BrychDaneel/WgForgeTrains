@@ -1,0 +1,30 @@
+{
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": null,
+            "player_id": "8f53c0f7-9260-4c4b-ab20-9fa8041895d3",
+            "position": null,
+            "product": 0,
+            "speed": 0
+        }
+    ]
+}
