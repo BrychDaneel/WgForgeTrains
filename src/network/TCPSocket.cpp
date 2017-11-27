@@ -1,4 +1,5 @@
 #include "network/TCPSocket.h"
+#include <iostream>
 
 using namespace tiger::trains::network;
 
@@ -42,6 +43,9 @@ bool TCPSocket::connect(uint32_t addr, int port)
 
 int TCPSocket::send(const uint8_t* buffer, size_t bufferSize)
 {
+    #ifdef  DEBUG
+        printf("%s  :  %i", buffer, maxBytes);
+    #endif // DEBUG
     int bytesSend = -1;
     if (isSocketValid())
     {
@@ -56,6 +60,9 @@ int TCPSocket::send(const uint8_t* buffer, size_t bufferSize)
 
 int TCPSocket::recv(uint8_t* buffer, size_t maxBytes = 1)
 {
+    #ifdef DEBUG
+        printf("%s  :  %i", buffer, maxBytes);
+    #endif // DEBUG
     int bytesRecieved = -1;
     if (isSocketValid())
     {
