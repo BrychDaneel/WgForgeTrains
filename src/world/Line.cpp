@@ -14,6 +14,7 @@ namespace world{
         startPont = owner->getPointByIdx(model.getStartPoint());
         endPont = owner->getPointByIdx(model.getEndPoint());
         length = model.getLength();
+        idx = model.getIdx();
     }
 
     World * Line::getWorld() const{

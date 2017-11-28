@@ -36,7 +36,8 @@ ResposeMessage* TCPSession::login()
     memcpy(sendBuffer + 4, &len, 4);
     memcpy(sendBuffer + 8, buffer, len);
 
-    int retVal = send(sendBuffer, len + 8);
+    size_t retVal = send(sendBuffer, len + 8);
+
 
 
     return recv();

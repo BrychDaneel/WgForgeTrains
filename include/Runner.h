@@ -4,6 +4,7 @@
 #include <string>
 #include <client/TCPTrainClient.h>
 #include <world/World.h>
+#include <ai/IBot.h>
 
 namespace tiger
 {
@@ -14,9 +15,13 @@ namespace tiger
             private:
                 client::TCPTrainClient trainClient;
                 world::World world;
+                ai::IBot *bot;
+
 
             public:
                 Runner(const char *name, const char *addr, int port);
+                void setBot(ai::IBot *bot);
+
                 virtual ~Runner()
                 {
                     trainClient.~TCPTrainClient();
