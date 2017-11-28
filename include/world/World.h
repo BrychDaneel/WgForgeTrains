@@ -28,6 +28,8 @@ namespace world{
 
             ICommandSender* commandSender;
 
+            bool initialized = false;
+
             std::map<int, IPost*> postMap;
             std::map<std::string, Player*> playerMap;
             std::map<int, Point*> pointMap;
@@ -54,6 +56,8 @@ namespace world{
 
             void init(const std::vector<models::PlayerModel>& playerModelList, const models::StaticMap& staticMap, ICommandSender* commandSender=nullptr);
             void update(const models::DynamicMap& dynamicMap);
+
+            bool isInitialized();
 
             ICommandSender* getCommandSender() const;
 

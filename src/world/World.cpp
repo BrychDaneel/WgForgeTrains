@@ -58,6 +58,7 @@ namespace world{
             homes[player] = playerModel.getHome();
         }
 
+        initialized = true;
     }
 
     void World::update(const models::DynamicMap& dynamicMap){
@@ -85,6 +86,10 @@ namespace world{
                 trainsOfLine[lineMap[trainModel.getLineIdx()]].push_back( trainMap[trainModel.getIdx()] );
 
         }
+    }
+
+    bool World::isInitialized(){
+        return initialized;
     }
 
     ICommandSender* World::getCommandSender() const{

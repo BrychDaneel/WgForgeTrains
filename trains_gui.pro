@@ -10,36 +10,9 @@ TEMPLATE = app
 
 INCLUDEPATH += include libs
 
-SOURCES += src/gui/main.cpp \
-    src/client/TCPTrainClient.cpp \
-    src/convertors/json/DynamicMapReader.cpp \
-    src/convertors/json/ModelConvertor.cpp \
-    src/convertors/json/MoveWriter.cpp \
-    src/convertors/json/PlayerReader.cpp \
-    src/convertors/json/StaticMapReader.cpp \
-    src/models/DynamicMap.cpp \
-    src/models/LineModel.cpp \
-    src/models/MoveModel.cpp \
-    src/models/PlayerModel.cpp \
-    src/models/PointModel.cpp \
-    src/models/PostModel.cpp \
-    src/models/StaticMap.cpp \
-    src/models/TrainModel.cpp \
-    src/network/TCPClient.cpp \
-    src/network/TCPSession.cpp \
-    src/network/TCPSocket.cpp \
-    src/utils/GraphPlaner.cpp \
-    src/world/BasePost.cpp \
-    src/world/Line.cpp \
-    src/world/Player.cpp \
-    src/world/Point.cpp \
-    src/world/PostFactory.cpp \
-    src/world/Train.cpp \
-    src/world/World.cpp \
-    src/Runner.cpp \
-    src/gui/WorldWidget.cpp
-
 HEADERS += \
+    include/ai/IBot.h \
+    include/ai/JustDoItBot.h \
     include/client/ITrainClient.h \
     include/client/TCPTrainClient.h \
     include/convertors/json/DynamicMapReader.h \
@@ -52,6 +25,7 @@ HEADERS += \
     include/convertors/IMoveWriter.h \
     include/convertors/IPlayerReader.h \
     include/convertors/IStaticMapReader.h \
+    include/gui/QWorldWidget.h \
     include/models/DynamicMap.h \
     include/models/LineModel.h \
     include/models/MoveModel.h \
@@ -76,7 +50,42 @@ HEADERS += \
     include/world/PostFactory.h \
     include/world/Train.h \
     include/world/World.h \
+    include/CommandSender.h \
+    include/QRunnerThread.h \
     include/Runner.h \
-    include/gui/WorldWidget.h \
-    include/gui/WorldWidget.h \
-    include/gui/Ticker.h
+    libs/nlohmann/json.hpp
+
+SOURCES += \
+    src/ai/JustDoItBot.cpp \
+    src/client/TCPTrainClient.cpp \
+    src/convertors/json/DynamicMapReader.cpp \
+    src/convertors/json/ModelConvertor.cpp \
+    src/convertors/json/MoveWriter.cpp \
+    src/convertors/json/PlayerReader.cpp \
+    src/convertors/json/StaticMapReader.cpp \
+    src/gui/QWorldWidget.cpp \
+    src/models/DynamicMap.cpp \
+    src/models/LineModel.cpp \
+    src/models/MoveModel.cpp \
+    src/models/PlayerModel.cpp \
+    src/models/PointModel.cpp \
+    src/models/PostModel.cpp \
+    src/models/StaticMap.cpp \
+    src/models/TrainModel.cpp \
+    src/network/TCPClient.cpp \
+    src/network/TCPSession.cpp \
+    src/network/TCPSocket.cpp \
+    src/utils/GraphPlaner.cpp \
+    src/world/BasePost.cpp \
+    src/world/Line.cpp \
+    src/world/Player.cpp \
+    src/world/Point.cpp \
+    src/world/PostFactory.cpp \
+    src/world/Train.cpp \
+    src/world/World.cpp \
+    src/CommandSender.cpp \
+    src/main_gui.cpp \
+    src/QRunnerThread.cpp \
+    src/Runner.cpp
+
+

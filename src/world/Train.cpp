@@ -16,6 +16,8 @@ namespace world{
 
         if (model.isInLine())
             line = owner->getLineByIdx(model.getLineIdx());
+        else
+            line = nullptr;
 
         speed = model.getSpeed();
         position = model.getPosition();
@@ -24,6 +26,8 @@ namespace world{
     void Train::update(models::TrainModel model){
         if (model.isInLine())
             line = owner->getLineByIdx(model.getLineIdx());
+        else
+            line = nullptr;
 
         speed = model.getSpeed();
         position = model.getPosition();

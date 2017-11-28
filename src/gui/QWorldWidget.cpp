@@ -1,17 +1,24 @@
-#include <gui/WorldWidget.h>
+#include <gui/QWorldWidget.h>
+
+
 #include <utils/GraphPlaner.h>
 #include <QMap>
 #include <vector>
 #include <QPainter>
+#include <QTimer>
 
 namespace tiger {
 namespace trains {
 namespace gui {
 
 
-WorldWidget::WorldWidget(world::World * world){
-    this->world = world;
+QWorldWidget::QWorldWidget(world::World * world) : world(world){
+    QTimer * timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
+    timer->start(500);
+}
 
+void QWorldWidget::buildGraph(){
 
     int len = 0;
     QMap<world::Point*, int> pointToInd;
@@ -43,17 +50,28 @@ WorldWidget::WorldWidget(world::World * world){
 
 }
 
-void WorldWidget::paintEvent(QPaintEvent * event){
+void QWorldWidget::paintEvent(QPaintEvent * event){
+
+    if (!graphBuilded){
+        if (!world->isInitialized())
+            return;
+        else{
+            buildGraph();
+            graphBuilded = true;
+        }
+    }
 
     QPainter painter;
 
     painter.begin(this);
 
+    painter.setBrush(Qt::black);
+    painter.drawRect(0, 0, width(), height());
+
     painter.scale( width() / maxX / 1.2, height() / maxY / 1.2);
     painter.translate(maxX * 0.1, maxY * 0.1);
 
     painter.setPen(QPen(Qt::blue, 0.3));
-
     for (world::Line* line : world->getLineList()){
         QLineF qline(pointCoords[line->getStartPont()], pointCoords[line->getEndPont()]);
         painter.drawLine(qline);
@@ -64,6 +82,7 @@ void WorldWidget::paintEvent(QPaintEvent * event){
     for (world::Point* point : world->getPointList())
         painter.drawEllipse(pointCoords[point], 0.5, 0.5);
 
+    painter.setBrush(Qt::red);
     painter.setPen(QPen(Qt::red, 0.3));
     for (world::Train* train : world->getTrainList())
         if (train->getLine() != nullptr){
@@ -72,10 +91,10 @@ void WorldWidget::paintEvent(QPaintEvent * event){
             QPointF lpoint1 = pointCoords[line->getStartPont()];
             QPointF lpoint2 = pointCoords[line->getEndPont()];
 
-            float progress = train->getPosition() / line->getLenght();
+            float progress = train->getPosition() / (float) line->getLenght();
             QPointF trainPoint;
-            trainPoint.rx() = lpoint1.x() * progress + lpoint2.x() * (1 - progress);
-            trainPoint.ry() = lpoint1.y() * progress + lpoint2.y() * (1 - progress);
+            trainPoint.rx() = lpoint2.x() * progress + lpoint1.x() * (1 - progress);
+            trainPoint.ry() = lpoint2.y() * progress + lpoint1.y() * (1 - progress);
             painter.drawEllipse(trainPoint, 0.3, 0.3);
 
 

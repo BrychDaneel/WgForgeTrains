@@ -11,7 +11,7 @@ namespace tiger {
 namespace trains {
 namespace gui {
 
-    class WorldWidget : public QWidget{
+    class QWorldWidget : public QWidget{
     private:
         world::World * world;
         QMap<world::Point*, QPointF> pointCoords;
@@ -19,8 +19,12 @@ namespace gui {
         float maxX = 0;
         float maxY = 0;
 
+        bool graphBuilded = false;
+
+        void buildGraph();
+
     public:
-        WorldWidget(world::World * world);
+        QWorldWidget(world::World * world);
     protected:
         void paintEvent(QPaintEvent * event);
     };
