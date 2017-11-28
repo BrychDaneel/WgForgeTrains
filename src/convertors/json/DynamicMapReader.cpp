@@ -34,6 +34,8 @@ namespace json{
                     train.setPosition(jtrain["position"]);
 
                 train.setSpeed(jtrain["speed"]);
+                train.setCapacity(jtrain["capacity"]);
+                train.setProduct(jtrain["product"]);
 
                 dynamicMap->addTrain(train);
             }

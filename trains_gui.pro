@@ -53,7 +53,9 @@ HEADERS += \
     include/CommandSender.h \
     include/QRunnerThread.h \
     include/Runner.h \
-    libs/nlohmann/json.hpp
+    libs/nlohmann/json.hpp \
+    include/world/Town.h \
+    include/world/Market.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -86,6 +88,8 @@ SOURCES += \
     src/CommandSender.cpp \
     src/main_gui.cpp \
     src/QRunnerThread.cpp \
-    src/Runner.cpp
+    src/Runner.cpp \
+    src/world/Town.cpp \
+    src/world/Market.cpp
 
 

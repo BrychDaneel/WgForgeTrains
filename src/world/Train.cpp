@@ -21,6 +21,8 @@ namespace world{
 
         speed = model.getSpeed();
         position = model.getPosition();
+        capacity = model.getCapacity();
+        product = model.getProduct();
     }
 
     void Train::update(models::TrainModel model){
@@ -53,6 +55,14 @@ namespace world{
 
     int Train::getPosition() const{
         return position;
+    }
+
+    const int Train::getCapacity() const{
+        return capacity;
+    }
+
+    const int Train::getProduct() const{
+        return product;
     }
 
     models::SpeedType Train::getSpeed() const{

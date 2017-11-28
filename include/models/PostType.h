@@ -8,7 +8,9 @@ namespace trains{
 namespace models{
 
     enum class PostType{
-        UNKNOWN = 1
+        UNKNOWN = 0,
+        TOWN = 1,
+        MARKET = 2
     };
 
 }

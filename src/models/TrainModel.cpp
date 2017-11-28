@@ -8,8 +8,12 @@ namespace models{
     TrainModel::TrainModel(){
     }
 
-    TrainModel::TrainModel(const int idx, const int lineIdx, const string playerIdx, const int position, const SpeedType speed) :
-        idx(idx), lineIdx(lineIdx), playerIdx(playerIdx), position(position), speed(speed)
+    TrainModel::TrainModel(const int idx, const int lineIdx,
+                           const string playerIdx, const int position,
+                           const int capacity, const int product,
+                           const SpeedType speed) :
+        idx(idx), lineIdx(lineIdx), playerIdx(playerIdx), position(position),
+        capacity(capacity), product(product), speed(speed)
     {
     }
 
@@ -29,12 +33,20 @@ namespace models{
         return position;
     }
 
+    const int TrainModel::getCapacity() const{
+        return capacity;
+    }
+
+    const int TrainModel::getProduct() const{
+        return product;
+    }
+
     const SpeedType TrainModel::getSpeed() const{
         return speed;
     }
 
     bool TrainModel::isInLine() const{
-        return lineIdx != 0 && position != 0;
+        return lineIdx != 0;
     }
 
     void TrainModel::setIdx(const int idx){
@@ -51,6 +63,14 @@ namespace models{
 
     void TrainModel::setPosition(const int position){
         this->position = position;
+    }
+
+    void TrainModel::setCapacity(const int capacity){
+        this->capacity = capacity;
+    }
+
+    void TrainModel::setProduct(const int product){
+        this->product = product;
     }
 
     void TrainModel::setSpeed(const SpeedType speed){

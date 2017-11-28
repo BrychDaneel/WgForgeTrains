@@ -23,6 +23,8 @@ namespace world{
             Player* player;
             Line* line;
             models::SpeedType speed;
+            int capacity;
+            int product;
             int position;
         public:
             Train();
@@ -35,6 +37,8 @@ namespace world{
             Player * getPlayer() const;
             Line * getLine() const;
             int getPosition() const;
+            const int getCapacity() const;
+            const int getProduct() const;
             models::SpeedType getSpeed() const;
 
             void move(Line* line, models::SpeedType speed);
