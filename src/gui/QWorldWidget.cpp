@@ -65,6 +65,7 @@ void QWorldWidget::paintEvent(QPaintEvent * event){
 
     painter.begin(this);
 
+    painter.setPen(QPen(Qt::black, 0));
     painter.setBrush(Qt::black);
     painter.drawRect(0, 0, width(), height());
 
