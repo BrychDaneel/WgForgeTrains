@@ -13,6 +13,10 @@ Runner::Runner(const char *name, const char *addr, int port):trainClient(name, a
 
 }
 
+world::World * Runner::getWorld(){
+    return &world;
+}
+
 void Runner::setBot(ai::IBot *bot)
 {
     this->bot = bot;
