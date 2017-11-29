@@ -36,7 +36,7 @@ public:
     int getIdx() const;
     PostType getType() const;
     int getArmor() const;
-    const string getName() const;
+    const string& getName() const;
     int getPopulation() const;
     int getProduct() const;
 

@@ -30,7 +30,7 @@ int TrainModel::getLineIdx() const{
 }
 
 
-const string TrainModel::getPlayerIdx() const{
+const string& TrainModel::getPlayerIdx() const{
     return playerIdx;
 }
 
@@ -56,7 +56,7 @@ SpeedType TrainModel::getSpeed() const{
 
 
 bool TrainModel::isInLine() const{
-    return lineIdx != 0;
+    return lineIdx != ~0;
 }
 
 

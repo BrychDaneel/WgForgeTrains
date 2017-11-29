@@ -37,12 +37,12 @@ const string StaticMap::getName() const{
 }
 
 
-const vector<LineModel> StaticMap::getLineList() const{
+const vector<LineModel>& StaticMap::getLineList() const{
     return lineList;
 }
 
 
-const vector<PointModel> StaticMap::getPointList() const{
+const vector<PointModel>& StaticMap::getPointList() const{
     return pointList;
 }
 

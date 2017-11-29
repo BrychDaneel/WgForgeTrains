@@ -32,7 +32,7 @@ int PostModel::getArmor() const{
 }
 
 
-const string PostModel::getName() const{
+const string& PostModel::getName() const{
     return name;
 }
 

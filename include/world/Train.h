@@ -35,6 +35,7 @@ public:
 
     Train();
     Train(const models::TrainModel& model, World* world);
+
     void update(models::TrainModel model);
 
     World* getWorld() const;

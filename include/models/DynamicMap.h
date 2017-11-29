@@ -34,8 +34,8 @@ public:
     void addTrain(const TrainModel& train);
 
     int getIdx() const;
-    const vector<PostModel> getPostList() const;
-    const vector<TrainModel> getTrainList() const;
+    const vector<PostModel>& getPostList() const;
+    const vector<TrainModel>& getTrainList() const;
 
     void setIdx(int idx);
     void clearPostList();

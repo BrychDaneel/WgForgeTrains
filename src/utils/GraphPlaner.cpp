@@ -29,7 +29,7 @@ bool GraphPlaner::isCollade(float x1, float y1, float x2, float y2, float x3, fl
 }
 
 
-float GraphPlaner::getTemperature(const vector<Edge>& edges, vector<pair<float, float> >& coords, float avgEdge){
+float GraphPlaner::getTemperature(const vector<Edge>& edges, const vector<pair<float, float> >& coords, float avgEdge){
     float res = 0;
     for (const Edge e : edges){
         float sqrDist = SQR(coords[e.v].first - coords[e.t].first) + SQR(coords[e.v].second - coords[e.t].second);

@@ -20,7 +20,7 @@ class TrainModel{
 private:
 
     int idx = 0;
-    int lineIdx = 0;
+    int lineIdx = ~0;
     string playerIdx;
     int position = 0;
     int capacity = 0;
@@ -33,9 +33,10 @@ public:
     TrainModel(const int idx, const int lineIdx, const string playerIdx,
                const int position, const int capacity,
                const int product, const SpeedType speed);
+
     int getIdx() const;
     int getLineIdx() const;
-    const string getPlayerIdx() const;
+    const string& getPlayerIdx() const;
     int getPosition() const;
     int getCapacity() const;
     int getProduct() const;
