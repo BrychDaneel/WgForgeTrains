@@ -17,11 +17,11 @@ class QRunnerThred : public QThread{
 
 private:
 
-    Runner * runner;
+    Runner* runner;
 
 public:
 
-    QRunnerThred(Runner * runner, QObject * ppw = 0);
+    QRunnerThred(Runner* runner, QObject* ppw = 0);
     void run();
 
 };

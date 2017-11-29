@@ -84,7 +84,7 @@ public:
     IPost* getPostOfPoint(const Point* point) const;
     Point* getPointOfPost(const IPost* post) const;
 
-    const std::vector<Train*>& getTrainsOfPlayer(const Player * player) const;
+    const std::vector<Train*>& getTrainsOfPlayer(const Player* player) const;
     IPost* getHome(const Player* player) const;
     const std::vector<Train*>& getTrainsOfLine(const Line* line) const;
 

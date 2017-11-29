@@ -18,7 +18,7 @@ class QWorldWidget : public QWidget{
 
 private:
 
-    world::World * world;
+    world::World* world;
     QMap<world::Point*, QPointF> pointCoords;
 
     float maxX = 0;
@@ -30,11 +30,11 @@ private:
 
 public:
 
-    QWorldWidget(world::World * world);
+    QWorldWidget(world::World* world);
 
 protected:
 
-    void paintEvent(QPaintEvent * event);
+    void paintEvent(QPaintEvent* event);
 
 };
 

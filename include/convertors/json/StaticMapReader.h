@@ -16,7 +16,7 @@ class StaticMapReader : public IStaticMapReader{
 
 public:
 
-    int readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const;
+    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const;
 
 };
 

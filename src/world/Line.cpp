@@ -10,7 +10,7 @@ Line::Line(){
 }
 
 
-Line::Line(const models::LineModel& model, World * world){
+Line::Line(const models::LineModel& model, World* world){
     owner = world;
     startPont = owner->getPointByIdx(model.getStartPoint());
     endPont = owner->getPointByIdx(model.getEndPoint());
@@ -19,7 +19,7 @@ Line::Line(const models::LineModel& model, World * world){
 }
 
 
-World * Line::getWorld() const{
+World* Line::getWorld() const{
     return owner;
 }
 
@@ -29,12 +29,12 @@ int Line::getIdx() const{
 }
 
 
-Point * Line::getStartPont() const{
+Point* Line::getStartPont() const{
     return startPont;
 }
 
 
-Point * Line::getEndPont() const{
+Point* Line::getEndPont() const{
     return endPont;
 }
 

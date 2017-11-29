@@ -13,8 +13,8 @@ namespace trains {
 namespace gui {
 
 
-QWorldWidget::QWorldWidget(world::World * world) : world(world){
-    QTimer * timer = new QTimer(this);
+QWorldWidget::QWorldWidget(world::World* world) : world(world){
+    QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
     timer->start(500);
 }
@@ -31,7 +31,7 @@ void QWorldWidget::buildGraph(){
         graph.push_back(v);
     }
 
-    for (tiger::trains::world::Line * line : world->getLineList()){
+    for (tiger::trains::world::Line* line : world->getLineList()){
         int si = pointToInd[line->getStartPont()];
         int ei = pointToInd[line->getEndPont()];
         graph[si].push_back(std::pair<int, float> (ei, line->getLenght()));
@@ -53,7 +53,7 @@ void QWorldWidget::buildGraph(){
 }
 
 
-void QWorldWidget::paintEvent(QPaintEvent * event){
+void QWorldWidget::paintEvent(QPaintEvent* event){
 
     if (!graphBuilded){
         if (!world->isInitialized())

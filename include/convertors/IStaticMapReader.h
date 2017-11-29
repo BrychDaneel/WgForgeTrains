@@ -17,7 +17,7 @@ public:
 
     virtual ~IStaticMapReader(){}
 
-    virtual int readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const = 0;
+    virtual int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const = 0;
 };
 
 

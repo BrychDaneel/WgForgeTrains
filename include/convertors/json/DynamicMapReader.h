@@ -16,7 +16,7 @@ class DynamicMapReader : public IDynamicMapReader{
 
 public:
 
-    int readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const;
+    int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap) const;
 
 };
 

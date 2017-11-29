@@ -10,7 +10,7 @@ Point::Point(){
 }
 
 
-Point::Point(const models::PointModel& model, World * world){
+Point::Point(const models::PointModel& model, World* world){
     owner = world;
     idx = model.getIdx();
 }
@@ -38,7 +38,7 @@ const std::vector<Line*>& Point::getEdges() const{
 
 const std::vector<Point*> Point::getNeighboards() const{
     std::vector<Point*> result;
-    for (Line * line : owner->getEdges(this))
+    for (Line* line : owner->getEdges(this))
         if (line->getStartPont() != this)
             result.push_back(line->getStartPont());
         else

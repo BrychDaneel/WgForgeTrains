@@ -16,7 +16,7 @@ class MoveWriter : public IMoveWriter{
 
 public:
 
-    int writeMove(const models::MoveModel * move, char * buffer,  int * bufferSize) const;
+    int writeMove(const models::MoveModel* move, char* buffer,  int* bufferSize) const;
 
 };
 

@@ -30,7 +30,7 @@ private:
 public:
 
     Player();
-    Player(const models::PlayerModel& model, World * world);
+    Player(const models::PlayerModel& model, World* world);
 
     World* getWorld() const;
     const std::string& getIdx();

@@ -40,8 +40,8 @@ public:
     World* getWorld() const;
 
     int getIdx() const;
-    Player * getPlayer() const;
-    Line * getLine() const;
+    Player* getPlayer() const;
+    Line* getLine() const;
     int getPosition() const;
     int getCapacity() const;
     int getProduct() const;

@@ -10,7 +10,7 @@ namespace convertors{
 namespace json{
 
 
-int PlayerReader::readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const{
+int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel) const{
     string str;
     str.assign(buffer, bufferSize);
     auto j = nlohmann::json::parse(str);

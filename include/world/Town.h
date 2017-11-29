@@ -23,7 +23,7 @@ public:
 
     Town();
 
-    Town(const models::PostModel& model, World * world);
+    Town(const models::PostModel& model, World* world);
     void update(const models::PostModel& model);
 
     int getArrmor();

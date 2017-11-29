@@ -16,7 +16,7 @@ class PlayerReader : public IPlayerReader{
 
 public:
 
-    int readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const;
+    int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel) const;
 
 };
 

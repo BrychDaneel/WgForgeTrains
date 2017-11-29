@@ -23,13 +23,13 @@ class Point{
 
 private:
 
-    World * owner;
+    World* owner;
     int idx;
 
 public:
 
     Point();
-    Point(const models::PointModel& model, World * world);
+    Point(const models::PointModel& model, World* world);
 
     World* getWorld() const;
 

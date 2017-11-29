@@ -49,12 +49,12 @@ int Train::getIdx() const{
 }
 
 
-Player * Train::getPlayer() const{
+Player* Train::getPlayer() const{
     return player;
 }
 
 
-Line * Train::getLine() const{
+Line* Train::getLine() const{
     return line;
 }
 

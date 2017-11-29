@@ -14,7 +14,7 @@ BasePost::BasePost(){
 }
 
 
-BasePost::BasePost(const models::PostModel& model, World * world){
+BasePost::BasePost(const models::PostModel& model, World* world){
     owner = world;
     name = model.getName();
     idx = model.getIdx();
@@ -33,12 +33,12 @@ void BasePost::update(const models::PostModel& model){
 }
 
 
-Point * BasePost::getPoint() const{
+Point* BasePost::getPoint() const{
     return owner->getPointOfPost(this);
 }
 
 
-World * BasePost::getWorld() const{
+World* BasePost::getWorld() const{
     return owner;
 }
 

@@ -13,7 +13,7 @@ Runner::Runner(const char *name, const char *addr, int port):trainClient(name, a
 
 }
 
-world::World * Runner::getWorld(){
+world::World* Runner::getWorld(){
     return &world;
 }
 

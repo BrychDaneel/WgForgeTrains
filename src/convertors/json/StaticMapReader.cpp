@@ -10,7 +10,7 @@ namespace convertors{
 namespace json{
 
 
-int StaticMapReader::readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const{
+int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const{
 
     string str;
     str.assign(buffer, bufferSize);

@@ -6,19 +6,19 @@ using namespace tiger::trains::world;
 
 
 World::~World(){
-    for (IPost * post : getPostList())
+    for (IPost* post : getPostList())
         delete post;
 
-    for (Train * train : getTrainList())
+    for (Train* train : getTrainList())
         delete train;
 
-    for (Player * player : getPlayerList())
+    for (Player* player : getPlayerList())
         delete player;
 
-    for (Point * point : getPointList())
+    for (Point* point : getPointList())
         delete point;
 
-    for (Line * line : getLineList())
+    for (Line* line : getLineList())
         delete line;
 }
 
@@ -45,7 +45,7 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
 
 
     for (models::LineModel lineModel : staticMap.getLineList()){
-        Line * line = new Line(lineModel, this);
+        Line* line = new Line(lineModel, this);
         lineMap[lineModel.getIdx()] = line;
         lineList.push_back(line);
         graph[line->getStartPont()].push_back(line);
@@ -53,7 +53,7 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
     }
 
     for (models::PlayerModel playerModel : playerModelList){
-        Player * player = new Player(playerModel, this);
+        Player* player = new Player(playerModel, this);
         playerMap[playerModel.getIdx()] = player;
         playerList.push_back(player);
         homes[player] = playerModel.getHome();
@@ -78,7 +78,7 @@ void World::update(const models::DynamicMap& dynamicMap){
 
     for (models::TrainModel trainModel : dynamicMap.getTrainList()){
         if (trainMap.find(trainModel.getIdx()) == trainMap.end()){
-            Train * train = new Train(trainModel, this);
+            Train* train = new Train(trainModel, this);
             trainMap[trainModel.getIdx()] = train;
             trainList.push_back(train);
             trainsOfPlayer[playerMap[trainModel.getPlayerIdx()]].push_back(train);
@@ -170,7 +170,7 @@ Point* World::getPointOfPost(const IPost* post) const{
 }
 
 
-const std::vector<Train*>& World::getTrainsOfPlayer(const Player * player) const{
+const std::vector<Train*>& World::getTrainsOfPlayer(const Player* player) const{
     return trainsOfPlayer.find(player)->second;
 }
 

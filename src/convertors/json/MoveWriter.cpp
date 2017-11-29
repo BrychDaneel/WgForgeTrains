@@ -10,14 +10,14 @@ namespace convertors{
 namespace json{
 
 
-int MoveWriter::writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const{
+int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize) const{
     nlohmann::json j;
     j["line_idx"] = move->getLineIdx();
     j["speed"] = move->getSpeedType();
     j["train_idx"] = move->getTrainIdx();
 
     std::string str = j.dump();
-    const char * cstr = str.c_str();
+    const char* cstr = str.c_str();
     int len = strlen(cstr);
     if (len > *bufferSize)
         return -1;

@@ -10,7 +10,7 @@ Town::Town() : BasePost(){
 }
 
 
-Town::Town(const models::PostModel& model, World * world) :
+Town::Town(const models::PostModel& model, World* world) :
     BasePost(model, world)
 {
     arrmor = model.getArmor();

@@ -10,7 +10,7 @@ Market::Market() : BasePost(){
 }
 
 
-Market::Market(const models::PostModel& model, World * world) :
+Market::Market(const models::PostModel& model, World* world) :
     BasePost(model, world)
 {
     product = model.getProduct();

@@ -10,7 +10,7 @@ Player::Player(){
 }
 
 
-Player::Player(const models::PlayerModel& model, World * world){
+Player::Player(const models::PlayerModel& model, World* world){
     owner = world;
     name = model.getName();
     idx = model.getIdx();
