@@ -49,7 +49,8 @@ namespace utils{
         return res;
     }
 
-    const vector<pair<float, float> > GraphPlaner::planeGraph(const vector<vector<pair<int, float> > >& graph, int seed){
+    const vector<pair<float, float> > GraphPlaner::planeGraph(const vector<vector<pair<int, float> > >& graph, int seed)
+    {
         srand(seed);
 
         size_t size = graph.size();

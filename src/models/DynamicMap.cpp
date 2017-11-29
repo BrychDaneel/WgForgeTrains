@@ -20,7 +20,7 @@ namespace models{
         trainList.push_back(train);
     }
 
-    const int DynamicMap::getIdx() const{
+    int DynamicMap::getIdx() const{
         return idx;
     }
 

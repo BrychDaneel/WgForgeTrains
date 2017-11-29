@@ -9,7 +9,7 @@ namespace trains{
 namespace convertors{
 namespace json{
 
-    const int MoveWriter::writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const{
+    int MoveWriter::writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const{
         nlohmann::json j;
         j["line_idx"] = move->getLineIdx();
         j["speed"] = move->getSpeedType();

@@ -16,7 +16,7 @@ namespace models{
         return idx;
     }
 
-    const int PlayerModel::getHome() const{
+    int PlayerModel::getHome() const{
         return home;
     }
 

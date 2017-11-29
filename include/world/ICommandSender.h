@@ -12,7 +12,7 @@ namespace world{
     class ICommandSender{
         public:
             virtual void move(const models::MoveModel &move) = 0;
-            virtual ~ICommandSender(){};
+            virtual ~ICommandSender(){}
     };
 }
 }

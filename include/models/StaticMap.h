@@ -31,7 +31,7 @@ namespace models{
             void addPoint(const PointModel& point);
             void addLine(const LineModel& line);
 
-            const int getIdx() const;
+            int getIdx() const;
             const string getName() const;
             const vector<LineModel> getLineList() const;
             const vector<PointModel> getPointList() const;

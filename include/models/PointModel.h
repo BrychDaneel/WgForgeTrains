@@ -20,8 +20,8 @@ namespace models{
         public:
             PointModel();
             PointModel(const int idx, const int postId);
-            const int getIdx() const;
-            const int getPostId() const;
+            int getIdx() const;
+            int getPostId() const;
             bool hasPost() const;
 
             void setIdx(const int idx);

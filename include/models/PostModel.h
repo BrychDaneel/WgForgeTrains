@@ -28,12 +28,12 @@ namespace models{
             PostModel(const int idx, const PostType type, const int armor, const string name,
                 const int population, const int product);
 
-            const int getIdx() const;
-            const PostType getType() const;
-            const int getArmor() const;
+            int getIdx() const;
+            PostType getType() const;
+            int getArmor() const;
             const string getName() const;
-            const int getPopulation() const;
-            const int getProduct() const;
+            int getPopulation() const;
+            int getProduct() const;
 
             void setIdx(const int idx);
             void setType(const PostType type);

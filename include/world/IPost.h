@@ -23,7 +23,7 @@ namespace world{
             virtual World * getWorld() const = 0;
             virtual const std::string& getName() const = 0;
             virtual models::PostType getPostType() const = 0;
-            virtual ~IPost(){};
+            virtual ~IPost(){}
     };
 }
 }

@@ -22,7 +22,7 @@ namespace models{
         lineList.push_back(line);
     }
 
-    const int StaticMap::getIdx() const{
+    int StaticMap::getIdx() const{
         return idx;
     }
 

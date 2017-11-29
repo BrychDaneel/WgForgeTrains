@@ -11,10 +11,16 @@ namespace trains{
 namespace convertors{
 namespace json{
 
-    class PlayerReader : public IPlayerReader{
-        public:
-            const int readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const;
-    };
+
+class PlayerReader : public IPlayerReader{
+
+public:
+
+    int readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const;
+
+};
+
+
 }
 }
 }
@@ -22,5 +28,3 @@ namespace json{
 
 
 #endif
-
-

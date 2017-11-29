@@ -14,15 +14,15 @@ namespace models{
     {
     }
 
-    const int PostModel::getIdx() const{
+    int PostModel::getIdx() const{
         return idx;
     }
 
-    const PostType PostModel::getType() const{
+    PostType PostModel::getType() const{
         return type;
     }
 
-    const int PostModel::getArmor() const{
+    int PostModel::getArmor() const{
         return armor;
     }
 
@@ -30,11 +30,11 @@ namespace models{
         return name;
     }
 
-    const int PostModel::getPopulation() const{
+    int PostModel::getPopulation() const{
         return population;
     }
 
-    const int PostModel::getProduct() const{
+    int PostModel::getProduct() const{
         return product;
     }
 

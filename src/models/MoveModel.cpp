@@ -12,15 +12,15 @@ namespace models{
         lineIdx(lineIdx), trainIdx(trainIdx), speedType(speedType){
     }
 
-    const int MoveModel::getLineIdx() const{
+    int MoveModel::getLineIdx() const{
         return lineIdx;
     }
 
-    const int MoveModel::getTrainIdx() const{
+    int MoveModel::getTrainIdx() const{
         return trainIdx;
     }
 
-    const SpeedType MoveModel::getSpeedType() const{
+    SpeedType MoveModel::getSpeedType() const{
         return speedType;
     }
 

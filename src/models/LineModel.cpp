@@ -12,19 +12,19 @@ namespace models{
         idx(idx), length(length), startPoint(startPoint), endPoint(endPoint){
     }
 
-    const int LineModel::getIdx() const{
+    int LineModel::getIdx() const{
         return idx;
     }
 
-    const int LineModel::getLength() const{
+    int LineModel::getLength() const{
         return length;
     }
 
-    const int LineModel::getStartPoint() const{
+    int LineModel::getStartPoint() const{
         return startPoint;
     }
 
-    const int LineModel::getEndPoint() const{
+    int LineModel::getEndPoint() const{
         return endPoint;
     }
 

@@ -11,10 +11,16 @@ namespace trains{
 namespace convertors{
 namespace json{
 
-    class DynamicMapReader : public IDynamicMapReader{
-        public:
-            const int readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const;
-    };
+
+class DynamicMapReader : public IDynamicMapReader{
+
+public:
+
+    int readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const;
+
+};
+
+
 }
 }
 }
@@ -22,5 +28,3 @@ namespace json{
 
 
 #endif
-
-

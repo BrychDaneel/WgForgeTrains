@@ -12,11 +12,11 @@ namespace models{
         idx(idx), postId(postId){
     }
 
-    const int PointModel::getIdx() const{
+    int PointModel::getIdx() const{
         return idx;
     }
 
-    const int PointModel::getPostId() const{
+    int PointModel::getPostId() const{
         return postId;
     }
 

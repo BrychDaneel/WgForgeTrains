@@ -28,13 +28,13 @@ namespace models{
             TrainModel(const int idx, const int lineIdx, const string playerIdx,
                        const int position, const int capacity,
                        const int product, const SpeedType speed);
-            const int getIdx() const;
-            const int getLineIdx() const;
+            int getIdx() const;
+            int getLineIdx() const;
             const string getPlayerIdx() const;
-            const int getPosition() const;
-            const int getCapacity() const;
-            const int getProduct() const;
-            const SpeedType getSpeed() const;
+            int getPosition() const;
+            int getCapacity() const;
+            int getProduct() const;
+            SpeedType getSpeed() const;
 
             bool isInLine() const;
 

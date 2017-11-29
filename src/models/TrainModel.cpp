@@ -17,11 +17,11 @@ namespace models{
     {
     }
 
-    const int TrainModel::getIdx() const{
+    int TrainModel::getIdx() const{
         return idx;
     }
 
-    const int TrainModel::getLineIdx() const{
+    int TrainModel::getLineIdx() const{
         return lineIdx;
     }
 
@@ -29,19 +29,19 @@ namespace models{
         return playerIdx;
     }
 
-    const int TrainModel::getPosition() const{
+    int TrainModel::getPosition() const{
         return position;
     }
 
-    const int TrainModel::getCapacity() const{
+    int TrainModel::getCapacity() const{
         return capacity;
     }
 
-    const int TrainModel::getProduct() const{
+    int TrainModel::getProduct() const{
         return product;
     }
 
-    const SpeedType TrainModel::getSpeed() const{
+    SpeedType TrainModel::getSpeed() const{
         return speed;
     }
 
