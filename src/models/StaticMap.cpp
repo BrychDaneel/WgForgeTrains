@@ -6,53 +6,66 @@ namespace tiger{
 namespace trains{
 namespace models{
 
-    StaticMap::StaticMap(){
-    }
 
-    StaticMap::StaticMap(const int idx, const string name) :
-        idx(idx), name(name)
-    {
-    }
+StaticMap::StaticMap(){
+}
 
-    void StaticMap::addPoint(const PointModel& point){
-        pointList.push_back(point);
-    }
 
-    void StaticMap::addLine(const LineModel& line){
-        lineList.push_back(line);
-    }
+StaticMap::StaticMap(const int idx, const string name) :
+    idx(idx), name(name)
+{
+}
 
-    int StaticMap::getIdx() const{
-        return idx;
-    }
 
-    const string StaticMap::getName() const{
-        return name;
-    }
+void StaticMap::addPoint(const PointModel& point){
+    pointList.push_back(point);
+}
 
-    const vector<LineModel> StaticMap::getLineList() const{
-        return lineList;
-    }
 
-    const vector<PointModel> StaticMap::getPointList() const{
-        return pointList;
-    }
+void StaticMap::addLine(const LineModel& line){
+    lineList.push_back(line);
+}
 
-    void StaticMap::setIdx(const int idx){
-        this->idx = idx;
-    }
 
-    void StaticMap::setName(const string name){
-        this->name = name;
-    }
+int StaticMap::getIdx() const{
+    return idx;
+}
 
-    void StaticMap::clearLineList(){
-        lineList.clear();
-    }
 
-    void StaticMap::clearPointList(){
-        pointList.clear();
-    }
+const string StaticMap::getName() const{
+    return name;
+}
+
+
+const vector<LineModel> StaticMap::getLineList() const{
+    return lineList;
+}
+
+
+const vector<PointModel> StaticMap::getPointList() const{
+    return pointList;
+}
+
+
+void StaticMap::setIdx(const int idx){
+    this->idx = idx;
+}
+
+
+void StaticMap::setName(const string name){
+    this->name = name;
+}
+
+
+void StaticMap::clearLineList(){
+    lineList.clear();
+}
+
+
+void StaticMap::clearPointList(){
+    pointList.clear();
+}
+
 
 }
 }

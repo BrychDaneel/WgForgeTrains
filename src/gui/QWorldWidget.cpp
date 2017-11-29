@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QTimer>
 
+
 namespace tiger {
 namespace trains {
 namespace gui {
@@ -17,6 +18,7 @@ QWorldWidget::QWorldWidget(world::World * world) : world(world){
     connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
     timer->start(500);
 }
+
 
 void QWorldWidget::buildGraph(){
 
@@ -30,11 +32,11 @@ void QWorldWidget::buildGraph(){
     }
 
     for (tiger::trains::world::Line * line : world->getLineList()){
-                int si = pointToInd[line->getStartPont()];
-                int ei = pointToInd[line->getEndPont()];
-                graph[si].push_back(std::pair<int, float> (ei, line->getLenght()));
-                graph[ei].push_back(std::pair<int, float> (si, line->getLenght()));
-            }
+        int si = pointToInd[line->getStartPont()];
+        int ei = pointToInd[line->getEndPont()];
+        graph[si].push_back(std::pair<int, float> (ei, line->getLenght()));
+        graph[ei].push_back(std::pair<int, float> (si, line->getLenght()));
+    }
 
     std::vector<std::pair<float, float> > coords = tiger::trains::utils::GraphPlaner::planeGraph(graph, time(0));
 
@@ -49,6 +51,7 @@ void QWorldWidget::buildGraph(){
     }
 
 }
+
 
 void QWorldWidget::paintEvent(QPaintEvent * event){
 
@@ -109,4 +112,3 @@ void QWorldWidget::paintEvent(QPaintEvent * event){
 }
 }
 }
-

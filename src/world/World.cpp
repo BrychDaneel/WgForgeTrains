@@ -64,6 +64,7 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
 
 
 void World::update(const models::DynamicMap& dynamicMap){
+
     for (models::PostModel postModel : dynamicMap.getPostList()){
         if (postMap.find(postModel.getIdx()) == postMap.end()){
             IPost* post = PostFactory::createPost(postModel, this);

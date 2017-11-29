@@ -9,6 +9,7 @@ namespace trains{
 namespace convertors{
 namespace json{
 
+
 int DynamicMapReader::readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const
 {
     string str;

@@ -2,6 +2,7 @@
 #ifndef _TIGER_TRAINS_WORLD_WORLD_H_
 #define _TIGER_TRAINS_WORLD_WORLD_H_
 
+
 #include <world/ICommandSender.h>
 #include <world/Point.h>
 #include <world/Line.h>
@@ -23,7 +24,9 @@ namespace tiger{
 namespace trains{
 namespace world{
 
+
 class World{
+
 private:
 
     ICommandSender* commandSender;
@@ -84,11 +87,13 @@ public:
     const std::vector<Train*>& getTrainsOfPlayer(const Player * player) const;
     IPost* getHome(const Player* player) const;
     const std::vector<Train*>& getTrainsOfLine(const Line* line) const;
-};
-}
-}
-}
 
+};
+
+
+}
+}
+}
 
 
 #endif

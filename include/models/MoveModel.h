@@ -30,6 +30,7 @@ public:
     void setLineIdx(const int lineIdx);
     void setTrainIdx(const int trainIdx);
     void setSpeedType(const SpeedType speedType);
+
 };
 
 

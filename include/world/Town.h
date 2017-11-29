@@ -10,13 +10,17 @@ namespace tiger{
 namespace trains{
 namespace world{
 
+
 class Town : public BasePost{
+
 private:
+
     int arrmor;
     int population;
     int product;
 
 public:
+
     Town();
 
     Town(const models::PostModel& model, World * world);
@@ -25,10 +29,13 @@ public:
     int getArrmor();
     int getPopulation();
     int getProduct();
+
 };
+
 
 }
 }
 }
+
 
 #endif

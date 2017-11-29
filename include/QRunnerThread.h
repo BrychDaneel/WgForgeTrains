@@ -11,17 +11,24 @@
 namespace tiger{
 namespace trains{
 
-    class QRunnerThred : public QThread{
-        Q_OBJECT
 
-    private:
-        Runner * runner;
+class QRunnerThred : public QThread{
+    Q_OBJECT
 
-    public:
-        QRunnerThred(Runner * runner, QObject * ppw = 0);
-        void run();
-    };
+private:
+
+    Runner * runner;
+
+public:
+
+    QRunnerThred(Runner * runner, QObject * ppw = 0);
+    void run();
+
+};
+
+
 }
 }
+
 
 #endif
