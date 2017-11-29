@@ -36,6 +36,10 @@ protected:
 
     void paintEvent(QPaintEvent* event);
 
+    void drawLines(QPainter* painter);
+    void drawPoints(QPainter* painter);
+    void drawTrains(QPainter* painter);
+
 };
 
 
