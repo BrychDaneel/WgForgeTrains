@@ -47,6 +47,16 @@ int PostModel::getProduct() const{
 }
 
 
+int PostModel::getReplenishment() const{
+    return replenishment;
+}
+
+
+int PostModel::getProductCapacity() const{
+    return productCapacity;
+}
+
+
 void PostModel::setIdx(const int idx){
     this->idx = idx;
 }
@@ -74,6 +84,16 @@ void PostModel::setPopulation(const int population){
 
 void PostModel::setProduct(const int product){
     this->product = product;
+}
+
+
+void PostModel::setReplenishment(const int replenishment){
+    this->replenishment = replenishment;
+}
+
+
+void PostModel::setProductCapacity(const int productCapacity){
+    this->productCapacity = productCapacity;
 }
 
 

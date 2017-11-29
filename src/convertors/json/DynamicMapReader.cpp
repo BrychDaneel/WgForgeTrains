@@ -59,6 +59,12 @@ int DynamicMapReader::readDynamicMap(const char* buffer, const int bufferSize, m
 
             post.setProduct(jpost["product"]);
 
+            if (jpost["replenishment"].is_number_integer())
+                post.setReplenishment(jpost["replenishment"]);
+
+            if (jpost["product_capacity"].is_number_integer())
+                post.setProductCapacity(jpost["product_capacity"]);
+
             dynamicMap->addPost(post);
         }
 

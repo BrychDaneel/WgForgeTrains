@@ -16,6 +16,8 @@ class Market : public BasePost{
 private:
 
     int product;
+    int replenishment;
+    int productCapacity;
 
 public:
 
@@ -24,7 +26,9 @@ public:
     Market(const models::PostModel& model, World* world);
     void update(const models::PostModel& model);
 
-    int getProduct();
+    int getProduct() const;
+    int getReplenishment() const;
+    int getProductCapacity() const;
 
 };
 

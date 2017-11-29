@@ -27,17 +27,17 @@ void Town::update(const models::PostModel& model){
 }
 
 
-int Town::getArrmor(){
+int Town::getArrmor() const{
     return arrmor;
 }
 
 
-int Town::getPopulation(){
+int Town::getPopulation() const{
     return population;
 }
 
 
-int Town::getProduct(){
+int Town::getProduct() const{
     return product;
 }
 

@@ -12,7 +12,9 @@ int main(int argc, char *argv[]){
 
     QApplication application(argc, argv);
 
-    Runner runner("tiger", "localhost", 30001);
+    //Runner runner("tiger1", "wgforge-srv.wargaming.net", 443);
+    Runner runner("tiger", "wgforge-srv.wargaming.net", 443);
+    //Runner runner("tiger", "localhost", 30001);
 
     ai::JustDoItBot bot;
     bot.init(runner.getWorld());

@@ -26,9 +26,9 @@ public:
     Town(const models::PostModel& model, World* world);
     void update(const models::PostModel& model);
 
-    int getArrmor();
-    int getPopulation();
-    int getProduct();
+    int getArrmor() const;
+    int getPopulation() const;
+    int getProduct() const;
 
 };
 

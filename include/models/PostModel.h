@@ -26,6 +26,8 @@ private:
     string name;
     int population = 0;
     int product = 0;
+    int replenishment;
+    int productCapacity;
 
 public:
 
@@ -39,6 +41,8 @@ public:
     const string& getName() const;
     int getPopulation() const;
     int getProduct() const;
+    int getReplenishment() const;
+    int getProductCapacity() const;
 
     void setIdx(const int idx);
     void setType(const PostType type);
@@ -46,6 +50,8 @@ public:
     void setName(const string name);
     void setPopulation(const int population);
     void setProduct(const int product);
+    void setReplenishment(const int replenishment);
+    void setProductCapacity(const int productCapacity);
 
 };
 
