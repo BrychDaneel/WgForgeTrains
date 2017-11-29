@@ -10,21 +10,28 @@ namespace tiger{
 namespace trains{
 namespace world{
 
+
 class Market : public BasePost{
+
 private:
+
     int product;
 
 public:
+
     Market();
 
-    Market(const models::PostModel& model, World * world);
+    Market(const models::PostModel& model, World* world);
     void update(const models::PostModel& model);
 
     int getProduct();
+
 };
+
 
 }
 }
 }
+
 
 #endif

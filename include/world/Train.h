@@ -13,42 +13,49 @@ namespace tiger{
 namespace trains{
 namespace world{
 
-    class World;
-    class Player;
 
-    class Train{
-        private:
-            int idx;
-            World* owner;
-            Player* player;
-            Line* line;
-            models::SpeedType speed;
-            int capacity;
-            int product;
-            int position;
-        public:
-            Train();
-            Train(const models::TrainModel& model, World* world);
-            void update(models::TrainModel model);
+class World;
+class Player;
 
-            World* getWorld() const;
 
-            int getIdx() const;
-            Player * getPlayer() const;
-            Line * getLine() const;
-            int getPosition() const;
-            const int getCapacity() const;
-            const int getProduct() const;
-            models::SpeedType getSpeed() const;
+class Train{
 
-            void move(Line* line, models::SpeedType speed);
-    };
+private:
+
+    int idx;
+    World* owner;
+    Player* player;
+    Line* line;
+    models::SpeedType speed;
+    int capacity;
+    int product;
+    int position;
+
+public:
+
+    Train();
+    Train(const models::TrainModel& model, World* world);
+
+    void update(models::TrainModel model);
+
+    World* getWorld() const;
+
+    int getIdx() const;
+    Player* getPlayer() const;
+    Line* getLine() const;
+    int getPosition() const;
+    int getCapacity() const;
+    int getProduct() const;
+    models::SpeedType getSpeed() const;
+
+    void move(Line* line, models::SpeedType speed);
+
+};
+
+
 }
 }
 }
-
 
 
 #endif
-
-

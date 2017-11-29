@@ -16,30 +16,37 @@ namespace tiger{
 namespace trains{
 namespace models{
 
-    class DynamicMap{
-        private:
-            int idx = 0;
-            vector<PostModel> postList;
-            vector<TrainModel> trainList;
-        public:
-            DynamicMap();
-            DynamicMap(const int idx);
 
-            void addPost(const PostModel& post);
-            void addTrain(const TrainModel& train);
+class DynamicMap{
 
-            const int getIdx() const;
-            const vector<PostModel> getPostList() const;
-            const vector<TrainModel> getTrainList() const;
+private:
 
-            void setIdx(int idx);
-            void clearPostList();
-            void clearTrainList();
-    };
+    int idx = 0;
+    vector<PostModel> postList;
+    vector<TrainModel> trainList;
+
+public:
+
+    DynamicMap();
+    DynamicMap(const int idx);
+
+    void addPost(const PostModel& post);
+    void addTrain(const TrainModel& train);
+
+    int getIdx() const;
+    const vector<PostModel>& getPostList() const;
+    const vector<TrainModel>& getTrainList() const;
+
+    void setIdx(int idx);
+    void clearPostList();
+    void clearTrainList();
+
+};
+
+
 }
 }
 }
-
 
 
 #endif

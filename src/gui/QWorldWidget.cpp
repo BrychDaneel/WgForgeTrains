@@ -7,16 +7,18 @@
 #include <QPainter>
 #include <QTimer>
 
+
 namespace tiger {
 namespace trains {
 namespace gui {
 
 
-QWorldWidget::QWorldWidget(world::World * world) : world(world){
-    QTimer * timer = new QTimer(this);
+QWorldWidget::QWorldWidget(world::World* world) : world(world){
+    QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
     timer->start(500);
 }
+
 
 void QWorldWidget::buildGraph(){
 
@@ -29,12 +31,12 @@ void QWorldWidget::buildGraph(){
         graph.push_back(v);
     }
 
-    for (tiger::trains::world::Line * line : world->getLineList()){
-                int si = pointToInd[line->getStartPont()];
-                int ei = pointToInd[line->getEndPont()];
-                graph[si].push_back(std::pair<int, float> (ei, line->getLenght()));
-                graph[ei].push_back(std::pair<int, float> (si, line->getLenght()));
-            }
+    for (tiger::trains::world::Line* line : world->getLineList()){
+        int si = pointToInd[line->getStartPont()];
+        int ei = pointToInd[line->getEndPont()];
+        graph[si].push_back(std::pair<int, float> (ei, line->getLenght()));
+        graph[ei].push_back(std::pair<int, float> (si, line->getLenght()));
+    }
 
     std::vector<std::pair<float, float> > coords = tiger::trains::utils::GraphPlaner::planeGraph(graph, time(0));
 
@@ -50,7 +52,46 @@ void QWorldWidget::buildGraph(){
 
 }
 
-void QWorldWidget::paintEvent(QPaintEvent * event){
+
+void QWorldWidget::drawLines(QPainter* painter){
+    painter->setPen(QPen(Qt::blue, 0.3));
+    for (world::Line* line : world->getLineList()){
+        QLineF qline(pointCoords[line->getStartPont()], pointCoords[line->getEndPont()]);
+        painter->drawLine(qline);
+    }
+}
+
+
+void QWorldWidget::drawPoints(QPainter* painter){
+    painter->setPen(QPen(Qt::white, 0.3));
+    painter->setBrush(Qt::white);
+    for (world::Point* point : world->getPointList())
+        painter->drawEllipse(pointCoords[point], 0.5, 0.5);
+}
+
+
+void QWorldWidget::drawTrains(QPainter* painter){
+    painter->setBrush(Qt::red);
+    painter->setPen(QPen(Qt::red, 0.3));
+    for (world::Train* train : world->getTrainList())
+        if (train->getLine() != nullptr){
+            world::Line* line = train->getLine();
+
+            QPointF lpoint1 = pointCoords[line->getStartPont()];
+            QPointF lpoint2 = pointCoords[line->getEndPont()];
+
+            float progress = train->getPosition() / (float) line->getLenght();
+            QPointF trainPoint;
+            trainPoint.rx() = lpoint2.x() * progress + lpoint1.x() * (1 - progress);
+            trainPoint.ry() = lpoint2.y() * progress + lpoint1.y() * (1 - progress);
+            painter->drawEllipse(trainPoint, 0.3, 0.3);
+
+
+        }
+}
+
+
+void QWorldWidget::paintEvent(QPaintEvent* event){
 
     if (!graphBuilded){
         if (!world->isInitialized())
@@ -72,34 +113,9 @@ void QWorldWidget::paintEvent(QPaintEvent * event){
     painter.scale( width() / maxX / 1.2, height() / maxY / 1.2);
     painter.translate(maxX * 0.1, maxY * 0.1);
 
-    painter.setPen(QPen(Qt::blue, 0.3));
-    for (world::Line* line : world->getLineList()){
-        QLineF qline(pointCoords[line->getStartPont()], pointCoords[line->getEndPont()]);
-        painter.drawLine(qline);
-    }
-
-    painter.setPen(QPen(Qt::white, 0.3));
-    painter.setBrush(Qt::white);
-    for (world::Point* point : world->getPointList())
-        painter.drawEllipse(pointCoords[point], 0.5, 0.5);
-
-    painter.setBrush(Qt::red);
-    painter.setPen(QPen(Qt::red, 0.3));
-    for (world::Train* train : world->getTrainList())
-        if (train->getLine() != nullptr){
-            world::Line* line = train->getLine();
-
-            QPointF lpoint1 = pointCoords[line->getStartPont()];
-            QPointF lpoint2 = pointCoords[line->getEndPont()];
-
-            float progress = train->getPosition() / (float) line->getLenght();
-            QPointF trainPoint;
-            trainPoint.rx() = lpoint2.x() * progress + lpoint1.x() * (1 - progress);
-            trainPoint.ry() = lpoint2.y() * progress + lpoint1.y() * (1 - progress);
-            painter.drawEllipse(trainPoint, 0.3, 0.3);
-
-
-        }
+    drawLines(&painter);
+    drawPoints(&painter);
+    drawTrains(&painter);
 
     painter.end();
 
@@ -109,4 +125,3 @@ void QWorldWidget::paintEvent(QPaintEvent * event){
 }
 }
 }
-

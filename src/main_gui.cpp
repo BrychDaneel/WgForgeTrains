@@ -4,10 +4,12 @@
 #include <QRunnerThread.h>
 #include <ai/JustDoItBot.h>
 
+
 using namespace tiger::trains;
 
-int main(int argc, char *argv[])
-{
+
+int main(int argc, char *argv[]){
+
     QApplication application(argc, argv);
 
     Runner runner("tiger", "localhost", 30001);

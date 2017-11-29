@@ -13,41 +13,43 @@ namespace tiger{
 namespace trains{
 namespace world{
 
-    class World;
-    class Point;
-    class Train;
 
-    class Line{
+class World;
+class Point;
+class Train;
 
-        private:
-            World * owner;
-            Point * startPont;
-            Point * endPont;
-            int length;
-            int idx;
-        public:
-            Line();
-            Line(const models::LineModel& model, World * world);
 
-            int getIdx() const;
-            World * getWorld() const;
+class Line{
 
-            Point * getStartPont() const;
-            Point * getEndPont() const;
+private:
 
-            const std::vector<Point*> getPoints() const;
+    World* owner;
+    Point* startPont;
+    Point* endPont;
+    int length;
+    int idx;
 
-            const std::vector<Train*>& getTrains();
+public:
 
-            int getLenght() const;
+    Line();
+    Line(const models::LineModel& model, World* world);
 
-    };
+    World* getWorld() const;
+    int getIdx() const;
+    Point* getStartPont() const;
+    Point* getEndPont() const;
+    int getLenght() const;
+
+    const std::vector<Point*> getPoints() const;
+
+    const std::vector<Train*>& getTrains();
+
+};
+
+
 }
 }
 }
-
 
 
 #endif
-
-

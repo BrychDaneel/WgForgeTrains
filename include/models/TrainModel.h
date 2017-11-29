@@ -14,38 +14,47 @@ namespace tiger{
 namespace trains{
 namespace models{
 
-    class TrainModel{
-        private:
-            int idx = 0;
-            int lineIdx = 0;
-            string playerIdx;
-            int position = 0;
-            int capacity = 0;
-            int product = 0;
-            SpeedType speed = SpeedType::STOP;
-        public:
-            TrainModel();
-            TrainModel(const int idx, const int lineIdx, const string playerIdx,
-                       const int position, const int capacity,
-                       const int product, const SpeedType speed);
-            const int getIdx() const;
-            const int getLineIdx() const;
-            const string getPlayerIdx() const;
-            const int getPosition() const;
-            const int getCapacity() const;
-            const int getProduct() const;
-            const SpeedType getSpeed() const;
 
-            bool isInLine() const;
+class TrainModel{
 
-            void setIdx(const int idx);
-            void setLineIdx(const int lineIdx);
-            void setPlayerIdx(const string playerIdx);
-            void setPosition(const int position);
-            void setCapacity(const int capacity);
-            void setProduct(const int product);
-            void setSpeed(const SpeedType speed);
-    };
+private:
+
+    int idx = 0;
+    int lineIdx = ~0;
+    string playerIdx;
+    int position = 0;
+    int capacity = 0;
+    int product = 0;
+    SpeedType speed = SpeedType::STOP;
+
+public:
+
+    TrainModel();
+    TrainModel(const int idx, const int lineIdx, const string playerIdx,
+               const int position, const int capacity,
+               const int product, const SpeedType speed);
+
+    int getIdx() const;
+    int getLineIdx() const;
+    const string& getPlayerIdx() const;
+    int getPosition() const;
+    int getCapacity() const;
+    int getProduct() const;
+    SpeedType getSpeed() const;
+
+    bool isInLine() const;
+
+    void setIdx(const int idx);
+    void setLineIdx(const int lineIdx);
+    void setPlayerIdx(const string playerIdx);
+    void setPosition(const int position);
+    void setCapacity(const int capacity);
+    void setProduct(const int product);
+    void setSpeed(const SpeedType speed);
+
+};
+
+
 }
 }
 }
