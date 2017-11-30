@@ -30,7 +30,7 @@ void Runner::run()
 
     std::vector<models::PlayerModel> models;
     models::PlayerModel * player = trainClient.getMyPlayer();
-    models::StaticMap *staticMap;
+    models::StaticMap *staticMap = new models::StaticMap();
 
     trainClient.getStaticMap(staticMap);
     models.push_back(*player);
@@ -38,10 +38,14 @@ void Runner::run()
 
     delete staticMap;
 
+
+    models::DynamicMap *dynamicMap = new models::DynamicMap();
+
+    trainClient.getDynamicMap(dynamicMap);
+    world.update(*dynamicMap);
+
     if (bot != nullptr)
         bot->init(&world);
-
-    models::DynamicMap *dynamicMap;
 
     while (true)
     {

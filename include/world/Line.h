@@ -38,6 +38,7 @@ public:
     int getIdx() const;
     Point* getStartPont() const;
     Point* getEndPont() const;
+    Point* getAnotherPoint(const Point* point) const;
     int getLenght() const;
 
     const std::vector<Point*> getPoints() const;

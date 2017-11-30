@@ -38,6 +38,15 @@ Point* Line::getEndPont() const{
     return endPont;
 }
 
+Point *Line::getAnotherPoint(const Point *point) const
+{
+    if (point == startPont)
+        return endPont;
+    if (point == endPont)
+        return startPont;
+    return nullptr;
+}
+
 
 const std::vector<Point*> Line::getPoints() const{
     std::vector<Point*> v;
