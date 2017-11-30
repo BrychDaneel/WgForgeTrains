@@ -11,8 +11,9 @@ PostModel::PostModel(){
 
 
 PostModel::PostModel(const int idx, const PostType type, const int armor, const string name,
-                     const int population, const int product):
-    idx(idx), type(type), armor(armor), name(name), population(population), product(product)
+                     const int population, const int product, const int replenishment, const int productCapacity):
+    idx(idx), type(type), armor(armor), name(name), population(population), product(product),
+    replenishment(replenishment), productCapacity(productCapacity)
 {
 }
 

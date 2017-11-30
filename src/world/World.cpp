@@ -50,6 +50,8 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
         lineList.push_back(line);
         graph[line->getStartPont()].push_back(line);
         graph[line->getEndPont()].push_back(line);
+
+        trainsOfLine[line] = std::vector<Train*>();
     }
 
     for (models::PlayerModel playerModel : playerModelList){
@@ -74,7 +76,8 @@ void World::update(const models::DynamicMap& dynamicMap){
             postMap[postModel.getIdx()]->update(postModel);
     }
 
-    trainsOfLine.clear();
+    for (auto trainList = trainsOfLine.begin(); trainList != trainsOfLine.end(); trainList++)
+        trainList->second.clear();
 
     for (models::TrainModel trainModel : dynamicMap.getTrainList()){
         if (trainMap.find(trainModel.getIdx()) == trainMap.end()){

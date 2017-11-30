@@ -54,7 +54,8 @@ HEADERS += \
     tests/convertors/json/DynamicMapReaderTests.h \
     tests/convertors/json/MoveWriterTests.h \
     tests/convertors/json/StaticMapReaderTests.h \
-    tests/reader.h
+    tests/reader.h \
+    tests/world/WorldTests.h
 
 SOURCES +=  tests/main.cpp \
     \

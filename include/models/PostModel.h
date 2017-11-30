@@ -33,7 +33,7 @@ public:
 
     PostModel();
     PostModel(const int idx, const PostType type, const int armor, const string name,
-              const int population, const int product);
+              const int population, const int product, const int replenishment, const int productCapacity);
 
     int getIdx() const;
     PostType getType() const;
