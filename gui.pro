@@ -56,7 +56,8 @@ HEADERS += \
     include/Runner.h \
     libs/nlohmann/json.hpp \
     include/world/Town.h \
-    include/world/Market.h
+    include/world/Market.h \
+    include/utils/pi.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \

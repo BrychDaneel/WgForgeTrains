@@ -38,6 +38,7 @@ protected:
 
     void drawLines(QPainter* painter);
     void drawPoints(QPainter* painter);
+    void drawPosts(QPainter* painter);
     void drawTrains(QPainter* painter);
 
 };

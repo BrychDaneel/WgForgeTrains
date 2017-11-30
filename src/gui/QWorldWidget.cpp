@@ -6,6 +6,9 @@
 #include <vector>
 #include <QPainter>
 #include <QTimer>
+#include <world/Market.h>
+#include <world/Town.h>
+#include <sstream>
 
 
 namespace tiger {
@@ -43,18 +46,18 @@ void QWorldWidget::buildGraph(){
     for (int i=0; i<len; i++){
         std::pair<float, float> c = coords[i];
 
-        if (c.first > maxX)
-            maxX = c.first;
-        if (c.second > maxY)
-            maxY = c.second;
-        pointCoords[world->getPointList()[i]] = QPointF(c.first, c.second);
+        if (c.first * 10 > maxX)
+            maxX = c.first  * 10;
+        if (c.second  * 10 > maxY)
+            maxY = c.second  * 10;
+        pointCoords[world->getPointList()[i]] = QPointF(c.first, c.second) * 10;
     }
 
 }
 
 
 void QWorldWidget::drawLines(QPainter* painter){
-    painter->setPen(QPen(Qt::blue, 0.3));
+    painter->setPen(QPen(Qt::blue, 0.5));
     for (world::Line* line : world->getLineList()){
         QLineF qline(pointCoords[line->getStartPont()], pointCoords[line->getEndPont()]);
         painter->drawLine(qline);
@@ -63,16 +66,68 @@ void QWorldWidget::drawLines(QPainter* painter){
 
 
 void QWorldWidget::drawPoints(QPainter* painter){
-    painter->setPen(QPen(Qt::white, 0.3));
+    painter->setPen(QPen(Qt::white, 0));
     painter->setBrush(Qt::white);
     for (world::Point* point : world->getPointList())
-        painter->drawEllipse(pointCoords[point], 0.5, 0.5);
+        painter->drawEllipse(pointCoords[point], 1, 1);
+}
+
+
+void QWorldWidget::drawPosts(QPainter* painter){
+
+    QFont font = painter->font();
+    font.setPixelSize(1);
+    painter->setFont(font);
+    painter->setPen(QPen(Qt::yellow, 0));
+    for (world::IPost* post : world->getPostList()){
+
+            switch (post->getPostType()) {
+            case models::PostType::TOWN:
+                painter->setPen(QPen(Qt::yellow, 0));
+                painter->setBrush(Qt::yellow);
+                break;
+            case models::PostType::MARKET:
+                painter->setPen(QPen(Qt::green, 0));
+                painter->setBrush(Qt::green);
+                break;
+            default:
+                painter->setPen(QPen(Qt::yellow, 0));
+                break;
+            }
+
+            QPointF ppoint = pointCoords[post->getPoint()];
+            QRectF textRect(ppoint - QPoint(5, 2), ppoint - QPoint(-5, 1));
+            QString name = QString::fromStdString(post->getName());
+
+            painter->drawEllipse(ppoint, 1, 1);
+
+            painter->drawText(textRect, Qt::AlignCenter, name);
+
+            if (post->getPostType() == models::PostType::MARKET){
+                QRectF prodRect(ppoint + QPoint(-5, 1), ppoint + QPoint(5, 2));
+                world::Market* market = (world::Market*)post;
+                QString productText = QString("product: %1").arg(market->getProduct());
+                painter->drawText(prodRect, Qt::AlignCenter, productText);
+            }
+
+            if (post->getPostType() == models::PostType::TOWN){
+                world::Town* town = (world::Town*)post;
+
+                QRectF prodRect(ppoint + QPoint(-5, 1), ppoint + QPoint(5, 2));
+                QString productText = QString("product: %1").arg(town->getProduct());
+                painter->drawText(prodRect, Qt::AlignCenter, productText);
+
+                QRectF popRect(ppoint + QPoint(-5, 2), ppoint + QPoint(5, 3));
+                QString popText = QString("populat: %1").arg(town->getPopulation());
+                painter->drawText(popRect, Qt::AlignCenter, popText);
+            }
+    }
 }
 
 
 void QWorldWidget::drawTrains(QPainter* painter){
     painter->setBrush(Qt::red);
-    painter->setPen(QPen(Qt::red, 0.3));
+    painter->setPen(QPen(Qt::red, 0));
     for (world::Train* train : world->getTrainList())
         if (train->getLine() != nullptr){
             world::Line* line = train->getLine();
@@ -84,7 +139,7 @@ void QWorldWidget::drawTrains(QPainter* painter){
             QPointF trainPoint;
             trainPoint.rx() = lpoint2.x() * progress + lpoint1.x() * (1 - progress);
             trainPoint.ry() = lpoint2.y() * progress + lpoint1.y() * (1 - progress);
-            painter->drawEllipse(trainPoint, 0.3, 0.3);
+            painter->drawEllipse(trainPoint, 0.7, 0.7);
 
 
         }
@@ -115,6 +170,7 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
 
     drawLines(&painter);
     drawPoints(&painter);
+    drawPosts(&painter);
     drawTrains(&painter);
 
     painter.end();

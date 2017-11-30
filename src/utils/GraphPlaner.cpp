@@ -3,12 +3,15 @@
 
 #include <stdlib.h>
 #include <cmath>
+#include <utils/pi.h>
 
 
 using std::tuple;
 
 
 #define SQR(x) ((x)*(x))
+#define CRAP(a, min, max) ((a) > (max) ? (max) : (a) < (min) ? (min) : (a))
+#define LOG(x, a) (log(x) / log(a))
 
 
 namespace tiger{
@@ -39,7 +42,7 @@ float GraphPlaner::getTemperature(const vector<Edge>& edges, const vector<pair<f
     for (size_t i=0; i<coords.size(); i++)
         for (size_t ii=i+1; ii<coords.size(); ii++){
             float dist = hypot(coords[i].first - coords[ii].first, coords[i].second - coords[ii].second);
-            if (dist < avgEdge * 0.7)
+            if (dist < avgEdge * 0.8)
                 res += SQR(avgEdge - dist);
         }
 
@@ -80,17 +83,29 @@ const vector<pair<float, float> > GraphPlaner::planeGraph(const vector<vector<pa
     for (size_t i=0; i<size; i++)
         coords.push_back(pair<float, float>(rand()*1./RAND_MAX*width, rand()*1./RAND_MAX*height));
 
-    int t = 80;
-    float k = 0.973;
-    int it = 300;
+    float maxT = 80;
+    float minT = 0.0001;
+    float t = maxT;
+    float k = 0.97;
+    int it = 100;
     float e = getTemperature(edges, coords, avgEdge);
 
-    while (t > 0.0001){
+
+    while (t > minT){
         for (int i=0; i<it; i++){
             int v = rand() % size;
             float oldX = coords[v].first;
             float oldY = coords[v].second;
-            coords[v] = pair<float, float>(rand()*1./RAND_MAX*width, rand()*1./RAND_MAX*height);
+
+            float r = rand()*1./RAND_MAX;
+            float phi = rand()*1./RAND_MAX;
+            float dx = cos(2 * PI * phi) * sqrt(-2 * log(r)) * width * (log(t) - log(minT)) / maxT;
+            float dy = sin(2 * PI * phi) * sqrt(-2 * log(r)) * height * (log(t) - log(minT)) / maxT;
+
+            float x = CRAP(oldX + dx, 0, width);
+            float y = CRAP(oldY + dy, 0 , height);
+
+            coords[v] = pair<float, float>(x, y);
 
             float ne = getTemperature(edges, coords, avgEdge);
             float d = e - ne;
