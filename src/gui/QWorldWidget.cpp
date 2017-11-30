@@ -66,10 +66,18 @@ void QWorldWidget::drawLines(QPainter* painter){
 
 
 void QWorldWidget::drawPoints(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(1);
+    painter->setFont(font);
+
     painter->setPen(QPen(Qt::white, 0));
     painter->setBrush(Qt::white);
-    for (world::Point* point : world->getPointList())
-        painter->drawEllipse(pointCoords[point], 1, 1);
+    for (world::Point* point : world->getPointList()){
+        QPointF ppoint = pointCoords[point];
+        painter->drawEllipse(ppoint, 1, 1);
+        QRectF textRect(ppoint - QPoint(2, 1), ppoint - QPoint(1, 0));
+        painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(point->getIdx()));
+    }
 }
 
 
