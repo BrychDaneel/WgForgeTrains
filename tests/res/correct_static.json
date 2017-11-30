@@ -1,0 +1,201 @@
+{
+    "idx": 1,
+    "line": [
+        {
+            "idx": 3,
+            "length": 1,
+            "point": [
+                1,
+                7
+            ]
+        },
+        {
+            "idx": 6,
+            "length": 1,
+            "point": [
+                8,
+                2
+            ]
+        },
+        {
+            "idx": 9,
+            "length": 1,
+            "point": [
+                9,
+                3
+            ]
+        },
+        {
+            "idx": 12,
+            "length": 1,
+            "point": [
+                10,
+                4
+            ]
+        },
+        {
+            "idx": 15,
+            "length": 1,
+            "point": [
+                11,
+                5
+            ]
+        },
+        {
+            "idx": 18,
+            "length": 2,
+            "point": [
+                12,
+                6
+            ]
+        },
+        {
+            "idx": 21,
+            "length": 1,
+            "point": [
+                7,
+                8
+            ]
+        },
+        {
+            "idx": 24,
+            "length": 2,
+            "point": [
+                8,
+                9
+            ]
+        },
+        {
+            "idx": 27,
+            "length": 2,
+            "point": [
+                9,
+                10
+            ]
+        },
+        {
+            "idx": 30,
+            "length": 1,
+            "point": [
+                10,
+                11
+            ]
+        },
+        {
+            "idx": 33,
+            "length": 3,
+            "point": [
+                11,
+                12
+            ]
+        },
+        {
+            "idx": 36,
+            "length": 1,
+            "point": [
+                12,
+                7
+            ]
+        },
+        {
+            "idx": 39,
+            "length": 2,
+            "point": [
+                1,
+                2
+            ]
+        },
+        {
+            "idx": 42,
+            "length": 2,
+            "point": [
+                2,
+                3
+            ]
+        },
+        {
+            "idx": 45,
+            "length": 1,
+            "point": [
+                3,
+                4
+            ]
+        },
+        {
+            "idx": 48,
+            "length": 3,
+            "point": [
+                4,
+                5
+            ]
+        },
+        {
+            "idx": 51,
+            "length": 1,
+            "point": [
+                5,
+                6
+            ]
+        },
+        {
+            "idx": 54,
+            "length": 3,
+            "point": [
+                6,
+                1
+            ]
+        }
+    ],
+    "name": "map02",
+    "point": [
+        {
+            "idx": 4,
+            "post_id": 1
+        },
+        {
+            "idx": 8,
+            "post_id": null
+        },
+        {
+            "idx": 12,
+            "post_id": null
+        },
+        {
+            "idx": 16,
+            "post_id": 2
+        },
+        {
+            "idx": 20,
+            "post_id": 3
+        },
+        {
+            "idx": 24,
+            "post_id": null
+        },
+        {
+            "idx": 28,
+            "post_id": 4
+        },
+        {
+            "idx": 32,
+            "post_id": null
+        },
+        {
+            "idx": 36,
+            "post_id": null
+        },
+        {
+            "idx": 40,
+            "post_id": null
+        },
+        {
+            "idx": 44,
+            "post_id": null
+        },
+        {
+            "idx": 48,
+            "post_id": null
+        }
+    ]
+}
+
