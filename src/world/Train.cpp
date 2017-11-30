@@ -74,6 +74,26 @@ int Train::getProduct() const{
 }
 
 
+Point *Train::getPoint() const{
+
+    if (line == nullptr){
+        return player->getHome()->getPoint();
+    }
+
+    if (position == 0){
+
+        return line->getStartPont();
+    }
+
+    if (position == line->getLenght())
+    {
+        return line->getEndPont();
+    }
+
+    return nullptr;
+
+}
+
 models::SpeedType Train::getSpeed() const{
     return speed;
 }

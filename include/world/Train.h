@@ -9,6 +9,7 @@
 #include <models/TrainModel.h>
 
 
+
 namespace tiger{
 namespace trains{
 namespace world{
@@ -46,6 +47,8 @@ public:
     int getPosition() const;
     int getCapacity() const;
     int getProduct() const;
+    Point *getPoint() const;
+
     models::SpeedType getSpeed() const;
 
     void move(Line* line, models::SpeedType speed);

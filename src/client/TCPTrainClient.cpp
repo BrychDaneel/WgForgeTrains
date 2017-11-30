@@ -1,5 +1,6 @@
 #include <client/TCPTrainClient.h>
-#include <iostream>
+
+
 using namespace tiger::trains::client;
 using namespace tiger::trains::models;
 using namespace tiger::trains;
@@ -7,12 +8,14 @@ using namespace tiger::trains;
 TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port)
     :tcpSession(name, addr, port), convertor(),playerModel(new PlayerModel())
 {
-
+    logger = el::Loggers::getLogger("TCPClient");
+    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "TCPClient.log");
 }
 
 TCPTrainClient::~TCPTrainClient()
 {
-
+    tcpSession.~TCPSession();
+    logger->info("Logout");
 }
 
 bool TCPTrainClient::login()
@@ -21,7 +24,7 @@ bool TCPTrainClient::login()
     if (message == nullptr || message->result != 0)
         return false;
 
-    std::cout << message->data << std::endl;
+    logger->info(" %v\n %v", "login", message->data);
     convertor.readPlayer(message->data, message->dataLength, playerModel.get());
 
     delete message;
@@ -56,7 +59,7 @@ std::shared_ptr<const StaticMap> TCPTrainClient::getStaticMap()
     if (message == nullptr || message->result != 0)
         return nullptr;
 
-    std::cout << message->data << std::endl;
+     logger->info(" %v\n %v", "Static Map", message->data);
 
     std::shared_ptr<StaticMap> staticMap(new StaticMap());
     convertor.readStaticMap(message->data, message->dataLength, staticMap.get());
@@ -87,7 +90,8 @@ std::shared_ptr<const DynamicMap> TCPTrainClient::getDynamicMap()
         return nullptr;
 
 
-    std::cout << message->data << std::endl;
+    logger->info(" %v\n %v", "Dynamic Map", message->data);
+
 
     std::shared_ptr<DynamicMap> dynamicMap(new DynamicMap());
     int retVal = convertor.readDynamicMap(message->data, message->dataLength, dynamicMap.get());

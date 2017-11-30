@@ -1,11 +1,16 @@
 #ifndef TCP_TRAIN_CLIENT_H_
 #define TCP_TRAIN_CLIENT_H_
 
+
+#include "easylogging++.h"
+
+
 #include "client/ITrainClient.h"
 #include "convertors/json/ModelConvertor.h"
 #include "network/TCPSession.h"
 #include "network/ResposeMessage.h"
 #include <memory>
+
 
 
 
@@ -32,9 +37,11 @@ namespace tiger
 
                 private:
 
+
                     network::TCPSession tcpSession;
                     convertors::json::ModelConvertor convertor;
-                    std::shared_ptr<models::PlayerModel> playerModel;
+                    std::   shared_ptr<models::PlayerModel> playerModel;
+                    el::Logger *logger;
             };
 
 
