@@ -4,7 +4,7 @@
 #include <set>
 using namespace tiger::trains;
 
-ai::Post::Post(const world::Point *point):postPoint(point)
+ai::Post::Post(world::Point *point):postPoint(point)
 {
 
 }
@@ -49,10 +49,15 @@ int ai::Post::getMinLen(const world::Point *point)
     return minLen[point];
 }
 
+const world::Point *ai::Post::getPoint() const
+{
+    return postPoint;
+}
+
 std::vector<const world::Point *> ai::Post::getMinPath(const world::Point *point)
 {
     std::vector<const world::Point *> vec;
-    const world::Point *temp_point=temp_point;
+    const world::Point *temp_point=point;
     if (ancestors[temp_point] == nullptr)
         return vec;
 
@@ -63,6 +68,7 @@ std::vector<const world::Point *> ai::Post::getMinPath(const world::Point *point
     }
 
     vec.push_back(temp_point);
+    std::reverse(vec.begin(), vec.end());
 
     return vec;
 }

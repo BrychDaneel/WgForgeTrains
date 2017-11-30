@@ -12,9 +12,10 @@ namespace ai {
 class Post
 {
 public:
-    Post(const world::Point *point);
+    Post(world::Point *point);
     void init(const world::World &world);
     int getMinLen(const world::Point *point);
+    const world::Point *getPoint() const;
     std::vector<const world::Point*> getMinPath(const world::Point *point);
 
 private:
