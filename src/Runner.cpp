@@ -29,18 +29,23 @@ void Runner::run()
     CommandSender commandSender(&trainClient);
 
     std::vector<models::PlayerModel> models;
-    std::shared_ptr<const models::PlayerModel> player = trainClient.getMyPlayer();
-    std::shared_ptr<const models::StaticMap> staticMap = trainClient.getStaticMap();
+    models::PlayerModel * player = trainClient.getMyPlayer();
+    models::StaticMap *staticMap;
+
+    trainClient.getStaticMap(staticMap);
     models.push_back(*player);
     world.init(models, *staticMap, &commandSender);
-    player.reset();
-    staticMap.reset();
+
+    delete staticMap;
+
     if (bot != nullptr)
         bot->init(&world);
 
+    models::DynamicMap *dynamicMap;
+
     while (true)
     {
-        std::shared_ptr<const models::DynamicMap> dynamicMap = trainClient.getDynamicMap();
+        trainClient.getDynamicMap(dynamicMap);
         world.update(*dynamicMap);
 
 

@@ -26,22 +26,36 @@ namespace tiger
             class TCPTrainClient : public ITrainClient
             {
                 public:
+                    enum class ErrorType: int
+                    {
+                        OKEY = 0,
+                        BAD_COMMAND = 1,
+                        RESOURCE_NOT_FOUND = 2,
+                        PATH_NOT_FOUND = 3,
+                        ACCESS_DENIED = 5,
+                        JSON_NO_PARSE = 6,
+                        UNKOWN_ERROR = 7,
+                        NOT_SEND = 8
+                    };
+
                     TCPTrainClient(const char *name, const char *addr, int port);
                     virtual ~TCPTrainClient();
-                    std::shared_ptr<const models::PlayerModel> getMyPlayer();
-                    std::shared_ptr<const models::StaticMap> getStaticMap();
-                    std::shared_ptr<const models::DynamicMap> getDynamicMap();
-                    void turn();
-                    bool move(const models::MoveModel &move);
-                    bool login();
+                    models::PlayerModel *getMyPlayer() const;
+                    int getStaticMap(models::StaticMap *staticMap) const;
+                    int getDynamicMap(models::DynamicMap *dynamicMap) const;
+                    void turn() const;
+                    int move(const models::MoveModel &move) const;
+                    int login();
 
                 private:
 
 
-                    network::TCPSession tcpSession;
+                    mutable network::TCPSession tcpSession;
                     convertors::json::ModelConvertor convertor;
-                    std::   shared_ptr<models::PlayerModel> playerModel;
+                    models::PlayerModel *playerModel;
                     el::Logger *logger;
+
+
             };
 
 
