@@ -100,6 +100,21 @@ bool World::isInitialized(){
 }
 
 
+int World::getTickNum(){
+    return tickNum;
+}
+
+
+void World::setTickNum(const int tickNum){
+    this->tickNum = tickNum;
+}
+
+
+void World::tick(){
+    this->tickNum++;
+}
+
+
 ICommandSender* World::getCommandSender() const{
     return commandSender;
 }

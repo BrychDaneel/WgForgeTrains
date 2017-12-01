@@ -120,15 +120,9 @@ void GreedyBot::makeStep()
         speed = models::SpeedType::REVERSE;
 
     train->move(currentLine, speed);
-    world->getCommandSender()->turn();
-
-
-
-
-
-
 
 }
+
 
 void GreedyBot::checkArrival()
 {

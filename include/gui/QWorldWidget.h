@@ -40,6 +40,7 @@ protected:
     void drawPoints(QPainter* painter);
     void drawPosts(QPainter* painter);
     void drawTrains(QPainter* painter);
+    void drawTick(QPainter* painter);
 
 };
 
