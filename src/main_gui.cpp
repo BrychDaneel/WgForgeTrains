@@ -3,6 +3,7 @@
 #include <Runner.h>
 #include <QRunnerThread.h>
 #include <ai/JustDoItBot.h>
+#include <ai/GreedyBot.h>
 #include <easylogging++/easylogging++.h>
 
 
@@ -21,7 +22,8 @@ int main(int argc, char *argv[]){
     //Runner runner("tiger", "localhost", 30001);
 
     ai::JustDoItBot bot;
-    runner.setBot(&bot);
+    ai::GreedyBot greedyBot;
+    runner.setBot(&greedyBot);
 
     QRunnerThred runnerThread(&runner);
     runnerThread.start();
