@@ -58,7 +58,7 @@ void Runner::run()
 
         // make command
 
-        sleep(1);
+        //sleep(1);
 
     }
 

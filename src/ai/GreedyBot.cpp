@@ -49,31 +49,36 @@ void GreedyBot::findNextPost()
     int maxLen = homeTown.getProduct() / homeTown.getPopulation();
     double maxProductByTick = 0;
     Post *tempNext = nullptr;
-
-
-    for (std::pair<int, Post*> mapPair : postMap)
+    int killer = 0;
+    while(true)
     {
-        if (mapPair.second == currentPost ||
-                mapPair.second->getPoint()->getPost()->getPostType() == models::PostType::TOWN)
-            continue;
-
-        int tempLen = mapPair.second->getMinLen(currentPost->getPoint())
-                + mapPair.second->getMinLen(homePost->getPoint());
-
-
-        if (tempLen > maxLen)
-            continue;
-
-        ArtMarket market(mapPair.second);
-        ArtMarket newMarket = market.getFuture(mapPair.second->getMinLen(currentPost->getPoint()));
-        if (((double)newMarket.getProduct())/tempLen > maxProductByTick)
+        for (std::pair<int, Post*> mapPair : postMap)
         {
-            tempNext = mapPair.second;
-            maxProductByTick = ((double)newMarket.getProduct())/tempLen;
+            if (mapPair.second == currentPost ||
+                    mapPair.second->getPoint()->getPost()->getPostType() == models::PostType::TOWN)
+                continue;
+
+            int tempLen = mapPair.second->getMinLen(currentPost->getPoint())
+                    + mapPair.second->getMinLen(homePost->getPoint());
+
+
+            if (tempLen > maxLen + killer)
+                continue;
+
+            ArtMarket market(mapPair.second);
+            ArtMarket newMarket = market.getFuture(mapPair.second->getMinLen(currentPost->getPoint()));
+            if (((double)newMarket.getProduct())/tempLen > maxProductByTick)
+            {
+                tempNext = mapPair.second;
+                maxProductByTick = ((double)newMarket.getProduct())/tempLen;
+            }
+
         }
 
+        if (currentPost != homePost || maxProductByTick > homeTown.getPopulation() -  killer)
+            break;
+        killer++;
     }
-
     if (tempNext == nullptr)
         nextPost = homePost;
     else
