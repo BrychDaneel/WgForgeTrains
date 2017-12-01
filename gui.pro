@@ -59,7 +59,13 @@ HEADERS += \
     libs/nlohmann/json.hpp \
     include/world/Town.h \
     include/world/Market.h \
-    include/utils/pi.h
+    include/utils/pi.h \
+    include/ai/ArtMarket.h \
+    include/ai/ArtTown.h \
+    include/ai/IBot.h \
+    include/ai/Post.h \
+    include/ai/ScoreCalc.h \
+    libs/easylogging++/easylogging++.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -94,6 +100,13 @@ SOURCES += \
     src/QRunnerThread.cpp \
     src/Runner.cpp \
     src/world/Town.cpp \
-    src/world/Market.cpp
+    src/world/Market.cpp \
+    src/ai/ArtMarket.cpp \
+    src/ai/ArtTown.cpp \
+    src/ai/Post.cpp \
+    src/ai/ScoreCalc.cpp \
+    libs/easylogging++/easylogging++.cc
+
+DISTFILES +=
 
 

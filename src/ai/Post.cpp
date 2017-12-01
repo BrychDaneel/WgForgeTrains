@@ -1,5 +1,5 @@
 #include <ai/Post.h>
-#include <easylogging++.h>
+#include <easylogging++/easylogging++.h>
 
 #include <set>
 using namespace tiger::trains;

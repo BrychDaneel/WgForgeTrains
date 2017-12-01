@@ -2,7 +2,7 @@
 #define TCP_TRAIN_CLIENT_H_
 
 
-#include "easylogging++.h"
+#include <easylogging++/easylogging++.h>
 
 
 #include "client/ITrainClient.h"

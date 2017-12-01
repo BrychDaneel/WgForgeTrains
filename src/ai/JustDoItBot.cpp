@@ -1,7 +1,7 @@
 #include <ai/JustDoItBot.h>
 #include <world/Train.h>
 #include <models/SpeedType.h>
-#include <easylogging++.h>
+#include <easylogging++/easylogging++.h>
 
 using namespace tiger::trains::ai;
 
