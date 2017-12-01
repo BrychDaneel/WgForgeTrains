@@ -44,7 +44,7 @@ void ai::Post::init(const world::World &world)
 
 }
 
-int ai::Post::getMinLen(const world::Point *point)
+int ai::Post::getMinLen(const world::Point *point) const
 {
     return minLen[point];
 }
@@ -54,7 +54,7 @@ const world::Point *ai::Post::getPoint() const
     return postPoint;
 }
 
-std::vector<const world::Point *> ai::Post::getMinPath(const world::Point *point)
+std::vector<const world::Point *> ai::Post::getMinPath(const world::Point *point) const
 {
     std::vector<const world::Point *> vec;
     const world::Point *temp_point=point;

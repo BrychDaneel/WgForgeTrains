@@ -25,13 +25,20 @@ public:
     const Post *getPost() const;
 
     int getProduct() const;
+    int takeProduct(int value);
 
     int getReplenishment() const;
 
     int getProductCapacity() const;
 
+    int getLastTick() const;
+    void setLastTick(int value);
+
+    ArtMarket getFuture(int tick) const;
+
 private:
     const Post *post;
+    int lastTick;
     int product;
     int replenishment;
     int productCapacity;

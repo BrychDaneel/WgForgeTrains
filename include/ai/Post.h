@@ -14,14 +14,14 @@ class Post
 public:
     Post(world::Point *point);
     void init(const world::World &world);
-    int getMinLen(const world::Point *point);
+    int getMinLen(const world::Point *point) const;
     const world::Point *getPoint() const;
-    std::vector<const world::Point*> getMinPath(const world::Point *point);
+    std::vector<const world::Point*> getMinPath(const world::Point *point) const;
 
 private:
     const world::Point *postPoint;
-    std::map<const world::Point*, int> minLen;
-    std::map<const world::Point*, const world::Point*> ancestors;
+    mutable std::map<const world::Point*, int> minLen;
+    mutable std::map<const world::Point*, const world::Point*> ancestors;
     const int inf = 999999;
 
 

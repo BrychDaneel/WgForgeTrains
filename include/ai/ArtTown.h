@@ -28,12 +28,19 @@ public:
     int getPopulation() const;
 
     int getProduct() const;
+    void addProduct(int value);
 
     const Post *getPost() const;
 
+    int getLastTick() const;
+    void setLastTick(int value);
+
+    const ArtTown getFuture(int tick) const;
+
+
 private:
     const Post *post;
-    int last_in;
+    int lastTick;
     int armor;
     int population;
     int product;
