@@ -95,3 +95,4 @@ TEST_F(DynamicMapReaderTests, checkTrainsIdx){
     ASSERT_EQ(33, dynamicMap.getTrainList()[0].getIdx());
     ASSERT_EQ(42, dynamicMap.getTrainList()[1].getIdx());
 }
+

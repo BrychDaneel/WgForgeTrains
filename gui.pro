@@ -2,6 +2,8 @@ QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += object_parallel_to_source
+
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
