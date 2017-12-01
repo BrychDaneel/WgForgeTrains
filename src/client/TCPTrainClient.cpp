@@ -1,5 +1,6 @@
 #include <client/TCPTrainClient.h>
-#include <iostream>
+
+
 using namespace tiger::trains::client;
 using namespace tiger::trains::models;
 using namespace tiger::trains;
@@ -7,36 +8,39 @@ using namespace tiger::trains;
 TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port)
     :tcpSession(name, addr, port), convertor(),playerModel(new PlayerModel())
 {
-
+    logger = el::Loggers::getLogger("TCPClient");
+    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "TCPClient.log");
 }
 
 TCPTrainClient::~TCPTrainClient()
 {
-
+    delete playerModel;
+    tcpSession.~TCPSession();
+    logger->info("Logout");    
 }
 
-bool TCPTrainClient::login()
+int TCPTrainClient::login()
 {
     network::ResposeMessage *message = tcpSession.login();
     if (message == nullptr || message->result != 0)
-        return false;
+        return message->result;
 
-    std::cout << message->data << std::endl;
-    convertor.readPlayer(message->data, message->dataLength, playerModel.get());
+    logger->info(" %v\n %v", "login", message->data);
+    convertor.readPlayer(message->data, message->dataLength, playerModel);
 
     delete message;
-    return true;
+    return (int)TCPTrainClient::ErrorType::OKEY;
 }
 
 
-std::shared_ptr<const PlayerModel> TCPTrainClient::getMyPlayer()
+PlayerModel *TCPTrainClient::getMyPlayer() const
 {
 
     return playerModel;
 }
 
 
-std::shared_ptr<const StaticMap> TCPTrainClient::getStaticMap()
+int TCPTrainClient::getStaticMap(StaticMap *staticMap) const
 {
     char buffer[255];
     size_t len = sprintf(buffer, "{\n \"layer\": %i\n}", 0);
@@ -48,25 +52,28 @@ std::shared_ptr<const StaticMap> TCPTrainClient::getStaticMap()
     memcpy(sendBuffer + 8, buffer, len);
 
     if (!tcpSession.send(sendBuffer, len + 8))
-        return nullptr;
+        return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
     network::ResposeMessage *message = tcpSession.recv();
 
     if (message == nullptr || message->result != 0)
-        return nullptr;
+        return message->result;
 
-    std::cout << message->data << std::endl;
+     logger->info(" %v\n %v", "Static Map", message->data);
 
-    std::shared_ptr<StaticMap> staticMap(new StaticMap());
-    convertor.readStaticMap(message->data, message->dataLength, staticMap.get());
+
+    int retVal = convertor.readStaticMap(message->data, message->dataLength, staticMap);
 
     delete message;
 
-    return staticMap;
+    if (retVal != 0)
+        return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
+
+    return (int)TCPTrainClient::ErrorType::OKEY;
 }
 
-std::shared_ptr<const DynamicMap> TCPTrainClient::getDynamicMap()
+int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap) const
 {
     char buffer[255];
     size_t len = sprintf(buffer, "{\n \"layer\": %i\n}", 1);
@@ -78,34 +85,34 @@ std::shared_ptr<const DynamicMap> TCPTrainClient::getDynamicMap()
     memcpy(sendBuffer + 8, buffer, len);
 
     if (!tcpSession.send(sendBuffer, len + 8))
-        return nullptr;
+        return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
     network::ResposeMessage *message = tcpSession.recv();
 
     if (message == nullptr || message->result != 0)
-        return nullptr;
+        return message->result;
 
 
-    std::cout << message->data << std::endl;
+    logger->info(" %v\n %v", "Dynamic Map", message->data);
 
-    std::shared_ptr<DynamicMap> dynamicMap(new DynamicMap());
-    int retVal = convertor.readDynamicMap(message->data, message->dataLength, dynamicMap.get());
+
+    int retVal = convertor.readDynamicMap(message->data, message->dataLength, dynamicMap);
 
     delete message;
     if (retVal != 0)
-        return nullptr;
+        return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
 
-    return dynamicMap;
+    return (int)TCPTrainClient::ErrorType::OKEY;
 }
 
 
-void TCPTrainClient::turn()
+void TCPTrainClient::turn() const
 {
 
 }
 
-bool TCPTrainClient::move(const models::MoveModel &move)
+int TCPTrainClient::move(const models::MoveModel &move) const
 {
     char buffer[255];
     //size_t len = sprintf(buffer, "{\n\"line_idx\": 1,\n\"speed\": 1,\n\"train_idx\": 0\n}");
@@ -122,12 +129,12 @@ bool TCPTrainClient::move(const models::MoveModel &move)
 
     network::ResposeMessage *message = tcpSession.recv();
 
-    bool bRetVal;
-    if (message->result == 0)
-        bRetVal = true;
-    else
-        bRetVal = false;
+    int retVal = message->result;
+
 
     delete message;
-    return bRetVal;
+    return retVal;
 }
+
+
+

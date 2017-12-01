@@ -4,6 +4,7 @@
 #include <CommandSender.h>
 #include <world/World.h>
 #include <ai/IBot.h>
+#include <ai/Post.h>
 
 namespace tiger
 {
