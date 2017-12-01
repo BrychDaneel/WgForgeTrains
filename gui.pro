@@ -65,7 +65,10 @@ HEADERS += \
     include/ai/IBot.h \
     include/ai/Post.h \
     include/ai/ScoreCalc.h \
-    libs/easylogging++/easylogging++.h
+    libs/easylogging++/easylogging++.h \
+    include/ai/NPBot.h \
+    include/ai/IPathGenerator.h \
+    include/ai/generators/AnnealingGenerator.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -105,7 +108,9 @@ SOURCES += \
     src/ai/ArtTown.cpp \
     src/ai/Post.cpp \
     src/ai/ScoreCalc.cpp \
-    libs/easylogging++/easylogging++.cc
+    libs/easylogging++/easylogging++.cc \
+    src/ai/NPBot.cpp \
+    src/ai/generators/AnnealingGenerator.cpp
 
 DISTFILES +=
 
