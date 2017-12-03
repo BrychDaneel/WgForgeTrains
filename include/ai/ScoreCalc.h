@@ -19,9 +19,12 @@ namespace ai
     public:
         ScoreCalc(std::map<int, Post*> *postMap, const Post* startPost,  const Post* homePost, int maxTick);
 
+        void setStartPost(const Post* startPost);
+
         double getScore(const std::vector<int> &vec);
 
     private:
+        void reset();
         void goToMarket(const Post* post, ArtMarket artMarket, int &tick, int &products);
         void goToTown(const Post* post, ArtTown artTown, int &tick, int &products);
 

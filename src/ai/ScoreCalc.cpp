@@ -6,6 +6,19 @@ using namespace tiger::trains::ai;
 ScoreCalc::ScoreCalc(std::map<int, Post *> *postMap, const Post *startPost,const Post* homePost,int maxTick)
     :postMap(postMap), startPost(startPost), homePost(homePost), maxTick(maxTick)
 {
+}
+
+
+void ScoreCalc::setStartPost(const Post* startPost){
+    this->startPost = startPost;
+}
+
+
+void ScoreCalc::reset(){
+
+    artMarketMap.clear();
+    artTownMap.clear();
+
     for(std::pair<int, tiger::trains::ai::Post *> mapPair : *postMap)
     {
         switch(mapPair.second->getPoint()->getPost()->getPostType())
@@ -23,8 +36,11 @@ ScoreCalc::ScoreCalc(std::map<int, Post *> *postMap, const Post *startPost,const
     }
 }
 
+
 double ScoreCalc::getScore(const std::vector<int> &vec)
 {
+    reset();
+
     int tick = 0;
     returned = false;
     int currProduct = 0;

@@ -35,9 +35,9 @@ void NPBot::init(world::World* world){
     homeAiPost = postMap[world->getPlayerList()[0]->getHome()->getPoint()->getIdx()];
     next = homeAiPost;
 
-    scoreCalc = new ScoreCalc(&postMap, next, homeAiPost, 20);
+    scoreCalc = new ScoreCalc(&postMap, next, homeAiPost, 200);
 
-    pathGenerator->init(scoreCalc, idxs, 5);
+    pathGenerator->init(scoreCalc, idxs, 50);
 }
 
 
@@ -53,8 +53,9 @@ void NPBot::step(){
     }
 
     Post* current = next;
-    next = postMap[pathGenerator->front()];
+    scoreCalc->setStartPost(current);
 
+    next = postMap[pathGenerator->front()];
     while (current == next){
         pathGenerator->pop();
         next = postMap[pathGenerator->front()];
@@ -95,8 +96,8 @@ void NPBot::followPath(){
 
 
 bool NPBot::needHome(Post* current, Post* nextPost){
-    int len = nextPost->getMinLen(nextPost->getPoint()); // Path to Market
-    int home_len = current->getMinLen(homeAiPost->getPoint()); // Path to Home from Market
+    int len = current->getMinLen(nextPost->getPoint()); // Path to Market
+    int home_len = nextPost->getMinLen(homeAiPost->getPoint()); // Path to Home from Market
 
     world::Town* home = (world::Town*) homeAiPost->getPoint()->getPost();
 
