@@ -86,6 +86,7 @@ public:
     Line* getLineByIdx(int idx) const;
 
     const std::vector<Line*>& getEdges(const Point* point) const;
+    Line* getLine(const Point* point1, const Point* point2);
 
     IPost* getPostOfPoint(const Point* point) const;
     Point* getPointOfPost(const IPost* post) const;

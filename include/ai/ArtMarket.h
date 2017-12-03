@@ -37,7 +37,7 @@ public:
     ArtMarket getFuture(int tick) const;
 
 private:
-    const Post *post;
+    const Post* post;
     int lastTick;
     int product;
     int replenishment;

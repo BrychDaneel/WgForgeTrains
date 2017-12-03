@@ -7,6 +7,7 @@
 #include <ai/Post.h>
 #include <ai/ScoreCalc.h>
 #include <ai/IPathGenerator.h>
+#include <queue>
 
 
 namespace tiger{
@@ -18,7 +19,7 @@ class NPBot: public IBot{
 
 public:
 
-    NPBot();
+    NPBot(IPathGenerator* pathGenerator);
 
     ~NPBot();
 
@@ -32,8 +33,12 @@ private:
     world::World *world;
     std::map<int, Post*> postMap;
     int tick;
-    Post* current;
     Post* next;
+    std::queue<const world::Point*> path;
+    Post* homeAiPost;
+
+    void followPath();
+    bool needHome(Post* current, Post* nextPost);
 
 };
 

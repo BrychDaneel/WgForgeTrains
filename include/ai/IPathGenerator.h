@@ -16,16 +16,10 @@ class IPathGenerator{
 
 public:
 
-    virtual void init(ScoreCalc* scoreCalc, std::vector<int> postIdxs, int len) = 0;
+    virtual void init(ScoreCalc* scoreCalc, std::vector<int>& postIdxs, int len) = 0;
     virtual void tick() = 0;
-    virtual int nextMarket() = 0;
-
-private:
-
-    int current;
-    int len;
-    ScoreCalc* scoreCalc;
-    std::vector<int> postIdxs;
+    virtual int pop() = 0;
+    virtual int front() = 0;
 
 };
 

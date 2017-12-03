@@ -4,6 +4,8 @@
 #include <QRunnerThread.h>
 #include <ai/JustDoItBot.h>
 #include <ai/GreedyBot.h>
+#include <ai/NPBot.h>
+#include <ai/generators/Annealing.h>
 #include <easylogging++/easylogging++.h>
 
 
@@ -21,9 +23,12 @@ int main(int argc, char *argv[]){
     //Runner runner("tiger", "wgforge-srv.wargaming.net", 443);
     //Runner runner("tiger", "localhost", 30001);
 
-    ai::JustDoItBot bot;
-    ai::GreedyBot greedyBot;
-    runner.setBot(&greedyBot);
+    //ai::JustDoItBot bot;
+    //ai::GreedyBot greedyBot;
+    ai::generators::Annealing pathGenerator;
+    ai::NPBot npBot(&pathGenerator);
+
+    runner.setBot(&npBot);
 
     QRunnerThred runnerThread(&runner);
     runnerThread.start();

@@ -68,8 +68,8 @@ HEADERS += \
     libs/easylogging++/easylogging++.h \
     include/ai/NPBot.h \
     include/ai/IPathGenerator.h \
-    include/ai/generators/AnnealingGenerator.h
-    include/ai/GreedyBot.h
+    include/ai/GreedyBot.h \
+    include/ai/generators/Annealing.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -111,8 +111,8 @@ SOURCES += \
     src/ai/ScoreCalc.cpp \
     libs/easylogging++/easylogging++.cc \
     src/ai/NPBot.cpp \
-    src/ai/generators/AnnealingGenerator.cpp
-    src/ai/GreedyBot.cpp
+    src/ai/GreedyBot.cpp \
+    src/ai/generators/Annealing.cpp
 
 DISTFILES +=
 

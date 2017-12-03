@@ -175,6 +175,14 @@ const std::vector<Line*>& World::getEdges(const Point* point) const{
 }
 
 
+Line* World::getLine(const Point* point1, const Point* point2){
+    for (Line* line : point1->getEdges())
+        if (line->getAnotherPoint(point1) == point2)
+            return line;
+    return nullptr;
+}
+
+
 IPost* World::getPostOfPoint(const Point* point) const{
     if (postOfPoint.find(point) == postOfPoint.end())
         return nullptr;

@@ -56,6 +56,10 @@ double ScoreCalc::getScore(const std::vector<int> &vec)
                     break;
             }
 
+            ArtTown town(homePost);
+            if (artTownMap[homePost->getPoint()->getIdx()].getPopulation() != town.getPopulation())
+                return -1;
+
         }
 
         if (returned)
@@ -63,9 +67,6 @@ double ScoreCalc::getScore(const std::vector<int> &vec)
 
     }
 
-    ArtTown town(homePost);
-    if (artTownMap[homePost->getPoint()->getIdx()].getPopulation() != town.getPopulation())
-        return -1;
     return artTownMap[homePost->getPoint()->getIdx()].getProduct();
 
 }
