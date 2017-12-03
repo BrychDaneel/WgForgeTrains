@@ -168,7 +168,7 @@ void QWorldWidget::drawTick(QPainter* painter){
     painter->setFont(font);
     painter->setPen(QPen(Qt::white, 0));
 
-    QRectF textRect(0, 0, maxX / 10.0, maxY / 10.0);
+    QRectF textRect(0, 0, maxX / 7.0, maxY / 10.0);
     painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(world->getTickNum()));
 }
 
