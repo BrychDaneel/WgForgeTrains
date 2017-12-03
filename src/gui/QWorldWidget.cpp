@@ -142,6 +142,10 @@ void QWorldWidget::drawPosts(QPainter* painter){
 
 
 void QWorldWidget::drawTrains(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(1);
+    painter->setFont(font);
+
     painter->setBrush(Qt::red);
     painter->setPen(QPen(Qt::red, 0));
     for (world::Train* train : world->getTrainList())
@@ -158,6 +162,9 @@ void QWorldWidget::drawTrains(QPainter* painter){
             painter->drawEllipse(trainPoint, 0.7, 0.7);
 
 
+            QRectF prodRect(trainPoint + QPoint(-5, 1), trainPoint  + QPoint(5, 2));
+            QString productText = QString("%1/%2").arg(train->getProduct()).arg(train->getCapacity());
+            painter->drawText(prodRect, Qt::AlignCenter, productText);
         }
 }
 
