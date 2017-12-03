@@ -33,6 +33,8 @@ private:
 
     bool initialized = false;
 
+    int tickNum = 0;
+
     std::map<int, IPost*> postMap;
     std::map<std::string, Player*> playerMap;
     std::map<int, Point*> pointMap;
@@ -64,6 +66,10 @@ public:
     void update(const models::DynamicMap& dynamicMap);
 
     bool isInitialized();
+
+    int getTickNum();
+    void setTickNum(const int tick);
+    void tick();
 
     ICommandSender* getCommandSender() const;
 

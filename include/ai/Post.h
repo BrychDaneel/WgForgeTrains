@@ -17,6 +17,7 @@ public:
     int getMinLen(const world::Point *point) const;
     const world::Point *getPoint() const;
     std::vector<const world::Point*> getMinPath(const world::Point *point) const;
+    std::vector<const world::Point *> getMinPathOnlyPost(const world::Point *point) const;
 
 private:
     const world::Point *postPoint;
