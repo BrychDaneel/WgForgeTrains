@@ -57,10 +57,18 @@ void QWorldWidget::buildGraph(){
 
 
 void QWorldWidget::drawLines(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(1);
+    painter->setFont(font);
+
     painter->setPen(QPen(Qt::blue, 0.5));
     for (world::Line* line : world->getLineList()){
         QLineF qline(pointCoords[line->getStartPont()], pointCoords[line->getEndPont()]);
         painter->drawLine(qline);
+
+        QPointF middle = (qline.p1() + qline.p2()) / 2;
+        QRectF textRect(middle - QPoint(1, 2), middle - QPoint(-1, 1));
+        painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(line->getLenght()));
     }
 }
 
@@ -114,7 +122,7 @@ void QWorldWidget::drawPosts(QPainter* painter){
             if (post->getPostType() == models::PostType::MARKET){
                 QRectF prodRect(ppoint + QPoint(-5, 1), ppoint + QPoint(5, 2));
                 world::Market* market = (world::Market*)post;
-                QString productText = QString("product: %1").arg(market->getProduct());
+                QString productText = QString("%1/%2").arg(market->getProduct()).arg(market->getProductCapacity());
                 painter->drawText(prodRect, Qt::AlignCenter, productText);
             }
 
@@ -134,6 +142,10 @@ void QWorldWidget::drawPosts(QPainter* painter){
 
 
 void QWorldWidget::drawTrains(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(1);
+    painter->setFont(font);
+
     painter->setBrush(Qt::red);
     painter->setPen(QPen(Qt::red, 0));
     for (world::Train* train : world->getTrainList())
@@ -150,7 +162,21 @@ void QWorldWidget::drawTrains(QPainter* painter){
             painter->drawEllipse(trainPoint, 0.7, 0.7);
 
 
+            QRectF prodRect(trainPoint + QPoint(-5, 1), trainPoint  + QPoint(5, 2));
+            QString productText = QString("%1/%2").arg(train->getProduct()).arg(train->getCapacity());
+            painter->drawText(prodRect, Qt::AlignCenter, productText);
         }
+}
+
+
+void QWorldWidget::drawTick(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(3);
+    painter->setFont(font);
+    painter->setPen(QPen(Qt::white, 0));
+
+    QRectF textRect(0, 0, maxX / 7.0, maxY / 10.0);
+    painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(world->getTickNum()));
 }
 
 
@@ -174,6 +200,9 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
     painter.drawRect(0, 0, width(), height());
 
     painter.scale( width() / maxX / 1.2, height() / maxY / 1.2);
+
+    drawTick(&painter);
+
     painter.translate(maxX * 0.1, maxY * 0.1);
 
     drawLines(&painter);

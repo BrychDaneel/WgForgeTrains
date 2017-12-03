@@ -18,6 +18,7 @@ public:
     virtual ~ICommandSender(){}
 
     virtual void move(const models::MoveModel &move) = 0;
+    virtual void turn() = 0;
 
 };
 

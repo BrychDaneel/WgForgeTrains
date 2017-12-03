@@ -36,6 +36,8 @@ void Train::update(models::TrainModel model){
 
     speed = model.getSpeed();
     position = model.getPosition();
+    capacity = model.getCapacity();
+    product = model.getProduct();
 }
 
 

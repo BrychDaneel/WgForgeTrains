@@ -72,3 +72,25 @@ std::vector<const world::Point *> ai::Post::getMinPath(const world::Point *point
 
     return vec;
 }
+
+std::vector<const world::Point *> ai::Post::getMinPathOnlyPost(const world::Point *point) const
+{
+    std::vector<const world::Point *> vec;
+    const world::Point *temp_point=point;
+    if (ancestors[temp_point] == nullptr)
+        return vec;
+
+    while (ancestors[temp_point] != temp_point)
+    {
+        if(temp_point->getPost() != nullptr)
+            vec.push_back(temp_point);
+        temp_point = ancestors[temp_point];
+    }
+
+    if(temp_point->getPost() != nullptr)
+        vec.push_back(temp_point);
+
+    std::reverse(vec.begin(), vec.end());
+
+    return vec;
+}

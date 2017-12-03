@@ -56,10 +56,10 @@ void Runner::run()
         if (bot != nullptr)
             bot->step();
 
-        // make command
+        trainClient.turn();
 
         sleep(1);
-
+        world.tick();
     }
 
 
