@@ -11,31 +11,39 @@ namespace tiger{
 namespace trains{
 namespace world{
 
-    class World;
 
-    class BasePost : public IPost{
-        private:
-            World * owner;
-            int idx;
-            models::PostType type;
-            std::string name;
-        public:
-            ~BasePost();
-            BasePost();
-            BasePost(const models::PostModel& model, World * world);
-            void update(const models::PostModel& model);
+class World;
 
-            int getIdx() const;
-            Point * getPoint() const;
-            World * getWorld() const;
-            const std::string& getName() const;
-            models::PostType getPostType() const;
-    };
+
+class BasePost : public IPost{
+
+private:
+
+    World* owner;
+    int idx;
+    models::PostType type;
+    std::string name;
+
+public:
+
+    ~BasePost();
+
+    BasePost();
+    BasePost(const models::PostModel& model, World* world);
+
+    void update(const models::PostModel& model);
+
+    World* getWorld() const;
+    int getIdx() const;
+    Point* getPoint() const;
+    const std::string& getName() const;
+    models::PostType getPostType() const;
+};
+
+
 }
 }
 }
-
 
 
 #endif
-

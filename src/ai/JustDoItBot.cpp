@@ -1,6 +1,7 @@
 #include <ai/JustDoItBot.h>
 #include <world/Train.h>
 #include <models/SpeedType.h>
+#include <easylogging++/easylogging++.h>
 
 using namespace tiger::trains::ai;
 
@@ -12,6 +13,13 @@ JustDoItBot::JustDoItBot():world(nullptr),tick(0)
 void JustDoItBot::init(world::World *world)
 {
     this->world = world;
+    Post post(world->getPlayerList()[0]->getHome()->getPoint());
+    post.init(*world);
+
+    for (auto point : world->getPointList())
+    {
+        LOG(INFO) << point->getIdx() << " " << post.getMinLen(point);
+    }
 }
 void JustDoItBot::step()
 {

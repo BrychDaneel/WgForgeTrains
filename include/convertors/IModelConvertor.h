@@ -13,20 +13,24 @@ namespace tiger{
 namespace trains{
 namespace convertors{
 
-    class IModelConvertor{
-        public:
-            virtual ~IModelConvertor(){};
-            virtual const int readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const = 0;
-            virtual const int readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const = 0;
-            virtual const int readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const = 0;
-            virtual const int writeMove(const models::MoveModel * move, char * buffer, int * bufferSize) const = 0;
-    };
-}
-}
-}
 
+class IModelConvertor{
+
+public:
+
+    virtual ~IModelConvertor(){}
+
+    virtual int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const = 0;
+    virtual int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap) const = 0;
+    virtual int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel) const = 0;
+    virtual int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize) const = 0;
+
+};
+
+
+}
+}
+}
 
 
 #endif
-
-

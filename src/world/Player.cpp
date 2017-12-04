@@ -5,34 +5,42 @@ namespace tiger{
 namespace trains{
 namespace world{
 
-    Player::Player(){
-    }
 
-    Player::Player(const models::PlayerModel& model, World * world){
-        owner = world;
-        name = model.getName();
-        idx = model.getIdx();
-    }
+Player::Player(){
+}
 
-    World* Player::getWorld() const{
-        return owner;
-    }
 
-    const std::string& Player::getIdx(){
-        return idx;
-    }
+Player::Player(const models::PlayerModel& model, World* world){
+    owner = world;
+    name = model.getName();
+    idx = model.getIdx();
+}
 
-    const std::string& Player::getName(){
-        return name;
-    }
 
-    IPost* Player::getHome(){
-        return owner->getHome(this);
-    }
+World* Player::getWorld() const{
+    return owner;
+}
 
-    const std::vector<Train*>& Player::getTrains(){
-        return owner->getTrainsOfPlayer(this);
-    }
+
+const std::string& Player::getIdx(){
+    return idx;
+}
+
+
+const std::string& Player::getName(){
+    return name;
+}
+
+
+IPost* Player::getHome(){
+    return owner->getHome(this);
+}
+
+
+const std::vector<Train*>& Player::getTrains(){
+    return owner->getTrainsOfPlayer(this);
+}
+
 
 }
 }

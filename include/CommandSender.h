@@ -14,6 +14,7 @@ namespace tiger
             public:
                 CommandSender(client::ITrainClient *client);
                 void move(const models::MoveModel &move);
+                void turn();
 
 
 

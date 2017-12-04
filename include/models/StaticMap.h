@@ -18,33 +18,40 @@ namespace tiger{
 namespace trains{
 namespace models{
 
-    class StaticMap{
-        private:
-            int idx = 0;
-            string name;
-            vector<LineModel> lineList;
-            vector<PointModel> pointList;
-        public:
-            StaticMap();
-            StaticMap(const int idx, const string name);
 
-            void addPoint(const PointModel& point);
-            void addLine(const LineModel& line);
+class StaticMap{
 
-            const int getIdx() const;
-            const string getName() const;
-            const vector<LineModel> getLineList() const;
-            const vector<PointModel> getPointList() const;
+private:
 
-            void setIdx(const int idx);
-            void setName(const string name);
-            void clearLineList();
-            void clearPointList();
-    };
+    int idx = 0;
+    string name;
+    vector<LineModel> lineList;
+    vector<PointModel> pointList;
+
+public:
+
+    StaticMap();
+    StaticMap(const int idx, const string name);
+
+    void addPoint(const PointModel& point);
+    void addLine(const LineModel& line);
+
+    int getIdx() const;
+    const string getName() const;
+    const vector<LineModel>& getLineList() const;
+    const vector<PointModel>& getPointList() const;
+
+    void setIdx(const int idx);
+    void setName(const string name);
+    void clearLineList();
+    void clearPointList();
+
+};
+
+
 }
 }
 }
-
 
 
 #endif

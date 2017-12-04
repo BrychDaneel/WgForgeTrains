@@ -68,6 +68,7 @@ ResposeMessage* TCPSession::recv()
     retVal = tcpClient.recv(firstBuffer, 4);
     if (retVal == -1)
     {
+        delete message;
         return nullptr;
     }
     memcpy(&message->dataLength, firstBuffer, 4);

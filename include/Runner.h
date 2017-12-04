@@ -24,7 +24,6 @@ namespace tiger
 
                 virtual ~Runner()
                 {
-                    trainClient.~TCPTrainClient();
                 }
 
                 void run();
