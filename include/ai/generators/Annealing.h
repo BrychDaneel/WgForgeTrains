@@ -22,9 +22,7 @@ public:
     Annealing(const int seed=1);
 
     void init(ScoreCalc* scoreCalc, std::vector<int>& postIdxs, int len);
-    void tick();
-    int pop();
-    int front();
+    std::queue<const world::Point*> generate();
 
 private:
 
@@ -32,9 +30,9 @@ private:
     int seed;
     ScoreCalc* scoreCalc;
     std::vector<int> postIdxs;
-    std::queue<int> path;
 
-    void calculate();
+    double scoreToEnerg(double score);
+    double energToScore(double energ);
 
 };
 

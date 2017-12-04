@@ -1,7 +1,9 @@
 #include <ai/ScoreCalc.h>
 #include <models/PostType.h>
 
+
 using namespace tiger::trains::ai;
+
 
 ScoreCalc::ScoreCalc(std::map<int, Post *> *postMap, const Post *startPost,const Post* homePost,int maxTick)
     :postMap(postMap), startPost(startPost), homePost(homePost), maxTick(maxTick)
@@ -13,11 +15,16 @@ void ScoreCalc::setStartPost(const Post* startPost){
     this->startPost = startPost;
 }
 
+void ScoreCalc::setStartProduct(const int product){
+    startProduct = product;
+}
+
 
 void ScoreCalc::reset(){
 
     artMarketMap.clear();
     artTownMap.clear();
+    path.clear();
 
     for(std::pair<int, tiger::trains::ai::Post *> mapPair : *postMap)
     {
@@ -43,21 +50,19 @@ double ScoreCalc::getScore(const std::vector<int> &vec)
 
     int tick = 0;
     returned = false;
-    int currProduct = 0;
+    int currProduct = startProduct;
     const Post* lastPost = startPost;
 
     for (int idx : vec)
     {
         const Post* post = (*postMap)[idx];
-        for (auto point : post->getMinPath(startPost->getPoint()))
+        for (auto point : post->getMinPathOnlyPost(startPost->getPoint()))
         {
             if (returned)
                 break;
 
-            if ((*postMap).count(point->getIdx()) == 0)
-                continue;
-
             const Post* tempPost = (*postMap)[point->getIdx()];
+
             switch (point->getPost()->getPostType())
             {
                 case models::PostType::MARKET:
@@ -83,7 +88,7 @@ double ScoreCalc::getScore(const std::vector<int> &vec)
 
     }
 
-    return artTownMap[homePost->getPoint()->getIdx()].getProduct();
+    return artTownMap[homePost->getPoint()->getIdx()].getProduct() + currProduct;
 
 }
 
@@ -96,16 +101,23 @@ void ScoreCalc::goToMarket(const Post* post, ArtMarket artMarket, int &tick, int
     ArtTown &homeTown = artTownMap[homePost->getPoint()->getIdx()];
     ArtTown newTown = homeTown.getFuture(tick + len + home_len);
 
-    if (tick + len + home_len > maxTick || newTown.getPopulation() != homeTown.getPopulation())
-    {
-        if (tick + len + home_len > maxTick)
-            returned = true;
+    if (tick + len + home_len > maxTick){
+        returned = true;
+        return;
+    }
+
+    if (newTown.getPopulation() != homeTown.getPopulation()){
         goToTown(post, homeTown, tick, products);
         post = homePost;
     }
 
     len = post->getMinLen(artMarket.getPost()->getPoint());
     tick += len;
+
+    if (!path.empty())
+        path.pop_back();
+    for (auto point : post->getMinPath(artMarket.getPost()->getPoint()))
+        path.emplace_back(point);
 
     ArtMarket newArtMarket = artMarket.getFuture(tick);
 
@@ -117,10 +129,21 @@ void ScoreCalc::goToMarket(const Post* post, ArtMarket artMarket, int &tick, int
 void ScoreCalc::goToTown(const Post* post, ArtTown artTown, int &tick, int &products)
 {
     int len = post->getMinLen(artTown.getPost()->getPoint()); // Path to home
+
+    if (!path.empty())
+        path.pop_back();
+    for (auto point : post->getMinPath(artTown.getPost()->getPoint()))
+        path.emplace_back(point);
+
     tick += len;
     ArtTown newArtTown = artTown.getFuture(tick);
     newArtTown.addProduct(products);
     products = 0;
     artTownMap[artTown.getPost()->getPoint()->getIdx()] = newArtTown;
 
+}
+
+
+vector<const tiger::trains::world::Point*> ScoreCalc::getLastPath() const{
+    return path;
 }

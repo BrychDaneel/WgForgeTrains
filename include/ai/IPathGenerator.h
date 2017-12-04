@@ -5,6 +5,7 @@
 #include <ai/ScoreCalc.h>
 #include <ai/Post.h>
 #include <vector>
+#include <queue>
 
 
 namespace tiger{
@@ -17,9 +18,7 @@ class IPathGenerator{
 public:
 
     virtual void init(ScoreCalc* scoreCalc, std::vector<int>& postIdxs, int len) = 0;
-    virtual void tick() = 0;
-    virtual int pop() = 0;
-    virtual int front() = 0;
+    virtual std::queue<const world::Point*> generate() = 0;
 
 };
 
