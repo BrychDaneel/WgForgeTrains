@@ -5,36 +5,45 @@ namespace tiger{
 namespace trains{
 namespace models{
 
-    MoveModel::MoveModel(){
-    }
 
-    MoveModel::MoveModel(const int lineIdx, const int trainIdx, const SpeedType speedType):
-        lineIdx(lineIdx), trainIdx(trainIdx), speedType(speedType){
-    }
+MoveModel::MoveModel(){
+}
 
-    const int MoveModel::getLineIdx() const{
-        return lineIdx;
-    }
 
-    const int MoveModel::getTrainIdx() const{
-        return trainIdx;
-    }
+MoveModel::MoveModel(const int lineIdx, const int trainIdx, const SpeedType speedType):
+    lineIdx(lineIdx), trainIdx(trainIdx), speedType(speedType){
+}
 
-    const SpeedType MoveModel::getSpeedType() const{
-        return speedType;
-    }
 
-    void MoveModel::setLineIdx(const int lineIdx){
-        this->lineIdx = lineIdx;
-    }
+int MoveModel::getLineIdx() const{
+    return lineIdx;
+}
 
-    void MoveModel::setTrainIdx(const int trainIdx){
-        this->trainIdx = trainIdx;
-    }
 
-    void MoveModel::setSpeedType(const SpeedType speedType){
-        this->speedType = speedType;
-    }
+int MoveModel::getTrainIdx() const{
+    return trainIdx;
+}
+
+
+SpeedType MoveModel::getSpeedType() const{
+    return speedType;
+}
+
+
+void MoveModel::setLineIdx(const int lineIdx){
+    this->lineIdx = lineIdx;
+}
+
+
+void MoveModel::setTrainIdx(const int trainIdx){
+    this->trainIdx = trainIdx;
+}
+
+
+void MoveModel::setSpeedType(const SpeedType speedType){
+    this->speedType = speedType;
+}
+
 
 }
 }

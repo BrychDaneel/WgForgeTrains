@@ -12,3 +12,8 @@ void CommandSender::move(const models::MoveModel &move)
 {
     client->move(move);
 }
+
+void CommandSender::turn()
+{
+    client->turn();
+}

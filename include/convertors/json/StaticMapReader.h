@@ -11,10 +11,16 @@ namespace trains{
 namespace convertors{
 namespace json{
 
-    class StaticMapReader : public IStaticMapReader{
-        public:
-            const int readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const;
-    };
+
+class StaticMapReader : public IStaticMapReader{
+
+public:
+
+    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const;
+
+};
+
+
 }
 }
 }
@@ -22,6 +28,3 @@ namespace json{
 
 
 #endif
-
-
-

@@ -5,21 +5,27 @@
 
 #include <models/MoveModel.h>
 
+
 namespace tiger{
 namespace trains{
 namespace world{
 
-    class ICommandSender{
-        public:
-            virtual void move(const models::MoveModel &move) = 0;
-            virtual ~ICommandSender(){};
-    };
-}
-}
-}
 
+class ICommandSender{
+
+public:
+
+    virtual ~ICommandSender(){}
+
+    virtual void move(const models::MoveModel &move) = 0;
+    virtual void turn() = 0;
+
+};
+
+
+}
+}
+}
 
 
 #endif
-
-

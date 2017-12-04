@@ -8,36 +8,42 @@
 #include <models/PointModel.h>
 #include <vector>
 
+
 namespace tiger{
 namespace trains{
 namespace world{
 
-    class World;
-    class Line;
-    class IPost;
 
-    class Point{
-        private:
-            World * owner;
-            int idx;
-        public:
-            Point();
-            Point(const models::PointModel& model, World * world);
+class World;
+class Line;
+class IPost;
 
-            World* getWorld() const;
 
-            int getIdx() const;
-            IPost* getPost() const;
-            const std::vector<Line*>& getEdges() const;
-            const std::vector<Point*> getNeighboards() const;
+class Point{
 
-    };
+private:
+
+    World* owner;
+    int idx;
+
+public:
+
+    Point();
+    Point(const models::PointModel& model, World* world);
+
+    World* getWorld() const;
+
+    int getIdx() const;
+    IPost* getPost() const;
+    const std::vector<Line*>& getEdges() const;
+    const std::vector<Point*> getNeighboards() const;
+
+};
+
+
 }
 }
 }
-
 
 
 #endif
-
-

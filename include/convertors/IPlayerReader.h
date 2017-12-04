@@ -10,17 +10,20 @@ namespace tiger{
 namespace trains{
 namespace convertors{
 
-    class IPlayerReader{
-        public:
-            virtual ~IPlayerReader(){};
-            virtual const int readPlayer(const char * buffer, const int bufferSize, models::PlayerModel * playerModel) const = 0;
-    };
-}
-}
-}
 
+class IPlayerReader{
+
+public:
+
+    virtual ~IPlayerReader(){}
+
+    virtual int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel) const = 0;
+};
+
+
+}
+}
+}
 
 
 #endif
-
-

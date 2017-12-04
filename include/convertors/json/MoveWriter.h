@@ -11,10 +11,15 @@ namespace trains{
 namespace convertors{
 namespace json{
 
-    class MoveWriter : public IMoveWriter{
-        public:
-            const int writeMove(const models::MoveModel * move, char * buffer,  int * bufferSize) const;
-    };
+
+class MoveWriter : public IMoveWriter{
+
+public:
+
+    int writeMove(const models::MoveModel* move, char* buffer,  int* bufferSize) const;
+
+};
+
 
 }
 }

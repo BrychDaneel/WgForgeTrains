@@ -10,17 +10,20 @@ namespace tiger{
 namespace trains{
 namespace convertors{
 
-    class IStaticMapReader{
-        public:
-            virtual ~IStaticMapReader(){};
-            virtual const int readStaticMap(const char * buffer, const int bufferSize, models::StaticMap * staticMap) const = 0;
-    };
-}
-}
-}
 
+class IStaticMapReader{
+
+public:
+
+    virtual ~IStaticMapReader(){}
+
+    virtual int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const = 0;
+};
+
+
+}
+}
+}
 
 
 #endif
-
-

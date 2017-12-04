@@ -20,11 +20,13 @@ namespace tiger
 
             public:
                 Runner(const char *name, const char *addr, int port);
+
                 void setBot(ai::IBot *bot);
+
+                world::World* getWorld();
 
                 virtual ~Runner()
                 {
-                    trainClient.~TCPTrainClient();
                 }
 
                 void run();
