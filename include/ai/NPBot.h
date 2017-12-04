@@ -32,8 +32,8 @@ private:
     IPathGenerator* pathGenerator;
     world::World *world;
     std::map<int, Post*> postMap;
-    int tick;
-    Post* next;
+    const int maxGenTick = 100;
+    const int pathLen = 33;
     std::queue<const world::Point*> path;
     Post* homeAiPost;
 

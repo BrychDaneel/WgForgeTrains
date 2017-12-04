@@ -58,7 +58,6 @@ void Runner::run()
 
         trainClient.turn();
 
-        //sleep(1);
         world.tick();
     }
 
