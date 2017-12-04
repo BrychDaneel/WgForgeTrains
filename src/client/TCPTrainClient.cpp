@@ -15,7 +15,6 @@ TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port)
 TCPTrainClient::~TCPTrainClient()
 {
     delete playerModel;
-    tcpSession.~TCPSession();
     logger->info("Logout");    
 }
 

@@ -49,17 +49,12 @@ namespace tiger
 
                 private:
 
-
                     mutable network::TCPSession tcpSession;
                     convertors::json::ModelConvertor convertor;
                     models::PlayerModel *playerModel;
                     el::Logger *logger;
 
-
             };
-
-
-
 
         }
 
