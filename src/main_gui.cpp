@@ -19,16 +19,16 @@ int main(int argc, char *argv[]){
 
     QApplication application(argc, argv);
 
-    Runner runner("tiger2", "wgforge-srv.wargaming.net", 443);
+    Runner runner("Vasya", "wgforge-srv.wargaming.net", 443);
     //Runner runner("tiger", "wgforge-srv.wargaming.net", 443);
     //Runner runner("tiger", "localhost", 30001);
 
     //ai::JustDoItBot bot;
-    //ai::GreedyBot greedyBot;
-    ai::generators::Annealing pathGenerator;
-    ai::NPBot npBot(&pathGenerator);
+    ai::GreedyBot greedyBot;
+    //ai::generators::Annealing pathGenerator;
+    //ai::NPBot npBot(&pathGenerator);
 
-    runner.setBot(&npBot);
+    runner.setBot(&greedyBot);
 
     QRunnerThred runnerThread(&runner);
     runnerThread.start();

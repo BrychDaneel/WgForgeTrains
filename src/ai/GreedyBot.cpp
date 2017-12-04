@@ -47,6 +47,7 @@ void GreedyBot::findNextPost()
 {
     ArtTown homeTown = ArtTown(homePost);
     int maxLen = homeTown.getProduct() / homeTown.getPopulation();
+    int currHomeLen = currentPost->getMinLen(homeTown.getPost()->getPoint());
     double maxProductByTick = 0;
     Post *tempNext = nullptr;
     int killer = 0;
@@ -67,10 +68,11 @@ void GreedyBot::findNextPost()
 
             ArtMarket market(mapPair.second);
             ArtMarket newMarket = market.getFuture(mapPair.second->getMinLen(currentPost->getPoint()));
-            if (((double)newMarket.getProduct())/tempLen > maxProductByTick)
+
+            if (((double)newMarket.getProduct())/(tempLen-currHomeLen + 1) > maxProductByTick)
             {
                 tempNext = mapPair.second;
-                maxProductByTick = ((double)newMarket.getProduct())/tempLen;
+                maxProductByTick = ((double)newMarket.getProduct())/(tempLen-currHomeLen + 1);
             }
 
         }
@@ -83,6 +85,12 @@ void GreedyBot::findNextPost()
         nextPost = homePost;
     else
         nextPost = tempNext;
+    world::Train * train = world->getTrainList()[0];
+
+    if (train->getProduct() >= train->getCapacity())
+        nextPost = homePost;
+    //if (currentPost != homePost && maxProductByTick < homeTown.getPopulation() - 0.6)
+      // nextPost = homePost;  // May improve score or not
 
     currentPath = currentPost->getMinPath(nextPost->getPoint());
 
