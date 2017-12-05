@@ -10,16 +10,21 @@ namespace tiger{
 namespace trains{
 namespace convertors{
 
-    class IDynamicMapReader{
-        public:
-            virtual ~IDynamicMapReader(){};
-            virtual const int readDynamicMap(const char * buffer, const int bufferSize, models::DynamicMap * dynamicMap) const = 0;
-    };
-}
-}
-}
 
+class IDynamicMapReader{
+
+public:
+
+    virtual ~IDynamicMapReader(){}
+
+    virtual int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap) const = 0;
+
+};
+
+
+}
+}
+}
 
 
 #endif
-

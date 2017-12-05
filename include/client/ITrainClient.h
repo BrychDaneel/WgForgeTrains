@@ -20,20 +20,13 @@ namespace tiger
             {
                 public:
 
-                    virtual std::shared_ptr<const models::PlayerModel> getMyPlayer() = 0;
-                    virtual std::shared_ptr<const models::StaticMap> getStaticMap() = 0;
-                    virtual std::shared_ptr<const models::DynamicMap> getDynamicMap() = 0;
-                    virtual void turn() = 0;
-                    virtual bool move(const models::MoveModel &move) = 0;
-
+                    virtual models::PlayerModel *getMyPlayer() const = 0;
+                    virtual int getStaticMap(models::StaticMap *staticMap) const = 0;
+                    virtual int getDynamicMap(models::DynamicMap *dynamicMap) const = 0;
+                    virtual void turn() const = 0;
+                    virtual int move(const models::MoveModel &move) const = 0;
 
             };
-
-
-
-
-
-
 
         }
     }
