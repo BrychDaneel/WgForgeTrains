@@ -2,56 +2,98 @@
     "idx": 1,
     "post": [
         {
-            "armor": 0,
+            "armor": 100,
+            "armor_capacity": 100,
+            "event": [],
             "idx": 2,
+            "level": 1,
             "name": "town-one",
+            "next_level_price": 100,
+            "player_id": "be9d34af-de62-4759-9b77-47be1ad8cefc",
+            "point_id": 1,
             "population": 3,
-            "product": 35,
+            "population_capacity": 10,
+            "product": 350,
+            "product_capacity": 200,
             "type": 1
         },
         {
+            "event": [],
             "idx": 4,
             "name": "market-big",
-            "product": 36,
-            "product_capacity": 36,
-            "replenishment": 2,
+            "point_id": 89,
+            "product": 500,
+            "product_capacity": 500,
+            "replenishment": 10,
             "type": 2
         },
         {
+            "event": [],
             "idx": 8,
             "name": "market-medium",
-            "product": 28,
-            "product_capacity": 28,
-            "replenishment": 1,
+            "point_id": 49,
+            "product": 250,
+            "product_capacity": 250,
+            "replenishment": 10,
             "type": 2
         },
         {
+            "event": [],
             "idx": 16,
             "name": "market-small",
-            "product": 5,
-            "product_capacity": 5,
-            "replenishment": 1,
+            "point_id": 12,
+            "product": 50,
+            "product_capacity": 50,
+            "replenishment": 5,
             "type": 2
+        },
+        {
+            "armor": 20,
+            "armor_capacity": 20,
+            "event": [],
+            "idx": 32,
+            "name": "storage-small",
+            "point_id": 32,
+            "replenishment": 1,
+            "type": 3
+        },
+        {
+            "armor": 100,
+            "armor_capacity": 100,
+            "event": [],
+            "idx": 64,
+            "name": "storage-big",
+            "point_id": 56,
+            "replenishment": 5,
+            "type": 3
         }
     ],
     "train": [
-         {
-            "capacity": 20,
-            "idx": 33,
-            "line_idx": 0,
-            "player_id": "asdasdasdasdasdasdads",
-            "position": 2,
-            "product": 3,
+        {
+            "event": [],
+            "goods": 0,
+            "goods_capacity": 40,
+            "idx": 1,
+            "level": 1,
+            "line_idx": 1,
+            "next_level_price": 40,
+            "player_id": "be9d34af-de62-4759-9b77-47be1ad8cefc",
+            "position": 0,
+            "post_type": null,
             "speed": 0
         },
         {
-            "capacity": 200,
-            "idx": 42,
+            "event": [],
+            "goods": 0,
+            "goods_capacity": 40,
+            "idx": 2,
+            "level": 1,
             "line_idx": 1,
-            "player_id": "c8e35156-de2f-4690-be43-cccbc116e513",
-            "position": 3,
-            "product": 5,
-            "speed": -1
+            "next_level_price": 40,
+            "player_id": "be9d34af-de62-4759-9b77-47be1ad8cefc",
+            "position": 0,
+            "post_type": null,
+            "speed": 0
         }
     ]
 }

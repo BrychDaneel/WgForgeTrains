@@ -4,7 +4,6 @@
 #include <fstream>
 #include <tests/reader.h>
 
-
 using namespace testing;
 
 
@@ -18,6 +17,7 @@ TEST(PlayerTest, correct)
 
     tiger::trains::models::PlayerModel player;
     int res = playerReader.readPlayer(buffer, size, &player);
+
 
     ASSERT_FALSE(res);
     ASSERT_EQ(8, player.getHome());

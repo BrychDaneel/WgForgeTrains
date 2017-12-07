@@ -28,8 +28,8 @@ private:
     Player* player;
     Line* line;
     models::SpeedType speed;
-    int capacity;
-    int product;
+    int goodsCapacity;
+    int goods;
     int position;
 
 public:
@@ -45,8 +45,8 @@ public:
     Player* getPlayer() const;
     Line* getLine() const;
     int getPosition() const;
-    int getCapacity() const;
-    int getProduct() const;
+    int getGoodsCapacity() const;
+    int getGoods() const;
     Point *getPoint() const;
 
     models::SpeedType getSpeed() const;

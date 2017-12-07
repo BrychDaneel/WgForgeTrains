@@ -33,10 +33,18 @@ public:
 
     ~ModelConvertor();
 
-    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const;
-    int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap) const;
-    int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel) const;
-    int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize) const;
+    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap);
+    int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap);
+    int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel);
+    int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize);
+
+    int getLastErrorCode();
+    const std::string& getLastErrorMessage();
+
+private:
+
+    int lastErrorCode;
+    std::string lastErrorMessage;
 
 };
 

@@ -29,23 +29,41 @@ ModelConvertor::~ModelConvertor(){
 }
 
 
-int ModelConvertor::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const{
-    return staticMapReader->readStaticMap(buffer, bufferSize, staticMap);
+int ModelConvertor::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap){
+    lastErrorCode = staticMapReader->readStaticMap(buffer, bufferSize, staticMap);
+    lastErrorMessage = staticMapReader->getLastErrorMessage();
+    return lastErrorCode;
 }
 
 
-int ModelConvertor::readDynamicMap(const char* buffer, int bufferSize, models::DynamicMap* dynamicMap) const{
-    return dynamicMapReader->readDynamicMap(buffer, bufferSize, dynamicMap);
+int ModelConvertor::readDynamicMap(const char* buffer, int bufferSize, models::DynamicMap* dynamicMap){
+    lastErrorCode = dynamicMapReader->readDynamicMap(buffer, bufferSize, dynamicMap);
+    lastErrorMessage = dynamicMapReader->getLastErrorMessage();
+    return lastErrorCode;
 }
 
 
-int ModelConvertor::readPlayer(const char* buffer, int bufferSize, models::PlayerModel* playerModel) const{
-    return playerReader->readPlayer(buffer, bufferSize, playerModel);
+int ModelConvertor::readPlayer(const char* buffer, int bufferSize, models::PlayerModel* playerModel){
+    lastErrorCode = playerReader->readPlayer(buffer, bufferSize, playerModel);
+    lastErrorMessage = playerReader->getLastErrorMessage();
+    return lastErrorCode;
 }
 
 
-int ModelConvertor::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize) const{
-    return moveWriter->writeMove(move, buffer, bufferSize);
+int ModelConvertor::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize){
+    lastErrorCode = moveWriter->writeMove(move, buffer, bufferSize);
+    lastErrorMessage = moveWriter->getLastErrorMessage();
+    return lastErrorCode;
+}
+
+
+int ModelConvertor::getLastErrorCode(){
+    return lastErrorCode;
+}
+
+
+const std::string& ModelConvertor::getLastErrorMessage(){
+    return lastErrorMessage;
 }
 
 

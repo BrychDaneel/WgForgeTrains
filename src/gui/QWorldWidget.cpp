@@ -163,7 +163,7 @@ void QWorldWidget::drawTrains(QPainter* painter){
 
 
             QRectF prodRect(trainPoint + QPoint(-5, 1), trainPoint  + QPoint(5, 2));
-            QString productText = QString("%1/%2").arg(train->getProduct()).arg(train->getCapacity());
+            QString productText = QString("%1/%2").arg(train->getGoods()).arg(train->getGoodsCapacity());
             painter->drawText(prodRect, Qt::AlignCenter, productText);
         }
 }

@@ -16,7 +16,7 @@ TCPTrainClient::~TCPTrainClient()
 {
     delete playerModel;
     tcpSession.~TCPSession();
-    logger->info("Logout");    
+    logger->info("Logout");
 }
 
 int TCPTrainClient::login()
@@ -40,7 +40,7 @@ PlayerModel *TCPTrainClient::getMyPlayer() const
 }
 
 
-int TCPTrainClient::getStaticMap(StaticMap *staticMap) const
+int TCPTrainClient::getStaticMap(StaticMap *staticMap)
 {
     char buffer[255];
     size_t len = sprintf(buffer, "{\n \"layer\": %i\n}", 0);
@@ -73,7 +73,7 @@ int TCPTrainClient::getStaticMap(StaticMap *staticMap) const
     return (int)TCPTrainClient::ErrorType::OKEY;
 }
 
-int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap) const
+int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
 {
     char buffer[255];
     size_t len = sprintf(buffer, "{\n \"layer\": %i\n}", 1);
@@ -107,13 +107,13 @@ int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap) const
 }
 
 
-void TCPTrainClient::turn() const
+void TCPTrainClient::turn()
 {
 
     uint32_t cmd = 5;
     size_t len = 2;
     uint8_t sendBuffer[8 + len];
-    char *js = "{}";
+    const char *js = "{}";
 
     memcpy(sendBuffer, &cmd, 4);
     memcpy(sendBuffer + 4, &len, 4);
@@ -128,7 +128,7 @@ void TCPTrainClient::turn() const
     delete message;
 }
 
-int TCPTrainClient::move(const models::MoveModel &move) const
+int TCPTrainClient::move(const models::MoveModel &move)
 {
     char buffer[255];
     //size_t len = sprintf(buffer, "{\n\"line_idx\": 1,\n\"speed\": 1,\n\"train_idx\": 0\n}");

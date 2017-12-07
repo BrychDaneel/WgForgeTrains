@@ -88,8 +88,7 @@ void World::update(const models::DynamicMap& dynamicMap){
         } else
             trainMap[trainModel.getIdx()]->update(trainModel);
 
-        if (trainModel.isInLine())
-            trainsOfLine[lineMap[trainModel.getLineIdx()]].push_back( trainMap[trainModel.getIdx()] );
+        trainsOfLine[lineMap[trainModel.getLineIdx()]].push_back( trainMap[trainModel.getIdx()] );
 
     }
 }

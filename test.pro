@@ -1,15 +1,11 @@
-QT += core gui
+include(gtest_dependency.pri)
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-CONFIG += object_parallel_to_source
-
-CONFIG += c++11
-
-DEFINES += QT_DEPRECATED_WARNINGS
-
-TARGET = trains_gui
 TEMPLATE = app
+CONFIG += console c++11
+CONFIG -= app_bundle
+CONFIG += thread
+CONFIG -= qt
+CONFIG += object_parallel_to_source
 
 INCLUDEPATH += include libs
 
@@ -28,7 +24,6 @@ HEADERS += \
     include/convertors/IMoveWriter.h \
     include/convertors/IPlayerReader.h \
     include/convertors/IStaticMapReader.h \
-    include/gui/QWorldWidget.h \
     include/models/DynamicMap.h \
     include/models/LineModel.h \
     include/models/MoveModel.h \
@@ -53,28 +48,31 @@ HEADERS += \
     include/world/PostFactory.h \
     include/world/Train.h \
     include/world/World.h \
-    include/CommandSender.h \
-    include/QRunnerThread.h \
-    include/Runner.h \
     libs/nlohmann/json.hpp \
     include/world/Town.h \
     include/world/Market.h \
-    include/utils/pi.h \
+    tests/convertors/json/PlayerReaderTests.h \
+    tests/convertors/json/DynamicMapReaderTests.h \
+    tests/convertors/json/MoveWriterTests.h \
+    tests/convertors/json/StaticMapReaderTests.h \
+    tests/reader.h \
+    tests/world/WorldTests.h \
+    include/models/EventModel.h \
+    include/models/EventType.h \
+    include/models/GoodType.h \
     include/ai/ArtMarket.h \
     include/ai/ArtTown.h \
+    include/ai/GreedyBot.h \
     include/ai/IBot.h \
+    include/ai/IPathGenerator.h \
+    include/ai/NPBot.h \
     include/ai/Post.h \
     include/ai/ScoreCalc.h \
-    libs/easylogging++/easylogging++.h \
-    include/ai/NPBot.h \
-    include/ai/IPathGenerator.h \
-    include/ai/GreedyBot.h \
     include/ai/generators/Annealing.h \
-    include/models/GoodType.h \
-    include/models/EventModel.h \
-    include/models/EventType.h
+    libs/easylogging++/easylogging++.h
 
-SOURCES += \
+SOURCES +=  tests/main.cpp \
+    \
     src/ai/JustDoItBot.cpp \
     src/client/TCPTrainClient.cpp \
     src/convertors/json/DynamicMapReader.cpp \
@@ -82,7 +80,6 @@ SOURCES += \
     src/convertors/json/MoveWriter.cpp \
     src/convertors/json/PlayerReader.cpp \
     src/convertors/json/StaticMapReader.cpp \
-    src/gui/QWorldWidget.cpp \
     src/models/DynamicMap.cpp \
     src/models/LineModel.cpp \
     src/models/MoveModel.cpp \
@@ -102,22 +99,17 @@ SOURCES += \
     src/world/PostFactory.cpp \
     src/world/Train.cpp \
     src/world/World.cpp \
-    src/CommandSender.cpp \
-    src/main_gui.cpp \
-    src/QRunnerThread.cpp \
-    src/Runner.cpp \
     src/world/Town.cpp \
     src/world/Market.cpp \
+    src/models/EventModel.cpp \
+    src/ai/generators/Annealing.cpp \
     src/ai/ArtMarket.cpp \
     src/ai/ArtTown.cpp \
+    src/ai/GreedyBot.cpp \
+    src/ai/NPBot.cpp \
     src/ai/Post.cpp \
     src/ai/ScoreCalc.cpp \
-    libs/easylogging++/easylogging++.cc \
-    src/ai/NPBot.cpp \
-    src/ai/GreedyBot.cpp \
-    src/ai/generators/Annealing.cpp \
-    src/models/EventModel.cpp
+    libs/easylogging++/easylogging++.cc
 
-DISTFILES +=
 
 

@@ -87,7 +87,7 @@ void GreedyBot::findNextPost()
         nextPost = tempNext;
     world::Train * train = world->getTrainList()[0];
 
-    if (train->getProduct() >= train->getCapacity())
+    if (train->getGoods() >= train->getGoodsCapacity())
         nextPost = homePost;
     //if (currentPost != homePost && maxProductByTick < homeTown.getPopulation() - 0.6)
       // nextPost = homePost;  // May improve score or not

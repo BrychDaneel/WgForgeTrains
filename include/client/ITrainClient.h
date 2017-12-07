@@ -21,10 +21,10 @@ namespace tiger
                 public:
 
                     virtual models::PlayerModel *getMyPlayer() const = 0;
-                    virtual int getStaticMap(models::StaticMap *staticMap) const = 0;
-                    virtual int getDynamicMap(models::DynamicMap *dynamicMap) const = 0;
-                    virtual void turn() const = 0;
-                    virtual int move(const models::MoveModel &move) const = 0;
+                    virtual int getStaticMap(models::StaticMap *staticMap) = 0;
+                    virtual int getDynamicMap(models::DynamicMap *dynamicMap) = 0;
+                    virtual void turn() = 0;
+                    virtual int move(const models::MoveModel &move) = 0;
 
 
             };

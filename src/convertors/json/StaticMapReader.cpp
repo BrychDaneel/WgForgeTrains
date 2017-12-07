@@ -10,7 +10,7 @@ namespace convertors{
 namespace json{
 
 
-int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const{
+int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap){
 
     string str;
     str.assign(buffer, bufferSize);
@@ -53,6 +53,16 @@ int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, mod
     }
 
     return 0;
+}
+
+
+int StaticMapReader::getLastErrorCode(){
+    return lastErrorCode;
+}
+
+
+const std::string& StaticMapReader::getLastErrorMessage(){
+    return lastErrorMessage;
 }
 
 

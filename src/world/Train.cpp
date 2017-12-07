@@ -16,28 +16,22 @@ Train::Train(const models::TrainModel& model, World* world){
     idx = model.getIdx();
     player = owner->getPlayerByIdx(model.getPlayerIdx());
 
-    if (model.isInLine())
-        line = owner->getLineByIdx(model.getLineIdx());
-    else
-        line = nullptr;
+    line = owner->getLineByIdx(model.getLineIdx());
 
     speed = model.getSpeed();
     position = model.getPosition();
-    capacity = model.getCapacity();
-    product = model.getProduct();
+    goodsCapacity = model.getGoodsCapacity();
+    goods = model.getGoods();
 }
 
 
 void Train::update(models::TrainModel model){
-    if (model.isInLine())
-        line = owner->getLineByIdx(model.getLineIdx());
-    else
-        line = nullptr;
+    line = owner->getLineByIdx(model.getLineIdx());
 
     speed = model.getSpeed();
     position = model.getPosition();
-    capacity = model.getCapacity();
-    product = model.getProduct();
+    goodsCapacity = model.getGoodsCapacity();
+    goods = model.getGoods();
 }
 
 
@@ -66,13 +60,13 @@ int Train::getPosition() const{
 }
 
 
-int Train::getCapacity() const{
-    return capacity;
+int Train::getGoodsCapacity() const{
+    return goodsCapacity;
 }
 
 
-int Train::getProduct() const{
-    return product;
+int Train::getGoods() const{
+    return goods;
 }
 
 

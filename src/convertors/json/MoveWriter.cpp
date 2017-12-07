@@ -10,7 +10,7 @@ namespace convertors{
 namespace json{
 
 
-int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize) const{
+int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize){
     nlohmann::json j;
     j["line_idx"] = move->getLineIdx();
     j["speed"] = move->getSpeedType();
@@ -27,6 +27,16 @@ int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* buff
         buffer[i] = cstr[i];
 
     return 0;
+}
+
+
+int MoveWriter::getLastErrorCode(){
+    return lastErrorCode;
+}
+
+
+const std::string& MoveWriter::getLastErrorMessage(){
+    return lastErrorMessage;
 }
 
 
