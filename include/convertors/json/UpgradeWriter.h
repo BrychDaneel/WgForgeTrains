@@ -9,6 +9,7 @@
 namespace tiger{
 namespace trains{
 namespace convertors{
+namespace json{
 
 
 struct UpgradeWriter : public IUpgradeWriter{
@@ -26,6 +27,7 @@ private:
 };
 
 
+}
 }
 }
 }

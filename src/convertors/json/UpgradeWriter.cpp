@@ -5,6 +5,7 @@
 namespace tiger{
 namespace trains{
 namespace convertors{
+namespace json{
 
 
 /*
@@ -14,18 +15,10 @@ namespace convertors{
  */
 
 int UpgradeWriter::writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize){
+
     nlohmann::json jupgrade;
-
-    nlohmann::json jtrainIdxs;
-    for (int tidx : upgrade->getTrainIdxList())
-        jtrainIdxs.push_back(tidx);
-
-    nlohmann::json jpostIdxs;
-    for (int pidx : upgrade->getPostIdxList())
-        jpostIdxs.push_back(pidx);
-
-    jupgrade["post"] = jtrainIdxs;
-    jupgrade["train"] = jpostIdxs;
+    jupgrade["post"] = upgrade->getPostIdxList();
+    jupgrade["train"] = upgrade->getTrainIdxList();
 
     std::string str = jupgrade.dump();
     const char* cstr = str.c_str();
@@ -54,6 +47,7 @@ const std::string& UpgradeWriter::getLastErrorMessage(){
 }
 
 
+}
 }
 }
 }

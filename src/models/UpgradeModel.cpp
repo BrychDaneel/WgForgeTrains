@@ -9,6 +9,12 @@ UpgradeModel::UpgradeModel(){
 }
 
 
+UpgradeModel::UpgradeModel(const std::vector<int>& trainIdxList, const std::vector<int>& postIdxList) :
+    trainIdxList(trainIdxList), postIdxList(postIdxList)
+{
+}
+
+
 const std::vector<int>& UpgradeModel::getTrainIdxList() const{
     return trainIdxList;
 }

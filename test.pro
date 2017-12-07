@@ -69,7 +69,10 @@ HEADERS += \
     include/ai/Post.h \
     include/ai/ScoreCalc.h \
     include/ai/generators/Annealing.h \
-    libs/easylogging++/easylogging++.h
+    libs/easylogging++/easylogging++.h \
+    tests/convertors/json/UpgradeWriterTests.h \
+    include/convertors/IUpgradeWriter.h \
+    include/convertors/json/UpgradeWriter.h
 
 SOURCES +=  tests/main.cpp \
     \
@@ -109,7 +112,9 @@ SOURCES +=  tests/main.cpp \
     src/ai/NPBot.cpp \
     src/ai/Post.cpp \
     src/ai/ScoreCalc.cpp \
-    libs/easylogging++/easylogging++.cc
+    libs/easylogging++/easylogging++.cc \
+    src/convertors/json/UpgradeWriter.cpp \
+    src/models/UpgradeModel.cpp
 
 
 
