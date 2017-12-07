@@ -10,6 +10,7 @@
 #include <convertors/IStaticMapReader.h>
 #include <convertors/IPlayerReader.h>
 #include <convertors/IMoveWriter.h>
+#include <convertors/IUpgradeWriter.h>
 
 
 namespace tiger{
@@ -26,6 +27,7 @@ private:
     IMoveWriter* moveWriter;
     IPlayerReader* playerReader;
     IStaticMapReader* staticMapReader;
+    IUpgradeWriter* upgradeWriter;
 
 public:
 
@@ -37,6 +39,7 @@ public:
     int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap);
     int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel);
     int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize);
+    int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
 
     int getLastErrorCode();
     const std::string& getLastErrorMessage();

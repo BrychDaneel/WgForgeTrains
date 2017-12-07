@@ -56,6 +56,7 @@ void Runner::run()
         if (bot != nullptr)
             bot->step();
 
+        sleep(8);
         trainClient.turn();
 
         world.tick();

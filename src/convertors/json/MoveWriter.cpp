@@ -19,8 +19,11 @@ int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* buff
     std::string str = j.dump();
     const char* cstr = str.c_str();
     int len = strlen(cstr);
-    if (len > *bufferSize)
-        return -1;
+    if (len > *bufferSize){
+        lastErrorCode = 1;
+        lastErrorMessage = "Buffer is too small to convert move.";
+        return lastErrorCode;
+    }
 
     *bufferSize = len;
     for (int i=0; i<len; i++)

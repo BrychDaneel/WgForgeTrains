@@ -72,7 +72,10 @@ HEADERS += \
     include/ai/generators/Annealing.h \
     include/models/GoodType.h \
     include/models/EventModel.h \
-    include/models/EventType.h
+    include/models/EventType.h \
+    include/convertors/IUpgradeWriter.h \
+    include/convertors/json/UpgradeWriter.h \
+    include/models/UpgradeModel.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -116,7 +119,9 @@ SOURCES += \
     src/ai/NPBot.cpp \
     src/ai/GreedyBot.cpp \
     src/ai/generators/Annealing.cpp \
-    src/models/EventModel.cpp
+    src/models/EventModel.cpp \
+    src/convertors/json/UpgradeWriter.cpp \
+    src/models/UpgradeModel.cpp
 
 DISTFILES +=
 
