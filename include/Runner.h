@@ -16,6 +16,9 @@ namespace tiger
                 client::TCPTrainClient trainClient;
                 world::World world;
                 ai::IBot *bot;
+                const char *name;
+                const char *addr;
+                int port;
 
 
             public:

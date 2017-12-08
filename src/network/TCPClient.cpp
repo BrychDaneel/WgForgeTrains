@@ -12,8 +12,14 @@ TCPClient::TCPClient():tcpSocket()
 TCPClient::~TCPClient()
 {
 
-    tcpSocket.close();
 }
+
+void TCPClient::close()
+{
+    tcpSocket.close();
+
+}
+
 
 
 bool TCPClient::connect(const char* addr, int port)
@@ -52,3 +58,5 @@ int TCPClient::recv(uint8_t* buffer, size_t maxBytes)
 
     return lastReceived == -1 ? -1 : received;
 }
+
+

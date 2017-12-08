@@ -8,7 +8,9 @@
 using namespace tiger::trains;
 
 
-Runner::Runner(const char *name, const char *addr, int port):trainClient(name, addr, port), world(),bot(nullptr)
+Runner::Runner(const char *name, const char *addr, int port)
+    :trainClient(name, addr, port), world(),bot(nullptr), name(name),
+        addr(addr), port(port)
 {
 
 }
@@ -25,7 +27,7 @@ void Runner::setBot(ai::IBot *bot)
 
 void Runner::run()
 {
-    trainClient.login();
+    int retVal = trainClient.login();
     CommandSender commandSender(&trainClient);
 
     std::vector<models::PlayerModel> models;
@@ -56,7 +58,7 @@ void Runner::run()
         if (bot != nullptr)
             bot->step();
 
-        sleep(8);
+
         trainClient.turn();
 
         world.tick();

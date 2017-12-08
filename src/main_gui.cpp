@@ -8,6 +8,8 @@
 #include <ai/generators/Annealing.h>
 #include <easylogging++/easylogging++.h>
 
+#include <client/TCPTrainClient.h>
+
 
 using namespace tiger::trains;
 
@@ -17,6 +19,9 @@ INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char *argv[]){
 
+   /* client::TCPTrainClient client("Vasya", "wgforge-srv.wargaming.net", 443);
+    client.login();
+    client.getCoordinate(nullptr);*/
     QApplication application(argc, argv);
 
     Runner runner("Vasya", "wgforge-srv.wargaming.net", 443);
