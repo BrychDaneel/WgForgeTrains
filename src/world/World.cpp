@@ -85,7 +85,7 @@ void World::update(const models::DynamicMap& dynamicMap){
             IPost* post = postMap[postModel.getIdx()];
             IEvent* event = EventFactory::createEvent(eventModel, post);
             post->addEvent(event);
-            fillEventsHistory(event->getTick());
+            fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
         }
     }
@@ -108,7 +108,7 @@ void World::update(const models::DynamicMap& dynamicMap){
             Train* train = trainMap[trainModel.getIdx()];
             IEvent* event = EventFactory::createEvent(eventModel, train);
             train->addEvent(event);
-            fillEventsHistory(event->getTick());
+            fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
         }
 
