@@ -82,7 +82,8 @@ HEADERS += \
     include/world/events/ParasitesAssaultEvent.h \
     include/world/events/TrainCollisionEvent.h \
     include/world/EventFactory.h \
-    include/world/IEvent.h
+    include/world/IEvent.h \
+    include/models/CoordsMap.h
 
 SOURCES +=  tests/main.cpp \
     \

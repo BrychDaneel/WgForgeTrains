@@ -86,8 +86,7 @@ int ModelConvertor::writeUpgrade(const models::UpgradeModel* upgrade, char* buff
 }
 
 
-int ModelConvertor::readCoordsMap(const char* buffer, const int bufferSize,
-                                  std::vector<models::CoordModel>& coordsMap){
+int ModelConvertor::readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap){
     if (coordMapReader->readCoordsMap(buffer, bufferSize, coordsMap)){
         lastErrorCode = playerReader->getLastErrorCode();
         lastErrorMessage = playerReader->getLastErrorMessage();

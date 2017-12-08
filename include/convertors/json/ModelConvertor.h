@@ -43,7 +43,7 @@ public:
     int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize);
     int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
 
-    int readCoordsMap(const char* buffer, const int bufferSize, std::vector<models::CoordModel>& coordsMap);
+    int readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap);
 
     int getLastErrorCode();
     const std::string& getLastErrorMessage();

@@ -10,8 +10,7 @@ namespace convertors{
 namespace json {
 
 
-int CoordsMapReader::readCoordsMap(const char* buffer, const int bufferSize,
-                                   std::vector<models::CoordModel>& coordsMap)
+int CoordsMapReader::readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap)
 {
     std::string str;
     try{
@@ -33,16 +32,20 @@ int CoordsMapReader::readCoordsMap(const char* buffer, const int bufferSize,
         return lastErrorCode;
     }
 
-    coordsMap.clear();
+    coordsMap->coords.clear();
 
     try{
-        for (nlohmann::json jcord : jmap["point"]){
+
+        coordsMap->width = jmap["size"][0];
+        coordsMap->height = jmap["size"][1];
+
+        for (nlohmann::json jcord : jmap["coordinate"]){
             models::CoordModel coord;
             coord.idx = jcord["idx"];
             coord.x = jcord["x"];
             coord.y = jcord["y"];
 
-            coordsMap.push_back(coord);
+            coordsMap->coords.push_back(coord);
         }
 
     }
