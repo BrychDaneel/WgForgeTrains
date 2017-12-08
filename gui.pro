@@ -75,7 +75,10 @@ HEADERS += \
     include/models/EventType.h \
     include/convertors/IUpgradeWriter.h \
     include/convertors/json/UpgradeWriter.h \
-    include/models/UpgradeModel.h
+    include/models/UpgradeModel.h \
+    include/convertors/ICoordsMapReader.h \
+    include/convertors/json/CoordsMapReader.h \
+    include/models/CoordModel.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -121,7 +124,8 @@ SOURCES += \
     src/ai/generators/Annealing.cpp \
     src/models/EventModel.cpp \
     src/convertors/json/UpgradeWriter.cpp \
-    src/models/UpgradeModel.cpp
+    src/models/UpgradeModel.cpp \
+    src/convertors/json/CoordsMapReader.cpp
 
 DISTFILES +=
 

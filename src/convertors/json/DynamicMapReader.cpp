@@ -64,6 +64,7 @@ void DynamicMapReader::readTrain(const nlohmann::json& jtrain, models::TrainMode
 void DynamicMapReader::readTown(const nlohmann::json& jtown, models::PostModel* post){
 
     post->setProduct(jtown["product"]);
+    post->setProductCapacity(jtown["product_capacity"]);
     post->setArmor(jtown["armor"]);
     post->setPopulation(jtown["population"]);
     post->setArmorCapacity(jtown["armor_capacity"]);
@@ -179,6 +180,7 @@ int DynamicMapReader::readDynamicMap(const char* buffer, const int bufferSize, m
     catch(...){
         lastErrorCode = -1;
         lastErrorMessage = "Unknown parse data error.";
+        return lastErrorCode;
     }
 
     return 0;

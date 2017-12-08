@@ -72,7 +72,11 @@ HEADERS += \
     libs/easylogging++/easylogging++.h \
     tests/convertors/json/UpgradeWriterTests.h \
     include/convertors/IUpgradeWriter.h \
-    include/convertors/json/UpgradeWriter.h
+    include/convertors/json/UpgradeWriter.h \
+    tests/convertors/json/CoordsMapReaderTests.h \
+    include/models/CoordModel.h \
+    include/convertors/ICoordsMapReader.h \
+    include/convertors/json/CoordsMapReader.h
 
 SOURCES +=  tests/main.cpp \
     \
@@ -114,7 +118,8 @@ SOURCES +=  tests/main.cpp \
     src/ai/ScoreCalc.cpp \
     libs/easylogging++/easylogging++.cc \
     src/convertors/json/UpgradeWriter.cpp \
-    src/models/UpgradeModel.cpp
+    src/models/UpgradeModel.cpp \
+    src/convertors/json/CoordsMapReader.cpp
 
 
 

@@ -11,6 +11,7 @@
 #include <convertors/IPlayerReader.h>
 #include <convertors/IMoveWriter.h>
 #include <convertors/IUpgradeWriter.h>
+#include <convertors/ICoordsMapReader.h>
 
 
 namespace tiger{
@@ -28,6 +29,7 @@ private:
     IPlayerReader* playerReader;
     IStaticMapReader* staticMapReader;
     IUpgradeWriter* upgradeWriter;
+    ICoordsMapReader* coordMapReader;
 
 public:
 
@@ -40,6 +42,8 @@ public:
     int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel);
     int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize);
     int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
+
+    int readCoordsMap(const char* buffer, const int bufferSize, std::vector<models::CoordModel>& coordsMap);
 
     int getLastErrorCode();
     const std::string& getLastErrorMessage();

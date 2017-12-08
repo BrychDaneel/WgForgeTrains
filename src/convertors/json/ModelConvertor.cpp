@@ -6,6 +6,7 @@
 #include <convertors/json/PlayerReader.h>
 #include <convertors/json/MoveWriter.h>
 #include <convertors/json/UpgradeWriter.h>
+#include <convertors/json/CoordsMapReader.h>
 
 
 namespace tiger{
@@ -20,6 +21,7 @@ ModelConvertor::ModelConvertor(){
     playerReader = new PlayerReader();
     moveWriter = new MoveWriter();
     upgradeWriter = new UpgradeWriter();
+    coordMapReader = new CoordsMapReader();
 }
 
 
@@ -29,6 +31,7 @@ ModelConvertor::~ModelConvertor(){
     delete playerReader;
     delete moveWriter;
     delete upgradeWriter;
+    delete coordMapReader;
 }
 
 
@@ -77,6 +80,17 @@ int ModelConvertor::writeUpgrade(const models::UpgradeModel* upgrade, char* buff
     if (upgradeWriter->writeUpgrade(upgrade, buffer, bufferSize)){
         lastErrorCode = upgradeWriter->getLastErrorCode();
         lastErrorMessage = upgradeWriter->getLastErrorMessage();
+        return lastErrorCode;
+    }
+    return 0;
+}
+
+
+int ModelConvertor::readCoordsMap(const char* buffer, const int bufferSize,
+                                  std::vector<models::CoordModel>& coordsMap){
+    if (coordMapReader->readCoordsMap(buffer, bufferSize, coordsMap)){
+        lastErrorCode = playerReader->getLastErrorCode();
+        lastErrorMessage = playerReader->getLastErrorMessage();
         return lastErrorCode;
     }
     return 0;

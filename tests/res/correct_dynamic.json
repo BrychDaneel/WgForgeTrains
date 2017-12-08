@@ -4,7 +4,23 @@
         {
             "armor": 100,
             "armor_capacity": 100,
-            "event": [],
+            "event": [
+                {
+                    "parasites_power": 3,
+                    "tick": 111,
+                    "type": 3
+                },
+                {
+                    "hijackers_power": 2,
+                    "tick": 1,
+                    "type": 2
+                },
+                 {
+                    "refugees_number": 1,
+                    "tick": 1,
+                    "type": 4
+                }
+            ],
             "idx": 2,
             "level": 1,
             "name": "town-one",
@@ -70,10 +86,16 @@
     ],
     "train": [
         {
-            "event": [],
+            "event": [
+                {
+                    "tick": 2,
+                    "train": 2,
+                    "type": 1
+                }
+            ],
             "goods": 0,
             "goods_capacity": 40,
-            "idx": 1,
+            "idx": 33,
             "level": 1,
             "line_idx": 1,
             "next_level_price": 40,
@@ -84,16 +106,16 @@
         },
         {
             "event": [],
-            "goods": 0,
+            "goods": 5,
             "goods_capacity": 40,
-            "idx": 2,
+            "idx": 42,
             "level": 1,
             "line_idx": 1,
             "next_level_price": 40,
             "player_id": "be9d34af-de62-4759-9b77-47be1ad8cefc",
-            "position": 0,
+            "position": 3,
             "post_type": null,
-            "speed": 0
+            "speed": -1
         }
     ]
 }

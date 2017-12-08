@@ -10,6 +10,11 @@ namespace convertors{
 namespace json{
 
 
+/*
+ * Error codes:
+ *  -1 : unknown
+ *  1 : buffer overflow
+ */
 int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize){
     nlohmann::json j;
     j["line_idx"] = move->getLineIdx();

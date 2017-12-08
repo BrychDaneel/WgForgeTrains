@@ -1,4 +1,4 @@
-#include <convertors/json/PlayerReader.h>
+#include <convertors/json/CoordsMapReader.h>
 
 
 #include <nlohmann/json.hpp>
@@ -7,18 +7,13 @@
 namespace tiger{
 namespace trains{
 namespace convertors{
-namespace json{
+namespace json {
 
-/*
- * Errors:
- * -1 unknown error
- * 1 - bad buffer
- * 2 - bad json
- * 3 - value error
- * 4 - player is empty
- */
-int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel){
-    string str;
+
+int CoordsMapReader::readCoordsMap(const char* buffer, const int bufferSize,
+                                   std::vector<models::CoordModel>& coordsMap)
+{
+    std::string str;
     try{
         str.assign(buffer, bufferSize);
     }
@@ -28,9 +23,9 @@ int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::P
         return lastErrorCode;
     }
 
-    nlohmann::json j;
+    nlohmann::json jmap;
     try{
-        j = nlohmann::json::parse(str);
+        jmap = nlohmann::json::parse(str);
     }
     catch (const nlohmann::json::parse_error& e){
         lastErrorCode = 2;
@@ -38,17 +33,17 @@ int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::P
         return lastErrorCode;
     }
 
+    coordsMap.clear();
+
     try{
+        for (nlohmann::json jcord : jmap["point"]){
+            models::CoordModel coord;
+            coord.idx = jcord["idx"];
+            coord.x = jcord["x"];
+            coord.y = jcord["y"];
 
-        if (j.find("home") != j.end() && j["home"].is_null()){
-            lastErrorCode = 4;
-            lastErrorMessage = "Player is empty";
-            return lastErrorCode;
+            coordsMap.push_back(coord);
         }
-
-        playerModel->setIdx(j["idx"]);
-        playerModel->setHome(j["home"]["post_id"]);
-        playerModel->setName(j["name"]);
 
     }
     catch(const nlohmann::json::type_error& e){
@@ -62,17 +57,16 @@ int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::P
         return lastErrorCode;
     }
 
-
     return 0;
 }
 
 
-int PlayerReader::getLastErrorCode(){
+int CoordsMapReader::getLastErrorCode(){
     return lastErrorCode;
 }
 
 
-const std::string& PlayerReader::getLastErrorMessage(){
+const std::string& CoordsMapReader::getLastErrorMessage(){
     return lastErrorMessage;
 }
 

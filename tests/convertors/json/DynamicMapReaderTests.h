@@ -3,12 +3,15 @@
 #include <string>
 #include <fstream>
 #include <tests/reader.h>
+#include <models/EventModel.h>
 
 
 using namespace testing;
 
 
 using tiger::trains::models::PostType;
+using tiger::trains::models::EventModel;
+using tiger::trains::models::EventType;
 
 
 class DynamicMapReaderTests : public ::testing::Test{
@@ -23,6 +26,8 @@ protected:
         int size = readFile("tests/res/correct_dynamic.json", &buffer);
 
         res = dynamicMapReader.readDynamicMap(buffer, size, &dynamicMap);
+
+        free(buffer);
     }
 
     void TearDown(){
@@ -52,10 +57,16 @@ TEST_F(DynamicMapReaderTests, town){
     ASSERT_EQ(100, post.getArmor());
     ASSERT_EQ(3, post.getPopulation());
     ASSERT_EQ(350, post.getProduct());
+
+    ASSERT_EQ(1, post.getLevel());
+    ASSERT_EQ(100, post.getNextLevelPrice());
+    ASSERT_EQ(10, post.getPopulationCapacity());
+    ASSERT_EQ(200, post.getProductCapacity());
+    ASSERT_EQ(100, post.getArmorCapacity());
 }
 
 
-TEST_F(DynamicMapReaderTests, market){
+TEST_F(DynamicMapReaderTests, someMarket){
     ASSERT_FALSE(res) << dynamicMapReader.getLastErrorMessage();
     tiger::trains::models::PostModel post;
     post = dynamicMap.getPostList()[2];
@@ -88,6 +99,10 @@ TEST_F(DynamicMapReaderTests, train){
     ASSERT_EQ(3, train.getPosition());
     ASSERT_EQ(5, train.getGoods());
     ASSERT_EQ(tiger::trains::models::SpeedType::REVERSE, train.getSpeed());
+
+    ASSERT_EQ(1, train.getLevel());
+    ASSERT_EQ(40, train.getNextLevelPrice());
+    ASSERT_EQ(tiger::trains::models::GoodType::NONE, train.getGoodsType());
 }
 
 
@@ -97,3 +112,37 @@ TEST_F(DynamicMapReaderTests, checkTrainsIdx){
     ASSERT_EQ(42, dynamicMap.getTrainList()[1].getIdx());
 }
 
+
+TEST_F(DynamicMapReaderTests, postEvents){
+    ASSERT_FALSE(res) << dynamicMapReader.getLastErrorMessage();
+
+    ASSERT_EQ(3u, dynamicMap.getPostList()[0].getEventList().size());
+
+    EventModel event = dynamicMap.getPostList()[0].getEventList()[0];
+    ASSERT_EQ(3, event.getParametrs());
+    ASSERT_EQ(111, event.getTick());
+    ASSERT_EQ(EventType::PARASITES_ASSAULT, event.getType());
+
+    event = dynamicMap.getPostList()[0].getEventList()[1];
+    ASSERT_EQ(2, event.getParametrs());
+    ASSERT_EQ(1, event.getTick());
+    ASSERT_EQ(EventType::HIJACKERS_ASSAULT, event.getType());
+
+    event = dynamicMap.getPostList()[0].getEventList()[2];
+    ASSERT_EQ(1, event.getParametrs());
+    ASSERT_EQ(1, event.getTick());
+    ASSERT_EQ(EventType::REFUGEES_ARRIVAL, event.getType());
+}
+
+
+TEST_F(DynamicMapReaderTests, trainEvents){
+    ASSERT_FALSE(res) << dynamicMapReader.getLastErrorMessage();
+
+    ASSERT_EQ(1u, dynamicMap.getTrainList()[0].getEventList().size());
+
+    EventModel event = dynamicMap.getTrainList()[0].getEventList()[0];
+    ASSERT_EQ(2, event.getParametrs());
+    ASSERT_EQ(2, event.getTick());
+    ASSERT_EQ(EventType::TRAIN_COLLISION, event.getType());
+
+}

@@ -26,7 +26,7 @@ TEST(MoveWriteTests, forward){
     nlohmann::json j = nlohmann::json::parse(str);
 
     ASSERT_TRUE(j.is_object());
-    ASSERT_EQ(j.size(), 3);
+    ASSERT_EQ(j.size(), 3u);
     ASSERT_EQ(j["train_idx"], 33);
     ASSERT_EQ(j["line_idx"], 2);
     ASSERT_EQ(j["speed"], 1);
@@ -45,7 +45,7 @@ TEST(MoveWriteTests, stop){
     nlohmann::json j = nlohmann::json::parse(str);
 
     ASSERT_TRUE(j.is_object());
-    ASSERT_EQ(j.size(), 3);
+    ASSERT_EQ(j.size(), 3u);
     ASSERT_EQ(j["train_idx"], 354);
     ASSERT_EQ(j["line_idx"], 55);
     ASSERT_EQ(j["speed"], 0);
@@ -64,7 +64,7 @@ TEST(MoveWriteTests, reverse){
     nlohmann::json j = nlohmann::json::parse(str);
 
     ASSERT_TRUE(j.is_object());
-    ASSERT_EQ(j.size(), 3);
+    ASSERT_EQ(j.size(), 3u);
     ASSERT_EQ(j["train_idx"], 5);
     ASSERT_EQ(j["line_idx"], 4);
     ASSERT_EQ(j["speed"], -1);
