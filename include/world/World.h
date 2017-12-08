@@ -10,6 +10,8 @@
 #include <world/Train.h>
 #include <world/IPost.h>
 #include <world/PostFactory.h>
+#include <world/IEvent.h>
+#include <world/EventFactory.h>
 
 #include <models/DynamicMap.h>
 #include <models/StaticMap.h>
@@ -23,6 +25,15 @@
 namespace tiger{
 namespace trains{
 namespace world{
+
+
+class Point;
+class Line;
+class Player;
+class Train;
+class IPost;
+class PostFactory;
+class IEvent;
 
 
 class World{
@@ -55,6 +66,9 @@ private:
     std::map<const Line*, std::vector<Train*> > trainsOfLine;
     std::map<const Player*, std::vector<Train*> > trainsOfPlayer;
 
+    std::vector<std::vector<IEvent*> > eventsHistory;
+
+    void fillEventsHistory(const size_t size);
 
 public:
 
@@ -95,6 +109,11 @@ public:
     IPost* getHome(const Player* player) const;
 
     const std::vector<Train*>& getTrainsOfLine(const Line* line) const;
+
+
+    const std::vector<std::vector<IEvent*> > & getEventsHistory() const;
+    const std::vector<IEvent*>& getEvents(int tick) const;
+    const std::vector<IEvent*> getEventsAfter(int startTick) const;
 
 };
 

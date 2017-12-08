@@ -20,9 +20,9 @@ private:
 
 public:
 
-    EventType getType();
-    int getTick();
-    int getParametrs();
+    EventType getType() const;
+    int getTick() const;
+    int getParametrs() const;
 
     void setType(const EventType type);
     void setTick(const int tick);

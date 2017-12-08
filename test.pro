@@ -76,7 +76,13 @@ HEADERS += \
     tests/convertors/json/CoordsMapReaderTests.h \
     include/models/CoordModel.h \
     include/convertors/ICoordsMapReader.h \
-    include/convertors/json/CoordsMapReader.h
+    include/convertors/json/CoordsMapReader.h \
+    include/world/events/BaseEvent.h \
+    include/world/events/HijackersAssaultEvent.h \
+    include/world/events/ParasitesAssaultEvent.h \
+    include/world/events/TrainCollisionEvent.h \
+    include/world/EventFactory.h \
+    include/world/IEvent.h
 
 SOURCES +=  tests/main.cpp \
     \
@@ -119,7 +125,11 @@ SOURCES +=  tests/main.cpp \
     libs/easylogging++/easylogging++.cc \
     src/convertors/json/UpgradeWriter.cpp \
     src/models/UpgradeModel.cpp \
-    src/convertors/json/CoordsMapReader.cpp
-
+    src/convertors/json/CoordsMapReader.cpp \
+    src/world/events/BaseEvent.cpp \
+    src/world/events/HijackersAssaultEvent.cpp \
+    src/world/events/ParasitesAssaultEvent.cpp \
+    src/world/events/TrainCollisionEvent.cpp \
+    src/world/EventFactory.cpp
 
 

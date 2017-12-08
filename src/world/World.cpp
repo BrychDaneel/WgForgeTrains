@@ -65,6 +65,12 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
 }
 
 
+void World::fillEventsHistory(const size_t size){
+    while (eventsHistory.size() < size)
+        eventsHistory.push_back(std::vector<IEvent*>());
+}
+
+
 void World::update(const models::DynamicMap& dynamicMap){
 
     for (models::PostModel postModel : dynamicMap.getPostList()){
@@ -74,6 +80,14 @@ void World::update(const models::DynamicMap& dynamicMap){
             postList.push_back(post);
         } else
             postMap[postModel.getIdx()]->update(postModel);
+
+        for (models::EventModel eventModel : postModel.getEventList()){
+            IPost* post = postMap[postModel.getIdx()];
+            IEvent* event = EventFactory::createEvent(eventModel, post);
+            post->addEvent(event);
+            fillEventsHistory(event->getTick());
+            eventsHistory[event->getTick()].push_back(event);
+        }
     }
 
     for (auto trainList = trainsOfLine.begin(); trainList != trainsOfLine.end(); trainList++)
@@ -89,6 +103,14 @@ void World::update(const models::DynamicMap& dynamicMap){
             trainMap[trainModel.getIdx()]->update(trainModel);
 
         trainsOfLine[lineMap[trainModel.getLineIdx()]].push_back( trainMap[trainModel.getIdx()] );
+
+        for (models::EventModel eventModel : trainModel.getEventList()){
+            Train* train = trainMap[trainModel.getIdx()];
+            IEvent* event = EventFactory::createEvent(eventModel, train);
+            train->addEvent(event);
+            fillEventsHistory(event->getTick());
+            eventsHistory[event->getTick()].push_back(event);
+        }
 
     }
 }
@@ -207,4 +229,23 @@ IPost* World::getHome(const Player* player) const{
 
 const std::vector<Train*>& World::getTrainsOfLine(const Line* line) const{
     return trainsOfLine.find(line)->second;
+}
+
+
+const std::vector<std::vector<IEvent*> > & World::getEventsHistory() const{
+    return eventsHistory;
+}
+
+
+const std::vector<IEvent*>& World::getEvents(int tick) const{
+    return eventsHistory[tick];
+}
+
+
+const std::vector<IEvent*> World::getEventsAfter(int startTick) const{
+    std::vector<IEvent*> res;
+    for (size_t i=startTick; i<eventsHistory.size(); i++)
+        for (IEvent* event: eventsHistory[i])
+            res.push_back(event);
+    return res;
 }

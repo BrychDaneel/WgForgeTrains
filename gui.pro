@@ -78,7 +78,13 @@ HEADERS += \
     include/models/UpgradeModel.h \
     include/convertors/ICoordsMapReader.h \
     include/convertors/json/CoordsMapReader.h \
-    include/models/CoordModel.h
+    include/models/CoordModel.h \
+    include/world/events/BaseEvent.h \
+    include/world/events/HijackersAssaultEvent.h \
+    include/world/events/ParasitesAssaultEvent.h \
+    include/world/events/TrainCollisionEvent.h \
+    include/world/EventFactory.h \
+    include/world/IEvent.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -125,7 +131,12 @@ SOURCES += \
     src/models/EventModel.cpp \
     src/convertors/json/UpgradeWriter.cpp \
     src/models/UpgradeModel.cpp \
-    src/convertors/json/CoordsMapReader.cpp
+    src/convertors/json/CoordsMapReader.cpp \
+    src/world/events/BaseEvent.cpp \
+    src/world/events/HijackersAssaultEvent.cpp \
+    src/world/events/ParasitesAssaultEvent.cpp \
+    src/world/events/TrainCollisionEvent.cpp \
+    src/world/EventFactory.cpp
 
 DISTFILES +=
 

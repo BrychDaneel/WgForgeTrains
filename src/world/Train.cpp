@@ -16,12 +16,7 @@ Train::Train(const models::TrainModel& model, World* world){
     idx = model.getIdx();
     player = owner->getPlayerByIdx(model.getPlayerIdx());
 
-    line = owner->getLineByIdx(model.getLineIdx());
-
-    speed = model.getSpeed();
-    position = model.getPosition();
-    goodsCapacity = model.getGoodsCapacity();
-    goods = model.getGoods();
+    update(model);
 }
 
 
@@ -32,6 +27,10 @@ void Train::update(models::TrainModel model){
     position = model.getPosition();
     goodsCapacity = model.getGoodsCapacity();
     goods = model.getGoods();
+
+    goodsType = model.getGoodsType();
+    level = model.getLevel();
+    nextLevelPrice = model.getNextLevelPrice();
 }
 
 
@@ -98,6 +97,36 @@ models::SpeedType Train::getSpeed() const{
 void Train::move(Line* line, models::SpeedType speed){
     models::MoveModel moveModel(line->getIdx(), idx, speed);
     owner->getCommandSender()->move(moveModel);
+}
+
+
+void Train::addEvent(IEvent* event){
+    eventsHistory.push_back(event);
+}
+
+
+void Train::clearEvents(){
+    eventsHistory.clear();
+}
+
+
+const std::vector<IEvent*>& Train::getEvents() const{
+    return eventsHistory;
+}
+
+
+models::GoodType Train::getGoodsType() const{
+    return goodsType;
+}
+
+
+int Train::getLevel() const{
+    return level;
+}
+
+
+int Train::getNextLevelPrice() const{
+    return nextLevelPrice;
 }
 
 

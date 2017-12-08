@@ -6,17 +6,17 @@ namespace trains{
 namespace models{
 
 
-EventType EventModel::getType(){
+EventType EventModel::getType() const{
     return type;
 }
 
 
-int EventModel::getTick(){
+int EventModel::getTick() const{
     return tick;
 }
 
 
-int EventModel::getParametrs(){
+int EventModel::getParametrs() const{
     return parametrs;
 }
 
