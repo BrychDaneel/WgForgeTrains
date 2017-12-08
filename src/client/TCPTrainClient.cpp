@@ -172,7 +172,7 @@ int TCPTrainClient::move(const models::MoveModel &move)
     return retVal;
 }
 
-int TCPTrainClient::getCoordinate(CoordModel *coordModel)
+int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
 {
     char buffer[255] = "{\n \"layer\": 10\n}";
     size_t len = strlen(buffer);
@@ -196,13 +196,13 @@ int TCPTrainClient::getCoordinate(CoordModel *coordModel)
 
     logger->info(" %v\n %v", "Coordinate Map", message->data);
 
-    /*int retVal = convertor.readCoordsMap(message->data, message->dataLength, coordModel);
+    int retVal = convertor.readCoordsMap(message->data, message->dataLength, coordsMap);
 
     delete message;
     if (retVal != 0)
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
 
-    return (int)TCPTrainClient::ErrorType::OKEY;*/
+    return (int)TCPTrainClient::ErrorType::OKEY;
 
 
 }

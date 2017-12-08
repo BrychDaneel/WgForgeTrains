@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <models/PlayerModel.h>
+#include <models/CoordsMap.h>
 #include <CommandSender.h>
 #include <memory>
 
@@ -33,10 +34,13 @@ void Runner::run()
     std::vector<models::PlayerModel> models;
     models::PlayerModel * player = trainClient.getMyPlayer();
     models::StaticMap *staticMap = new models::StaticMap();
+    models::CoordsMap coordsMap;
 
     trainClient.getStaticMap(staticMap);
+    trainClient.getCoordinate(&coordsMap);
     models.push_back(*player);
     world.init(models, *staticMap, &commandSender);
+    world.setCoords(coordsMap);
 
     delete staticMap;
 
