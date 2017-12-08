@@ -26,14 +26,7 @@ namespace tiger
                     virtual void turn() = 0;
                     virtual int move(const models::MoveModel &move) = 0;
 
-
             };
-
-
-
-
-
-
 
         }
     }
