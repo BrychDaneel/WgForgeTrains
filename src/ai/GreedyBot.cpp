@@ -32,6 +32,7 @@ void GreedyBot::init(world::World *world)
 void GreedyBot::step()
 {
 
+    return;
     checkArrival();
 
     if (nextPost == nullptr)

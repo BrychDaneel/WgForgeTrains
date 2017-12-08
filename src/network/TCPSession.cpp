@@ -11,13 +11,7 @@ TCPSession::TCPSession(const char *name, const char *servAddr, int port):name(na
 
 TCPSession::~TCPSession()
 {
-    uint8_t sendBuffer[8];
-    uint32_t cmd = 2;
-    size_t len = 0;
-
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    send(sendBuffer, len + 8);
+   logout();
 }
 
 ResposeMessage* TCPSession::login()
@@ -44,6 +38,20 @@ ResposeMessage* TCPSession::login()
 
 
 
+}
+
+void TCPSession::logout()
+{
+    uint8_t sendBuffer[8];
+    uint32_t cmd = 2;
+    size_t len = 0;
+
+    memcpy(sendBuffer, &cmd, 4);
+    memcpy(sendBuffer + 4, &len, 4);
+    send(sendBuffer, len + 8);
+
+    tcpClient.close();
+    tcpClient = TCPClient();
 }
 
 bool TCPSession::send(const uint8_t *buffer, size_t bufferSize)

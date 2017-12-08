@@ -45,6 +45,9 @@ namespace tiger
                     int getDynamicMap(models::DynamicMap *dynamicMap);
                     void turn();
                     int move(const models::MoveModel &move);
+                    int getCoordinate(models::CoordModel *coordModel);
+
+                    int upgrade(models::UpgradeModel &upgradeModel);
                     int login();
 
                 private:
