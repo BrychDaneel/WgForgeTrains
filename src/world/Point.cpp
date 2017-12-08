@@ -26,6 +26,16 @@ int Point::getIdx() const{
 }
 
 
+int Point::getX() const{
+    return x;
+}
+
+
+int Point::getY() const{
+    return y;
+}
+
+
 IPost* Point::getPost() const{
     return owner->getPostOfPoint(this);
 }
@@ -44,6 +54,16 @@ const std::vector<Point*> Point::getNeighboards() const{
         else
             result.push_back(line->getEndPont());
     return result;
+}
+
+
+void Point::setX(const int x){
+    this->x = x;
+}
+
+
+void Point::setY(const int y){
+    this->y = y;
 }
 
 

@@ -16,6 +16,7 @@
 #include <models/DynamicMap.h>
 #include <models/StaticMap.h>
 #include <models/PlayerModel.h>
+#include <models/CoordsMap.h>
 
 #include <map>
 #include <vector>
@@ -70,6 +71,9 @@ private:
 
     void fillEventsHistory(const size_t size);
 
+    int width = 0;
+    int height = 0;
+
 public:
 
     virtual ~World();
@@ -78,8 +82,10 @@ public:
               ICommandSender* commandSender=nullptr);
 
     void update(const models::DynamicMap& dynamicMap);
+    void setCoords(const models::CoordsMap& coordsMap);
 
     bool isInitialized();
+    bool hasCoords();
 
     int getTickNum();
     void setTickNum(const int tick);
@@ -115,6 +121,8 @@ public:
     const std::vector<IEvent*>& getEvents(int tick) const;
     const std::vector<IEvent*> getEventsAfter(int startTick) const;
 
+    int getWidth() const;
+    int getHeight() const;
 };
 
 

@@ -20,6 +20,10 @@ World::~World(){
 
     for (Line* line : getLineList())
         delete line;
+
+    for (std::vector<IEvent*>& eventList : eventsHistory)
+        for (IEvent* event : eventList)
+            delete event;
 }
 
 
@@ -61,6 +65,8 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
         homes[player] = playerModel.getHome();
     }
 
+    width = 0;
+    height = 0;
     initialized = true;
 }
 
@@ -113,6 +119,18 @@ void World::update(const models::DynamicMap& dynamicMap){
         }
 
     }
+}
+
+
+void World::setCoords(const models::CoordsMap& coordsMap){
+    for (models::CoordModel coord : coordsMap.coords){
+        Point* point = getPointByIdx(coord.idx);
+        point->setX(coord.x);
+        point->setY(coord.y);
+    }
+
+    width = coordsMap.width;
+    height = coordsMap.height;
 }
 
 
@@ -248,4 +266,14 @@ const std::vector<IEvent*> World::getEventsAfter(int startTick) const{
         for (IEvent* event: eventsHistory[i])
             res.push_back(event);
     return res;
+}
+
+
+int World::getWidth() const{
+    return width;
+}
+
+
+int World::getHeight() const{
+    return height;
 }

@@ -21,12 +21,6 @@ private:
     world::World* world;
     QMap<world::Point*, QPointF> pointCoords;
 
-    float maxX = 0;
-    float maxY = 0;
-
-    bool graphBuilded = false;
-
-    void buildGraph();
 
 public:
 
