@@ -19,9 +19,6 @@ INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char *argv[]){
 
-   /* client::TCPTrainClient client("Vasya", "wgforge-srv.wargaming.net", 443);
-    client.login();
-    client.getCoordinate(nullptr);*/
     QApplication application(argc, argv);
 
     Runner runner("Vasya", "wgforge-srv.wargaming.net", 443);
@@ -41,5 +38,8 @@ int main(int argc, char *argv[]){
     gui::QWorldWidget worldWidget(runner.getWorld());
     worldWidget.show();
 
-    return application.exec();
+    int res = application.exec();
+    runnerThread.shutDown();
+    runnerThread.wait();
+    return res;
 }

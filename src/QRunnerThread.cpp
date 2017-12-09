@@ -11,17 +11,12 @@ QRunnerThred::QRunnerThred(Runner* runner, QObject* ppw) : QThread(ppw), runner(
 
 
 void QRunnerThred::run(){
-    try
-    {
-        runner->run();
+    runner->run();
+}
 
-    }
-    catch(...)
-    {
-        runner->~Runner();
-        throw;
-    }
 
+void QRunnerThred::shutDown(){
+    runner->shutDown();
 }
 
 

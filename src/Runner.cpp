@@ -26,8 +26,14 @@ void Runner::setBot(ai::IBot *bot)
 }
 
 
+void shutDown(){
+
+}
+
+
 void Runner::run()
 {
+    doRun = true;
     int retVal = trainClient.login();
     CommandSender commandSender(&trainClient);
 
@@ -53,7 +59,7 @@ void Runner::run()
     if (bot != nullptr)
         bot->init(&world);
 
-    while (true)
+    while (doRun)
     {
         trainClient.getDynamicMap(dynamicMap);
         world.update(*dynamicMap);
@@ -70,4 +76,9 @@ void Runner::run()
 
 
 
+}
+
+
+void Runner::shutDown(){
+    doRun = false;
 }

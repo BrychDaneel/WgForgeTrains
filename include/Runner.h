@@ -19,6 +19,7 @@ namespace tiger
                 const char *name;
                 const char *addr;
                 int port;
+                bool doRun;
 
 
             public:
@@ -27,6 +28,8 @@ namespace tiger
                 void setBot(ai::IBot *bot);
 
                 world::World* getWorld();
+
+                void shutDown();
 
                 virtual ~Runner()
                 {
