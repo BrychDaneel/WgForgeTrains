@@ -19,40 +19,7 @@ namespace gui {
 QWorldWidget::QWorldWidget(world::World* world) : world(world){
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
-    timer->start(500);
-}
-
-
-void QWorldWidget::buildGraph(){
-
-    int len = 0;
-    QMap<world::Point*, int> pointToInd;
-    std::vector<std::vector<std::pair<int, float> > > graph;
-    for (world::Point* point : world->getPointList()){
-        pointToInd[point] = len++;
-        std::vector<std::pair<int, float> > v;
-        graph.push_back(v);
-    }
-
-    for (tiger::trains::world::Line* line : world->getLineList()){
-        int si = pointToInd[line->getStartPont()];
-        int ei = pointToInd[line->getEndPont()];
-        graph[si].push_back(std::pair<int, float> (ei, line->getLenght()));
-        graph[ei].push_back(std::pair<int, float> (si, line->getLenght()));
-    }
-
-    std::vector<std::pair<float, float> > coords = tiger::trains::utils::GraphPlaner::planeGraph(graph, time(0));
-
-    for (int i=0; i<len; i++){
-        std::pair<float, float> c = coords[i];
-
-        if (c.first * 10 > maxX)
-            maxX = c.first  * 10;
-        if (c.second  * 10 > maxY)
-            maxY = c.second  * 10;
-        pointCoords[world->getPointList()[i]] = QPointF(c.first, c.second) * 10;
-    }
-
+    timer->start(100);
 }
 
 
@@ -63,10 +30,12 @@ void QWorldWidget::drawLines(QPainter* painter){
 
     painter->setPen(QPen(Qt::blue, 0.5));
     for (world::Line* line : world->getLineList()){
-        QLineF qline(pointCoords[line->getStartPont()], pointCoords[line->getEndPont()]);
+        QPointF start(line->getStartPont()->getX(), line->getStartPont()->getY());
+        QPointF end(line->getEndPont()->getX(), line->getEndPont()->getY());
+        QLineF qline(start, end);
         painter->drawLine(qline);
 
-        QPointF middle = (qline.p1() + qline.p2()) / 2;
+        QPointF middle = (start + end) / 2;
         QRectF textRect(middle - QPoint(1, 2), middle - QPoint(-1, 1));
         painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(line->getLenght()));
     }
@@ -81,7 +50,7 @@ void QWorldWidget::drawPoints(QPainter* painter){
     painter->setPen(QPen(Qt::white, 0));
     painter->setBrush(Qt::white);
     for (world::Point* point : world->getPointList()){
-        QPointF ppoint = pointCoords[point];
+        QPointF ppoint(point->getX(), point->getY());
         painter->drawEllipse(ppoint, 1, 1);
         QRectF textRect(ppoint - QPoint(2, 1), ppoint - QPoint(1, 0));
         painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(point->getIdx()));
@@ -111,7 +80,7 @@ void QWorldWidget::drawPosts(QPainter* painter){
                 break;
             }
 
-            QPointF ppoint = pointCoords[post->getPoint()];
+            QPointF ppoint(post->getPoint()->getX(), post->getPoint()->getY());
             QRectF textRect(ppoint - QPoint(5, 2), ppoint - QPoint(-5, 1));
             QString name = QString::fromStdString(post->getName());
 
@@ -152,8 +121,8 @@ void QWorldWidget::drawTrains(QPainter* painter){
         if (train->getLine() != nullptr){
             world::Line* line = train->getLine();
 
-            QPointF lpoint1 = pointCoords[line->getStartPont()];
-            QPointF lpoint2 = pointCoords[line->getEndPont()];
+            QPointF lpoint1(line->getStartPont()->getX(), line->getStartPont()->getY());
+            QPointF lpoint2(line->getEndPont()->getX(), line->getEndPont()->getY());
 
             float progress = train->getPosition() / (float) line->getLenght();
             QPointF trainPoint;
@@ -163,7 +132,7 @@ void QWorldWidget::drawTrains(QPainter* painter){
 
 
             QRectF prodRect(trainPoint + QPoint(-5, 1), trainPoint  + QPoint(5, 2));
-            QString productText = QString("%1/%2").arg(train->getProduct()).arg(train->getCapacity());
+            QString productText = QString("%1/%2").arg(train->getGoods()).arg(train->getGoodsCapacity());
             painter->drawText(prodRect, Qt::AlignCenter, productText);
         }
 }
@@ -175,21 +144,15 @@ void QWorldWidget::drawTick(QPainter* painter){
     painter->setFont(font);
     painter->setPen(QPen(Qt::white, 0));
 
-    QRectF textRect(0, 0, maxX / 7.0, maxY / 10.0);
+    QRectF textRect(0, 0, world->getWidth() / 7.0, world->getHeight() / 10.0);
     painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(world->getTickNum()));
 }
 
 
 void QWorldWidget::paintEvent(QPaintEvent* event){
 
-    if (!graphBuilded){
-        if (!world->isInitialized())
-            return;
-        else{
-            buildGraph();
-            graphBuilded = true;
-        }
-    }
+    if (world->getWidth() == 0 || world->getHeight() == 0)
+        return;
 
     QPainter painter;
 
@@ -199,11 +162,11 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
     painter.setBrush(Qt::black);
     painter.drawRect(0, 0, width(), height());
 
-    painter.scale( width() / maxX / 1.2, height() / maxY / 1.2);
+    painter.scale( width() / 1.2 / world->getWidth(), height() / 1.2 / world->getHeight());
 
     drawTick(&painter);
 
-    painter.translate(maxX * 0.1, maxY * 0.1);
+    painter.translate(world->getWidth() * 0.1, world->getHeight() * 0.1);
 
     drawLines(&painter);
     drawPoints(&painter);

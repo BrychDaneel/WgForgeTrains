@@ -91,10 +91,10 @@ TEST(WorldTests, lineList){
 TEST(WorldTests, postList){
     DynamicMap dynamicMap;
 
-    dynamicMap.addPost(PostModel(1, PostType::MARKET, 1, "M1", 10, 3, 1, 20));
-    dynamicMap.addPost(PostModel(2, PostType::MARKET, 1, "M2", 10, 3, 1, 20));
-    dynamicMap.addPost(PostModel(3, PostType::MARKET, 1, "M3", 10, 3, 1, 20));
-    dynamicMap.addPost(PostModel(4, PostType::TOWN, 1, "T1", 10, 3, 1, 20));
+    dynamicMap.addPost(PostModel(1, PostType::MARKET, 1, "M1", 10, 3, 1, 20, 10, 12, 50, 1));
+    dynamicMap.addPost(PostModel(2, PostType::MARKET, 1, "M2", 10, 3, 1, 20, 10, 12, 50, 1));
+    dynamicMap.addPost(PostModel(3, PostType::MARKET, 1, "M3", 10, 3, 1, 20, 10, 12, 50, 1));
+    dynamicMap.addPost(PostModel(4, PostType::TOWN, 1, "T1", 10, 3, 1, 20, 10, 12, 50, 1));
 
     World world;
     world.init(std::vector<PlayerModel>(), StaticMap());
@@ -117,8 +117,8 @@ TEST(WorldTests, postList){
 TEST(WorldTests, trainList){
     DynamicMap dynamicMap;
 
-    dynamicMap.addTrain(TrainModel(1, 2, "abc", 0, 15, 15, SpeedType::STOP));
-    dynamicMap.addTrain(TrainModel(2, 8, "abc", 7, 13, 13, SpeedType::FORWARD));
+    dynamicMap.addTrain(TrainModel(1, 2, "abc", 0, 15, 15, GoodType::NONE, 1, 10, SpeedType::STOP));
+    dynamicMap.addTrain(TrainModel(2, 8, "abc", 7, 13, 13, GoodType::NONE, 1, 10, SpeedType::FORWARD));
 
     World world;
     world.init(std::vector<PlayerModel>({PlayerModel("abc", 1, "dno")}), StaticMap());
@@ -178,8 +178,8 @@ TEST(WorldTests, postAndPoint){
     staticMap.addPoint(PointModel(2, 4));
 
     DynamicMap dynamicMap;
-    dynamicMap.addPost(PostModel(3, PostType::TOWN, 1, "T1", 10, 3, 1, 20));
-    dynamicMap.addPost(PostModel(4, PostType::MARKET, 1, "M2", 10, 3, 1, 20));
+    dynamicMap.addPost(PostModel(3, PostType::TOWN, 1, "T1", 10, 3, 1, 20, 10, 12, 50, 1));
+    dynamicMap.addPost(PostModel(4, PostType::MARKET, 1, "M2", 10, 3, 1, 20, 10, 12, 50, 1));
 
     World world;
     world.init(std::vector<PlayerModel>(), staticMap);
@@ -204,7 +204,7 @@ TEST(WorldTests, home){
     staticMap.addPoint(PointModel(1, 4));
 
     DynamicMap dynamicMap;
-    dynamicMap.addPost(PostModel(4, PostType::TOWN, 1, "T1", 10, 3, 1, 20));
+    dynamicMap.addPost(PostModel(4, PostType::TOWN, 1, "T1", 10, 3, 1, 20, 10, 12, 50, 1));
 
     std::vector<PlayerModel> players({PlayerModel("abc", 4, "dno")});
 
@@ -225,8 +225,8 @@ TEST(WorldTests, home){
 TEST(WorldTests, playerTrains){
 
     DynamicMap dynamicMap;
-    dynamicMap.addTrain(TrainModel(1, 2, "abc", 0, 15, 15, SpeedType::STOP));
-    dynamicMap.addTrain(TrainModel(2, 2, "abc", 0, 15, 15, SpeedType::STOP));
+    dynamicMap.addTrain(TrainModel(1, 2, "abc", 0, 15, 15, GoodType::NONE, 1, 10, SpeedType::STOP));
+    dynamicMap.addTrain(TrainModel(2, 2, "abc", 0, 15, 15, GoodType::NONE, 1, 10, SpeedType::STOP));
 
     std::vector<PlayerModel> players({PlayerModel("abc", 4, "dno")});
 
@@ -253,8 +253,8 @@ TEST(WorldTests, lineTrains){
     staticMap.addLine(LineModel(1, 10, 1, 2));
 
     DynamicMap dynamicMap;
-    dynamicMap.addTrain(TrainModel(1, 2, "abc", 0, 15, 15, SpeedType::STOP));
-    dynamicMap.addTrain(TrainModel(2, 2, "abc", 0, 15, 15, SpeedType::STOP));
+    dynamicMap.addTrain(TrainModel(1, 2, "abc", 0, 15, 15, GoodType::NONE, 1, 10, SpeedType::STOP));
+    dynamicMap.addTrain(TrainModel(2, 2, "abc", 0, 15, 15, GoodType::NONE, 1, 10, SpeedType::STOP));
 
     std::vector<PlayerModel> players({PlayerModel("abc", 4, "dno")});
 

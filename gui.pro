@@ -69,7 +69,23 @@ HEADERS += \
     include/ai/NPBot.h \
     include/ai/IPathGenerator.h \
     include/ai/GreedyBot.h \
-    include/ai/generators/Annealing.h
+    include/ai/generators/Annealing.h \
+    include/models/GoodType.h \
+    include/models/EventModel.h \
+    include/models/EventType.h \
+    include/convertors/IUpgradeWriter.h \
+    include/convertors/json/UpgradeWriter.h \
+    include/models/UpgradeModel.h \
+    include/convertors/ICoordsMapReader.h \
+    include/convertors/json/CoordsMapReader.h \
+    include/models/CoordModel.h \
+    include/world/events/BaseEvent.h \
+    include/world/events/HijackersAssaultEvent.h \
+    include/world/events/ParasitesAssaultEvent.h \
+    include/world/events/TrainCollisionEvent.h \
+    include/world/EventFactory.h \
+    include/world/IEvent.h \
+    include/models/CoordsMap.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -112,7 +128,16 @@ SOURCES += \
     libs/easylogging++/easylogging++.cc \
     src/ai/NPBot.cpp \
     src/ai/GreedyBot.cpp \
-    src/ai/generators/Annealing.cpp
+    src/ai/generators/Annealing.cpp \
+    src/models/EventModel.cpp \
+    src/convertors/json/UpgradeWriter.cpp \
+    src/models/UpgradeModel.cpp \
+    src/convertors/json/CoordsMapReader.cpp \
+    src/world/events/BaseEvent.cpp \
+    src/world/events/HijackersAssaultEvent.cpp \
+    src/world/events/ParasitesAssaultEvent.cpp \
+    src/world/events/TrainCollisionEvent.cpp \
+    src/world/EventFactory.cpp
 
 DISTFILES +=
 

@@ -13,9 +13,7 @@ Town::Town() : BasePost(){
 Town::Town(const models::PostModel& model, World* world) :
     BasePost(model, world)
 {
-    arrmor = model.getArmor();
-    population = model.getPopulation();
-    product = model.getProduct();
+    update(model);
 }
 
 
@@ -24,6 +22,13 @@ void Town::update(const models::PostModel& model){
     arrmor = model.getArmor();
     population = model.getPopulation();
     product = model.getProduct();
+
+    arrmorCapacity = model.getArmorCapacity();
+    productCapacity = model.getPopulationCapacity();
+    populationCapacity = model.getPopulationCapacity();
+
+    level = model.getLevel();
+    nextLevelPrice = model.getNextLevelPrice();
 }
 
 
@@ -39,6 +44,36 @@ int Town::getPopulation() const{
 
 int Town::getProduct() const{
     return product;
+}
+
+
+int Town::getArrmorCapacity() const{
+    return arrmorCapacity;
+}
+
+
+int Town::getPopulationCapacity() const{
+    return populationCapacity;
+}
+
+
+int Town::getProductCapacity() const{
+    return productCapacity;
+}
+
+
+int Town::getLevel() const{
+    return level;
+}
+
+
+int Town::getNextLevelPrice() const{
+    return nextLevelPrice;
+}
+
+
+void Town::upgrade() const{
+    owner->getCommandSender()->upgrade(models::UpgradeModel({},{idx}));
 }
 
 

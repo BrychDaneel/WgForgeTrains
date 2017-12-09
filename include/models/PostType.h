@@ -12,7 +12,8 @@ enum class PostType{
 
     UNKNOWN = 0,
     TOWN = 1,
-    MARKET = 2
+    MARKET = 2,
+    STORAGE = 3
 
 };
 
