@@ -4,6 +4,7 @@
 
 
 #include <models/MoveModel.h>
+#include <models/UpgradeModel.h>
 
 
 namespace tiger{
@@ -17,7 +18,8 @@ public:
 
     virtual ~ICommandSender(){}
 
-    virtual void move(const models::MoveModel &move) = 0;
+    virtual void move(const models::MoveModel& move) = 0;
+    virtual void upgrade(const models::UpgradeModel& upgrade) = 0;
     virtual void turn() = 0;
 
 };

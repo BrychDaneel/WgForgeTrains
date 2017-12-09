@@ -207,7 +207,7 @@ int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
 
 }
 
-int TCPTrainClient::upgrade(UpgradeModel &upgradeModel)
+int TCPTrainClient::upgrade(const UpgradeModel &upgradeModel)
 {
     char buffer[255];
     int len = 255;

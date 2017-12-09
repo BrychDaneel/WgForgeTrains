@@ -6,7 +6,7 @@
 
 
 #include "client/ITrainClient.h"
-#include "convertors/json/ModelConvertor.h"
+#include <convertors/json/ModelConvertor.h>
 #include "network/TCPSession.h"
 #include "network/ResposeMessage.h"
 #include <memory>
@@ -45,9 +45,9 @@ namespace tiger
                     int getDynamicMap(models::DynamicMap *dynamicMap);
                     void turn();
                     int move(const models::MoveModel &move);
-                    int getCoordinate(models::CoordModel *coordModel);
+                    int getCoordinate(models::CoordsMap* coordsMap);
 
-                    int upgrade(models::UpgradeModel &upgradeModel);
+                    int upgrade(const models::UpgradeModel &upgradeModel);
                     int login();
 
                 private:

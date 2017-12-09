@@ -44,6 +44,8 @@ public:
     int getLevel() const;
     int getNextLevelPrice() const;
 
+    void upgrade() const;
+
 };
 
 

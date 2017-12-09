@@ -17,7 +17,7 @@ class World;
 
 class BasePost : public IPost{
 
-private:
+protected:
 
     World* owner;
     int idx;

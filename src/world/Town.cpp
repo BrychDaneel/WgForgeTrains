@@ -72,6 +72,11 @@ int Town::getNextLevelPrice() const{
 }
 
 
+void Town::upgrade() const{
+    owner->getCommandSender()->upgrade(models::UpgradeModel({},{idx}));
+}
+
+
 }
 }
 }

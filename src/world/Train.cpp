@@ -130,6 +130,11 @@ int Train::getNextLevelPrice() const{
 }
 
 
+void Train::upgrade() const{
+    owner->getCommandSender()->upgrade(models::UpgradeModel({idx},{}));
+}
+
+
 }
 }
 }
