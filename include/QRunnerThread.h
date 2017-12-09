@@ -23,6 +23,7 @@ public:
 
     QRunnerThred(Runner* runner, QObject* ppw = 0);
     void run();
+    void shutDown();
 
 };
 

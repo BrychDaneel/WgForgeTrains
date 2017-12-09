@@ -20,6 +20,7 @@ QWorldWidget::QWorldWidget(world::World* world) : world(world){
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
     timer->start(100);
+    setMouseTracking(true);
 }
 
 
@@ -140,12 +141,23 @@ void QWorldWidget::drawTrains(QPainter* painter){
 
 void QWorldWidget::drawTick(QPainter* painter){
     QFont font = painter->font();
-    font.setPixelSize(3);
+    font.setPixelSize(width() / 20);
     painter->setFont(font);
     painter->setPen(QPen(Qt::white, 0));
 
-    QRectF textRect(0, 0, world->getWidth() / 7.0, world->getHeight() / 10.0);
+    QRectF textRect(0, 0, width() / 7.0, height() / 10.0);
     painter->drawText(textRect, Qt::AlignCenter, QString("%1").arg(world->getTickNum()));
+}
+
+
+void QWorldWidget::drawGameOver(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(width() / 10);
+    painter->setFont(font);
+    painter->setPen(QPen(Qt::red, 0));
+
+    QRectF textRect(0, 0, width(), height());
+    painter->drawText(textRect, Qt::AlignCenter, "GAME OVER!");
 }
 
 
@@ -162,11 +174,14 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
     painter.setBrush(Qt::black);
     painter.drawRect(0, 0, width(), height());
 
-    painter.scale( width() / 1.2 / world->getWidth(), height() / 1.2 / world->getHeight());
-
     drawTick(&painter);
+    if (world->isGameOver())
+        drawGameOver(&painter);
 
+    painter.scale( width() / 1.2 / rectWidth, height() / 1.2 / rectWidth);
     painter.translate(world->getWidth() * 0.1, world->getHeight() * 0.1);
+
+    painter.translate(-camPos);
 
     drawLines(&painter);
     drawPoints(&painter);
@@ -175,6 +190,51 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
 
     painter.end();
 
+}
+
+
+void QWorldWidget::setRectHeight(float height){
+    rectHeight = height;
+}
+
+
+float QWorldWidget::getRectHeight() const{
+    return rectHeight;
+}
+
+
+void QWorldWidget::setRectWidth(float width){
+    rectWidth = width;
+}
+
+
+float QWorldWidget::getRectWidth() const{
+    return rectWidth;
+}
+
+
+void QWorldWidget::mouseMoveEvent(QMouseEvent* event){
+    if (lastCursorPos.x() == -1){
+        lastCursorPos = event->pos();
+        return;
+    }
+
+    if (event->buttons() && Qt::LeftButton != 0)
+        camPos += (lastCursorPos - event->pos()) / 20;
+
+    if (camPos.x() < 0)
+        camPos.rx() = 0;
+
+    if (camPos.y() < 0)
+        camPos.ry() = 0;
+
+    if (camPos.x() > world->getWidth())
+        camPos.rx() = world->getWidth();
+
+    if (camPos.y() > world->getHeight())
+        camPos.ry() = world->getHeight();
+
+    lastCursorPos = event->pos();
 }
 
 
