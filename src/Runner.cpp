@@ -10,8 +10,7 @@ using namespace tiger::trains;
 
 
 Runner::Runner(const char *name, const char *addr, int port)
-    :trainClient(name, addr, port), world(),bot(nullptr), name(name),
-        addr(addr), port(port)
+    :name(name), addr(addr), port(port), world(),bot(nullptr)
 {
 
 }
@@ -33,6 +32,8 @@ void shutDown(){
 
 void Runner::run()
 {
+    client::TCPTrainClient trainClient(name, addr, port);
+
     doRun = true;
     int retVal = trainClient.login();
     CommandSender commandSender(&trainClient);
@@ -59,7 +60,7 @@ void Runner::run()
     if (bot != nullptr)
         bot->init(&world);
 
-    while (doRun)
+    while (doRun && !world.isGameOver())
     {
         trainClient.getDynamicMap(dynamicMap);
         world.update(*dynamicMap);

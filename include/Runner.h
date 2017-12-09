@@ -13,12 +13,11 @@ namespace tiger
         class Runner
         {
             private:
-                client::TCPTrainClient trainClient;
-                world::World world;
-                ai::IBot *bot;
                 const char *name;
                 const char *addr;
                 int port;
+                world::World world;
+                ai::IBot *bot;
                 bool doRun;
 
 

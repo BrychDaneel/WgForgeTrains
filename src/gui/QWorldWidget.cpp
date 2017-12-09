@@ -150,6 +150,17 @@ void QWorldWidget::drawTick(QPainter* painter){
 }
 
 
+void QWorldWidget::drawGameOver(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(width() / 10);
+    painter->setFont(font);
+    painter->setPen(QPen(Qt::red, 0));
+
+    QRectF textRect(0, 0, width(), height());
+    painter->drawText(textRect, Qt::AlignCenter, "GAME OVER!");
+}
+
+
 void QWorldWidget::paintEvent(QPaintEvent* event){
 
     if (world->getWidth() == 0 || world->getHeight() == 0)
@@ -164,6 +175,8 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
     painter.drawRect(0, 0, width(), height());
 
     drawTick(&painter);
+    if (world->isGameOver())
+        drawGameOver(&painter);
 
     painter.scale( width() / 1.2 / rectWidth, height() / 1.2 / rectWidth);
     painter.translate(world->getWidth() * 0.1, world->getHeight() * 0.1);
