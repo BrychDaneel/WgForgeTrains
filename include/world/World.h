@@ -44,6 +44,7 @@ private:
     ICommandSender* commandSender;
 
     bool initialized = false;
+    bool gameOver = false;
 
     int tickNum = 0;
 
@@ -123,6 +124,8 @@ public:
 
     int getWidth() const;
     int getHeight() const;
+
+    bool isGameOver();
 };
 
 

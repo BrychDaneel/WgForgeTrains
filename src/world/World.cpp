@@ -31,6 +31,8 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
                  ICommandSender* commandSender)
 {
 
+    gameOver = false;
+
     this->commandSender = commandSender;
 
     for (models::PointModel pointModel : staticMap.getPointList()){
@@ -90,6 +92,8 @@ void World::update(const models::DynamicMap& dynamicMap){
         for (models::EventModel eventModel : postModel.getEventList()){
             IPost* post = postMap[postModel.getIdx()];
             IEvent* event = EventFactory::createEvent(eventModel, post);
+            if (event->getType() == models::EventType::GAME_OVER)
+                gameOver = true;
             post->addEvent(event);
             fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
@@ -113,6 +117,8 @@ void World::update(const models::DynamicMap& dynamicMap){
         for (models::EventModel eventModel : trainModel.getEventList()){
             Train* train = trainMap[trainModel.getIdx()];
             IEvent* event = EventFactory::createEvent(eventModel, train);
+            if (event->getType() == models::EventType::GAME_OVER)
+                gameOver = true;
             train->addEvent(event);
             fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
@@ -276,4 +282,9 @@ int World::getWidth() const{
 
 int World::getHeight() const{
     return height;
+}
+
+
+bool World::isGameOver(){
+    return gameOver;
 }
