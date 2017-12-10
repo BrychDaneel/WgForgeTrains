@@ -1,5 +1,9 @@
 #include <client/TCPTrainClient.h>
 
+#define BUFF_SIZE 255
+#define OFFSET_SIZE 4
+#define OFFSET_1 4
+#define OFFSET_2 8
 
 using namespace tiger::trains::client;
 using namespace tiger::trains::models;
@@ -20,7 +24,8 @@ TCPTrainClient::~TCPTrainClient()
 
 int TCPTrainClient::login()
 {
-    network::ResposeMessage *message = tcpSession.login();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.login());
+//    network::ResposeMessage *message = tcpSession.login();
     if (message == nullptr || message->result != 0)
         return message->result;
 
@@ -32,9 +37,8 @@ int TCPTrainClient::login()
         tcpSession.logout();
         logger->info("Logout");
 
-        delete message;
         sleep(2);
-        message = tcpSession.login();
+        message.reset( tcpSession.login());
         if (message == nullptr || message->result != 0)
             return message->result;
 
@@ -45,7 +49,6 @@ int TCPTrainClient::login()
 
 
 
-    delete message;
     if (!retVal)
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
 
@@ -62,16 +65,16 @@ PlayerModel *TCPTrainClient::getMyPlayer() const
 
 int TCPTrainClient::getStaticMap(StaticMap *staticMap)
 {
-    char buffer[255] = "{\n \"layer\": 0\n}";
+    char buffer[BUFF_SIZE] = "{\n \"layer\": 0\n}";
     size_t len = strlen(buffer);
-    uint8_t sendBuffer[8+len];
+    uint8_t sendBuffer[OFFSET_2 + len];
     uint32_t cmd = 10;
 
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    memcpy(sendBuffer + 8, buffer, len);
+    memcpy(sendBuffer, &cmd, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_2, buffer, len);
 
-    if (!tcpSession.send(sendBuffer, len + 8))
+    if (!tcpSession.send(sendBuffer, len + OFFSET_2))
         return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
@@ -95,16 +98,16 @@ int TCPTrainClient::getStaticMap(StaticMap *staticMap)
 
 int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
 {
-    char buffer[255] = "{\n \"layer\": 1\n}";
+    char buffer[BUFF_SIZE] = "{\n \"layer\": 1\n}";
     size_t len = strlen(buffer);
-    uint8_t sendBuffer[8+len];
+    uint8_t sendBuffer[OFFSET_2 + len];
     uint32_t cmd = 10;
 
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    memcpy(sendBuffer + 8, buffer, len);
+    memcpy(sendBuffer, &cmd, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_2, buffer, len);
 
-    if (!tcpSession.send(sendBuffer, len + 8))
+    if (!tcpSession.send(sendBuffer, len + OFFSET_2))
         return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
@@ -132,12 +135,12 @@ void TCPTrainClient::turn()
 
     uint32_t cmd = 5;
     size_t len = 2;
-    uint8_t sendBuffer[8 + len];
+    uint8_t sendBuffer[OFFSET_2 + len];
     const char *js = "{}";
 
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    memcpy(sendBuffer + 8, js, len);
+    memcpy(sendBuffer, &cmd, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_2, js, len);
     tcpSession.send(sendBuffer, 8 + len);
 
     network::ResposeMessage *message = tcpSession.recv();
@@ -150,18 +153,18 @@ void TCPTrainClient::turn()
 
 int TCPTrainClient::move(const models::MoveModel &move)
 {
-    char buffer[255];
+    char buffer[BUFF_SIZE];
 
-    int len = 255;
+    int len = BUFF_SIZE;
     uint32_t cmd = 3;
 
     convertor.writeMove(&move, buffer, &len);
-    uint8_t sendBuffer[len + 8];
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    memcpy(sendBuffer + 8, buffer, len);
+    uint8_t sendBuffer[len + OFFSET_2];
+    memcpy(sendBuffer, &cmd, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_2, buffer, len);
 
-    tcpSession.send(sendBuffer, len + 8);
+    tcpSession.send(sendBuffer, len + OFFSET_2);
 
     network::ResposeMessage *message = tcpSession.recv();
 
@@ -174,17 +177,17 @@ int TCPTrainClient::move(const models::MoveModel &move)
 
 int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
 {
-    char buffer[255] = "{\n \"layer\": 10\n}";
+    char buffer[BUFF_SIZE] = "{\n \"layer\": 10\n}";
     size_t len = strlen(buffer);
 
     uint8_t sendBuffer[8+len];
     uint32_t cmd = 10;
 
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    memcpy(sendBuffer + 8, buffer, len);
+    memcpy(sendBuffer, &cmd, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_2, buffer, len);
 
-    if (!tcpSession.send(sendBuffer, len + 8))
+    if (!tcpSession.send(sendBuffer, len + OFFSET_2))
         return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
@@ -209,17 +212,17 @@ int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
 
 int TCPTrainClient::upgrade(const UpgradeModel &upgradeModel)
 {
-    char buffer[255];
-    int len = 255;
+    char buffer[BUFF_SIZE];
+    int len = BUFF_SIZE;
     uint32_t cmd = 4;
 
     convertor.writeUpgrade(&upgradeModel, buffer, &len);
-    uint8_t sendBuffer[len + 8];
-    memcpy(sendBuffer, &cmd, 4);
-    memcpy(sendBuffer + 4, &len, 4);
-    memcpy(sendBuffer + 8, buffer, len);
+    uint8_t sendBuffer[len + OFFSET_2];
+    memcpy(sendBuffer, &cmd, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
+    memcpy(sendBuffer + OFFSET_2, buffer, len);
 
-    tcpSession.send(sendBuffer, len + 8);
+    tcpSession.send(sendBuffer, len + OFFSET_2);
 
     network::ResposeMessage *message = tcpSession.recv();
 
