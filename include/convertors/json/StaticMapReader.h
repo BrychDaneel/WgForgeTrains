@@ -16,7 +16,15 @@ class StaticMapReader : public IStaticMapReader{
 
 public:
 
-    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) const;
+    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap);
+
+    int getLastErrorCode();
+    const std::string& getLastErrorMessage();
+
+private:
+
+    int lastErrorCode;
+    std::string lastErrorMessage;
 
 };
 

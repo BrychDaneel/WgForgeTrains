@@ -18,6 +18,8 @@ protected:
         int size = readFile("tests/res/correct_static.json", &buffer);
 
         res = staticMapReader.readStaticMap(buffer, size, &staticMap);
+
+        free(buffer);
     }
 
     void TearDown(){
@@ -70,14 +72,14 @@ TEST_F(StaticMapReaderTests, someLines){
 }
 
 
-TEST_F(StaticMapReaderTests, posts){
-    int posts[] = {1, 0, 0, 2, 3, 0, 4, 0, 0, 0, 0, 0};
+TEST_F(StaticMapReaderTests, points){
+    int points[] = {1, 0, 0, 2, 3, 0, 4, 0, 0, 0, 0, 0};
 
     for (size_t i=0; i<staticMap.getPointList().size(); i++)
-        if (posts[i] == 0)
+        if (points[i] == 0)
             ASSERT_FALSE(staticMap.getPointList()[i].hasPost());
         else{
             ASSERT_TRUE(staticMap.getPointList()[i].hasPost());
-            ASSERT_EQ(posts[i], staticMap.getPointList()[i].getPostId());
+            ASSERT_EQ(points[i], staticMap.getPointList()[i].getPostId());
         }
 }

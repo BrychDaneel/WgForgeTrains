@@ -8,6 +8,8 @@
 #include <ai/generators/Annealing.h>
 #include <easylogging++/easylogging++.h>
 
+#include <client/TCPTrainClient.h>
+
 
 using namespace tiger::trains;
 
@@ -36,5 +38,8 @@ int main(int argc, char *argv[]){
     gui::QWorldWidget worldWidget(runner.getWorld());
     worldWidget.show();
 
-    return application.exec();
+    int res = application.exec();
+    runnerThread.shutDown();
+    runnerThread.wait();
+    return res;
 }

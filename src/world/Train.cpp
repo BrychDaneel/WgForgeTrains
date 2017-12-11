@@ -16,28 +16,21 @@ Train::Train(const models::TrainModel& model, World* world){
     idx = model.getIdx();
     player = owner->getPlayerByIdx(model.getPlayerIdx());
 
-    if (model.isInLine())
-        line = owner->getLineByIdx(model.getLineIdx());
-    else
-        line = nullptr;
-
-    speed = model.getSpeed();
-    position = model.getPosition();
-    capacity = model.getCapacity();
-    product = model.getProduct();
+    update(model);
 }
 
 
 void Train::update(models::TrainModel model){
-    if (model.isInLine())
-        line = owner->getLineByIdx(model.getLineIdx());
-    else
-        line = nullptr;
+    line = owner->getLineByIdx(model.getLineIdx());
 
     speed = model.getSpeed();
     position = model.getPosition();
-    capacity = model.getCapacity();
-    product = model.getProduct();
+    goodsCapacity = model.getGoodsCapacity();
+    goods = model.getGoods();
+
+    goodsType = model.getGoodsType();
+    level = model.getLevel();
+    nextLevelPrice = model.getNextLevelPrice();
 }
 
 
@@ -66,13 +59,13 @@ int Train::getPosition() const{
 }
 
 
-int Train::getCapacity() const{
-    return capacity;
+int Train::getGoodsCapacity() const{
+    return goodsCapacity;
 }
 
 
-int Train::getProduct() const{
-    return product;
+int Train::getGoods() const{
+    return goods;
 }
 
 
@@ -104,6 +97,41 @@ models::SpeedType Train::getSpeed() const{
 void Train::move(Line* line, models::SpeedType speed){
     models::MoveModel moveModel(line->getIdx(), idx, speed);
     owner->getCommandSender()->move(moveModel);
+}
+
+
+void Train::addEvent(IEvent* event){
+    eventsHistory.push_back(event);
+}
+
+
+void Train::clearEvents(){
+    eventsHistory.clear();
+}
+
+
+const std::vector<IEvent*>& Train::getEvents() const{
+    return eventsHistory;
+}
+
+
+models::GoodType Train::getGoodsType() const{
+    return goodsType;
+}
+
+
+int Train::getLevel() const{
+    return level;
+}
+
+
+int Train::getNextLevelPrice() const{
+    return nextLevelPrice;
+}
+
+
+void Train::upgrade() const{
+    owner->getCommandSender()->upgrade(models::UpgradeModel({idx},{}));
 }
 
 

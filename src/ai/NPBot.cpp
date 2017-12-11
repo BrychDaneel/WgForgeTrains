@@ -52,7 +52,7 @@ void NPBot::step(){
     /*if (path.empty()){*/
     if (train->getPoint()->getPost()!=nullptr){
         scoreCalc->setStartPost(postMap[train->getPoint()->getIdx()]);
-        scoreCalc->setStartProduct(train->getProduct());
+        scoreCalc->setStartProduct(train->getGoods());
         path = pathGenerator->generate();
         path.pop();
     }

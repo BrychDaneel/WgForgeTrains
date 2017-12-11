@@ -13,10 +13,9 @@ namespace tiger
         {
             public:
                 explicit CommandSender(client::ITrainClient *client);
-                void move(const models::MoveModel &move);
+                void move(const models::MoveModel& move);
+                void upgrade(const models::UpgradeModel& upgrade);
                 void turn();
-
-
 
             private:
 

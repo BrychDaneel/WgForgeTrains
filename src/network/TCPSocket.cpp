@@ -11,6 +11,13 @@ TCPSocket::TCPSocket()
 
 bool TCPSocket::init()
 {
+#if defined(linux) || defined(__linux) || defined(__linux__)
+
+#else
+    WSADATA ws;
+    WSAStartup(MAKEWORD(2, 2), &ws);
+#endif
+
     pSocket = socket(AF_INET, SOCK_STREAM, 0);
 
     return isSocketValid();
@@ -51,7 +58,7 @@ int TCPSocket::send(const uint8_t* buffer, size_t bufferSize)
     {
         if (bufferSize > 0 && buffer != nullptr)
         {
-            bytesSend = ::send(pSocket, buffer, bufferSize, 0);
+            bytesSend = ::send(pSocket,(const char *)buffer, bufferSize, 0);
         }
     }
 
@@ -66,7 +73,7 @@ int TCPSocket::recv(uint8_t* buffer, size_t maxBytes = 1)
     int bytesRecieved = -1;
     if (isSocketValid())
     {
-        bytesRecieved = ::recv(pSocket, buffer, maxBytes, 0);
+        bytesRecieved = ::recv(pSocket, (char *)buffer, maxBytes, 0);
     }
 
     return bytesRecieved;
@@ -76,7 +83,13 @@ void TCPSocket::close()
 {
     if (pSocket != -1)
     {
+    #if defined(linux) || defined(__linux) || defined(__linux__)
         ::close(pSocket);
+    #else
+        closesocket(pSocket);
+        WSACleanup();
+    #endif
+
         pSocket = -1;
     }
 }

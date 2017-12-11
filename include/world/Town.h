@@ -19,6 +19,13 @@ private:
     int population;
     int product;
 
+    int arrmorCapacity;
+    int populationCapacity;
+    int productCapacity;
+
+    int level;
+    int nextLevelPrice;
+
 public:
 
     Town();
@@ -29,6 +36,15 @@ public:
     int getArrmor() const;
     int getPopulation() const;
     int getProduct() const;
+
+    int getArrmorCapacity() const;
+    int getPopulationCapacity() const;
+    int getProductCapacity() const;
+
+    int getLevel() const;
+    int getNextLevelPrice() const;
+
+    void upgrade() const;
 
 };
 

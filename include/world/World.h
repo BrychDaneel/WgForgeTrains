@@ -10,10 +10,13 @@
 #include <world/Train.h>
 #include <world/IPost.h>
 #include <world/PostFactory.h>
+#include <world/IEvent.h>
+#include <world/EventFactory.h>
 
 #include <models/DynamicMap.h>
 #include <models/StaticMap.h>
 #include <models/PlayerModel.h>
+#include <models/CoordsMap.h>
 
 #include <map>
 #include <vector>
@@ -25,6 +28,15 @@ namespace trains{
 namespace world{
 
 
+class Point;
+class Line;
+class Player;
+class Train;
+class IPost;
+class PostFactory;
+class IEvent;
+
+
 class World{
 
 private:
@@ -32,6 +44,7 @@ private:
     ICommandSender* commandSender;
 
     bool initialized = false;
+    bool gameOver = false;
 
     int tickNum = 0;
 
@@ -55,6 +68,12 @@ private:
     std::map<const Line*, std::vector<Train*> > trainsOfLine;
     std::map<const Player*, std::vector<Train*> > trainsOfPlayer;
 
+    std::vector<std::vector<IEvent*> > eventsHistory;
+
+    void fillEventsHistory(const size_t size);
+
+    int width = 0;
+    int height = 0;
 
 public:
 
@@ -64,8 +83,10 @@ public:
               ICommandSender* commandSender=nullptr);
 
     void update(const models::DynamicMap& dynamicMap);
+    void setCoords(const models::CoordsMap& coordsMap);
 
     bool isInitialized();
+    bool hasCoords();
 
     int getTickNum();
     void setTickNum(const int tick);
@@ -96,6 +117,15 @@ public:
 
     const std::vector<Train*>& getTrainsOfLine(const Line* line) const;
 
+
+    const std::vector<std::vector<IEvent*> > & getEventsHistory() const;
+    const std::vector<IEvent*>& getEvents(int tick) const;
+    const std::vector<IEvent*> getEventsAfter(int startTick) const;
+
+    int getWidth() const;
+    int getHeight() const;
+
+    bool isGameOver();
 };
 
 
