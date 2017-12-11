@@ -1,11 +1,23 @@
 #ifndef _TCPSOCKET_H_
 #define _TCPSOCKET_H_
+#include <stdio.h>
 
 
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <unistd.h>
+#if defined(linux) || defined(__linux) || defined(__linux__)
+    #include <sys/socket.h>
+    #include <sys/types.h>
+    #include <netinet/in.h>
+    #include <unistd.h>
+    typedef int SOCKET;
+
+#else
+    #include <winsock2.h>
+    #include <WS2tcpip.h>
+    #include <inttypes.h>
+    #pragma comment(lib, "Ws2_32.lib")
+
+#endif
+
 
 namespace tiger
 {
@@ -26,7 +38,7 @@ namespace tiger
 
 
             private:
-                int pSocket;
+                SOCKET pSocket;
                 struct sockaddr_in  serverSockAddr;
                 struct sockaddr_in  clientSockAddr;
 

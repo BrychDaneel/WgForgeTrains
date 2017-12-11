@@ -17,12 +17,13 @@ class World;
 
 class BasePost : public IPost{
 
-private:
+protected:
 
     World* owner;
     int idx;
     models::PostType type;
     std::string name;
+    std::vector<IEvent*> eventsHistory;
 
 public:
 
@@ -38,6 +39,10 @@ public:
     Point* getPoint() const;
     const std::string& getName() const;
     models::PostType getPostType() const;
+
+    void addEvent(IEvent* event);
+    void clearEvents();
+    const std::vector<IEvent*>& getEvents() const;
 };
 
 

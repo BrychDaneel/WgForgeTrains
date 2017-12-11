@@ -17,3 +17,8 @@ void CommandSender::turn()
 {
     client->turn();
 }
+
+
+void CommandSender::upgrade(const models::UpgradeModel& upgrade){
+    client->upgrade(upgrade);
+}

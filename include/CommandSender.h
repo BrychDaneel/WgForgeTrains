@@ -12,11 +12,10 @@ namespace tiger
         class CommandSender: public world::ICommandSender
         {
             public:
-                CommandSender(client::ITrainClient *client);
-                void move(const models::MoveModel &move);
+                explicit CommandSender(client::ITrainClient *client);
+                void move(const models::MoveModel& move);
+                void upgrade(const models::UpgradeModel& upgrade);
                 void turn();
-
-
 
             private:
 

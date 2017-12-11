@@ -38,7 +38,7 @@ float GraphPlaner::getTemperature(const vector<Edge>& edges, const vector<pair<f
         float sqrDist = SQR(coords[e.v].first - coords[e.t].first) + SQR(coords[e.v].second - coords[e.t].second);
         res += abs(sqrDist - e.len * e.len);
     }
-
+/*
     for (size_t i=0; i<coords.size(); i++)
         for (size_t ii=i+1; ii<coords.size(); ii++){
             float dist = hypot(coords[i].first - coords[ii].first, coords[i].second - coords[ii].second);
@@ -52,7 +52,7 @@ float GraphPlaner::getTemperature(const vector<Edge>& edges, const vector<pair<f
             if (isCollade(coords[e1.v].first, coords[e1.v].second, coords[e1.t].first, coords[e1.t].second,
                           coords[e2.v].first, coords[e2.v].second, coords[e2.t].first, coords[e2.t].second))
                 res += avgEdge*avgEdge;
-
+*/
     return res;
 }
 
@@ -84,10 +84,10 @@ const vector<pair<float, float> > GraphPlaner::planeGraph(const vector<vector<pa
         coords.push_back(pair<float, float>(rand()*1./RAND_MAX*width, rand()*1./RAND_MAX*height));
 
     float maxT = 80;
-    float minT = 0.0001;
+    float minT = 0.01;
     float t = maxT;
     float k = 0.97;
-    int it = 100;
+    int it = 300;
     float e = getTemperature(edges, coords, avgEdge);
 
 

@@ -2,13 +2,15 @@
 
 #include <vector>
 #include <models/PlayerModel.h>
+#include <models/CoordsMap.h>
 #include <CommandSender.h>
 #include <memory>
 
 using namespace tiger::trains;
 
 
-Runner::Runner(const char *name, const char *addr, int port):trainClient(name, addr, port), world(),bot(nullptr)
+Runner::Runner(const char *name, const char *addr, int port)
+    :name(name), addr(addr), port(port), world(),bot(nullptr)
 {
 
 }
@@ -23,18 +25,29 @@ void Runner::setBot(ai::IBot *bot)
 }
 
 
+void shutDown(){
+
+}
+
+
 void Runner::run()
 {
-    trainClient.login();
+    client::TCPTrainClient trainClient(name, addr, port);
+
+    doRun = true;
+    int retVal = trainClient.login();
     CommandSender commandSender(&trainClient);
 
     std::vector<models::PlayerModel> models;
     models::PlayerModel * player = trainClient.getMyPlayer();
     models::StaticMap *staticMap = new models::StaticMap();
+    models::CoordsMap coordsMap;
 
     trainClient.getStaticMap(staticMap);
+    trainClient.getCoordinate(&coordsMap);
     models.push_back(*player);
     world.init(models, *staticMap, &commandSender);
+    world.setCoords(coordsMap);
 
     delete staticMap;
 
@@ -47,7 +60,7 @@ void Runner::run()
     if (bot != nullptr)
         bot->init(&world);
 
-    while (true)
+    while (doRun && !world.isGameOver())
     {
         trainClient.getDynamicMap(dynamicMap);
         world.update(*dynamicMap);
@@ -56,6 +69,7 @@ void Runner::run()
         if (bot != nullptr)
             bot->step();
 
+
         trainClient.turn();
 
         world.tick();
@@ -63,4 +77,9 @@ void Runner::run()
 
 
 
+}
+
+
+void Runner::shutDown(){
+    doRun = false;
 }
