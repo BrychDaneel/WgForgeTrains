@@ -6,7 +6,7 @@
 
 
 #include "client/ITrainClient.h"
-#include "convertors/json/ModelConvertor.h"
+#include <convertors/json/ModelConvertor.h>
 #include "network/TCPSession.h"
 #include "network/ResposeMessage.h"
 #include <memory>
@@ -41,10 +41,13 @@ namespace tiger
                     TCPTrainClient(const char *name, const char *addr, int port);
                     virtual ~TCPTrainClient();
                     models::PlayerModel *getMyPlayer() const;
-                    int getStaticMap(models::StaticMap *staticMap) const;
-                    int getDynamicMap(models::DynamicMap *dynamicMap) const;
-                    void turn() const;
-                    int move(const models::MoveModel &move) const;
+                    int getStaticMap(models::StaticMap *staticMap);
+                    int getDynamicMap(models::DynamicMap *dynamicMap);
+                    void turn();
+                    int move(const models::MoveModel &move);
+                    int getCoordinate(models::CoordsMap* coordsMap);
+
+                    int upgrade(const models::UpgradeModel &upgradeModel);
                     int login();
 
                 private:

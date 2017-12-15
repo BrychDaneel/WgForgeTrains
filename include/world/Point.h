@@ -25,6 +25,8 @@ private:
 
     World* owner;
     int idx;
+    int x = 0;
+    int y = 0;
 
 public:
 
@@ -34,9 +36,15 @@ public:
     World* getWorld() const;
 
     int getIdx() const;
+    int getX() const;
+    int getY() const;
+
     IPost* getPost() const;
     const std::vector<Line*>& getEdges() const;
     const std::vector<Point*> getNeighboards() const;
+
+    void setX(const int x);
+    void setY(const int y);
 
 };
 

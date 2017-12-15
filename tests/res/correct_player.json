@@ -1,26 +1,51 @@
 {
     "home": {
-        "idx": 1,
+        "idx": 8,
         "post_id": 8
     },
     "idx": "c8e35156-de2f-4690-be43-cccbc116e513",
     "name": "tiger",
     "town": {
-        "armor": 0,
+        "armor": 100,
+        "armor_capacity": 100,
+        "event": [],
         "idx": 1,
+        "level": 1,
         "name": "town-one",
+        "next_level_price": 100,
+        "player_id": "c8e35156-de2f-4690-be43-cccbc116e513",
+        "point_id": 1,
         "population": 3,
-        "product": 35,
+        "population_capacity": 10,
+        "product": 350,
+        "product_capacity": 200,
         "type": 1
     },
     "train": [
         {
-            "capacity": 200,
-            "idx": 0,
+            "event": [],
+            "goods": 0,
+            "goods_capacity": 40,
+            "idx": 1,
+            "level": 1,
             "line_idx": 1,
+            "next_level_price": 40,
             "player_id": "c8e35156-de2f-4690-be43-cccbc116e513",
             "position": 0,
-            "product": 0,
+            "post_type": null,
+            "speed": 0
+        },
+        {
+            "event": [],
+            "goods": 0,
+            "goods_capacity": 40,
+            "idx": 2,
+            "level": 1,
+            "line_idx": 1,
+            "next_level_price": 40,
+            "player_id": "c8e35156-de2f-4690-be43-cccbc116e513",
+            "position": 0,
+            "post_type": null,
             "speed": 0
         }
     ]

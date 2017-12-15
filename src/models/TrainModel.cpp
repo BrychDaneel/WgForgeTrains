@@ -10,12 +10,15 @@ TrainModel::TrainModel(){
 }
 
 
-TrainModel::TrainModel(const int idx, const int lineIdx,
-                       const string playerIdx, const int position,
-                       const int capacity, const int product,
+TrainModel::TrainModel(const int idx, const int lineIdx, const string playerIdx,
+                       const int position, const int goodsCapacity,
+                       const int goods, const GoodType goodsType,
+                       const int level, const int nextLevelPrice,
                        const SpeedType speed) :
     idx(idx), lineIdx(lineIdx), playerIdx(playerIdx), position(position),
-    capacity(capacity), product(product), speed(speed)
+    speed(speed), goodsCapacity(goodsCapacity),
+    goods(goods), goodsType(goodsType),
+    level(level), nextLevelPrice(nextLevelPrice)
 {
 }
 
@@ -40,13 +43,17 @@ int TrainModel::getPosition() const{
 }
 
 
-int TrainModel::getCapacity() const{
-    return capacity;
+int TrainModel::getGoodsCapacity() const{
+    return goodsCapacity;
 }
 
 
-int TrainModel::getProduct() const{
-    return product;
+int TrainModel::getGoods() const{
+    return goods;
+}
+
+GoodType TrainModel::getGoodsType() const{
+    return goodsType;
 }
 
 
@@ -55,8 +62,13 @@ SpeedType TrainModel::getSpeed() const{
 }
 
 
-bool TrainModel::isInLine() const{
-    return lineIdx != ~0;
+int TrainModel::getLevel() const{
+    return level;
+}
+
+
+int TrainModel::getNextLevelPrice() const{
+    return nextLevelPrice;
 }
 
 
@@ -80,18 +92,48 @@ void TrainModel::setPosition(const int position){
 }
 
 
-void TrainModel::setCapacity(const int capacity){
-    this->capacity = capacity;
+void TrainModel::setGoodsCapacity(const int capacity){
+    this->goodsCapacity = capacity;
 }
 
 
-void TrainModel::setProduct(const int product){
-    this->product = product;
+void TrainModel::setGoods(const int goods){
+    this->goods = goods;
 }
 
 
 void TrainModel::setSpeed(const SpeedType speed){
     this->speed = speed;
+}
+
+
+void TrainModel::setLevel(const int level){
+    this->level = level;
+}
+
+
+void TrainModel::setNextLevelPrice(const int nextLevelPrice){
+    this->nextLevelPrice = nextLevelPrice;
+}
+
+
+void TrainModel::setGoodsType(const GoodType type){
+    this->goodsType = type;
+}
+
+
+void TrainModel::addEvent(const EventModel& event){
+    eventList.push_back(event);
+}
+
+
+void TrainModel::clearEventList(){
+    eventList.clear();
+}
+
+
+const std::vector<EventModel>& TrainModel::getEventList() const{
+    return eventList;
 }
 
 

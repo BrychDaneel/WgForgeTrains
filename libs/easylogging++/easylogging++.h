@@ -1,3 +1,5 @@
+#pragma GCC diagnostic ignored "-Wunused-variable"
+
 //
 //  Bismillah ar-Rahmaan ar-Raheem
 //
@@ -4603,3 +4605,4 @@ el::base::debug::CrashHandler elCrashHandler(ELPP_USE_DEF_CRASH_HANDLER);\
 #  define START_EASYLOGGINGPP(argc, argv) el::Helpers::setArgs(argc, argv)
 #endif  // defined(ELPP_UNICODE)
 #endif // EASYLOGGINGPP_H
+

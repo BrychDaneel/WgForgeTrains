@@ -1,6 +1,7 @@
 #include <ai/GreedyBot.h>
 
 #include <world/Train.h>
+#include <world/Town.h>
 #include <models/SpeedType.h>
 #include <algorithm>
 #include <easylogging++/easylogging++.h>
@@ -32,6 +33,11 @@ void GreedyBot::init(world::World *world)
 void GreedyBot::step()
 {
 
+    world::Train * train = world->getTrainList()[0];
+    world::Town * town = (world::Town*)world->getHome(world->getPlayerList()[0]);
+
+    train->upgrade();
+    town->upgrade();
     checkArrival();
 
     if (nextPost == nullptr)
@@ -40,6 +46,7 @@ void GreedyBot::step()
     }
 
     makeStep();
+
 
 }
 
@@ -87,12 +94,22 @@ void GreedyBot::findNextPost()
         nextPost = tempNext;
     world::Train * train = world->getTrainList()[0];
 
-    if (train->getProduct() >= train->getCapacity())
+
+    if (currentPost->getPoint()->getPost()->getPostType() == models::PostType::MARKET
+            && currHomeLen < maxLen)
+    {
+        ArtMarket mark = ArtMarket(currentPost);
+        if (mark.getReplenishment() > maxProductByTick)
+            nextPost = nullptr;
+    }
+
+    if (train->getGoods() >= train->getGoodsCapacity())
         nextPost = homePost;
+
     //if (currentPost != homePost && maxProductByTick < homeTown.getPopulation() - 0.6)
       // nextPost = homePost;  // May improve score or not
-
-    currentPath = currentPost->getMinPath(nextPost->getPoint());
+    if (nextPost != nullptr)
+        currentPath = currentPost->getMinPath(nextPost->getPoint());
 
 
 
@@ -102,6 +119,8 @@ void GreedyBot::findNextPost()
 
 void GreedyBot::makeStep()
 {
+    if (nextPost == nullptr)
+            return;
     world::Train * train = world->getTrainList()[0];
     if (train->getPoint() == currentPath[0])
     {

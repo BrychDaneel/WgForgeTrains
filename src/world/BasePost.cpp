@@ -53,6 +53,21 @@ models::PostType BasePost::getPostType() const{
 }
 
 
+void BasePost::addEvent(IEvent* event){
+    eventsHistory.push_back(event);
+}
+
+
+void BasePost::clearEvents(){
+    eventsHistory.clear();
+}
+
+
+const std::vector<IEvent*>& BasePost::getEvents() const{
+    return eventsHistory;
+}
+
+
 }
 }
 }
