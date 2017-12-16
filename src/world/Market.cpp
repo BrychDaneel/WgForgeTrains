@@ -1,6 +1,9 @@
 #include <world/Market.h>
 
 
+#define MIN(a,b) ((a)<(b)?(a):(b))
+
+
 namespace tiger{
 namespace trains{
 namespace world{
@@ -39,6 +42,17 @@ int Market::getReplenishment() const{
 
 int Market::getProductCapacity() const{
     return productCapacity;
+}
+
+
+int Market::predictProduct(int delta, int visitTime){
+    int pr = product;
+    if (visitTime != -1 && delta < visitTime){
+        pr = 0;
+        delta -= visitTime;
+    }
+
+    return MIN(productCapacity, pr + delta * replenishment);
 }
 
 
