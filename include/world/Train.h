@@ -7,7 +7,7 @@
 #include <models/SpeedType.h>
 #include <world/IEvent.h>
 #include <models/TrainModel.h>
-
+#include <world/IUpgradeble.h>
 
 
 namespace tiger{
@@ -20,7 +20,7 @@ class Player;
 class IEvent;
 
 
-class Train{
+class Train : public IUpgradeble{
 
 private:
 

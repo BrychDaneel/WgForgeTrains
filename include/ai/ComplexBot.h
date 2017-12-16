@@ -1,15 +1,14 @@
 #ifndef _COMPLEX_BOT_H_
 #define _COMPLEX_BOT_H_
 
-#include <CommandSender.h>
-#include <world/World.h>
-#include <ai/IBot.h>
-#include <ai/Post.h>
-#include <ai/ArtMarket.h>
-#include <ai/ArtTown.h>
+
 #include <ai/IBotSegment.h>
 #include <map>
 #include <vector>
+#include <set>
+#include <world/World.h>
+#include <ai/IBot.h>
+
 
 namespace tiger
 {
@@ -35,8 +34,8 @@ namespace ai
         private:
 
             world::World *world;
-            int tick;
             std::vector<IBotSegment* > listBotSegment;
+            std::set<std::pair<int ,const world::Line *>> busyLines;
 
 
 

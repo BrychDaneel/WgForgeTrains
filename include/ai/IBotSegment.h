@@ -16,7 +16,7 @@ namespace ai
     {
         public:
             virtual ~IBotSegment(){}
-            virtual void step(const world::World &world) = 0;
+            virtual void step() = 0;
 
 
     };

@@ -17,11 +17,11 @@ TrainAI::TrainAI(std::set<std::pair<int, const world::Line *> > *busyLines,
     id = train->getIdx();
 }
 
-void TrainAI::step(const world::World &world)
+void TrainAI::step()
 {
-    makeOwnBusyLines(world);
-    calculatePath(world);
-    makePath(world);
+    makeOwnBusyLines(*train->getWorld());
+    calculatePath(*train->getWorld());
+    makePath(*train->getWorld());
 
 }
 
