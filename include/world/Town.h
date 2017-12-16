@@ -45,7 +45,7 @@ public:
     int getLevel() const;
     int getNextLevelPrice() const;
 
-    void upgrade() const;
+    bool upgrade() const;
 
     int predictProduct(int delta);
 

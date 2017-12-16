@@ -66,7 +66,7 @@ public:
     void clearEvents();
     const std::vector<IEvent*>& getEvents() const;
 
-    void upgrade() const;
+    bool upgrade() const;
 
 };
 

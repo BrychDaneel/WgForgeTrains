@@ -72,8 +72,8 @@ int Town::getNextLevelPrice() const{
 }
 
 
-void Town::upgrade() const{
-    owner->getCommandSender()->upgrade(models::UpgradeModel({},{idx}));
+bool Town::upgrade() const{
+    return (owner->getCommandSender()->upgrade(models::UpgradeModel({},{idx})));
 }
 
 

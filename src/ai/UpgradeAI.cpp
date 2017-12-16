@@ -23,8 +23,13 @@ void UpgradeAI::step(){
     if (upgradeQueue.empty())
         return;
 
-    if (town->getArrmor() - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR){
+   /* if (town->getArrmor() - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR){
         upgradeQueue.front()->upgrade();
+        upgradeQueue.pop();
+    }*/
+
+    while (upgradeQueue.front()->upgrade())
+    {
         upgradeQueue.pop();
     }
 }
