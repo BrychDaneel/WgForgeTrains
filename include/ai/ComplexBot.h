@@ -1,5 +1,5 @@
-#ifndef _BR_BOT_H_
-#define _BR_BOT_H_
+#ifndef _COMPLEX_BOT_H_
+#define _COMPLEX_BOT_H_
 
 #include <CommandSender.h>
 #include <world/World.h>
@@ -18,13 +18,13 @@ namespace trains
 namespace ai
 {
 
-    class BRBot: public IBot
+    class ComplexBot: public IBot
     {
         public:
-            BRBot();
+            ComplexBot();
             void init(world::World *world);
             void step();
-            ~BRBot()
+            ~ComplexBot()
             {
                 for (auto botSegment : listBotSegment)
                 {

@@ -88,7 +88,20 @@ HEADERS += \
     include/models/CoordsMap.h \
     include/ai/CollisionAllower.h \
     include/ai/TrainGoalPredictor.h \
-    include/world/Storage.h
+    include/world/Storage.h \
+    include/ai/CollisionAllower.h \
+    include/ai/GreedyBot.h \
+    include/ai/IBot.h \
+    include/ai/IBotSegment.h \
+    include/ai/IPathGenerator.h \
+    include/ai/JustDoItBot.h \
+    include/ai/NPBot.h \
+    include/ai/Post.h \
+    include/ai/ScoreCalc.h \
+    include/ai/TrainAI.h \
+    include/ai/TrainGoalPredictor.h \
+    include/ai/UpgradeAI.h \
+    include/ai/ComplexBot.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -143,7 +156,10 @@ SOURCES += \
     src/world/EventFactory.cpp \
     src/ai/CollisionAllower.cpp \
     src/ai/TrainGoalPredictor.cpp \
-    src/world/Storage.cpp
+    src/world/Storage.cpp \
+    src/ai/TrainAI.cpp \
+    src/ai/UpgradeAI.cpp \
+    src/ai/ComplexBot.cpp
 
 DISTFILES +=
 

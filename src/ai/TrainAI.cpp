@@ -21,7 +21,7 @@ void TrainAI::step(const world::World &world)
 {
     makeOwnBusyLines(world);
     calculatePath(world);
-    makePath();
+    makePath(world);
 
 }
 
@@ -122,7 +122,7 @@ void TrainAI::makeOwnBusyLines(const world::World &world)
 
 void TrainAI::makePath(const world::World &world)
 {
-    const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
+   /* const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
     int maxLen = homeTown->getProduct() / homeTown->getProductCapacity(); // TODO SWITCH
     int currHomeLen = minLen[homeTown->getPoint()];
     double maxProductByTick = 0;
@@ -154,7 +154,7 @@ void TrainAI::makePath(const world::World &world)
         if (lastPoint != homeTown->getPoint() || maxProductByTick > homeTown->getPopulation() -  killer)
             break;
         killer++;
-    }
+    } */
 
 
 }
