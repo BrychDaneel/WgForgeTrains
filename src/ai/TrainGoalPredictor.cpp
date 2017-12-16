@@ -24,7 +24,7 @@ world::IPost* TrainGoalPredictor::predictGoal(const world::Train* train){
 
     const world::Point* startPoint = train->getLine()->getStartPont();
     int lenToStart = train->getPosition();
-    const world::Point* endPoint = train->getLine()->getStartPont();
+    const world::Point* endPoint = train->getLine()->getEndPont();
     int lenToEnd = train->getLine()->getLenght() - train->getPosition();
 
     minLen[startPoint] = lenToStart;

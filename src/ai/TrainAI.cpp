@@ -46,7 +46,7 @@ void TrainAI::step()
 void TrainAI::makeMove()
 {
 
-    world::Line *currentLine;
+    world::Line *currentLine = train->getLine();
 
     for(auto line : currentPath[0]->getEdges())
     {
@@ -109,12 +109,14 @@ void TrainAI::calculatePath(const world::World &world)
     int lenToStart = train->getPosition();
 
     minLen[startPoint] = lenToStart;
+    ancestors[startPoint] = startPoint;
     setMinLen.insert({lenToStart, startPoint});
 
-    const world::Point* endPoint = train->getLine()->getStartPont();
+    const world::Point* endPoint = train->getLine()->getEndPont();
     int lenToEnd = train->getLine()->getLenght() - train->getPosition();
 
     minLen[endPoint] = lenToEnd;
+    ancestors[endPoint] = endPoint;
     setMinLen.insert({lenToEnd, endPoint});
 
 
@@ -185,9 +187,9 @@ void TrainAI::makePath(const world::World &world)
     const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
     int maxLen;
     if (type == models::GoodType::PRODUCT)
-        maxLen = (homeTown->getProduct() - 10) / homeTown->getProductCapacity();
+        maxLen = (homeTown->getProduct() - 10) / homeTown->getPopulation();
     else
-        maxLen = homeTown->getArrmor() - 10;
+        maxLen = 150;
 
     int currHomeLen = minLen[homeTown->getPoint()];
     double maxProductByTick = 0;
@@ -291,7 +293,10 @@ void TrainAI::changeCurrentBusy()
 
     for (auto line : currentPath[1]->getEdges())
     {
-        currentBusy.push_back({id, line});
-        busyLines->insert(currentBusy.back());
+        if (line->getAnotherPoint(currentPath[1]) == currentPath[0])
+        {
+            currentBusy.push_back({id, line});
+            busyLines->insert(currentBusy.back());
+        }
     }
 }

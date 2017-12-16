@@ -11,9 +11,9 @@ UpgradeAI::UpgradeAI(const world::World* world) : world(world){
     world::Train* train1 = world->getPlayerList()[0]->getTrains()[1];
     town = static_cast<world::Town*>(world->getPlayerList()[0]->getHome());
     upgradeQueue.push(train0);
+    upgradeQueue.push(train1);
     upgradeQueue.push(town);
     upgradeQueue.push(train0);
-    upgradeQueue.push(train1);
     upgradeQueue.push(train1);
     upgradeQueue.push(town);
 }

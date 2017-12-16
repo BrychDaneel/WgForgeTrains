@@ -5,6 +5,7 @@
 #include <ai/JustDoItBot.h>
 #include <ai/GreedyBot.h>
 #include <ai/NPBot.h>
+#include <ai/ComplexBot.h>
 #include <ai/generators/Annealing.h>
 #include <easylogging++/easylogging++.h>
 
@@ -27,10 +28,11 @@ int main(int argc, char *argv[]){
 
     //ai::JustDoItBot bot;
     ai::GreedyBot greedyBot;
+    ai::ComplexBot complexBot;
     //ai::generators::Annealing pathGenerator;
     //ai::NPBot npBot(&pathGenerator);
 
-    runner.setBot(&greedyBot);
+    runner.setBot(&complexBot);
 
     QRunnerThred runnerThread(&runner);
     runnerThread.start();
