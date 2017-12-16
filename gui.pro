@@ -87,7 +87,8 @@ HEADERS += \
     include/world/IEvent.h \
     include/models/CoordsMap.h \
     include/ai/CollisionAllower.h \
-    include/ai/TrainGoalPredictor.h
+    include/ai/TrainGoalPredictor.h \
+    include/world/Storage.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \
@@ -141,7 +142,8 @@ SOURCES += \
     src/world/events/TrainCollisionEvent.cpp \
     src/world/EventFactory.cpp \
     src/ai/CollisionAllower.cpp \
-    src/ai/TrainGoalPredictor.cpp
+    src/ai/TrainGoalPredictor.cpp \
+    src/world/Storage.cpp
 
 DISTFILES +=
 

@@ -46,6 +46,8 @@ public:
 
     void upgrade() const;
 
+    int predictProduct(int delta);
+
 };
 
 
