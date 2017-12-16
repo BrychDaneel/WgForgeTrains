@@ -11,9 +11,9 @@ namespace ai{
 
 class TrainGoalPredictor{
 
-    TrainGoalPredictor(world::World* world);
+    TrainGoalPredictor();
 
-    int predictGoal(world::Train* train);
+    world::IPost* predictGoal(const world::Train* train);
 
 };
 
