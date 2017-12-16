@@ -9,11 +9,12 @@ namespace trains{
 namespace ai{
 
 
-class CollisionAllower{
-
+class CollisionAllower
+{
+public:
     CollisionAllower();
 
-    bool isCollisionAllow(world::Train* train, world::Train* otherTrain);
+    bool isCollisionAllow(const world::Train* train,const world::Train* otherTrain);
 
 private:
 

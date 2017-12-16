@@ -156,7 +156,7 @@ void TrainAI::makePath(const world::World &world)
         killer++;
     }
 
-
+    
 }
 
 models::PostType TrainAI::getPostTypeByGood(models::GoodType type)

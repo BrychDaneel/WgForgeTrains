@@ -10,7 +10,7 @@ CollisionAllower::CollisionAllower(){
 }
 
 
-bool CollisionAllower::isCollisionAllow(world::Train* train, world::Train* otherTrain){
+bool CollisionAllower::isCollisionAllow(const world::Train *train, const world::Train *otherTrain){
 
     if (train->getPlayer() == otherTrain->getPlayer())
         return false;
