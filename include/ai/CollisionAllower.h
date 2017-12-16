@@ -11,9 +11,14 @@ namespace ai{
 
 class CollisionAllower{
 
-    CollisionAllower(world::World* world);
+    CollisionAllower();
 
-    bool isCollisionAllow(world::Train* firstTrain, world::Train* secondTrain);
+    bool isCollisionAllow(world::Train* train, world::Train* otherTrain);
+
+private:
+
+    const float ARMOR_WEIGHT = 1;
+    const float PRODUCT_WEIGHT = 2;
 
 };
 
