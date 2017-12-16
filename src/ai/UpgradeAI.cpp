@@ -20,6 +20,9 @@ UpgradeAI::UpgradeAI(const world::World* world) : world(world){
 
 
 void UpgradeAI::step(){
+    if (upgradeQueue.empty())
+        return;
+
     if (town->getArrmor() - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR){
         upgradeQueue.front()->upgrade();
         upgradeQueue.pop();
