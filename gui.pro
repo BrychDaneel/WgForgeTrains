@@ -101,7 +101,8 @@ HEADERS += \
     include/ai/TrainAI.h \
     include/ai/TrainGoalPredictor.h \
     include/ai/UpgradeAI.h \
-    include/ai/ComplexBot.h
+    include/ai/ComplexBot.h \
+    include/world/IUpgradeble.h
 
 SOURCES += \
     src/ai/JustDoItBot.cpp \

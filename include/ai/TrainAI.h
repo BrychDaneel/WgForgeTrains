@@ -23,7 +23,7 @@ namespace ai
         public:
             TrainAI(std::set<std::pair<int ,const world::Line *>> *busyLines,
                     models::GoodType type, world::Train *train);
-            void step(const world::World &world);
+            void step();
 
         private:
 

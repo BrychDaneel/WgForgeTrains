@@ -4,6 +4,7 @@
 
 
 #include <world/BasePost.h>
+#include <world/IUpgradeble.h>
 
 
 namespace tiger{
@@ -11,7 +12,7 @@ namespace trains{
 namespace world{
 
 
-class Town : public BasePost{
+class Town : public BasePost, public IUpgradeble{
 
 private:
 

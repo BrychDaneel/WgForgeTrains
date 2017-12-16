@@ -4,6 +4,10 @@
 #include <CommandSender.h>
 #include <ai/IBotSegment.h>
 #include <world/World.h>
+#include <world/IUpgradeble.h>
+#include <vector>
+#include <world/Town.h>
+#include <queue>
 
 
 namespace tiger
@@ -13,13 +17,21 @@ namespace trains
 namespace ai
 {
 
-    class TrainAI: public IBotSegment
-    {
-        public:
-            void step(const world::World &world);
 
+class UpgradeAI: public IBotSegment
+{
 
-    };
+    world::Town* town;
+    const world::World* world;
+    const int RESERV_ARMOR = 3;
+    std::queue<world::IUpgradeble*> upgradeQueue;
+
+public:
+    UpgradeAI(const world::World* world);
+    void step();
+
+};
+
 
 }
 }

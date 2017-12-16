@@ -21,7 +21,7 @@ TrainAI::TrainAI(std::set<std::pair<int, const world::Line *> > *busyLines,
     id = train->getIdx();
 }
 
-void TrainAI::step(const world::World &world)
+void TrainAI::step()
 {
 
     makeOwnBusyLines(*train->getWorld());
