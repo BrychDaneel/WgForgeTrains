@@ -30,7 +30,7 @@ public:
     int getReplenishment() const;
     int getProductCapacity() const;
 
-    int predictProduct(int delta, int visitTime=-1);
+    int predictProduct(int delta, int visitTime=-1) const;
 
 };
 

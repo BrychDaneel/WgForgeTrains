@@ -28,7 +28,7 @@ public:
     int getReplenishment() const;
     int getArmorCapacity() const;
 
-    int predictArmor(int delta, int visitTime=-1);
+    int predictArmor(int delta, int visitTime=-1) const;
 
 };
 

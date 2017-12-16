@@ -3,6 +3,10 @@
 #include <climits>
 #include <world/Town.h>
 #include <world/Market.h>
+#include <world/Storage.h>
+#include <algorithm>
+
+
 
 
 using namespace tiger::trains;
@@ -19,14 +23,68 @@ TrainAI::TrainAI(std::set<std::pair<int, const world::Line *> > *busyLines,
 
 void TrainAI::step(const world::World &world)
 {
-    makeOwnBusyLines(world);
-    calculatePath(world);
-    makePath(world);
+
+    makeOwnBusyLines(*train->getWorld());
+    calculatePath(*train->getWorld());
+    makePath(*train->getWorld());
+
+    if (currentPath.size() > 1 && train->getPoint() == currentPath[0])
+    {
+        changeCurrentBusy();
+        lastPoint = currentPath[0];
+        currentPath.erase(currentPath.begin());
+        makeMove();
+
+    } else
+    {
+        if (!currentPath.empty() && train->getPoint() != currentPath[0])
+            makeMove();
+    }
 
 }
 
-int TrainAI::calculateProducts()
+void TrainAI::makeMove()
 {
+
+    world::Line *currentLine;
+
+    for(auto line : currentPath[0]->getEdges())
+    {
+        if (line->getAnotherPoint(currentPath[0]) == lastPoint)
+        {
+            currentLine = line;
+            break;
+        }
+    }
+
+
+    models::SpeedType speed;
+
+    if (currentLine->getEndPont() == currentPath[0])
+        speed = models::SpeedType::FORWARD;
+    else
+        speed = models::SpeedType::REVERSE;
+
+    train->move(currentLine, speed);
+}
+
+int TrainAI::calculateProducts(int tick, world::IPost *post)
+{
+
+    if (tick == 0)
+        tick = 1;
+
+    if (type ==  models::GoodType::PRODUCT)
+    {
+        const world::Market *market = (world::Market*)post;
+        return std::min(market->predictProduct(tick), train->getGoodsCapacity() - train->getGoods() );
+    }
+    if (type == models::GoodType::ARMOR)
+    {
+        const world::Storage *storage = (world::Storage*)post;
+        return std::min(storage->predictArmor(tick), train->getGoodsCapacity() - train->getGoods() );
+    }
+
 
 }
 
@@ -116,14 +174,21 @@ void TrainAI::makeOwnBusyLines(const world::World &world)
             ownBusy.insert(line);
         }
     }
+
 }
 
 
 
 void TrainAI::makePath(const world::World &world)
 {
-   /* const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
-    int maxLen = homeTown->getProduct() / homeTown->getProductCapacity(); // TODO SWITCH
+
+    const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
+    int maxLen;
+    if (type == models::GoodType::PRODUCT)
+        maxLen = (homeTown->getProduct() - 10) / homeTown->getProductCapacity();
+    else
+        maxLen = homeTown->getArrmor() - 10;
+
     int currHomeLen = minLen[homeTown->getPoint()];
     double maxProductByTick = 0;
     world::Point *tempNext = nullptr;
@@ -132,7 +197,7 @@ void TrainAI::makePath(const world::World &world)
     {
         for (auto post : world.getPostList())
         {
-            if (post->getPostType() != getPostTypeByGood(type))
+            if (post->getPostType() != getPostTypeByGood(type) || minLen[post->getPoint()] == INT_MAX)
                 continue;
 
             int tempLen = minLen[post->getPoint()]*2 + minLen[homeTown->getPoint()]; // TODO DIJKSTRA for MARKET/TOWN
@@ -141,12 +206,13 @@ void TrainAI::makePath(const world::World &world)
                 continue;
 
 
-            const world::Market *market = (world::Market*)post;
 
-            if (((double)newMarket.getProduct())/(tempLen-currHomeLen + 1) > maxProductByTick)
+
+            int predict =  calculateProducts(minLen[post->getPoint()], post);
+            if (((double)predict)/(tempLen-currHomeLen + 1) > maxProductByTick)
             {
-                tempNext = mapPair.second;
-                maxProductByTick = ((double)newMarket.getProduct())/(tempLen-currHomeLen + 1);
+                tempNext = post->getPoint();
+                maxProductByTick = ((double)predict)/(tempLen-currHomeLen + 1);
             }
 
         }
@@ -154,10 +220,50 @@ void TrainAI::makePath(const world::World &world)
         if (lastPoint != homeTown->getPoint() || maxProductByTick > homeTown->getPopulation() -  killer)
             break;
         killer++;
-    } */
+    }
+
+    if (tempNext == nullptr)
+        nextPoint = train->getPlayer()->getHome()->getPoint();
+    else
+        nextPoint = tempNext;
+
+
+
+
+
+    if (train->getGoods() >= train->getGoodsCapacity())
+        nextPoint = homeTown->getPoint();
+
+    //if (currentPost != homePost && maxProductByTick < homeTown.getPopulation() - 0.6)
+      // nextPost = homePost;  // May improve score or not
+
+
+    currentPath = getMinPath(nextPoint);
 
 
 }
+
+std::vector<const world::Point *> TrainAI::getMinPath(const world::Point *point)
+{
+    std::vector<const world::Point *> vec;
+    const world::Point *temp_point=point;
+
+    if (ancestors[temp_point] == nullptr)
+        return vec;
+
+    while (ancestors[temp_point] != temp_point)
+    {
+        vec.push_back(temp_point);
+        temp_point = ancestors[temp_point];
+    }
+
+    vec.push_back(temp_point);
+    std::reverse(vec.begin(), vec.end());
+
+    return vec;
+}
+
+
 
 models::PostType TrainAI::getPostTypeByGood(models::GoodType type)
 {
@@ -171,5 +277,21 @@ models::PostType TrainAI::getPostTypeByGood(models::GoodType type)
     default:
         return models::PostType::UNKNOWN;
         break;
+    }
+}
+
+void TrainAI::changeCurrentBusy()
+{
+    for (auto busy : currentBusy)
+    {
+        busyLines->erase(busy);
+    }
+
+    currentBusy.clear();
+
+    for (auto line : currentPath[1]->getEdges())
+    {
+        currentBusy.push_back({id, line});
+        busyLines->insert(currentBusy.back());
     }
 }

@@ -43,7 +43,7 @@ int Storage::getArmorCapacity() const{
 }
 
 
-int Storage::predictArmor(int delta, int visitTime){
+int Storage::predictArmor(int delta, int visitTime) const{
     int ar = armor;
     if (visitTime != -1 && delta > visitTime){
         ar = 0;

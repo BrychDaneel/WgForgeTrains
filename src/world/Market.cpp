@@ -45,7 +45,7 @@ int Market::getProductCapacity() const{
 }
 
 
-int Market::predictProduct(int delta, int visitTime){
+int Market::predictProduct(int delta, int visitTime) const{
     int pr = product;
     if (visitTime != -1 && delta < visitTime){
         pr = 0;
