@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <world/Market.h>
+#include <world/Storage.h>
 #include <world/Town.h>
 #include <sstream>
 
@@ -69,15 +70,20 @@ void QWorldWidget::drawPosts(QPainter* painter){
 
             switch (post->getPostType()) {
             case models::PostType::TOWN:
+                painter->setPen(QPen(Qt::green, 0));
+                painter->setBrush(Qt::green);
+                break;
+            case models::PostType::STORAGE:
                 painter->setPen(QPen(Qt::yellow, 0));
                 painter->setBrush(Qt::yellow);
                 break;
             case models::PostType::MARKET:
-                painter->setPen(QPen(Qt::green, 0));
-                painter->setBrush(Qt::green);
+                painter->setPen(QPen(Qt::magenta, 0));
+                painter->setBrush(Qt::magenta);
                 break;
             default:
-                painter->setPen(QPen(Qt::yellow, 0));
+                painter->setPen(QPen(Qt::gray, 0));
+                painter->setBrush(Qt::gray);
                 break;
             }
 
@@ -96,6 +102,13 @@ void QWorldWidget::drawPosts(QPainter* painter){
                 painter->drawText(prodRect, Qt::AlignCenter, productText);
             }
 
+            if (post->getPostType() == models::PostType::STORAGE){
+                QRectF prodRect(ppoint + QPoint(-5, 1), ppoint + QPoint(5, 2));
+                world::Storage* storage = static_cast<world::Storage*>(post);
+                QString productText = QString("%1/%2").arg(storage->getArmor()).arg(storage->getArmorCapacity());
+                painter->drawText(prodRect, Qt::AlignCenter, productText);
+            }
+
             if (post->getPostType() == models::PostType::TOWN){
                 world::Town* town = (world::Town*)post;
 
@@ -103,7 +116,11 @@ void QWorldWidget::drawPosts(QPainter* painter){
                 QString productText = QString("product: %1").arg(town->getProduct());
                 painter->drawText(prodRect, Qt::AlignCenter, productText);
 
-                QRectF popRect(ppoint + QPoint(-5, 2), ppoint + QPoint(5, 3));
+                QRectF armorRect(ppoint + QPoint(-5, 2), ppoint + QPoint(5, 3));
+                QString armorText = QString("armor: %1").arg(town->getArrmor());
+                painter->drawText(armorRect, Qt::AlignCenter, armorText);
+
+                QRectF popRect(ppoint + QPoint(-5, 3), ppoint + QPoint(5, 4));
                 QString popText = QString("populat: %1").arg(town->getPopulation());
                 painter->drawText(popRect, Qt::AlignCenter, popText);
             }
