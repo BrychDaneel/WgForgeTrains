@@ -5,7 +5,7 @@
 #include "network/TCPClient.h"
 #include "network/ResposeMessage.h"
 #include <cstring>
-
+#include <memory>
 namespace tiger
 {
     namespace trains
