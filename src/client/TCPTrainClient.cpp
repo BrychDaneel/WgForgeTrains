@@ -120,8 +120,10 @@ int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
     int retVal = convertor.readDynamicMap(message->data, message->dataLength, dynamicMap);
 
     delete message;
-    if (retVal != 0)
+    if (retVal != 0){
+        LOG(ERROR) << convertor.getLastErrorMessage();
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
+    }
 
     return (int)TCPTrainClient::ErrorType::OKEY;
 }
@@ -199,8 +201,10 @@ int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
     int retVal = convertor.readCoordsMap(message->data, message->dataLength, coordsMap);
 
     delete message;
-    if (retVal != 0)
+    if (retVal != 0){
+        LOG(ERROR) << convertor.getLastErrorMessage();
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
+    }
 
     return (int)TCPTrainClient::ErrorType::OKEY;
 

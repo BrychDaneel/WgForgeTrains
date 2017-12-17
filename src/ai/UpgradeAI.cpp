@@ -1,4 +1,5 @@
 #include <ai/UpgradeAI.h>
+#include <easylogging++/easylogging++.h>
 
 
 namespace tiger{
@@ -20,17 +21,14 @@ UpgradeAI::UpgradeAI(const world::World* world) : world(world){
 
 
 void UpgradeAI::step(){
-    if (upgradeQueue.empty())
-        return;
-
-   /* if (town->getArrmor() - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR){
-        upgradeQueue.front()->upgrade();
-        upgradeQueue.pop();
-    }*/
-
-    while (upgradeQueue.front()->upgrade())
-    {
-        upgradeQueue.pop();
+    int ar = town->getArrmor();
+    while (!upgradeQueue.empty() && ar - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR){
+        ar -= upgradeQueue.front()->getNextLevelPrice();
+        if (upgradeQueue.front()->upgrade())
+            upgradeQueue.pop();
+        else
+            LOG(ERROR) << "Can't apply update that coasts " << upgradeQueue.front()->getNextLevelPrice()
+                         << " when have " << ar + upgradeQueue.front()->getNextLevelPrice();
     }
 }
 

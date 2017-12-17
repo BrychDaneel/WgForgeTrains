@@ -50,7 +50,10 @@ void DynamicMapReader::readTrain(const nlohmann::json& jtrain, models::TrainMode
         train->setGoodsType(jtrain["post_type"]);
 
     train->setLevel(jtrain["level"]);
-    train->setNextLevelPrice(jtrain["next_level_price"]);
+    if (jtrain["next_level_price"].is_number())
+        train->setNextLevelPrice(jtrain["next_level_price"]);
+    else
+        train->setNextLevelPrice(-1);
 
     for (nlohmann::json jevent : jtrain["event"]){
         models::EventModel event;
@@ -68,7 +71,10 @@ void DynamicMapReader::readTown(const nlohmann::json& jtown, models::PostModel* 
     post->setArmor(jtown["armor"]);
     post->setPopulation(jtown["population"]);
     post->setArmorCapacity(jtown["armor_capacity"]);
-    post->setNextLevelPrice(jtown["next_level_price"]);
+    if (jtown["next_level_price"].is_number())
+        post->setNextLevelPrice(jtown["next_level_price"]);
+    else
+        post->setNextLevelPrice(-1);
     post->setPopulationCapacity(jtown["population_capacity"]);
     post->setLevel(jtown["level"]);
 

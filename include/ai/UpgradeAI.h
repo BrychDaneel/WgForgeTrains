@@ -23,7 +23,7 @@ class UpgradeAI: public IBotSegment
 
     world::Town* town;
     const world::World* world;
-    const int RESERV_ARMOR = 3;
+    const int RESERV_ARMOR = 0;
     std::queue<world::IUpgradeble*> upgradeQueue;
 
 public:
