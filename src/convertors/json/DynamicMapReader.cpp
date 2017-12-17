@@ -177,6 +177,10 @@ int DynamicMapReader::readDynamicMap(const char* buffer, const int bufferSize, m
             dynamicMap->addPost(post);
         }
 
+        for (auto jscore = jmap["rating"].begin(); jscore != jmap["rating"].end(); jscore++){
+            dynamicMap->addScore(jscore.key(), jscore.value());
+        }
+
     }
     catch(const nlohmann::json::type_error& e){
         lastErrorCode = 3;

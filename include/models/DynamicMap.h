@@ -7,6 +7,7 @@
 #include <models/TrainModel.h>
 
 #include <vector>
+#include <map>
 
 
 using std::vector;
@@ -24,6 +25,7 @@ private:
     int idx = 0;
     vector<PostModel> postList;
     vector<TrainModel> trainList;
+    std::map<std::string, int> scoreMap;
 
 public:
 
@@ -32,14 +34,17 @@ public:
 
     void addPost(const PostModel& post);
     void addTrain(const TrainModel& train);
+    void addScore(const std::string& name, const int score);
 
     int getIdx() const;
     const vector<PostModel>& getPostList() const;
     const vector<TrainModel>& getTrainList() const;
+    const std::map<std::string, int>& getScoreMap() const;
 
     void setIdx(int idx);
     void clearPostList();
     void clearTrainList();
+    void clearScoreMap();
 
 };
 

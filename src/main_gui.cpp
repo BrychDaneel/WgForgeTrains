@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
 
     QApplication application(argc, argv);
 
-    Runner runner("Vasya", "wgforge-srv.wargaming.net", 443);
+    Runner runner("Tiger", "wgforge-srv.wargaming.net", 443);
     //Runner runner("tiger", "wgforge-srv.wargaming.net", 443);
     //Runner runner("tiger", "localhost", 30001);
 

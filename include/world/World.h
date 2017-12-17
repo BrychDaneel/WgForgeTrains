@@ -48,6 +48,8 @@ private:
 
     int tickNum = 0;
 
+    std::map<Player*, int> scoreMap;
+
     std::map<int, IPost*> postMap;
     std::map<std::string, Player*> playerMap;
     std::map<int, Point*> pointMap;
@@ -63,6 +65,7 @@ private:
     std::map<const Point*, std::vector<Line*> > graph;
     std::map<const Player*, int> homes;
 
+    std::map<std::string, Player*> playerOfName;
     std::map<const Point*, int> postOfPoint;
     std::map<int, Point*> pointOfPost;
     std::map<const Line*, std::vector<Train*> > trainsOfLine;
@@ -100,6 +103,8 @@ public:
     const std::vector<Point*>& getPointList() const;
     const std::vector<Line*>& getLineList() const;
 
+    Player* getPlayerByName(const std::string name) const;
+
     Player* getPlayerByIdx(const std::string idx) const;
     Train* getTrainByIdx(int idx) const;
     IPost* getPostByIdx(int idx) const;
@@ -126,6 +131,8 @@ public:
     int getHeight() const;
 
     bool isGameOver();
+
+    int getScore(Player* player);
 };
 
 

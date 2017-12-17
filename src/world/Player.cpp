@@ -41,6 +41,11 @@ const std::vector<Train*>& Player::getTrains(){
     return owner->getTrainsOfPlayer(this);
 }
 
+int Player::getScore()
+{
+    return owner->getScore(this);
+}
+
 
 }
 }

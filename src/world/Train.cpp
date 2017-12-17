@@ -208,7 +208,7 @@ std::vector<Train*> Train::getPosibleCollisions(const models::MoveModel* move)
             res.push_back(train);
 
     if (pos > lin->getLenght() - 2)
-        for (Train* train : lin->getStartPont()->getTrains())
+        for (Train* train : lin->getEndPont()->getTrains())
             res.push_back(train);
 
     return res;
