@@ -15,7 +15,7 @@ TrainGoalPredictor::TrainGoalPredictor(){
 }
 
 
-world::IPost* TrainGoalPredictor::predictGoal(const world::Train* train){
+std::pair<world::IPost*, int> TrainGoalPredictor::predictGoal(const world::Train* train){
 
     std::map<const world::Point*, int> minLen;
 
@@ -61,7 +61,7 @@ world::IPost* TrainGoalPredictor::predictGoal(const world::Train* train){
                 minPost = post;
         }
 
-    return minPost;
+    return std::make_pair(minPost, minLen[minPost->getPoint()]);
 }
 
 

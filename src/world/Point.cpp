@@ -56,6 +56,15 @@ const std::vector<Point*> Point::getNeighboards() const{
     return result;
 }
 
+const std::vector<Train*> Point::getTrains() const
+{
+    std::vector<Train*> res;
+    for (Train* train : owner->getTrainList())
+        if (train->getPoint() == this)
+            res.push_back(train);
+    return res;
+}
+
 
 void Point::setX(const int x){
     this->x = x;

@@ -17,6 +17,7 @@ namespace world{
 class World;
 class Line;
 class IPost;
+class Train;
 
 
 class Point{
@@ -42,6 +43,8 @@ public:
     IPost* getPost() const;
     const std::vector<Line*>& getEdges() const;
     const std::vector<Point*> getNeighboards() const;
+
+    const std::vector<Train*> getTrains() const;
 
     void setX(const int x);
     void setY(const int y);

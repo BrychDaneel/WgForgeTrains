@@ -1,4 +1,6 @@
 #include <world/Train.h>
+#include <easylogging++/easylogging++.h>
+#include <cmath>
 
 
 namespace tiger{
@@ -132,6 +134,84 @@ int Train::getNextLevelPrice() const{
 
 bool Train::upgrade() const{
     return (owner->getCommandSender()->upgrade(models::UpgradeModel({idx},{})));
+}
+
+std::vector<Train*> Train::getPosibleCollisions(const models::MoveModel* move)
+{
+    int pos = position;
+    const Line* lin = line;
+
+    if (move!=nullptr){
+        if (move->getLineIdx() != lin->getIdx()){
+
+            if (getPoint() == nullptr){
+                LOG(ERROR) << "Bad move command for predictions.";
+                return std::vector<Train*>();
+            }
+
+            std::vector<Line*> edges = getPoint()->getEdges();
+            if (std::find(edges.begin(), edges.end(), owner->getLineByIdx(move->getLineIdx())) == edges.end()){
+                LOG(ERROR) << "Bad move command for predictions.";
+                return std::vector<Train*>();
+            }
+
+            lin = owner->getLineByIdx(move->getLineIdx());
+            pos = lin->getStartPont() == getPoint() ? 0 : lin->getLenght();
+        }
+
+        if (move->getSpeedType() == models::SpeedType::FORWARD){
+            if (pos == lin->getLenght()){
+                LOG(ERROR) << "Bad move command for predictions.";
+                return std::vector<Train*>();
+            }
+
+            pos++;
+        }
+
+        if (move->getSpeedType() == models::SpeedType::REVERSE){
+            if (pos == 0){
+                LOG(ERROR) << "Bad move command for predictions.";
+                return std::vector<Train*>();
+            }
+
+            pos--;
+        }
+    }
+
+    std::vector<Train*> res;
+
+    for (Train* train : line->getTrains())
+        if (train != this){
+            if (abs(pos - train->getPosition()) < 2)
+                res.push_back(train);
+        }
+
+    Point* point = nullptr;
+
+    if (pos == 0)
+        point = lin->getStartPont();
+
+    if (pos == lin->getLenght())
+        point = lin->getStartPont();
+
+    if (point)
+        for (Line* edg: point->getEdges())
+            for (Train* train : edg->getTrains()){
+                if (edg->getStartPont() == point && train->getPosition() < 2)
+                    res.push_back(train);
+                if (edg->getEndPont() == point && train->getPosition() > edg->getLenght() - 2)
+                    res.push_back(train);
+            }
+
+    if (pos < 2)
+        for (Train* train : lin->getStartPont()->getTrains())
+            res.push_back(train);
+
+    if (pos > lin->getLenght() - 2)
+        for (Train* train : lin->getStartPont()->getTrains())
+            res.push_back(train);
+
+    return res;
 }
 
 
