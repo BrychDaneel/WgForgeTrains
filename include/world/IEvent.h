@@ -13,9 +13,7 @@ namespace world{
 class World;
 
 
-class IEvent{
-
-public:
+struct IEvent{
 
     virtual ~IEvent(){}
 

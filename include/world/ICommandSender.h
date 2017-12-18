@@ -10,9 +10,8 @@ namespace trains{
 namespace world{
 
 
-class ICommandSender{
-
-public:
+struct ICommandSender
+{
 
     virtual ~ICommandSender(){}
 
