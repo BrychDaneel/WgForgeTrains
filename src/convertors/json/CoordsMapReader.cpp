@@ -4,10 +4,14 @@
 #include <nlohmann/json.hpp>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json {
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
 int CoordsMapReader::readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap)
@@ -64,12 +68,14 @@ int CoordsMapReader::readCoordsMap(const char* buffer, const int bufferSize, mod
 }
 
 
-int CoordsMapReader::getLastErrorCode(){
+int CoordsMapReader::getLastErrorCode()
+{
     return lastErrorCode;
 }
 
 
-const std::string& CoordsMapReader::getLastErrorMessage(){
+const std::string& CoordsMapReader::getLastErrorMessage()
+{
     return lastErrorMessage;
 }
 

@@ -4,13 +4,16 @@
 #include <models/EventType.h>
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class EventModel{
-
+class EventModel
+{
 private:
     EventType type;
     int tick;

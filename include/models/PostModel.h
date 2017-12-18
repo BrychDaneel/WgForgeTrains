@@ -10,13 +10,16 @@
 using std::string;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class PostModel{
-
+class PostModel
+{
 private:
 
     int idx = 0;
@@ -73,7 +76,6 @@ public:
     void addEvent(const EventModel& event);
     void clearEventList();
     const std::vector<EventModel>& getEventList() const;
-
 };
 
 

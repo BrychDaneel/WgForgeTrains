@@ -4,13 +4,18 @@
 #include <convertors/IUpgradeWriter.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-struct UpgradeWriter : public IUpgradeWriter{
+struct UpgradeWriter : public IUpgradeWriter
+{
 
     int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
 

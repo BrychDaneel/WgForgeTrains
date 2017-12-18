@@ -4,14 +4,18 @@
 #include <convertors/IMoveWriter.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-class MoveWriter : public IMoveWriter{
-
+class MoveWriter : public IMoveWriter
+{
 public:
 
     int writeMove(const models::MoveModel* move, char* buffer,  int* bufferSize);

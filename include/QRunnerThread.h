@@ -6,12 +6,15 @@
 #include <Runner.h>
 
 
-namespace tiger{
-namespace trains{
+namespace tiger
+{
+namespace trains
+{
 
 
-class QRunnerThred : public QThread{
-    Q_OBJECT
+class QRunnerThred : public QThread
+{
+Q_OBJECT
 
 private:
 

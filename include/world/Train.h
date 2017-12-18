@@ -8,9 +8,12 @@
 #include <world/IUpgradeble.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class World;
@@ -18,8 +21,8 @@ class Player;
 class IEvent;
 
 
-class Train : public IUpgradeble{
-
+class Train : public IUpgradeble
+{
 private:
 
     int idx;
@@ -67,7 +70,6 @@ public:
     bool upgrade() const;
 
     std::vector<Train*> getPosibleCollisions(const models::MoveModel* move=nullptr);
-
 };
 
 

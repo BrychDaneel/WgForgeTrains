@@ -1,23 +1,27 @@
 #include <world/Town.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
-
-Town::Town() : BasePost(){
+Town::Town() : BasePost()
+{
 }
 
 
-Town::Town(const models::PostModel& model, World* world) :
-    BasePost(model, world)
+Town::Town(const models::PostModel& model, World* world)
+    : BasePost(model, world)
 {
     update(model);
 }
 
 
-void Town::update(const models::PostModel& model){
+void Town::update(const models::PostModel& model)
+{
     BasePost::update(model);
     arrmor = model.getArmor();
     population = model.getPopulation();
@@ -32,52 +36,62 @@ void Town::update(const models::PostModel& model){
 }
 
 
-int Town::getArrmor() const{
+int Town::getArrmor() const
+{
     return arrmor;
 }
 
 
-int Town::getPopulation() const{
+int Town::getPopulation() const
+{
     return population;
 }
 
 
-int Town::getProduct() const{
+int Town::getProduct() const
+{
     return product;
 }
 
 
-int Town::getArrmorCapacity() const{
+int Town::getArrmorCapacity() const
+{
     return arrmorCapacity;
 }
 
 
-int Town::getPopulationCapacity() const{
+int Town::getPopulationCapacity() const
+{
     return populationCapacity;
 }
 
 
-int Town::getProductCapacity() const{
+int Town::getProductCapacity() const
+{
     return productCapacity;
 }
 
 
-int Town::getLevel() const{
+int Town::getLevel() const
+{
     return level;
 }
 
 
-int Town::getNextLevelPrice() const{
+int Town::getNextLevelPrice() const
+{
     return nextLevelPrice;
 }
 
 
-bool Town::upgrade() const{
+bool Town::upgrade() const
+{
     return (owner->getCommandSender()->upgrade(models::UpgradeModel({},{idx})));
 }
 
 
-int Town::predictProduct(int delta) const{
+int Town::predictProduct(int delta) const
+{
     int predict = product - delta * population;
     if (predict < 0)
         return 0;

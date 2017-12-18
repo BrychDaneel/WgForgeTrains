@@ -3,16 +3,21 @@
 #include <cmath>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-Train::Train(){
+Train::Train()
+{
 }
 
 
-Train::Train(const models::TrainModel& model, World* world){
+Train::Train(const models::TrainModel& model, World* world)
+{
     owner = world;
 
     idx = model.getIdx();
@@ -22,7 +27,8 @@ Train::Train(const models::TrainModel& model, World* world){
 }
 
 
-void Train::update(models::TrainModel model){
+void Train::update(models::TrainModel model)
+{
     line = owner->getLineByIdx(model.getLineIdx());
 
     speed = model.getSpeed();
@@ -36,42 +42,50 @@ void Train::update(models::TrainModel model){
 }
 
 
-World* Train::getWorld() const{
+World* Train::getWorld() const
+{
     return owner;
 }
 
 
-int Train::getIdx() const{
+int Train::getIdx() const
+{
     return idx;
 }
 
 
-Player* Train::getPlayer() const{
+Player* Train::getPlayer() const
+{
     return player;
 }
 
 
-Line* Train::getLine() const{
+Line* Train::getLine() const
+{
     return line;
 }
 
 
-int Train::getPosition() const{
+int Train::getPosition() const
+{
     return position;
 }
 
 
-int Train::getGoodsCapacity() const{
+int Train::getGoodsCapacity() const
+{
     return goodsCapacity;
 }
 
 
-int Train::getGoods() const{
+int Train::getGoods() const
+{
     return goods;
 }
 
 
-Point *Train::getPoint() const{
+Point *Train::getPoint() const
+{
 
     if (line == nullptr){
         return player->getHome()->getPoint();
@@ -91,7 +105,8 @@ Point *Train::getPoint() const{
 
 }
 
-models::SpeedType Train::getSpeed() const{
+models::SpeedType Train::getSpeed() const
+{
     return speed;
 }
 
@@ -102,7 +117,8 @@ void Train::move(Line* line, models::SpeedType speed){
 }
 
 
-void Train::addEvent(IEvent* event){
+void Train::addEvent(IEvent* event)
+{
     eventsHistory.push_back(event);
 }
 
@@ -112,27 +128,32 @@ void Train::clearEvents(){
 }
 
 
-const std::vector<IEvent*>& Train::getEvents() const{
+const std::vector<IEvent*>& Train::getEvents() const
+{
     return eventsHistory;
 }
 
 
-models::GoodType Train::getGoodsType() const{
+models::GoodType Train::getGoodsType() const
+{
     return goodsType;
 }
 
 
-int Train::getLevel() const{
+int Train::getLevel() const
+{
     return level;
 }
 
 
-int Train::getNextLevelPrice() const{
+int Train::getNextLevelPrice() const
+{
     return nextLevelPrice;
 }
 
 
-bool Train::upgrade() const{
+bool Train::upgrade() const
+{
     return (owner->getCommandSender()->upgrade(models::UpgradeModel({idx},{})));
 }
 

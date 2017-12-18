@@ -5,13 +5,16 @@
 #include <string>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct IUpgradeWriter{
-
+struct IUpgradeWriter
+{
     virtual ~IUpgradeWriter(){}
 
     virtual int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize) = 0;

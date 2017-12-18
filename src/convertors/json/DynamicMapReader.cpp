@@ -4,13 +4,18 @@
 #include <nlohmann/json.hpp>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-void DynamicMapReader::readEvent(const nlohmann::json& jevent, models::EventModel* event){
+void DynamicMapReader::readEvent(const nlohmann::json& jevent, models::EventModel* event)
+{
     event->setTick(jevent["tick"]);
     event->setType(jevent["type"]);
     switch (event->getType()) {
@@ -32,7 +37,8 @@ void DynamicMapReader::readEvent(const nlohmann::json& jevent, models::EventMode
 }
 
 
-void DynamicMapReader::readTrain(const nlohmann::json& jtrain, models::TrainModel* train){
+void DynamicMapReader::readTrain(const nlohmann::json& jtrain, models::TrainModel* train)
+{
 
     train->clearEventList();
 
@@ -64,7 +70,8 @@ void DynamicMapReader::readTrain(const nlohmann::json& jtrain, models::TrainMode
 }
 
 
-void DynamicMapReader::readTown(const nlohmann::json& jtown, models::PostModel* post){
+void DynamicMapReader::readTown(const nlohmann::json& jtown, models::PostModel* post)
+{
 
     post->setProduct(jtown["product"]);
     post->setProductCapacity(jtown["product_capacity"]);
@@ -81,21 +88,24 @@ void DynamicMapReader::readTown(const nlohmann::json& jtown, models::PostModel* 
 }
 
 
-void DynamicMapReader::readMarket(const nlohmann::json& jmarket, models::PostModel* post){
+void DynamicMapReader::readMarket(const nlohmann::json& jmarket, models::PostModel* post)
+{
     post->setProduct(jmarket["product"]);
     post->setProductCapacity(jmarket["product_capacity"]);
     post->setReplenishment(jmarket["replenishment"]);
 
 }
 
-void DynamicMapReader::readStorage(const nlohmann::json& jstorage, models::PostModel* post){
+void DynamicMapReader::readStorage(const nlohmann::json& jstorage, models::PostModel* post)
+{
     post->setArmor(jstorage["armor"]);
     post->setArmorCapacity(jstorage["armor_capacity"]);
 
 }
 
 
-void DynamicMapReader::readPost(const nlohmann::json& jpost, models::PostModel* post){
+void DynamicMapReader::readPost(const nlohmann::json& jpost, models::PostModel* post)
+{
 
     post->clearEventList();
 
@@ -197,12 +207,14 @@ int DynamicMapReader::readDynamicMap(const char* buffer, const int bufferSize, m
 }
 
 
-int DynamicMapReader::getLastErrorCode(){
+int DynamicMapReader::getLastErrorCode()
+{
     return lastErrorCode;
 }
 
 
-const std::string& DynamicMapReader::getLastErrorMessage(){
+const std::string& DynamicMapReader::getLastErrorMessage()
+{
     return lastErrorMessage;
 }
 

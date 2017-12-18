@@ -21,9 +21,12 @@
 #include <string>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class Point;
@@ -35,8 +38,8 @@ class PostFactory;
 class IEvent;
 
 
-class World{
-
+class World
+{
 private:
 
     ICommandSender* commandSender;

@@ -5,9 +5,12 @@
 #include <models/CoordModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
 struct CoordsMap

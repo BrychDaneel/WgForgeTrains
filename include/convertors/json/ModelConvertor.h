@@ -12,13 +12,18 @@
 #include <convertors/ICoordsMapReader.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-class ModelConvertor : public IModelConvertor{
+class ModelConvertor : public IModelConvertor
+{
 
 private:
 

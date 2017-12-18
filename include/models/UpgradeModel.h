@@ -4,13 +4,16 @@
 #include <vector>
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class UpgradeModel{
-
+class UpgradeModel
+{
 private:
 
     std::vector<int> trainIdxList;
@@ -29,7 +32,6 @@ public:
 
     void addTrainIdx(const int idx);
     void addPostIdx(const int idx);
-
 };
 
 

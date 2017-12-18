@@ -4,13 +4,16 @@
 #include <world/BasePost.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-class Market : public BasePost{
-
+class Market : public BasePost
+{
 private:
 
     int product;

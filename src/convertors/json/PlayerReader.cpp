@@ -4,10 +4,14 @@
 #include <nlohmann/json.hpp>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 /*
  * Errors:
@@ -17,7 +21,8 @@ namespace json{
  * 3 - value error
  * 4 - player is empty
  */
-int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel){
+int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel)
+{
     string str;
     try{
         str.assign(buffer, bufferSize);
@@ -67,12 +72,14 @@ int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::P
 }
 
 
-int PlayerReader::getLastErrorCode(){
+int PlayerReader::getLastErrorCode()
+{
     return lastErrorCode;
 }
 
 
-const std::string& PlayerReader::getLastErrorMessage(){
+const std::string& PlayerReader::getLastErrorMessage()
+{
     return lastErrorMessage;
 }
 

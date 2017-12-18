@@ -9,13 +9,18 @@
 #include <convertors/json/CoordsMapReader.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-ModelConvertor::ModelConvertor(){
+ModelConvertor::ModelConvertor()
+{
     dynamicMapReader = new DynamicMapReader();
     staticMapReader = new StaticMapReader();
     playerReader = new PlayerReader();
@@ -25,7 +30,8 @@ ModelConvertor::ModelConvertor(){
 }
 
 
-ModelConvertor::~ModelConvertor(){
+ModelConvertor::~ModelConvertor()
+{
     delete dynamicMapReader;
     delete staticMapReader;
     delete playerReader;
@@ -35,7 +41,8 @@ ModelConvertor::~ModelConvertor(){
 }
 
 
-int ModelConvertor::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap){
+int ModelConvertor::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap)
+{
     if (staticMapReader->readStaticMap(buffer, bufferSize, staticMap)){
         lastErrorCode = staticMapReader->getLastErrorCode();
         lastErrorMessage = staticMapReader->getLastErrorMessage();
@@ -46,7 +53,8 @@ int ModelConvertor::readStaticMap(const char* buffer, const int bufferSize, mode
 }
 
 
-int ModelConvertor::readDynamicMap(const char* buffer, int bufferSize, models::DynamicMap* dynamicMap){
+int ModelConvertor::readDynamicMap(const char* buffer, int bufferSize, models::DynamicMap* dynamicMap)
+{
     if (dynamicMapReader->readDynamicMap(buffer, bufferSize, dynamicMap)){
         lastErrorCode = dynamicMapReader->getLastErrorCode();
         lastErrorMessage = dynamicMapReader->getLastErrorMessage();
@@ -56,7 +64,8 @@ int ModelConvertor::readDynamicMap(const char* buffer, int bufferSize, models::D
 }
 
 
-int ModelConvertor::readPlayer(const char* buffer, int bufferSize, models::PlayerModel* playerModel){
+int ModelConvertor::readPlayer(const char* buffer, int bufferSize, models::PlayerModel* playerModel)
+{
     if (playerReader->readPlayer(buffer, bufferSize, playerModel)){
         lastErrorCode = playerReader->getLastErrorCode();
         lastErrorMessage = playerReader->getLastErrorMessage();
@@ -66,7 +75,8 @@ int ModelConvertor::readPlayer(const char* buffer, int bufferSize, models::Playe
 }
 
 
-int ModelConvertor::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize){
+int ModelConvertor::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize)
+{
     if (moveWriter->writeMove(move, buffer, bufferSize)){
         lastErrorCode = moveWriter->getLastErrorCode();
         lastErrorMessage = moveWriter->getLastErrorMessage();

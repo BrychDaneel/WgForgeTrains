@@ -8,9 +8,12 @@
 #include <world/IEvent.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class Point;
@@ -18,8 +21,8 @@ class IEvent;
 class World;
 
 
-struct IPost{
-
+struct IPost
+{
     virtual ~IPost(){}
 
     virtual void update(const models::PostModel& model) = 0;

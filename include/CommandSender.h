@@ -9,18 +9,20 @@ namespace tiger
 namespace trains
 {
 
-    class CommandSender: public world::ICommandSender
-    {
-        public:
-            explicit CommandSender(client::ITrainClient *client);
-            void move(const models::MoveModel& move);
-            bool upgrade(const models::UpgradeModel& upgrade);
-            void turn();
 
-        private:
+class CommandSender: public world::ICommandSender
+{
+public:
+    explicit CommandSender(client::ITrainClient *client);
+    void move(const models::MoveModel& move);
+    bool upgrade(const models::UpgradeModel& upgrade);
+    void turn();
 
-            client::ITrainClient *client;
-    };
+private:
+
+    client::ITrainClient *client;
+};
+
 
 }
 }

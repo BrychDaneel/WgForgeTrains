@@ -14,8 +14,8 @@ using namespace tiger::trains;
 INITIALIZE_EASYLOGGINGPP
 
 
-int main(int argc, char *argv[]){
-
+int main(int argc, char *argv[])
+{
     QApplication application(argc, argv);
 
     Runner runner("Tiger", "wgforge-srv.wargaming.net", 443);

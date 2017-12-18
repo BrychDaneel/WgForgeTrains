@@ -10,13 +10,16 @@
 #include <string>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct IModelConvertor{
-
+struct IModelConvertor
+{
     virtual ~IModelConvertor(){}
 
     virtual int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) = 0;

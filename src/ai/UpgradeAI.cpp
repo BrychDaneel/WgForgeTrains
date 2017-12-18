@@ -2,12 +2,16 @@
 #include <easylogging++/easylogging++.h>
 
 
-namespace tiger{
-namespace trains{
-namespace ai{
+namespace tiger
+{
+namespace trains
+{
+namespace ai
+{
 
 
-UpgradeAI::UpgradeAI(const world::World* world) : world(world){
+UpgradeAI::UpgradeAI(const world::World* world) : world(world)
+{
     world::Train* train0 = world->getPlayerList()[0]->getTrains()[0];
     world::Train* train1 = world->getPlayerList()[0]->getTrains()[1];
     town = static_cast<world::Town*>(world->getPlayerList()[0]->getHome());
@@ -20,7 +24,8 @@ UpgradeAI::UpgradeAI(const world::World* world) : world(world){
 }
 
 
-void UpgradeAI::step(){
+void UpgradeAI::step()
+{
     int ar = town->getArrmor();
     while (!upgradeQueue.empty() && ar - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR){
         ar -= upgradeQueue.front()->getNextLevelPrice();

@@ -11,12 +11,16 @@
 #include <sstream>
 
 
-namespace tiger {
-namespace trains {
-namespace gui {
+namespace tiger
+{
+namespace trains
+{
+namespace gui
+{
 
 
-QWorldWidget::QWorldWidget(world::World* world) : world(world){
+QWorldWidget::QWorldWidget(world::World* world) : world(world)
+{
     QTimer* timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(repaint()));
     timer->start(100);
@@ -24,7 +28,8 @@ QWorldWidget::QWorldWidget(world::World* world) : world(world){
 }
 
 
-void QWorldWidget::drawLines(QPainter* painter){
+void QWorldWidget::drawLines(QPainter* painter)
+{
     QFont font = painter->font();
     font.setPixelSize(1);
     painter->setFont(font);
@@ -43,7 +48,8 @@ void QWorldWidget::drawLines(QPainter* painter){
 }
 
 
-void QWorldWidget::drawPoints(QPainter* painter){
+void QWorldWidget::drawPoints(QPainter* painter)
+{
     QFont font = painter->font();
     font.setPixelSize(1);
     painter->setFont(font);
@@ -59,7 +65,8 @@ void QWorldWidget::drawPoints(QPainter* painter){
 }
 
 
-void QWorldWidget::drawPosts(QPainter* painter){
+void QWorldWidget::drawPosts(QPainter* painter)
+{
 
     QFont font = painter->font();
     font.setPixelSize(1);
@@ -127,7 +134,8 @@ void QWorldWidget::drawPosts(QPainter* painter){
 }
 
 
-void QWorldWidget::drawTrains(QPainter* painter){
+void QWorldWidget::drawTrains(QPainter* painter)
+{
     QFont font = painter->font();
     font.setPixelSize(1);
     painter->setFont(font);
@@ -155,7 +163,8 @@ void QWorldWidget::drawTrains(QPainter* painter){
 }
 
 
-void QWorldWidget::drawTick(QPainter* painter){
+void QWorldWidget::drawTick(QPainter* painter)
+{
     QFont font = painter->font();
     font.setPixelSize(width() / 20);
     painter->setFont(font);
@@ -166,7 +175,8 @@ void QWorldWidget::drawTick(QPainter* painter){
 }
 
 
-void QWorldWidget::drawScore(QPainter* painter){
+void QWorldWidget::drawScore(QPainter* painter)
+{
     QFont font = painter->font();
     font.setPixelSize(width() / 40);
     painter->setFont(font);
@@ -195,8 +205,8 @@ void QWorldWidget::drawGameOver(QPainter* painter){
 }
 
 
-void QWorldWidget::paintEvent(QPaintEvent* event){
-
+void QWorldWidget::paintEvent(QPaintEvent* event)
+{
     if (world->getWidth() == 0 || world->getHeight() == 0)
         return;
 
@@ -228,17 +238,20 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
 }
 
 
-void QWorldWidget::setRectHeight(float height){
+void QWorldWidget::setRectHeight(float height)
+{
     rectHeight = height;
 }
 
 
-float QWorldWidget::getRectHeight() const{
+float QWorldWidget::getRectHeight() const
+{
     return rectHeight;
 }
 
 
-void QWorldWidget::setRectWidth(float width){
+void QWorldWidget::setRectWidth(float width)
+{
     rectWidth = width;
 }
 
@@ -248,7 +261,8 @@ float QWorldWidget::getRectWidth() const{
 }
 
 
-void QWorldWidget::mouseMoveEvent(QMouseEvent* event){
+void QWorldWidget::mouseMoveEvent(QMouseEvent* event)
+{
     if (lastCursorPos.x() == -1){
         lastCursorPos = event->pos();
         return;

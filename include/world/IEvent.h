@@ -5,16 +5,19 @@
 #include <models/EventModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class World;
 
 
-struct IEvent{
-
+struct IEvent
+{
     virtual ~IEvent(){}
 
     virtual models::EventType getType() const = 0;

@@ -4,13 +4,16 @@
 #include <string>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct IMoveWriter{
-
+struct IMoveWriter
+{
     virtual ~IMoveWriter(){}
 
     virtual int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize) = 0;

@@ -4,9 +4,12 @@
 #include <world/World.h>
 
 
-namespace tiger{
-namespace trains{
-namespace ai{
+namespace tiger
+{
+namespace trains
+{
+namespace ai
+{
 
 
 class CollisionAllower

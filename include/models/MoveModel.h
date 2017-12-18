@@ -4,13 +4,16 @@
 #include <models/SpeedType.h>
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class MoveModel{
-
+class MoveModel
+{
 private:
 
     int lineIdx = 0;
@@ -28,7 +31,6 @@ public:
     void setLineIdx(const int lineIdx);
     void setTrainIdx(const int trainIdx);
     void setSpeedType(const SpeedType speedType);
-
 };
 
 

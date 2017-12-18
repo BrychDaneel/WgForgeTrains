@@ -3,16 +3,21 @@
 #include <ai/UpgradeAI.h>
 
 
-namespace tiger{
-namespace trains{
-namespace ai{
+namespace tiger
+{
+namespace trains
+{
+namespace ai
+{
 
 
-ComplexBot::ComplexBot(){
+ComplexBot::ComplexBot()
+{
 }
 
 
-void ComplexBot::init(world::World *world){
+void ComplexBot::init(world::World *world)
+{
     this->world = world;
 
 
@@ -29,8 +34,8 @@ void ComplexBot::init(world::World *world){
 }
 
 
-void ComplexBot::step(){
-
+void ComplexBot::step()
+{
     world::Town *home = (world::Town*)world->getPlayerList()[0]->getHome();
 
     for (IBotSegment* subBot : listBotSegment)

@@ -4,10 +4,14 @@
 #include <nlohmann/json.hpp>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
 /*
@@ -15,7 +19,8 @@ namespace json{
  *  -1 : unknown
  *  1 : buffer overflow
  */
-int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize){
+int MoveWriter::writeMove(const models::MoveModel* move, char* buffer, int* bufferSize)
+{
     nlohmann::json j;
     j["line_idx"] = move->getLineIdx();
     j["speed"] = move->getSpeedType();
@@ -43,7 +48,8 @@ int MoveWriter::getLastErrorCode(){
 }
 
 
-const std::string& MoveWriter::getLastErrorMessage(){
+const std::string& MoveWriter::getLastErrorMessage()
+{
     return lastErrorMessage;
 }
 

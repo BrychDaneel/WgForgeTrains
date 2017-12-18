@@ -11,25 +11,28 @@
 using std::string;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class TrainModel{
-
+class TrainModel
+{
 private:
 
     int idx = 0;
     int lineIdx = 0;
     string playerIdx;
     int position = 0;
+    SpeedType speed = SpeedType::STOP;
     int goodsCapacity = 0;
     int goods = 0;
     GoodType goodsType = GoodType::NONE;
     int level = 0;
     int nextLevelPrice;
-    SpeedType speed = SpeedType::STOP;
 
     std::vector<EventModel> eventList;
 

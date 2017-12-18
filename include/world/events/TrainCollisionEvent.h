@@ -5,14 +5,18 @@
 #include <world/Train.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
-namespace events{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+namespace events
+{
 
 
-class TrainCollisionEven : public BaseEvent{
-
+class TrainCollisionEven : public BaseEvent
+{
 public:
 
     TrainCollisionEven(){}
@@ -25,7 +29,6 @@ private:
 
     Train* source;
     Train* another;
-
 };
 
 

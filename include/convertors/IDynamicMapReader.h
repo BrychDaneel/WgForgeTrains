@@ -4,12 +4,16 @@
 #include <models/DynamicMap.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct IDynamicMapReader{
+struct IDynamicMapReader
+{
 
     virtual ~IDynamicMapReader(){}
 

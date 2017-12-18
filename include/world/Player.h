@@ -17,8 +17,8 @@ class IPost;
 class Train;
 
 
-class Player{
-
+class Player
+{
 private:
 
     World* owner;
@@ -38,7 +38,6 @@ public:
     const std::vector<Train*>& getTrains();
 
     int getScore();
-
 };
 
 

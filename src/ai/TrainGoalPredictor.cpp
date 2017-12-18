@@ -6,17 +6,21 @@
 #include <climits>
 
 
-namespace tiger{
-namespace trains{
-namespace ai{
+namespace tiger
+{
+namespace trains
+{
+namespace ai
+{
 
 
-TrainGoalPredictor::TrainGoalPredictor(){
+TrainGoalPredictor::TrainGoalPredictor()
+{
 }
 
 
-std::pair<world::IPost*, int> TrainGoalPredictor::predictGoal(const world::Train* train){
-
+std::pair<world::IPost*, int> TrainGoalPredictor::predictGoal(const world::Train* train)
+{
     std::map<const world::Point*, int> minLen;
 
     for (auto point : train->getWorld()->getPointList())

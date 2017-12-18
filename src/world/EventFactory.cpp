@@ -7,12 +7,16 @@
 #include <world/events/TrainCollisionEvent.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-IEvent* EventFactory::createEvent(const models::EventModel& model, IPost* source){
+IEvent* EventFactory::createEvent(const models::EventModel& model, IPost* source)
+{
     switch (model.getType()) {
 
     case models::EventType::HIJACKERS_ASSAULT:
@@ -27,7 +31,8 @@ IEvent* EventFactory::createEvent(const models::EventModel& model, IPost* source
 }
 
 
- IEvent* EventFactory::createEvent(const models::EventModel& model, Train* source){
+ IEvent* EventFactory::createEvent(const models::EventModel& model, Train* source)
+ {
     switch (model.getType()) {
 
     case models::EventType::TRAIN_COLLISION:

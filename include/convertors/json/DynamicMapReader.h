@@ -11,7 +11,8 @@ namespace convertors{
 namespace json{
 
 
-class DynamicMapReader : public IDynamicMapReader{
+class DynamicMapReader : public IDynamicMapReader
+{
 
 public:
 

@@ -7,13 +7,16 @@
 using std::string;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class PointModel{
-
+class PointModel
+{
 private:
 
     int idx = 0;
@@ -29,7 +32,6 @@ public:
 
     void setIdx(const int idx);
     void setPostId(const int postId);
-
 };
 
 

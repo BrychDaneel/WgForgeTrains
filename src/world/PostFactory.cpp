@@ -7,12 +7,16 @@
 #include <world/Storage.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-IPost* PostFactory::createPost(const models::PostModel& model, World* world){
+IPost* PostFactory::createPost(const models::PostModel& model, World* world)
+{
     switch (model.getType()) {
 
     case models::PostType::TOWN:

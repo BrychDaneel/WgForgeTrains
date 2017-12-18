@@ -8,13 +8,16 @@
 #include <QMouseEvent>
 
 
-namespace tiger {
-namespace trains {
-namespace gui {
+namespace tiger
+{
+namespace trains
+{
+namespace gui
+{
 
 
-class QWorldWidget : public QWidget{
-
+class QWorldWidget : public QWidget
+{
 private:
 
     world::World* world;

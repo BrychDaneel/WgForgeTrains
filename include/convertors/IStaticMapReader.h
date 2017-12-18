@@ -4,13 +4,16 @@
 #include <models/StaticMap.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct IStaticMapReader{
-
+struct IStaticMapReader
+{
     virtual ~IStaticMapReader(){}
 
     virtual int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap) = 0;

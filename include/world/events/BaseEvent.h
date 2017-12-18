@@ -6,14 +6,18 @@
 #include <models/EventModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
-namespace events{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+namespace events
+{
 
 
-class BaseEvent : public IEvent{
-
+class BaseEvent : public IEvent
+{
 public:
 
     BaseEvent(){}
@@ -28,7 +32,6 @@ protected:
     World* world;
     int tick;
     models::EventType type;
-
 };
 
 

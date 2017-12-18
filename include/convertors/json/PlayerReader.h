@@ -4,14 +4,18 @@
 #include <convertors/IPlayerReader.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-class PlayerReader : public IPlayerReader{
-
+class PlayerReader : public IPlayerReader
+{
 public:
 
     int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel);

@@ -4,14 +4,18 @@
 #include <convertors/ICoordsMapReader.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json {
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-struct CoordsMapReader : public ICoordsMapReader{
-
+struct CoordsMapReader : public ICoordsMapReader
+{
     virtual int readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap);
 
     virtual int getLastErrorCode();

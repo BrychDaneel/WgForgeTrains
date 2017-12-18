@@ -4,10 +4,14 @@
 #include <nlohmann/json.hpp>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
 /*
@@ -17,8 +21,8 @@ namespace json{
  * 2 - bad json
  * 3 - value error
  */
-int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap){
-
+int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap)
+{
     string str;
     try{
         str.assign(buffer, bufferSize);
@@ -84,12 +88,14 @@ int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, mod
 }
 
 
-int StaticMapReader::getLastErrorCode(){
+int StaticMapReader::getLastErrorCode()
+{
     return lastErrorCode;
 }
 
 
-const std::string& StaticMapReader::getLastErrorMessage(){
+const std::string& StaticMapReader::getLastErrorMessage()
+{
     return lastErrorMessage;
 }
 

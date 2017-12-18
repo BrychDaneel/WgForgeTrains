@@ -11,13 +11,16 @@
 using std::vector;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class DynamicMap{
-
+class DynamicMap
+{
 private:
 
     int idx = 0;

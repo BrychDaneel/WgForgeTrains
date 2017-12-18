@@ -5,16 +5,19 @@
 #include <world/IPost.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class World;
 
 
-class BasePost : public IPost{
-
+class BasePost : public IPost
+{
 protected:
 
     World* owner;

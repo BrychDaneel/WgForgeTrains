@@ -5,14 +5,16 @@
 #include <models/UpgradeModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 struct ICommandSender
 {
-
     virtual ~ICommandSender(){}
 
     virtual void move(const models::MoveModel& move) = 0;

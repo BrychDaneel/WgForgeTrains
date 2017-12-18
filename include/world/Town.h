@@ -5,13 +5,16 @@
 #include <world/IUpgradeble.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-class Town : public BasePost, public IUpgradeble{
-
+class Town : public BasePost, public IUpgradeble
+{
 private:
 
     int arrmor;
@@ -46,7 +49,6 @@ public:
     bool upgrade() const;
 
     int predictProduct(int delta) const;
-
 };
 
 

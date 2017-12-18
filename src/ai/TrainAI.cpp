@@ -277,7 +277,7 @@ void TrainAI::makePath(const world::World &world)
         nextPoint = homeTown->getPoint();
 
     //if (currentPost != homePost && maxProductByTick < homeTown.getPopulation() - 0.6)
-      // nextPost = homePost;  // May improve score or not
+    // nextPost = homePost;  // May improve score or not
 
 
     currentPath = getMinPath(nextPoint);

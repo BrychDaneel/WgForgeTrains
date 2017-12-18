@@ -4,13 +4,16 @@
 #include <models/PlayerModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct IPlayerReader{
-
+struct IPlayerReader
+{
     virtual ~IPlayerReader(){}
 
     virtual int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel) = 0;

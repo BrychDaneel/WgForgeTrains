@@ -1,9 +1,12 @@
 #pragma once
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
 struct CoordModel

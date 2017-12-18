@@ -10,23 +10,19 @@ using namespace tiger::trains;
 
 
 Runner::Runner(const char *name, const char *addr, int port)
-    :name(name), addr(addr), port(port), world(),bot(nullptr)
+    : name(name), addr(addr), port(port), world(),bot(nullptr)
 {
 
 }
 
-world::World* Runner::getWorld(){
+world::World* Runner::getWorld()
+{
     return &world;
 }
 
 void Runner::setBot(ai::IBot *bot)
 {
     this->bot = bot;
-}
-
-
-void shutDown(){
-
 }
 
 
@@ -75,11 +71,10 @@ void Runner::run()
         world.tick();
     }
 
-
-
 }
 
 
-void Runner::shutDown(){
+void Runner::shutDown()
+{
     doRun = false;
 }

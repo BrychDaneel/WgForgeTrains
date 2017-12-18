@@ -5,14 +5,18 @@
 #include <world/Town.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
-namespace events{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+namespace events
+{
 
 
-class ParasitesAssaultEvent : public BaseEvent{
-
+class ParasitesAssaultEvent : public BaseEvent
+{
 public:
 
     ParasitesAssaultEvent(){}
@@ -25,7 +29,6 @@ private:
 
     Town* source;
     int parasitesPower;
-
 };
 
 

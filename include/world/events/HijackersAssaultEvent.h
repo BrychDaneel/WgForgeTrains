@@ -5,14 +5,18 @@
 #include <world/Town.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
-namespace events{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+namespace events
+{
 
 
-class HijackersAssaultEvent : public BaseEvent{
-
+class HijackersAssaultEvent : public BaseEvent
+{
 public:
 
     HijackersAssaultEvent(){}
@@ -25,7 +29,6 @@ private:
 
     Town* source;
     int hijackersPower;
-
 };
 
 

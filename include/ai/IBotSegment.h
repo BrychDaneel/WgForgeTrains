@@ -12,14 +12,16 @@ namespace trains
 namespace ai
 {
 
-    class IBotSegment
-    {
-        public:
-            virtual ~IBotSegment(){}
-            virtual void step() = 0;
 
+class IBotSegment
+{
+public:
 
-    };
+    virtual ~IBotSegment(){}
+    virtual void step() = 0;
+
+};
+
 
 }
 }

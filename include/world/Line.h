@@ -7,9 +7,12 @@
 #include <vector>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class World;
@@ -17,8 +20,8 @@ class Point;
 class Train;
 
 
-class Line{
-
+class Line
+{
 private:
 
     World* owner;

@@ -4,13 +4,18 @@
 #include <convertors/IStaticMapReader.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-class StaticMapReader : public IStaticMapReader{
+class StaticMapReader : public IStaticMapReader
+{
 
 public:
 

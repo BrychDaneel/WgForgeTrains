@@ -6,13 +6,16 @@
 #include <string>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
 
 
-struct ICoordsMapReader{
-
+struct ICoordsMapReader
+{
     virtual ~ICoordsMapReader(){}
 
     virtual int readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap) = 0;

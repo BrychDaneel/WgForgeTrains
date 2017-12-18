@@ -12,13 +12,16 @@ using std::string;
 using std::vector;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class StaticMap{
-
+class StaticMap
+{
 private:
 
     int idx = 0;
@@ -43,7 +46,6 @@ public:
     void setName(const string name);
     void clearLineList();
     void clearPointList();
-
 };
 
 

@@ -6,18 +6,20 @@
 #include <world/IEvent.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-class EventFactory{
-
+class EventFactory
+{
 public:
 
     static IEvent* createEvent(const models::EventModel& model, IPost* source);
     static IEvent* createEvent(const models::EventModel& model, Train* source);
-
 };
 
 

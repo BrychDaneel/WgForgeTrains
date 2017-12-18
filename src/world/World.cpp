@@ -5,7 +5,8 @@
 using namespace tiger::trains::world;
 
 
-World::~World(){
+World::~World()
+{
     for (IPost* post : getPostList())
         delete post;
 
@@ -74,14 +75,15 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
 }
 
 
-void World::fillEventsHistory(const size_t size){
+void World::fillEventsHistory(const size_t size)
+{
     while (eventsHistory.size() < size)
         eventsHistory.push_back(std::vector<IEvent*>());
 }
 
 
-void World::update(const models::DynamicMap& dynamicMap){
-
+void World::update(const models::DynamicMap& dynamicMap)
+{
     for (models::PostModel postModel : dynamicMap.getPostList()){
         if (postMap.find(postModel.getIdx()) == postMap.end()){
             IPost* post = PostFactory::createPost(postModel, this);
@@ -133,7 +135,8 @@ void World::update(const models::DynamicMap& dynamicMap){
 }
 
 
-void World::setCoords(const models::CoordsMap& coordsMap){
+void World::setCoords(const models::CoordsMap& coordsMap)
+{
     for (models::CoordModel coord : coordsMap.coords){
         Point* point = getPointByIdx(coord.idx);
         point->setX(coord.x);
@@ -145,52 +148,62 @@ void World::setCoords(const models::CoordsMap& coordsMap){
 }
 
 
-bool World::isInitialized(){
+bool World::isInitialized()
+{
     return initialized;
 }
 
 
-int World::getTickNum(){
+int World::getTickNum()
+{
     return tickNum;
 }
 
 
-void World::setTickNum(const int tickNum){
+void World::setTickNum(const int tickNum)
+{
     this->tickNum = tickNum;
 }
 
 
-void World::tick(){
+void World::tick()
+{
     this->tickNum++;
 }
 
 
-ICommandSender* World::getCommandSender() const{
+ICommandSender* World::getCommandSender() const
+{
     return commandSender;
 }
 
 
-const std::vector<Player*>& World::getPlayerList() const{
+const std::vector<Player*>& World::getPlayerList() const
+{
     return playerList;
 }
 
 
-const std::vector<Train*>& World::getTrainList() const{
+const std::vector<Train*>& World::getTrainList() const
+{
     return trainList;
 }
 
 
-const std::vector<IPost*>& World::getPostList() const{
+const std::vector<IPost*>& World::getPostList() const
+{
     return postList;
 }
 
 
-const std::vector<Point*>& World::getPointList() const{
+const std::vector<Point*>& World::getPointList() const
+{
     return pointList;
 }
 
 
-const std::vector<Line*>& World::getLineList() const{
+const std::vector<Line*>& World::getLineList() const
+{
     return lineList;
 }
 
@@ -200,7 +213,8 @@ Player*World::getPlayerByName(const std::string name) const
 }
 
 
-Player* World::getPlayerByIdx(const std::string idx) const{
+Player* World::getPlayerByIdx(const std::string idx) const
+{
     return playerMap.find(idx)->second;
 }
 
@@ -210,27 +224,32 @@ Train* World::getTrainByIdx(int idx) const{
 }
 
 
-IPost* World::getPostByIdx(int idx) const{
+IPost* World::getPostByIdx(int idx) const
+{
     return postMap.find(idx)->second;
 }
 
 
-Point* World::getPointByIdx(int idx) const{
+Point* World::getPointByIdx(int idx) const
+{
     return pointMap.find(idx)->second;
 }
 
 
-Line* World::getLineByIdx(int idx) const{
+Line* World::getLineByIdx(int idx) const
+{
     return lineMap.find(idx)->second;
 }
 
 
-const std::vector<Line*>& World::getEdges(const Point* point) const{
+const std::vector<Line*>& World::getEdges(const Point* point) const
+{
     return graph.find(point)->second;
 }
 
 
-Line* World::getLine(const Point* point1, const Point* point2){
+Line* World::getLine(const Point* point1, const Point* point2)
+{
     for (Line* line : point1->getEdges())
         if (line->getAnotherPoint(point1) == point2)
             return line;
@@ -238,7 +257,8 @@ Line* World::getLine(const Point* point1, const Point* point2){
 }
 
 
-IPost* World::getPostOfPoint(const Point* point) const{
+IPost* World::getPostOfPoint(const Point* point) const
+{
     if (postOfPoint.find(point) == postOfPoint.end())
         return nullptr;
     else
@@ -246,37 +266,44 @@ IPost* World::getPostOfPoint(const Point* point) const{
 }
 
 
-Point* World::getPointOfPost(const IPost* post) const{
+Point* World::getPointOfPost(const IPost* post) const
+{
     return pointOfPost.find(post->getIdx())->second;
 }
 
 
-const std::vector<Train*>& World::getTrainsOfPlayer(const Player* player) const{
+const std::vector<Train*>& World::getTrainsOfPlayer(const Player* player) const
+{
     return trainsOfPlayer.find(player)->second;
 }
 
 
-IPost* World::getHome(const Player* player) const{
+IPost* World::getHome(const Player* player) const
+{
     return getPostByIdx(homes.find(player)->second);
 }
 
 
-const std::vector<Train*>& World::getTrainsOfLine(const Line* line) const{
+const std::vector<Train*>& World::getTrainsOfLine(const Line* line) const
+{
     return trainsOfLine.find(line)->second;
 }
 
 
-const std::vector<std::vector<IEvent*> > & World::getEventsHistory() const{
+const std::vector<std::vector<IEvent*> > & World::getEventsHistory() const
+{
     return eventsHistory;
 }
 
 
-const std::vector<IEvent*>& World::getEvents(int tick) const{
+const std::vector<IEvent*>& World::getEvents(int tick) const
+{
     return eventsHistory[tick];
 }
 
 
-const std::vector<IEvent*> World::getEventsAfter(int startTick) const{
+const std::vector<IEvent*> World::getEventsAfter(int startTick) const
+{
     std::vector<IEvent*> res;
     for (size_t i=startTick; i<eventsHistory.size(); i++)
         for (IEvent* event: eventsHistory[i])
@@ -285,17 +312,20 @@ const std::vector<IEvent*> World::getEventsAfter(int startTick) const{
 }
 
 
-int World::getWidth() const{
+int World::getWidth() const
+{
     return width;
 }
 
 
-int World::getHeight() const{
+int World::getHeight() const
+{
     return height;
 }
 
 
-bool World::isGameOver(){
+bool World::isGameOver()
+{
     return gameOver;
 }
 

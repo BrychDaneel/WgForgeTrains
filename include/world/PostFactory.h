@@ -6,20 +6,22 @@
 #include <models/PostModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class IPost;
 
 
-class PostFactory{
-
+class PostFactory
+{
 public:
 
     static IPost* createPost(const models::PostModel& model, World* world);
-
 };
 
 
