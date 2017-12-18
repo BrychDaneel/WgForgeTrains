@@ -4,7 +4,9 @@
 #include <world/Town.h>
 #include <world/Market.h>
 #include <world/Storage.h>
+#include <ai/TrainGoalPredictor.h>
 #include <algorithm>
+#include <cmath>
 
 
 
@@ -25,6 +27,7 @@ void TrainAI::step()
 {
 
     makeOwnBusyLines(*train->getWorld());
+    makeGoalPredict(*train->getWorld());
     calculatePath(*train->getWorld());
     makePath(*train->getWorld());
 
@@ -79,23 +82,59 @@ int TrainAI::calculateProducts(int tick, world::IPost *post)
     if (tick == 0)
         tick = 1;
 
+
+    int visitTime = -1;
+    for (auto goal : goalPredict)
+    {
+        if (goal.first != post)
+            continue;
+        if (goal.second < tick && goal.second > visitTime)
+        {
+            visitTime = goal.second;
+        }
+    }
     if (type ==  models::GoodType::PRODUCT)
     {
         const world::Market *market = (world::Market*)post;
-        return std::min(market->predictProduct(tick), train->getGoodsCapacity() - train->getGoods() );
+        return std::min(market->predictProduct(tick, visitTime), train->getGoodsCapacity() - train->getGoods() );
     }
     if (type == models::GoodType::ARMOR)
     {
         const world::Storage *storage = (world::Storage*)post;
-        return std::min(storage->predictArmor(tick), train->getGoodsCapacity() - train->getGoods() );
+        return std::min(storage->predictArmor(tick, visitTime), train->getGoodsCapacity() - train->getGoods() );
     }
 
 
 }
 
-bool TrainAI::needHome()
+bool TrainAI::needHome(int len)
 {
+    const double dec_product =  0.0001;
+    const double dec_armor = 0.0001;
+    const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
 
+    if (type == models::GoodType::PRODUCT)
+    {
+        int predict = homeTown->getProduct() - (int)std::ceil(dec_product*len);
+        int maxLen = predict / homeTown->getPopulation();
+        int curProduct = train->getGoods();
+        if (maxLen < len)
+            return true;
+        if (curProduct + predict > homeTown->getProductCapacity())
+            return false;
+        return false;
+    }
+    else
+    {
+        int predict = homeTown->getArrmor() - (int)std::ceil(dec_armor*len);
+        int maxLen = 150;
+        int curProduct = train->getGoods();
+        if (maxLen < len)
+            return true;
+        if (curProduct + predict > homeTown->getArrmorCapacity())
+            return true;
+        return false;
+    }
 }
 
 void TrainAI::calculatePath(const world::World &world)
@@ -190,11 +229,7 @@ void TrainAI::makePath(const world::World &world)
 {
 
     const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
-    int maxLen;
-    if (type == models::GoodType::PRODUCT)
-        maxLen = (homeTown->getProduct() - 10) / homeTown->getPopulation();
-    else
-        maxLen = 150;
+
 
     int currHomeLen = minLen[homeTown->getPoint()];
     double maxProductByTick = 0;
@@ -209,7 +244,7 @@ void TrainAI::makePath(const world::World &world)
 
             int tempLen = minLen[post->getPoint()]*2 + minLen[homeTown->getPoint()]; // TODO DIJKSTRA for MARKET/TOWN
 
-            if (tempLen > maxLen + killer)
+            if (needHome(tempLen - killer))
                 continue;
 
 
@@ -248,6 +283,18 @@ void TrainAI::makePath(const world::World &world)
     currentPath = getMinPath(nextPoint);
 
 
+}
+
+void TrainAI::makeGoalPredict(const world::World &world)
+{
+    TrainGoalPredictor predictor;
+    for (auto trainI : world.getTrainList() )
+    {
+        if (trainI->getPlayer() != train->getPlayer())
+        {
+            goalPredict.push_back(predictor.predictGoal(trainI));
+        }
+    }
 }
 
 std::vector<const world::Point *> TrainAI::getMinPath(const world::Point *point)

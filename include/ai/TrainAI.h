@@ -31,10 +31,11 @@ namespace ai
 
             void makeMove();
             int calculateProducts(int tick, world::IPost *post);
-            bool needHome();
+            bool needHome(int len);
             void calculatePath(const world::World &world);
             void makeOwnBusyLines(const world::World &world);
             void makePath(const world::World &world);
+            void makeGoalPredict(const world::World &world);
             std::vector<const world::Point *> getMinPath(const world::Point *point);
 
             models::PostType getPostTypeByGood(models::GoodType type);
@@ -52,6 +53,7 @@ namespace ai
             std::map<const world::Point*, const world::Point*> ancestors;
             std::vector<const world::Point *> currentPath;
             std::vector<std::pair<int, const world::Line *>> currentBusy;
+            std::vector<std::pair<const world::IPost *, int>> goalPredict;
 
             int id;
 
