@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_LINE_MODEL_H_
-#define _TIGER_TRAINS_MODELS_LINE_MODEL_H_
 
 
 namespace tiger{
@@ -38,6 +36,3 @@ public:
 }
 }
 }
-
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_Q_RUNNER_THREAD_H_
-#define _TIGER_TRAINS_Q_RUNNER_THREAD_H_
 
 
 #include <QThread>
@@ -30,6 +28,3 @@ public:
 
 }
 }
-
-
-#endif

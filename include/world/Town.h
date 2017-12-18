@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_WORLD_TOWN_H_
-#define _TIGER_TRAINS_WORLD_TOWN_H_
 
 
 #include <world/BasePost.h>
@@ -55,6 +53,3 @@ public:
 }
 }
 }
-
-
-#endif

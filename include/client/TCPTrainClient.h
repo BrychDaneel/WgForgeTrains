@@ -1,5 +1,4 @@
-#ifndef TCP_TRAIN_CLIENT_H_
-#define TCP_TRAIN_CLIENT_H_
+#pragma once
 
 
 #include <easylogging++/easylogging++.h>
@@ -63,7 +62,3 @@ namespace tiger
 
     }
 }
-
-
-
-#endif

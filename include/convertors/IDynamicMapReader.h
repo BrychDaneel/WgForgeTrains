@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_I_DYNAMIC_MAP_READER_H_
-#define _TIGER_TRAINS_MODELS_I_DYNAMIC_MAP_READER_H_
 
 
 #include <models/DynamicMap.h>
@@ -25,6 +23,3 @@ struct IDynamicMapReader{
 }
 }
 }
-
-
-#endif

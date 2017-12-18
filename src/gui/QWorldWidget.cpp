@@ -1,7 +1,6 @@
 #include <gui/QWorldWidget.h>
 
 
-#include <utils/GraphPlaner.h>
 #include <QMap>
 #include <vector>
 #include <QPainter>

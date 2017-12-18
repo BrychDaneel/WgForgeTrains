@@ -1,5 +1,5 @@
-#ifndef _COMMAND_SENDER_H_
-#define _COMMAND_SENDER_H_
+#pragma once
+
 
 #include <world/ICommandSender.h>
 #include <client/ITrainClient.h>
@@ -24,6 +24,3 @@ namespace tiger
 
     }
 }
-
-
-#endif

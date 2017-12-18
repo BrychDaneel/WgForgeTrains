@@ -1,5 +1,5 @@
-#ifndef _I_TRAIN_AI_H_
-#define _I_TRAIN_AI_H_
+#pragma once
+
 
 #include <CommandSender.h>
 #include <ai/IBotSegment.h>
@@ -61,6 +61,3 @@ namespace ai
 }
 }
 }
-
-
-#endif

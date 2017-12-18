@@ -1,5 +1,5 @@
-#ifndef TCPSESSION_H
-#define TCPSESSION_H
+#pragma once
+
 
 #include <string>
 #include "network/TCPClient.h"
@@ -35,6 +35,3 @@ namespace tiger
         }
     }
 }
-
-
-#endif // TCPSESSION_H

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_JSON_MOVE_WRITER_H_
-#define _TIGER_TRAINS_MODELS_JSON_MOVE_WRITER_H_
 
 
 #include <convertors/IMoveWriter.h>
@@ -33,6 +31,3 @@ private:
 }
 }
 }
-
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_JSON_PLAYER_READER_H_
-#define _TIGER_TRAINS_MODELS_JSON_PLAYER_READER_H_
 
 
 #include <convertors/IPlayerReader.h>
@@ -33,6 +31,3 @@ private:
 }
 }
 }
-
-
-#endif

@@ -15,7 +15,6 @@ INCLUDEPATH += include libs
 
 HEADERS += \
     include/ai/IBot.h \
-    include/ai/JustDoItBot.h \
     include/client/ITrainClient.h \
     include/client/TCPTrainClient.h \
     include/convertors/json/DynamicMapReader.h \
@@ -43,7 +42,6 @@ HEADERS += \
     include/network/TCPClient.h \
     include/network/TCPSession.h \
     include/network/TCPSocket.h \
-    include/utils/GraphPlaner.h \
     include/world/BasePost.h \
     include/world/ICommandSender.h \
     include/world/IPost.h \
@@ -60,16 +58,8 @@ HEADERS += \
     include/world/Town.h \
     include/world/Market.h \
     include/utils/pi.h \
-    include/ai/ArtMarket.h \
-    include/ai/ArtTown.h \
     include/ai/IBot.h \
-    include/ai/Post.h \
-    include/ai/ScoreCalc.h \
     libs/easylogging++/easylogging++.h \
-    include/ai/NPBot.h \
-    include/ai/IPathGenerator.h \
-    include/ai/GreedyBot.h \
-    include/ai/generators/Annealing.h \
     include/models/GoodType.h \
     include/models/EventModel.h \
     include/models/EventType.h \
@@ -90,14 +80,8 @@ HEADERS += \
     include/ai/TrainGoalPredictor.h \
     include/world/Storage.h \
     include/ai/CollisionAllower.h \
-    include/ai/GreedyBot.h \
     include/ai/IBot.h \
     include/ai/IBotSegment.h \
-    include/ai/IPathGenerator.h \
-    include/ai/JustDoItBot.h \
-    include/ai/NPBot.h \
-    include/ai/Post.h \
-    include/ai/ScoreCalc.h \
     include/ai/TrainAI.h \
     include/ai/TrainGoalPredictor.h \
     include/ai/UpgradeAI.h \
@@ -105,7 +89,6 @@ HEADERS += \
     include/world/IUpgradeble.h
 
 SOURCES += \
-    src/ai/JustDoItBot.cpp \
     src/client/TCPTrainClient.cpp \
     src/convertors/json/DynamicMapReader.cpp \
     src/convertors/json/ModelConvertor.cpp \
@@ -124,7 +107,6 @@ SOURCES += \
     src/network/TCPClient.cpp \
     src/network/TCPSession.cpp \
     src/network/TCPSocket.cpp \
-    src/utils/GraphPlaner.cpp \
     src/world/BasePost.cpp \
     src/world/Line.cpp \
     src/world/Player.cpp \
@@ -138,14 +120,7 @@ SOURCES += \
     src/Runner.cpp \
     src/world/Town.cpp \
     src/world/Market.cpp \
-    src/ai/ArtMarket.cpp \
-    src/ai/ArtTown.cpp \
-    src/ai/Post.cpp \
-    src/ai/ScoreCalc.cpp \
     libs/easylogging++/easylogging++.cc \
-    src/ai/NPBot.cpp \
-    src/ai/GreedyBot.cpp \
-    src/ai/generators/Annealing.cpp \
     src/models/EventModel.cpp \
     src/convertors/json/UpgradeWriter.cpp \
     src/models/UpgradeModel.cpp \

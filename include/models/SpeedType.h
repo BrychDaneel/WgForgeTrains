@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_SPEED_TYPE_H_
-#define _TIGER_TRAINS_MODELS_SPEED_TYPE_H_
 
 
 namespace tiger{
@@ -20,6 +18,3 @@ enum class SpeedType{
 }
 }
 }
-
-
-#endif

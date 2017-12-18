@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_GUI_WORLD_WIDGET_H_
-#define _TIGER_TRAINS_GUI_WORLD_WIDGET_H_
 
 
 #include <QWidget>
@@ -55,6 +53,3 @@ protected:
 }
 }
 }
-
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_I_MODEL_CONVERTOR_H_
-#define _TIGER_TRAINS_MODELS_I_MODEL_CONVERTOR_H_
 
 
 #include <models/DynamicMap.h>
@@ -38,6 +36,3 @@ struct IModelConvertor{
 }
 }
 }
-
-
-#endif

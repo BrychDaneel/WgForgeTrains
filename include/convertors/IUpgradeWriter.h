@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_I_UPGRADE_WRITER_H_
-#define _TIGER_TRAINS_MODELS_I_UPGRADE_WRITER_H_
 
 
 #include <models/UpgradeModel.h>
@@ -26,7 +24,3 @@ struct IUpgradeWriter{
 }
 }
 }
-
-
-#endif
-

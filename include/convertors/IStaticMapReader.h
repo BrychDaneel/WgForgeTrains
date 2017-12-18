@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_I_STATIC_MAP_READER_H_
-#define _TIGER_TRAINS_MODELS_I_STATIC_MAP_READER_H_
 
 
 #include <models/StaticMap.h>
@@ -25,6 +23,3 @@ struct IStaticMapReader{
 }
 }
 }
-
-
-#endif

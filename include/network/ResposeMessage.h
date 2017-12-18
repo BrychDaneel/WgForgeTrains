@@ -1,5 +1,6 @@
-#ifndef RESPONSEMESSAGE_H
-#define RESPONSEMESSAGE_H
+#pragma once
+
+
 namespace tiger
 {
     namespace trains
@@ -24,5 +25,3 @@ namespace tiger
         }
     }
 }
-
-#endif

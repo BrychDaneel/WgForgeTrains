@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_DYNAMIC_MAP_HPP_
-#define _TIGER_TRAINS_MODELS_DYNAMIC_MAP_HPP_
 
 
 #include <models/PostModel.h>
@@ -52,6 +50,3 @@ public:
 }
 }
 }
-
-
-#endif

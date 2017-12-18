@@ -1,5 +1,5 @@
-#ifndef I_TRAIN_CLIENT_H_
-#define I_TRAIN_CLIENT_H_
+#pragma once
+
 
 #include <models/DynamicMap.h>
 #include <models/StaticMap.h>
@@ -36,7 +36,3 @@ namespace tiger
         }
     }
 }
-
-
-
-#endif
