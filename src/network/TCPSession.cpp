@@ -31,11 +31,10 @@ ResposeMessage *TCPSession::login()
     memcpy(sendBuffer + 4, &len, 4);
     memcpy(sendBuffer + 8, buffer, len);
 
-    size_t retVal = send(sendBuffer, len + 8);
+    bool retVal = send(sendBuffer, len + 8);
 
-    if (retVal != len + 8)
+    if (!retVal)
         return nullptr;
-
 
     return recv();
 

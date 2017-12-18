@@ -27,7 +27,10 @@ int TCPTrainClient::login()
     std::unique_ptr<network::ResposeMessage> message(tcpSession.login());
 
 //  network::ResposeMessage *message = tcpSession.login();
-    if (message == nullptr || message->result != 0)
+    if (message == nullptr)
+        return (int)TCPTrainClient::ErrorType::UNKOWN_ERROR;
+
+    if (message->result != 0)
         return message->result;
 
     logger->info(" %v\n %v", "login", message->data);
@@ -82,7 +85,10 @@ int TCPTrainClient::getStaticMap(StaticMap *staticMap)
 
     std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
-    if (message == nullptr || message->result != 0)
+    if (message == nullptr)
+        return (int)TCPTrainClient::ErrorType::UNKOWN_ERROR;
+
+    if (message->result != 0)
         return message->result;
 
     logger->info(" %v\n %v", "Static Map", message->data);
@@ -114,7 +120,10 @@ int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
 
     std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
-    if (message == nullptr || message->result != 0)
+    if (message == nullptr)
+        return (int)TCPTrainClient::ErrorType::UNKOWN_ERROR;
+
+    if (message->result != 0)
         return message->result;
 
 
