@@ -19,15 +19,15 @@ class HijackersAssaultEvent : public BaseEvent
 {
 public:
 
-    HijackersAssaultEvent(){}
-    HijackersAssaultEvent(const models::EventModel& model, Town* source);
+    HijackersAssaultEvent() {}
+    HijackersAssaultEvent(const models::EventModel &model, Town *source);
 
-    Town* getSource() const;
+    Town *getSource() const;
     int getHijackersPower() const;
 
 private:
 
-    Town* source;
+    Town *source;
     int hijackersPower;
 };
 

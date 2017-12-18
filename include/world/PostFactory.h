@@ -21,7 +21,7 @@ class PostFactory
 {
 public:
 
-    static IPost* createPost(const models::PostModel& model, World* world);
+    static IPost *createPost(const models::PostModel &model, World *world);
 };
 
 

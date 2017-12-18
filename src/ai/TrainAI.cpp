@@ -102,8 +102,8 @@ int TrainAI::calculateProducts(int tick, world::IPost *post)
         const world::Market *market = (world::Market *)post;
         return std::min(market->predictProduct(tick, visitTime), train->getGoodsCapacity() - train->getGoods() );
     }
-
-    if (type == models::GoodType::ARMOR)
+    //if (type == models::GoodType::ARMOR)
+    else
     {
         const world::Storage *storage = (world::Storage *)post;
         return std::min(storage->predictArmor(tick, visitTime), train->getGoodsCapacity() - train->getGoods() );

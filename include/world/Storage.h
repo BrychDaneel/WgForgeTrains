@@ -4,12 +4,16 @@
 #include <world/BasePost.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-class Storage : public BasePost{
+class Storage : public BasePost
+{
 
 private:
 
@@ -21,8 +25,8 @@ public:
 
     Storage();
 
-    Storage(const models::PostModel& model, World* world);
-    void update(const models::PostModel& model);
+    Storage(const models::PostModel &model, World *world);
+    void update(const models::PostModel &model);
 
     int getArmor() const;
     int getReplenishment() const;

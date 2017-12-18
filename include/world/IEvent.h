@@ -18,11 +18,11 @@ class World;
 
 struct IEvent
 {
-    virtual ~IEvent(){}
+    virtual ~IEvent() {}
 
     virtual models::EventType getType() const = 0;
     virtual int getTick() const = 0;
-    virtual World* getWorld() const = 0;
+    virtual World *getWorld() const = 0;
 
 };
 

@@ -32,8 +32,8 @@ public:
 
     Town();
 
-    Town(const models::PostModel& model, World* world);
-    void update(const models::PostModel& model);
+    Town(const models::PostModel &model, World *world);
+    void update(const models::PostModel &model);
 
     int getArrmor() const;
     int getPopulation() const;

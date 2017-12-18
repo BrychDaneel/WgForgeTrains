@@ -33,6 +33,8 @@ ResposeMessage *TCPSession::login()
 
     size_t retVal = send(sendBuffer, len + 8);
 
+    if (retVal != len + 8)
+        return nullptr;
 
 
     return recv();

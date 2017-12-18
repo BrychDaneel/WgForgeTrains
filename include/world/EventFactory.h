@@ -18,8 +18,8 @@ class EventFactory
 {
 public:
 
-    static IEvent* createEvent(const models::EventModel& model, IPost* source);
-    static IEvent* createEvent(const models::EventModel& model, Train* source);
+    static IEvent *createEvent(const models::EventModel &model, IPost *source);
+    static IEvent *createEvent(const models::EventModel &model, Train *source);
 };
 
 

@@ -19,16 +19,16 @@ class TrainCollisionEven : public BaseEvent
 {
 public:
 
-    TrainCollisionEven(){}
-    TrainCollisionEven(const models::EventModel& model, Train* source);
+    TrainCollisionEven() {}
+    TrainCollisionEven(const models::EventModel &model, Train *source);
 
-    Train* getSource() const;
-    Train* getAnother() const;
+    Train *getSource() const;
+    Train *getAnother() const;
 
 private:
 
-    Train* source;
-    Train* another;
+    Train *source;
+    Train *another;
 };
 
 

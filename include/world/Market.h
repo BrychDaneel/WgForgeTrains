@@ -24,8 +24,8 @@ public:
 
     Market();
 
-    Market(const models::PostModel& model, World* world);
-    void update(const models::PostModel& model);
+    Market(const models::PostModel &model, World *world);
+    void update(const models::PostModel &model);
 
     int getProduct() const;
     int getReplenishment() const;

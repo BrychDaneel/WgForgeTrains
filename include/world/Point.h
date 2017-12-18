@@ -25,7 +25,7 @@ class Point
 {
 private:
 
-    World* owner;
+    World *owner;
     int idx;
     int x = 0;
     int y = 0;
@@ -33,19 +33,19 @@ private:
 public:
 
     Point();
-    Point(const models::PointModel& model, World* world);
+    Point(const models::PointModel &model, World *world);
 
-    World* getWorld() const;
+    World *getWorld() const;
 
     int getIdx() const;
     int getX() const;
     int getY() const;
 
-    IPost* getPost() const;
-    const std::vector<Line*>& getEdges() const;
-    const std::vector<Point*> getNeighboards() const;
+    IPost *getPost() const;
+    const std::vector<Line *> &getEdges() const;
+    const std::vector<Point *> getNeighboards() const;
 
-    const std::vector<Train*> getTrains() const;
+    const std::vector<Train *> getTrains() const;
 
     void setX(const int x);
     void setY(const int y);

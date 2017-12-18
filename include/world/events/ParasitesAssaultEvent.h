@@ -19,15 +19,15 @@ class ParasitesAssaultEvent : public BaseEvent
 {
 public:
 
-    ParasitesAssaultEvent(){}
-    ParasitesAssaultEvent(const models::EventModel& model, Town* source);
+    ParasitesAssaultEvent() {}
+    ParasitesAssaultEvent(const models::EventModel &model, Town *source);
 
-    Town* getSource() const;
+    Town *getSource() const;
     int getParasitesPower() const;
 
 private:
 
-    Town* source;
+    Town *source;
     int parasitesPower;
 };
 
