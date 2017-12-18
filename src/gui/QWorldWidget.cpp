@@ -167,6 +167,24 @@ void QWorldWidget::drawTick(QPainter* painter){
 }
 
 
+void QWorldWidget::drawScore(QPainter* painter){
+    QFont font = painter->font();
+    font.setPixelSize(width() / 40);
+    painter->setFont(font);
+    painter->setPen(QPen(Qt::yellow, 0));
+
+    QRectF textRect(width() / 7.0, 0, width(), height() / 10.0);
+
+    QString text;
+    for (world::Player* player : world->getPlayerList())
+        if (text != "")
+            text += "     ";
+        else
+            text += QString("%1: %2").arg(player->getName().c_str()).arg(player->getScore());
+    painter->drawText(textRect, Qt::AlignCenter, text);
+}
+
+
 void QWorldWidget::drawGameOver(QPainter* painter){
     QFont font = painter->font();
     font.setPixelSize(width() / 10);
@@ -192,6 +210,7 @@ void QWorldWidget::paintEvent(QPaintEvent* event){
     painter.drawRect(0, 0, width(), height());
 
     drawTick(&painter);
+    drawScore(&painter);
     if (world->isGameOver())
         drawGameOver(&painter);
 

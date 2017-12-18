@@ -39,6 +39,8 @@ public:
 
     const std::vector<Train*>& getTrains();
 
+    int getScore();
+
 };
 
 

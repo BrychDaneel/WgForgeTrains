@@ -63,6 +63,7 @@ void World::init(const std::vector<models::PlayerModel>& playerModelList, const 
     for (models::PlayerModel playerModel : playerModelList){
         Player* player = new Player(playerModel, this);
         playerMap[playerModel.getIdx()] = player;
+        playerOfName[playerModel.getName()] = player;
         playerList.push_back(player);
         homes[player] = playerModel.getHome();
     }
@@ -125,6 +126,10 @@ void World::update(const models::DynamicMap& dynamicMap){
         }
 
     }
+
+    scoreMap.clear();
+    for (auto it : dynamicMap.getScoreMap())
+        scoreMap[getPlayerByName(it.first)] = it.second;
 }
 
 
@@ -187,6 +192,11 @@ const std::vector<Point*>& World::getPointList() const{
 
 const std::vector<Line*>& World::getLineList() const{
     return lineList;
+}
+
+Player*World::getPlayerByName(const std::string name) const
+{
+    return playerOfName.find(name)->second;
 }
 
 
@@ -287,4 +297,9 @@ int World::getHeight() const{
 
 bool World::isGameOver(){
     return gameOver;
+}
+
+int World::getScore(Player* player)
+{
+    return scoreMap[player];
 }

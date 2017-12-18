@@ -68,6 +68,8 @@ public:
 
     bool upgrade() const;
 
+    std::vector<Train*> getPosibleCollisions(const models::MoveModel* move=nullptr);
+
 };
 
 

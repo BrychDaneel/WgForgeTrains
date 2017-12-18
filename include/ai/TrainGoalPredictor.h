@@ -2,7 +2,6 @@
 
 
 #include <world/World.h>
-#
 
 
 namespace tiger{
@@ -14,7 +13,7 @@ class TrainGoalPredictor{
 
     TrainGoalPredictor();
 
-    world::IPost* predictGoal(const world::Train* train);
+    std::pair<world::IPost*, int> predictGoal(const world::Train* train);
 
 };
 

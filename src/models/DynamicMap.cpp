@@ -24,6 +24,11 @@ void DynamicMap::addTrain(const TrainModel& train){
     trainList.push_back(train);
 }
 
+void DynamicMap::addScore(const std::string& name, const int score)
+{
+    scoreMap[name] = score;
+}
+
 
 int DynamicMap::getIdx() const{
     return idx;
@@ -40,6 +45,12 @@ const vector<TrainModel>& DynamicMap::getTrainList() const{
 }
 
 
+const std::map<std::string, int>& DynamicMap::getScoreMap() const
+{
+    return scoreMap;
+}
+
+
 void DynamicMap::setIdx(int idx){
     this->idx = idx;
 }
@@ -52,6 +63,11 @@ void DynamicMap::clearPostList(){
 
 void DynamicMap::clearTrainList(){
     trainList.clear();
+}
+
+void DynamicMap::clearScoreMap()
+{
+    scoreMap.clear();
 }
 
 

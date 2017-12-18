@@ -46,6 +46,7 @@ protected:
     void drawPosts(QPainter* painter);
     void drawTrains(QPainter* painter);
     void drawTick(QPainter* painter);
+    void drawScore(QPainter* painter);
     void drawGameOver(QPainter* painter);
 
 };
