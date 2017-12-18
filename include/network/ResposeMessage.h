@@ -13,6 +13,7 @@ namespace tiger
                 uint32_t result;
                 size_t dataLength;
                 char *data = nullptr;
+
                 ~ResposeMessage()
                 {
                     delete data;

@@ -13,26 +13,29 @@
 
 namespace tiger
 {
-    namespace trains
+namespace trains
+{
+namespace client
+{
+
+    class ITrainClient
     {
-        namespace client
-        {
+        public:
+            virtual ~ITrainClient(){}
 
-            class ITrainClient
-            {
-                public:
+            virtual models::PlayerModel *getMyPlayer() const = 0;
+            virtual int getStaticMap(models::StaticMap *staticMap) = 0;
+            virtual int getDynamicMap(models::DynamicMap *dynamicMap) = 0;
+            virtual void turn() = 0;
 
-                    virtual models::PlayerModel *getMyPlayer() const = 0;
-                    virtual int getStaticMap(models::StaticMap *staticMap) = 0;
-                    virtual int getDynamicMap(models::DynamicMap *dynamicMap) = 0;
-                    virtual void turn() = 0;
+            virtual int getCoordinate(models::CoordsMap* coordsMap) = 0;
+            virtual int move(const models::MoveModel &move) = 0;
+            virtual int upgrade(const models::UpgradeModel &upgradeModel) = 0;
 
-                    virtual int getCoordinate(models::CoordsMap* coordsMap) = 0;
-                    virtual int move(const models::MoveModel &move) = 0;
-                    virtual int upgrade(const models::UpgradeModel &upgradeModel) = 0;
 
-            };
 
-        }
-    }
+    };
+
+}
+}
 }

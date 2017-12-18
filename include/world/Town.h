@@ -45,7 +45,7 @@ public:
 
     bool upgrade() const;
 
-    int predictProduct(int delta);
+    int predictProduct(int delta) const;
 
 };
 

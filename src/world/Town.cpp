@@ -77,7 +77,7 @@ bool Town::upgrade() const{
 }
 
 
-int Town::predictProduct(int delta){
+int Town::predictProduct(int delta) const{
     int predict = product - delta * population;
     if (predict < 0)
         return 0;

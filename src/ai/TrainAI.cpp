@@ -109,8 +109,7 @@ int TrainAI::calculateProducts(int tick, world::IPost *post)
 
 bool TrainAI::needHome(int len)
 {
-    const double dec_product =  0.0001;
-    const double dec_armor = 0.0001;
+
     const world::Town *homeTown = (world::Town*)train->getPlayer()->getHome();
 
     if (type == models::GoodType::PRODUCT)
@@ -120,8 +119,9 @@ bool TrainAI::needHome(int len)
         int curProduct = train->getGoods();
         if (maxLen < len)
             return true;
+        predict = homeTown->predictProduct(minLen[homeTown->getPoint()]) - (int)std::ceil(dec_product*len);
         if (curProduct + predict > homeTown->getProductCapacity())
-            return false;
+            return true;
         return false;
     }
     else

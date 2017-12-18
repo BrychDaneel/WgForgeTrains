@@ -26,7 +26,7 @@ private:
 
 public:
 
-    QWorldWidget(world::World* world);
+    explicit QWorldWidget(world::World* world);
 
     void setRectWidth(float width);
     float getRectWidth() const;

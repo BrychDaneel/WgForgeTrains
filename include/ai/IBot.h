@@ -5,21 +5,21 @@
 
 namespace tiger
 {
-    namespace trains
+namespace trains
+{
+namespace ai
+{
+
+    class IBot
     {
-        namespace ai
-        {
-
-            class IBot
-            {
-                public:
-                    virtual ~IBot(){}
-                    virtual void init(world::World *world) = 0;
-                    virtual void step() = 0;
+        public:
+            virtual ~IBot(){}
+            virtual void init(world::World *world) = 0;
+            virtual void step() = 0;
 
 
-            };
+    };
 
-        }
-    }
+}
+}
 }

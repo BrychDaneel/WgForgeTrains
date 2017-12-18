@@ -27,7 +27,7 @@ class UpgradeAI: public IBotSegment
     std::queue<world::IUpgradeble*> upgradeQueue;
 
 public:
-    UpgradeAI(const world::World* world);
+    explicit UpgradeAI(const world::World* world);
     void step();
 
 };

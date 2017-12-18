@@ -56,6 +56,8 @@ namespace ai
             std::vector<std::pair<const world::IPost *, int>> goalPredict;
 
             int id;
+            const double dec_product =  0.0001;
+            const double dec_armor = 0.0001;
 
 
 
