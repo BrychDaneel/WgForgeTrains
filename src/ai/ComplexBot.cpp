@@ -15,10 +15,15 @@ ComplexBot::ComplexBot(){
 void ComplexBot::init(world::World *world){
     this->world = world;
 
-    listBotSegment.push_back(new TrainAI(&busyLines, models::GoodType::PRODUCT,
-                             world->getPlayerList()[0]->getTrains()[1]));
-    listBotSegment.push_back(new TrainAI(&busyLines, models::GoodType::ARMOR,
-                             world->getPlayerList()[0]->getTrains()[0]));
+
+    trainA = new TrainAI(&busyLines, models::GoodType::PRODUCT,
+                         world->getPlayerList()[0]->getTrains()[1]);
+    listBotSegment.push_back(trainA);
+
+    trainB = new TrainAI(&busyLines, models::GoodType::ARMOR,
+                         world->getPlayerList()[0]->getTrains()[0]);
+    listBotSegment.push_back(trainB);
+
 
     listBotSegment.push_back(new UpgradeAI(world));
 }
@@ -26,8 +31,11 @@ void ComplexBot::init(world::World *world){
 
 void ComplexBot::step(){
 
+    world::Town *home = (world::Town*)world->getPlayerList()[0]->getHome();
+
     for (IBotSegment* subBot : listBotSegment)
         subBot->step();
+
 }
 
 

@@ -25,6 +25,8 @@ namespace ai
                     models::GoodType type, world::Train *train);
             void step();
 
+            void changeType(models::GoodType type);
+
         private:
 
             void makeMove();

@@ -43,6 +43,11 @@ void TrainAI::step()
 
 }
 
+void TrainAI::changeType(models::GoodType type)
+{
+    this->type = type;
+}
+
 void TrainAI::makeMove()
 {
 

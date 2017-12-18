@@ -3,6 +3,7 @@
 
 
 #include <ai/IBotSegment.h>
+#include <ai/TrainAI.h>
 #include <map>
 #include <vector>
 #include <set>
@@ -34,8 +35,11 @@ namespace ai
         private:
 
             world::World *world;
+
             std::vector<IBotSegment* > listBotSegment;
             std::set<std::pair<int ,const world::Line *>> busyLines;
+            TrainAI *trainA;
+            TrainAI *trainB;
 
 
 
