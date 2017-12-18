@@ -5,9 +5,8 @@ namespace tiger{
 namespace trains{
 namespace world{
 
-class IUpgradeble{
 
-public:
+struct IUpgradeble{
 
     virtual ~IUpgradeble(){}
     virtual int getLevel() const = 0;

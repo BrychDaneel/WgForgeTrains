@@ -10,14 +10,11 @@ namespace tiger
         namespace ai
         {
 
-            class IBot
+            struct IBot
             {
-                public:
-                    virtual ~IBot(){}
-                    virtual void init(world::World *world) = 0;
-                    virtual void step() = 0;
-
-
+                virtual ~IBot(){}
+                virtual void init(world::World *world) = 0;
+                virtual void step() = 0;
             };
 
         }

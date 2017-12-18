@@ -18,9 +18,7 @@ class IEvent;
 class World;
 
 
-class IPost{
-
-public:
+struct IPost{
 
     virtual ~IPost(){}
 
