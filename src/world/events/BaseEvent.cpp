@@ -11,7 +11,7 @@ namespace events
 {
 
 
-BaseEvent::BaseEvent(const models::EventModel& model, World* world)
+BaseEvent::BaseEvent(const models::EventModel &model, World *world)
 {
     this->world = world;
     tick = model.getTick();
@@ -32,7 +32,7 @@ int BaseEvent::getTick() const
 }
 
 
-World* BaseEvent::getWorld() const
+World *BaseEvent::getWorld() const
 {
     return world;
 }

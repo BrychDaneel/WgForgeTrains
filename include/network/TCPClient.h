@@ -24,7 +24,7 @@ public:
     TCPClient();
     virtual ~TCPClient();
     void close();
-    bool connect(const char* addr, int port);
+    bool connect(const char *addr, int port);
     int send(const uint8_t *buffer, size_t bufferSize);
     int recv(uint8_t *buffer, size_t maxBytes);
 

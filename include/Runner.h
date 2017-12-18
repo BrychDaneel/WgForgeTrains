@@ -28,7 +28,7 @@ public:
 
     void setBot(ai::IBot *bot);
 
-    world::World* getWorld();
+    world::World *getWorld();
 
     void shutDown();
 

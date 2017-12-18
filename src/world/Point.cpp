@@ -13,14 +13,14 @@ Point::Point()
 }
 
 
-Point::Point(const models::PointModel& model, World* world)
+Point::Point(const models::PointModel &model, World *world)
 {
     owner = world;
     idx = model.getIdx();
 }
 
 
-World* Point::getWorld() const
+World *Point::getWorld() const
 {
     return owner;
 }
@@ -44,35 +44,39 @@ int Point::getY() const
 }
 
 
-IPost* Point::getPost() const
+IPost *Point::getPost() const
 {
     return owner->getPostOfPoint(this);
 }
 
 
-const std::vector<Line*>& Point::getEdges() const
+const std::vector<Line *> &Point::getEdges() const
 {
     return owner->getEdges(this);
 }
 
 
-const std::vector<Point*> Point::getNeighboards() const
+const std::vector<Point *> Point::getNeighboards() const
 {
-    std::vector<Point*> result;
-    for (Line* line : owner->getEdges(this))
+    std::vector<Point *> result;
+
+    for (Line *line : owner->getEdges(this))
         if (line->getStartPont() != this)
             result.push_back(line->getStartPont());
         else
             result.push_back(line->getEndPont());
+
     return result;
 }
 
-const std::vector<Train*> Point::getTrains() const
+const std::vector<Train *> Point::getTrains() const
 {
-    std::vector<Train*> res;
-    for (Train* train : owner->getTrainList())
+    std::vector<Train *> res;
+
+    for (Train *train : owner->getTrainList())
         if (train->getPoint() == this)
             res.push_back(train);
+
     return res;
 }
 

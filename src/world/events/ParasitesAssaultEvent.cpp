@@ -11,7 +11,7 @@ namespace events
 {
 
 
-ParasitesAssaultEvent::ParasitesAssaultEvent(const models::EventModel& model, Town* source)
+ParasitesAssaultEvent::ParasitesAssaultEvent(const models::EventModel &model, Town *source)
     : BaseEvent(model, source->getWorld())
 {
     source = source;
@@ -19,7 +19,7 @@ ParasitesAssaultEvent::ParasitesAssaultEvent(const models::EventModel& model, To
 }
 
 
-Town* ParasitesAssaultEvent::getSource() const
+Town *ParasitesAssaultEvent::getSource() const
 {
     return source;
 }

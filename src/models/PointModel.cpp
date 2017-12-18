@@ -9,7 +9,8 @@ namespace models
 {
 
 
-PointModel::PointModel(){
+PointModel::PointModel()
+{
 }
 
 

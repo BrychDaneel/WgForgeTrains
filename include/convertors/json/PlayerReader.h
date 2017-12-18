@@ -18,10 +18,10 @@ class PlayerReader : public IPlayerReader
 {
 public:
 
-    int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel);
+    int readPlayer(const char *buffer, const int bufferSize, models::PlayerModel *playerModel);
 
     int getLastErrorCode();
-    const std::string& getLastErrorMessage();
+    const std::string &getLastErrorMessage();
 
 private:
 

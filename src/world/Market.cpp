@@ -17,7 +17,7 @@ Market::Market() : BasePost()
 }
 
 
-Market::Market(const models::PostModel& model, World* world)
+Market::Market(const models::PostModel &model, World *world)
     : BasePost(model, world)
 {
     product = model.getProduct();
@@ -26,7 +26,7 @@ Market::Market(const models::PostModel& model, World* world)
 }
 
 
-void Market::update(const models::PostModel& model)
+void Market::update(const models::PostModel &model)
 {
     BasePost::update(model);
     product = model.getProduct();
@@ -56,7 +56,9 @@ int Market::getProductCapacity() const
 int Market::predictProduct(int delta, int visitTime) const
 {
     int pr = product;
-    if (visitTime != -1 && delta < visitTime){
+
+    if (visitTime != -1 && delta < visitTime)
+    {
         pr = 0;
         delta -= visitTime;
     }

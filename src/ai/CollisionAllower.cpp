@@ -21,13 +21,16 @@ bool CollisionAllower::isCollisionAllow(const world::Train *train, const world::
 
     float firstScore = 0;
 
-    switch (train->getGoodsType()) {
+    switch (train->getGoodsType())
+    {
     case models::GoodType::ARMOR:
         firstScore += ARMOR_WEIGHT * train->getGoods();
         break;
+
     case models::GoodType::PRODUCT:
         firstScore += PRODUCT_WEIGHT * train->getGoods();
         break;
+
     default:
         break;
     }
@@ -35,13 +38,16 @@ bool CollisionAllower::isCollisionAllow(const world::Train *train, const world::
 
     float secondScore = 0;
 
-    switch (otherTrain->getGoodsType()) {
+    switch (otherTrain->getGoodsType())
+    {
     case models::GoodType::ARMOR:
         secondScore += ARMOR_WEIGHT * otherTrain->getGoods();
         break;
+
     case models::GoodType::PRODUCT:
         secondScore += PRODUCT_WEIGHT * otherTrain->getGoods();
         break;
+
     default:
         break;
     }

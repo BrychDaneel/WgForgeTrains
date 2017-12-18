@@ -16,7 +16,7 @@ Train::Train()
 }
 
 
-Train::Train(const models::TrainModel& model, World* world)
+Train::Train(const models::TrainModel &model, World *world)
 {
     owner = world;
 
@@ -42,7 +42,7 @@ void Train::update(models::TrainModel model)
 }
 
 
-World* Train::getWorld() const
+World *Train::getWorld() const
 {
     return owner;
 }
@@ -54,13 +54,13 @@ int Train::getIdx() const
 }
 
 
-Player* Train::getPlayer() const
+Player *Train::getPlayer() const
 {
     return player;
 }
 
 
-Line* Train::getLine() const
+Line *Train::getLine() const
 {
     return line;
 }
@@ -87,11 +87,13 @@ int Train::getGoods() const
 Point *Train::getPoint() const
 {
 
-    if (line == nullptr){
+    if (line == nullptr)
+    {
         return player->getHome()->getPoint();
     }
 
-    if (position == 0){
+    if (position == 0)
+    {
 
         return line->getStartPont();
     }
@@ -111,24 +113,26 @@ models::SpeedType Train::getSpeed() const
 }
 
 
-void Train::move(Line* line, models::SpeedType speed){
+void Train::move(Line *line, models::SpeedType speed)
+{
     models::MoveModel moveModel(line->getIdx(), idx, speed);
     owner->getCommandSender()->move(moveModel);
 }
 
 
-void Train::addEvent(IEvent* event)
+void Train::addEvent(IEvent *event)
 {
     eventsHistory.push_back(event);
 }
 
 
-void Train::clearEvents(){
+void Train::clearEvents()
+{
     eventsHistory.clear();
 }
 
 
-const std::vector<IEvent*>& Train::getEvents() const
+const std::vector<IEvent *> &Train::getEvents() const
 {
     return eventsHistory;
 }
@@ -154,60 +158,70 @@ int Train::getNextLevelPrice() const
 
 bool Train::upgrade() const
 {
-    return (owner->getCommandSender()->upgrade(models::UpgradeModel({idx},{})));
+    return (owner->getCommandSender()->upgrade(models::UpgradeModel({idx}, {})));
 }
 
-std::vector<Train*> Train::getPosibleCollisions(const models::MoveModel* move)
+std::vector<Train *> Train::getPosibleCollisions(const models::MoveModel *move)
 {
     int pos = position;
-    const Line* lin = line;
+    const Line *lin = line;
 
-    if (move!=nullptr){
-        if (move->getLineIdx() != lin->getIdx()){
+    if (move!=nullptr)
+    {
+        if (move->getLineIdx() != lin->getIdx())
+        {
 
-            if (getPoint() == nullptr){
+            if (getPoint() == nullptr)
+            {
                 LOG(ERROR) << "Bad move command for predictions.";
-                return std::vector<Train*>();
+                return std::vector<Train *>();
             }
 
-            std::vector<Line*> edges = getPoint()->getEdges();
-            if (std::find(edges.begin(), edges.end(), owner->getLineByIdx(move->getLineIdx())) == edges.end()){
+            std::vector<Line *> edges = getPoint()->getEdges();
+
+            if (std::find(edges.begin(), edges.end(), owner->getLineByIdx(move->getLineIdx())) == edges.end())
+            {
                 LOG(ERROR) << "Bad move command for predictions.";
-                return std::vector<Train*>();
+                return std::vector<Train *>();
             }
 
             lin = owner->getLineByIdx(move->getLineIdx());
             pos = lin->getStartPont() == getPoint() ? 0 : lin->getLenght();
         }
 
-        if (move->getSpeedType() == models::SpeedType::FORWARD){
-            if (pos == lin->getLenght()){
+        if (move->getSpeedType() == models::SpeedType::FORWARD)
+        {
+            if (pos == lin->getLenght())
+            {
                 LOG(ERROR) << "Bad move command for predictions.";
-                return std::vector<Train*>();
+                return std::vector<Train *>();
             }
 
             pos++;
         }
 
-        if (move->getSpeedType() == models::SpeedType::REVERSE){
-            if (pos == 0){
+        if (move->getSpeedType() == models::SpeedType::REVERSE)
+        {
+            if (pos == 0)
+            {
                 LOG(ERROR) << "Bad move command for predictions.";
-                return std::vector<Train*>();
+                return std::vector<Train *>();
             }
 
             pos--;
         }
     }
 
-    std::vector<Train*> res;
+    std::vector<Train *> res;
 
-    for (Train* train : line->getTrains())
-        if (train != this){
+    for (Train *train : line->getTrains())
+        if (train != this)
+        {
             if (abs(pos - train->getPosition()) < 2)
                 res.push_back(train);
         }
 
-    Point* point = nullptr;
+    Point *point = nullptr;
 
     if (pos == 0)
         point = lin->getStartPont();
@@ -216,20 +230,22 @@ std::vector<Train*> Train::getPosibleCollisions(const models::MoveModel* move)
         point = lin->getStartPont();
 
     if (point)
-        for (Line* edg: point->getEdges())
-            for (Train* train : edg->getTrains()){
+        for (Line *edg: point->getEdges())
+            for (Train *train : edg->getTrains())
+            {
                 if (edg->getStartPont() == point && train->getPosition() < 2)
                     res.push_back(train);
+
                 if (edg->getEndPont() == point && train->getPosition() > edg->getLenght() - 2)
                     res.push_back(train);
             }
 
     if (pos < 2)
-        for (Train* train : lin->getStartPont()->getTrains())
+        for (Train *train : lin->getStartPont()->getTrains())
             res.push_back(train);
 
     if (pos > lin->getLenght() - 2)
-        for (Train* train : lin->getEndPont()->getTrains())
+        for (Train *train : lin->getEndPont()->getTrains())
             res.push_back(train);
 
     return res;

@@ -22,10 +22,10 @@ private:
 public:
 
     UpgradeModel();
-    UpgradeModel(const std::vector<int>& trainIdxList, const std::vector<int>& postIdxList);
+    UpgradeModel(const std::vector<int> &trainIdxList, const std::vector<int> &postIdxList);
 
-    const std::vector<int>& getTrainIdxList() const;
-    const std::vector<int>&  getPostIdxList() const;
+    const std::vector<int> &getTrainIdxList() const;
+    const std::vector<int>  &getPostIdxList() const;
 
     void clearTrainIdxList();
     void clearPostIdxList();

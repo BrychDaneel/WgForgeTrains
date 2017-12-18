@@ -33,14 +33,14 @@ public:
     DynamicMap();
     DynamicMap(const int idx);
 
-    void addPost(const PostModel& post);
-    void addTrain(const TrainModel& train);
-    void addScore(const std::string& name, const int score);
+    void addPost(const PostModel &post);
+    void addTrain(const TrainModel &train);
+    void addScore(const std::string &name, const int score);
 
     int getIdx() const;
-    const vector<PostModel>& getPostList() const;
-    const vector<TrainModel>& getTrainList() const;
-    const std::map<std::string, int>& getScoreMap() const;
+    const vector<PostModel> &getPostList() const;
+    const vector<TrainModel> &getTrainList() const;
+    const std::map<std::string, int> &getScoreMap() const;
 
     void setIdx(int idx);
     void clearPostList();

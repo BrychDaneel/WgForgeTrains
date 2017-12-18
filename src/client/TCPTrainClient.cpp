@@ -13,7 +13,7 @@ TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port)
     :tcpSession(name, addr, port), convertor(),playerModel(new PlayerModel())
 {
     logger = el::Loggers::getLogger("TCPClient");
-    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "logs/TCPClient.log");
+    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "TCPClient.log");
 }
 
 TCPTrainClient::~TCPTrainClient()
@@ -25,7 +25,8 @@ TCPTrainClient::~TCPTrainClient()
 int TCPTrainClient::login()
 {
     std::unique_ptr<network::ResposeMessage> message(tcpSession.login());
-//    network::ResposeMessage *message = tcpSession.login();
+
+//  network::ResposeMessage *message = tcpSession.login();
     if (message == nullptr || message->result != 0)
         return message->result;
 
@@ -38,7 +39,8 @@ int TCPTrainClient::login()
         logger->info("Logout");
 
         sleep(2);
-        message.reset( tcpSession.login());
+        message.reset(tcpSession.login());
+
         if (message == nullptr || message->result != 0)
             return message->result;
 
@@ -78,17 +80,16 @@ int TCPTrainClient::getStaticMap(StaticMap *staticMap)
         return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
-    network::ResposeMessage *message = tcpSession.recv();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
     if (message == nullptr || message->result != 0)
         return message->result;
 
-     logger->info(" %v\n %v", "Static Map", message->data);
+    logger->info(" %v\n %v", "Static Map", message->data);
 
 
     int retVal = convertor.readStaticMap(message->data, message->dataLength, staticMap);
 
-    delete message;
 
     if (retVal != 0)
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
@@ -111,7 +112,7 @@ int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
         return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
-    network::ResposeMessage *message = tcpSession.recv();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
     if (message == nullptr || message->result != 0)
         return message->result;
@@ -122,8 +123,9 @@ int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
 
     int retVal = convertor.readDynamicMap(message->data, message->dataLength, dynamicMap);
 
-    delete message;
-    if (retVal != 0){
+
+    if (retVal != 0)
+    {
         LOG(ERROR) << convertor.getLastErrorMessage();
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
     }
@@ -145,12 +147,12 @@ void TCPTrainClient::turn()
     memcpy(sendBuffer + OFFSET_2, js, len);
     tcpSession.send(sendBuffer, 8 + len);
 
-    network::ResposeMessage *message = tcpSession.recv();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
 
 
 
-    delete message;
+
 }
 
 int TCPTrainClient::move(const models::MoveModel &move)
@@ -168,16 +170,16 @@ int TCPTrainClient::move(const models::MoveModel &move)
 
     tcpSession.send(sendBuffer, len + OFFSET_2);
 
-    network::ResposeMessage *message = tcpSession.recv();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
     int retVal = message->result;
 
 
-    delete message;
+
     return retVal;
 }
 
-int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
+int TCPTrainClient::getCoordinate(models::CoordsMap *coordsMap)
 {
     char buffer[BUFF_SIZE] = "{\n \"layer\": 10\n}";
     size_t len = strlen(buffer);
@@ -193,7 +195,7 @@ int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
         return (int)TCPTrainClient::ErrorType::NOT_SEND;
 
 
-    network::ResposeMessage *message = tcpSession.recv();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
     if (message == nullptr || message->result != 0)
         return message->result;
@@ -203,8 +205,9 @@ int TCPTrainClient::getCoordinate(models::CoordsMap* coordsMap)
 
     int retVal = convertor.readCoordsMap(message->data, message->dataLength, coordsMap);
 
-    delete message;
-    if (retVal != 0){
+
+    if (retVal != 0)
+    {
         LOG(ERROR) << convertor.getLastErrorMessage();
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
     }
@@ -228,12 +231,12 @@ int TCPTrainClient::upgrade(const UpgradeModel &upgradeModel)
 
     tcpSession.send(sendBuffer, len + OFFSET_2);
 
-    network::ResposeMessage *message = tcpSession.recv();
+    std::unique_ptr<network::ResposeMessage> message(tcpSession.recv());
 
     int retVal = message->result;
 
 
-    delete message;
+
     return retVal;
 }
 

@@ -21,23 +21,29 @@ namespace json
  * 2 - bad json
  * 3 - value error
  */
-int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap)
+int StaticMapReader::readStaticMap(const char *buffer, const int bufferSize, models::StaticMap *staticMap)
 {
     string str;
-    try{
+
+    try
+    {
         str.assign(buffer, bufferSize);
     }
-    catch (...){
+    catch (...)
+    {
         lastErrorCode = 1;
         lastErrorMessage = "Can't conver buffer to string";
         return lastErrorCode;
     }
 
     nlohmann::json j;
-    try{
+
+    try
+    {
         j = nlohmann::json::parse(str);
     }
-    catch (const nlohmann::json::parse_error& e){
+    catch (const nlohmann::json::parse_error &e)
+    {
         lastErrorCode = 2;
         lastErrorMessage = e.what();
         return lastErrorCode;
@@ -47,21 +53,25 @@ int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, mod
     staticMap->clearLineList();
     staticMap->clearPointList();
 
-    try{
+    try
+    {
         staticMap->setIdx(j["idx"]);
         staticMap->setName(j["name"]);
 
-        for (auto jpoint : j["point"]){
+        for (auto jpoint : j["point"])
+        {
             models::PointModel point;
 
             point.setIdx(jpoint["idx"]);
+
             if (jpoint["post_id"].is_number_integer())
                 point.setPostId(jpoint["post_id"]);
 
             staticMap->addPoint(point);
         }
 
-        for (auto jline: j["line"]){
+        for (auto jline: j["line"])
+        {
             models::LineModel line;
 
             line.setIdx(jline["idx"]);
@@ -73,12 +83,14 @@ int StaticMapReader::readStaticMap(const char* buffer, const int bufferSize, mod
         }
 
     }
-    catch(const nlohmann::json::type_error& e){
+    catch(const nlohmann::json::type_error &e)
+    {
         lastErrorCode = 3;
         lastErrorMessage = e.what();
         return lastErrorCode;
     }
-    catch(...){
+    catch(...)
+    {
         lastErrorCode = -1;
         lastErrorMessage = "Unknown parse data error.";
         return lastErrorCode;
@@ -94,7 +106,7 @@ int StaticMapReader::getLastErrorCode()
 }
 
 
-const std::string& StaticMapReader::getLastErrorMessage()
+const std::string &StaticMapReader::getLastErrorMessage()
 {
     return lastErrorMessage;
 }

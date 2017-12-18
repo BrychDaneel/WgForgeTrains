@@ -36,9 +36,9 @@ void ComplexBot::init(world::World *world)
 
 void ComplexBot::step()
 {
-    world::Town *home = (world::Town*)world->getPlayerList()[0]->getHome();
+    world::Town *home = (world::Town *)world->getPlayerList()[0]->getHome();
 
-    for (IBotSegment* subBot : listBotSegment)
+    for (IBotSegment *subBot : listBotSegment)
         subBot->step();
 
 }

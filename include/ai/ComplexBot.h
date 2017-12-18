@@ -37,7 +37,7 @@ private:
 
     world::World *world;
 
-    std::vector<IBotSegment* > listBotSegment;
+    std::vector<IBotSegment * > listBotSegment;
     std::set<std::pair<int ,const world::Line *>> busyLines;
     TrainAI *trainA;
     TrainAI *trainB;

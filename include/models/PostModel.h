@@ -48,7 +48,7 @@ public:
     int getIdx() const;
     PostType getType() const;
     int getArmor() const;
-    const string& getName() const;
+    const string &getName() const;
     int getPopulation() const;
     int getProduct() const;
     int getReplenishment() const;
@@ -73,9 +73,9 @@ public:
     void setPopulationCapacity(const int populationCapacity);
     void setLevel(const int level);
 
-    void addEvent(const EventModel& event);
+    void addEvent(const EventModel &event);
     void clearEventList();
-    const std::vector<EventModel>& getEventList() const;
+    const std::vector<EventModel> &getEventList() const;
 };
 
 

@@ -17,10 +17,10 @@ namespace json
 struct UpgradeWriter : public IUpgradeWriter
 {
 
-    int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
+    int writeUpgrade(const models::UpgradeModel *upgrade, char *buffer, int *bufferSize);
 
     int getLastErrorCode();
-    const std::string& getLastErrorMessage();
+    const std::string &getLastErrorMessage();
 
 private:
 

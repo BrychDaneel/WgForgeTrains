@@ -47,7 +47,7 @@ public:
 
     int getIdx() const;
     int getLineIdx() const;
-    const string& getPlayerIdx() const;
+    const string &getPlayerIdx() const;
     int getPosition() const;
     int getGoodsCapacity() const;
     GoodType getGoodsType() const;
@@ -67,9 +67,9 @@ public:
     void setLevel(const int level);
     void setNextLevelPrice(const int nextLevelPrice);
 
-    void addEvent(const EventModel& event);
+    void addEvent(const EventModel &event);
     void clearEventList();
-    const std::vector<EventModel>& getEventList() const;
+    const std::vector<EventModel> &getEventList() const;
 };
 
 

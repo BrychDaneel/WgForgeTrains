@@ -20,9 +20,9 @@ TrainModel::TrainModel(const int idx, const int lineIdx, const string playerIdx,
                        const int level, const int nextLevelPrice,
                        const SpeedType speed)
     : idx(idx), lineIdx(lineIdx), playerIdx(playerIdx), position(position),
-    speed(speed), goodsCapacity(goodsCapacity),
-    goods(goods), goodsType(goodsType),
-    level(level), nextLevelPrice(nextLevelPrice)
+      speed(speed), goodsCapacity(goodsCapacity),
+      goods(goods), goodsType(goodsType),
+      level(level), nextLevelPrice(nextLevelPrice)
 {
 }
 
@@ -39,7 +39,7 @@ int TrainModel::getLineIdx() const
 }
 
 
-const string& TrainModel::getPlayerIdx() const
+const string &TrainModel::getPlayerIdx() const
 {
     return playerIdx;
 }
@@ -146,7 +146,7 @@ void TrainModel::setGoodsType(const GoodType type)
 }
 
 
-void TrainModel::addEvent(const EventModel& event)
+void TrainModel::addEvent(const EventModel &event)
 {
     eventList.push_back(event);
 }
@@ -158,7 +158,7 @@ void TrainModel::clearEventList()
 }
 
 
-const std::vector<EventModel>& TrainModel::getEventList() const
+const std::vector<EventModel> &TrainModel::getEventList() const
 {
     return eventList;
 }

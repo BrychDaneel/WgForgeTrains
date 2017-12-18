@@ -21,13 +21,13 @@ namespace ai
 class UpgradeAI: public IBotSegment
 {
 
-    world::Town* town;
-    const world::World* world;
+    world::Town *town;
+    const world::World *world;
     const int RESERV_ARMOR = 0;
-    std::queue<world::IUpgradeble*> upgradeQueue;
+    std::queue<world::IUpgradeble *> upgradeQueue;
 
 public:
-    explicit UpgradeAI(const world::World* world);
+    explicit UpgradeAI(const world::World *world);
     void step();
 
 };

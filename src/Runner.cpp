@@ -15,7 +15,7 @@ Runner::Runner(const char *name, const char *addr, int port)
 
 }
 
-world::World* Runner::getWorld()
+world::World *Runner::getWorld()
 {
     return &world;
 }
@@ -35,7 +35,7 @@ void Runner::run()
     CommandSender commandSender(&trainClient);
 
     std::vector<models::PlayerModel> models;
-    models::PlayerModel * player = trainClient.getMyPlayer();
+    models::PlayerModel *player = trainClient.getMyPlayer();
     models::StaticMap *staticMap = new models::StaticMap();
     models::CoordsMap coordsMap;
 

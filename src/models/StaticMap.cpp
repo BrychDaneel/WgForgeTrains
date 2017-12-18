@@ -21,13 +21,13 @@ StaticMap::StaticMap(const int idx, const string name)
 }
 
 
-void StaticMap::addPoint(const PointModel& point)
+void StaticMap::addPoint(const PointModel &point)
 {
     pointList.push_back(point);
 }
 
 
-void StaticMap::addLine(const LineModel& line)
+void StaticMap::addLine(const LineModel &line)
 {
     lineList.push_back(line);
 }
@@ -45,13 +45,13 @@ const string StaticMap::getName() const
 }
 
 
-const vector<LineModel>& StaticMap::getLineList() const
+const vector<LineModel> &StaticMap::getLineList() const
 {
     return lineList;
 }
 
 
-const vector<PointModel>& StaticMap::getPointList() const
+const vector<PointModel> &StaticMap::getPointList() const
 {
     return pointList;
 }

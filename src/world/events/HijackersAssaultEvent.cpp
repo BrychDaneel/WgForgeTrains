@@ -11,7 +11,7 @@ namespace events
 {
 
 
-HijackersAssaultEvent::HijackersAssaultEvent(const models::EventModel& model, Town* source)
+HijackersAssaultEvent::HijackersAssaultEvent(const models::EventModel &model, Town *source)
     : BaseEvent(model, source->getWorld())
 {
     source = source;
@@ -19,7 +19,7 @@ HijackersAssaultEvent::HijackersAssaultEvent(const models::EventModel& model, To
 }
 
 
-Town* HijackersAssaultEvent::getSource() const
+Town *HijackersAssaultEvent::getSource() const
 {
     return source;
 }

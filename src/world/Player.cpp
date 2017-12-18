@@ -14,7 +14,7 @@ Player::Player()
 }
 
 
-Player::Player(const models::PlayerModel& model, World* world)
+Player::Player(const models::PlayerModel &model, World *world)
 {
     owner = world;
     name = model.getName();
@@ -22,30 +22,31 @@ Player::Player(const models::PlayerModel& model, World* world)
 }
 
 
-World* Player::getWorld() const
+World *Player::getWorld() const
 {
     return owner;
 }
 
 
-const std::string& Player::getIdx()
+const std::string &Player::getIdx()
 {
     return idx;
 }
 
 
-const std::string& Player::getName()
+const std::string &Player::getName()
 {
     return name;
 }
 
 
-IPost* Player::getHome(){
+IPost *Player::getHome()
+{
     return owner->getHome(this);
 }
 
 
-const std::vector<Train*>& Player::getTrains()
+const std::vector<Train *> &Player::getTrains()
 {
     return owner->getTrainsOfPlayer(this);
 }

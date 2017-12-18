@@ -17,7 +17,7 @@ class IBotSegment
 {
 public:
 
-    virtual ~IBotSegment(){}
+    virtual ~IBotSegment() {}
     virtual void step() = 0;
 
 };

@@ -41,7 +41,7 @@ public:
     int getDynamicMap(models::DynamicMap *dynamicMap);
     void turn();
     int move(const models::MoveModel &move);
-    int getCoordinate(models::CoordsMap* coordsMap);
+    int getCoordinate(models::CoordsMap *coordsMap);
 
     int upgrade(const models::UpgradeModel &upgradeModel);
     int login();

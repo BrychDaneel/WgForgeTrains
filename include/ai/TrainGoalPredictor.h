@@ -4,17 +4,21 @@
 #include <world/World.h>
 
 
-namespace tiger{
-namespace trains{
-namespace ai{
+namespace tiger
+{
+namespace trains
+{
+namespace ai
+{
 
 
-class TrainGoalPredictor{
+class TrainGoalPredictor
+{
 
 public:
     TrainGoalPredictor();
 
-    std::pair<world::IPost*, int> predictGoal(const world::Train* train);
+    std::pair<world::IPost *, int> predictGoal(const world::Train *train);
 
 };
 

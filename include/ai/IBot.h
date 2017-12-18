@@ -13,7 +13,7 @@ namespace ai
 
 struct IBot
 {
-    virtual ~IBot(){}
+    virtual ~IBot() {}
     virtual void init(world::World *world) = 0;
     virtual void step() = 0;
 

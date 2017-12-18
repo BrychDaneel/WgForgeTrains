@@ -16,10 +16,10 @@ namespace json
 
 struct CoordsMapReader : public ICoordsMapReader
 {
-    virtual int readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap);
+    virtual int readCoordsMap(const char *buffer, const int bufferSize, models::CoordsMap *coordsMap);
 
     virtual int getLastErrorCode();
-    virtual const std::string& getLastErrorMessage();
+    virtual const std::string &getLastErrorMessage();
 
 private:
 

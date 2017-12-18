@@ -10,7 +10,7 @@ namespace world
 namespace events
 {
 
-TrainCollisionEven::TrainCollisionEven(const models::EventModel& model, Train* source)
+TrainCollisionEven::TrainCollisionEven(const models::EventModel &model, Train *source)
     : BaseEvent(model, source->getWorld())
 {
     source = source;
@@ -18,13 +18,13 @@ TrainCollisionEven::TrainCollisionEven(const models::EventModel& model, Train* s
 }
 
 
-Train* TrainCollisionEven::getSource() const
+Train *TrainCollisionEven::getSource() const
 {
     return source;
 }
 
 
-Train* TrainCollisionEven::getAnother() const
+Train *TrainCollisionEven::getAnother() const
 {
     return another;
 }

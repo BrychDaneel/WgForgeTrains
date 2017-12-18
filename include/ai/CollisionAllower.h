@@ -17,7 +17,7 @@ class CollisionAllower
 public:
     CollisionAllower();
 
-    bool isCollisionAllow(const world::Train* train,const world::Train* otherTrain);
+    bool isCollisionAllow(const world::Train *train,const world::Train *otherTrain);
 
 private:
 

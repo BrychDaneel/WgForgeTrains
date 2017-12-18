@@ -18,8 +18,8 @@ PostModel::PostModel(const int idx, const PostType type, const int armor, const 
                      const int population, const int product, const int replenishment, const int productCapacity,
                      const int armorCapacity, const int nextLevelPrice, const int populationCapacity, const int level)
     : idx(idx), type(type), armor(armor), name(name), population(population), product(product),
-    replenishment(replenishment), productCapacity(productCapacity),
-    armorCapacity(armorCapacity), nextLevelPrice(nextLevelPrice), populationCapacity(populationCapacity), level(level)
+      replenishment(replenishment), productCapacity(productCapacity),
+      armorCapacity(armorCapacity), nextLevelPrice(nextLevelPrice), populationCapacity(populationCapacity), level(level)
 {
 }
 
@@ -42,7 +42,7 @@ int PostModel::getArmor() const
 }
 
 
-const string& PostModel::getName() const
+const string &PostModel::getName() const
 {
     return name;
 }
@@ -168,7 +168,7 @@ void PostModel::setLevel(const int level)
 }
 
 
-void PostModel::addEvent(const EventModel& event)
+void PostModel::addEvent(const EventModel &event)
 {
     eventList.push_back(event);
 }
@@ -180,7 +180,7 @@ void PostModel::clearEventList()
 }
 
 
-const std::vector<EventModel>& PostModel::getEventList() const
+const std::vector<EventModel> &PostModel::getEventList() const
 {
     return eventList;
 }

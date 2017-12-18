@@ -18,10 +18,10 @@ class MoveWriter : public IMoveWriter
 {
 public:
 
-    int writeMove(const models::MoveModel* move, char* buffer,  int* bufferSize);
+    int writeMove(const models::MoveModel *move, char *buffer,  int *bufferSize);
 
     int getLastErrorCode();
-    const std::string& getLastErrorMessage();
+    const std::string &getLastErrorMessage();
 
 private:
 

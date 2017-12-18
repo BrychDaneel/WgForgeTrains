@@ -28,7 +28,8 @@ namespace network
 {
 
 
-class TCPSocket {
+class TCPSocket
+{
 public:
     TCPSocket();
     bool init();
@@ -45,7 +46,10 @@ private:
     struct sockaddr_in  serverSockAddr;
     struct sockaddr_in  clientSockAddr;
 
-    bool isSocketValid() {return pSocket != -1;}
+    bool isSocketValid()
+    {
+        return pSocket != -1;
+    }
 
 
 };

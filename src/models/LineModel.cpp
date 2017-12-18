@@ -15,7 +15,8 @@ LineModel::LineModel()
 
 
 LineModel::LineModel(const int idx, const int length, const int startPoint, const int endPoint)
-    : idx(idx), length(length), startPoint(startPoint), endPoint(endPoint){
+    : idx(idx), length(length), startPoint(startPoint), endPoint(endPoint)
+{
 }
 
 

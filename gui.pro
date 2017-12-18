@@ -137,6 +137,7 @@ SOURCES += \
     src/ai/UpgradeAI.cpp \
     src/ai/ComplexBot.cpp
 
-DISTFILES +=
+DISTFILES += \
+    style.astylerc
 
 

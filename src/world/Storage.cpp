@@ -16,14 +16,14 @@ Storage::Storage() : BasePost()
 }
 
 
-Storage::Storage(const models::PostModel& model, World* world)
+Storage::Storage(const models::PostModel &model, World *world)
     : BasePost(model, world)
 {
     update(model);
 }
 
 
-void Storage::update(const models::PostModel& model)
+void Storage::update(const models::PostModel &model)
 {
     BasePost::update(model);
     armor = model.getArmor();
@@ -53,7 +53,9 @@ int Storage::getArmorCapacity() const
 int Storage::predictArmor(int delta, int visitTime) const
 {
     int ar = armor;
-    if (visitTime != -1 && delta > visitTime){
+
+    if (visitTime != -1 && delta > visitTime)
+    {
         ar = 0;
         delta -= visitTime;
     }

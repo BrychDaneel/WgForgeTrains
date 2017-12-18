@@ -15,9 +15,10 @@ namespace world
 {
 
 
-IPost* PostFactory::createPost(const models::PostModel& model, World* world)
+IPost *PostFactory::createPost(const models::PostModel &model, World *world)
 {
-    switch (model.getType()) {
+    switch (model.getType())
+    {
 
     case models::PostType::TOWN:
         return new Town(model, world);

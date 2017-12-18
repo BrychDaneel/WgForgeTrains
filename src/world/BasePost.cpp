@@ -19,7 +19,7 @@ BasePost::BasePost()
 }
 
 
-BasePost::BasePost(const models::PostModel& model, World* world)
+BasePost::BasePost(const models::PostModel &model, World *world)
 {
     owner = world;
     name = model.getName();
@@ -34,26 +34,26 @@ int BasePost::getIdx() const
 }
 
 
-void BasePost::update(const models::PostModel& model)
+void BasePost::update(const models::PostModel &model)
 {
     name = model.getName();
     idx = model.getIdx();
 }
 
 
-Point* BasePost::getPoint() const
+Point *BasePost::getPoint() const
 {
     return owner->getPointOfPost(this);
 }
 
 
-World* BasePost::getWorld() const
+World *BasePost::getWorld() const
 {
     return owner;
 }
 
 
-const std::string& BasePost::getName() const
+const std::string &BasePost::getName() const
 {
     return name;
 }
@@ -65,7 +65,7 @@ models::PostType BasePost::getPostType() const
 }
 
 
-void BasePost::addEvent(IEvent* event)
+void BasePost::addEvent(IEvent *event)
 {
     eventsHistory.push_back(event);
 }
@@ -77,7 +77,7 @@ void BasePost::clearEvents()
 }
 
 
-const std::vector<IEvent*>& BasePost::getEvents() const
+const std::vector<IEvent *> &BasePost::getEvents() const
 {
     return eventsHistory;
 }

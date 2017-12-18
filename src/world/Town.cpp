@@ -13,14 +13,14 @@ Town::Town() : BasePost()
 }
 
 
-Town::Town(const models::PostModel& model, World* world)
+Town::Town(const models::PostModel &model, World *world)
     : BasePost(model, world)
 {
     update(model);
 }
 
 
-void Town::update(const models::PostModel& model)
+void Town::update(const models::PostModel &model)
 {
     BasePost::update(model);
     arrmor = model.getArmor();
@@ -86,13 +86,14 @@ int Town::getNextLevelPrice() const
 
 bool Town::upgrade() const
 {
-    return (owner->getCommandSender()->upgrade(models::UpgradeModel({},{idx})));
+    return (owner->getCommandSender()->upgrade(models::UpgradeModel({}, {idx})));
 }
 
 
 int Town::predictProduct(int delta) const
 {
     int predict = product - delta * population;
+
     if (predict < 0)
         return 0;
     else

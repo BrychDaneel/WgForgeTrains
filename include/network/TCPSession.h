@@ -22,10 +22,10 @@ public:
 
     TCPSession(const char *name,const char *servAddr, int port);
     virtual ~TCPSession();
-    ResposeMessage* login();
+    ResposeMessage *login();
     void logout();
-    bool send(const uint8_t* buffer, size_t bufferSize);
-    ResposeMessage* recv();
+    bool send(const uint8_t *buffer, size_t bufferSize);
+    ResposeMessage *recv();
 
 private:
     const char *name;

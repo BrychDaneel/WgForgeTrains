@@ -34,13 +34,13 @@ public:
     StaticMap();
     StaticMap(const int idx, const string name);
 
-    void addPoint(const PointModel& point);
-    void addLine(const LineModel& line);
+    void addPoint(const PointModel &point);
+    void addLine(const LineModel &line);
 
     int getIdx() const;
     const string getName() const;
-    const vector<LineModel>& getLineList() const;
-    const vector<PointModel>& getPointList() const;
+    const vector<LineModel> &getLineList() const;
+    const vector<PointModel> &getPointList() const;
 
     void setIdx(const int idx);
     void setName(const string name);

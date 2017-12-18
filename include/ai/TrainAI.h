@@ -50,8 +50,8 @@ private:
     const world::Point *lastPoint;
     const world::Point *nextPoint;
 
-    std::map<const world::Point*, int> minLen;
-    std::map<const world::Point*, const world::Point*> ancestors;
+    std::map<const world::Point *, int> minLen;
+    std::map<const world::Point *, const world::Point *> ancestors;
     std::vector<const world::Point *> currentPath;
     std::vector<std::pair<int, const world::Line *>> currentBusy;
     std::vector<std::pair<const world::IPost *, int>> goalPredict;
