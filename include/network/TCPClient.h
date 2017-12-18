@@ -1,5 +1,5 @@
-#ifndef TCPCLIENT_H
-#define TCPCLIENT_H
+#pragma once
+
 
 #include "network/TCPSocket.h"
 #if defined(linux) || defined(__linux) || defined(__linux__)
@@ -38,4 +38,3 @@ namespace tiger
         }
     }
 }
-#endif // TCPClient_H

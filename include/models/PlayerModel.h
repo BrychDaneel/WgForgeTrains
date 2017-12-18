@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_PLAYER_MODEL_H_
-#define _TIGER_TRAINS_MODELS_PLAYER_MODEL_H_
 
 
 #include <string>
@@ -40,6 +38,3 @@ public:
 }
 }
 }
-
-
-#endif

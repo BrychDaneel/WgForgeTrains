@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_EVENT_MODEL_H_
-#define _TIGER_TRAINS_MODELS_EVENT_MODEL_H_
 
 
 #include <models/EventType.h>
@@ -34,7 +32,3 @@ public:
 }
 }
 }
-
-
-#endif
-

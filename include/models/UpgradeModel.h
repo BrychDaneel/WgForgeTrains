@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_UPGRADE_MODEL_H_
-#define _TIGER_TRAINS_MODELS_UPGRADE_MODEL_H_
 
 
 #include <vector>
@@ -38,7 +36,3 @@ public:
 }
 }
 }
-
-
-#endif
-

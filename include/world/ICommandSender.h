@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_WORLD_I_COMMAND_SENDER_H_
-#define _TIGER_TRAINS_WORLD_I_COMMAND_SENDER_H_
 
 
 #include <models/MoveModel.h>
@@ -28,6 +26,3 @@ public:
 }
 }
 }
-
-
-#endif

@@ -1,5 +1,5 @@
-#ifndef _COMPLEX_BOT_H_
-#define _COMPLEX_BOT_H_
+#pragma once
+
 
 
 #include <ai/IBotSegment.h>
@@ -48,6 +48,3 @@ namespace ai
 }
 }
 }
-
-
-#endif

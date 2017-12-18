@@ -24,7 +24,7 @@ void Town::update(const models::PostModel& model){
     product = model.getProduct();
 
     arrmorCapacity = model.getArmorCapacity();
-    productCapacity = model.getPopulationCapacity();
+    productCapacity = model.getProductCapacity();
     populationCapacity = model.getPopulationCapacity();
 
     level = model.getLevel();

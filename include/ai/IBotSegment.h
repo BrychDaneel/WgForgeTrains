@@ -1,5 +1,5 @@
-#ifndef _I_BOT_SEGMENT_H_
-#define _I_BOT_SEGMENT_H_
+#pragma once
+
 
 #include <CommandSender.h>
 #include <world/World.h>
@@ -24,6 +24,3 @@ namespace ai
 }
 }
 }
-
-
-#endif

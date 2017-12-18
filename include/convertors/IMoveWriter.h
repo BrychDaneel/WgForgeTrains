@@ -1,7 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_I_MOVE_WRITER_H_
-#define _TIGER_TRAINS_MODELS_I_MOVE_WRITER_H_
-
 
 #include <models/MoveModel.h>
 #include <string>
@@ -26,6 +23,3 @@ struct IMoveWriter{
 }
 }
 }
-
-
-#endif

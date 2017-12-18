@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_TRAIN_MODEL_H_
-#define _TIGER_TRAINS_MODELS_TRAIN_MODEL_H_
 
 
 #include <models/SpeedType.h>
@@ -75,6 +73,3 @@ public:
 }
 }
 }
-
-
-#endif

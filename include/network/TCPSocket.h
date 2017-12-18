@@ -1,5 +1,6 @@
-#ifndef _TCPSOCKET_H_
-#define _TCPSOCKET_H_
+#pragma once
+
+
 #include <stdio.h>
 
 
@@ -52,5 +53,3 @@ namespace tiger
 
     }
 }
-
-#endif

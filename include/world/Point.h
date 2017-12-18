@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_WORLD_POINT_H_
-#define _TIGER_TRAINS_WORLD_POINT_H_
 
 
 #include <world/World.h>
@@ -55,6 +53,3 @@ public:
 }
 }
 }
-
-
-#endif

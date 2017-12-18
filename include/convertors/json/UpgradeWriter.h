@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_JSON_UPGRADE_WRITER_H_
-#define _TIGER_TRAINS_MODELS_JSON_UPGRADE_WRITER_H_
 
 
 #include <convertors/IUpgradeWriter.h>
@@ -31,8 +29,3 @@ private:
 }
 }
 }
-
-
-#endif
-
-

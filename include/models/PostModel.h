@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_POST_MODEL_H_
-#define _TIGER_TRAINS_MODELS_POST_MODEL_H_
 
 
 #include <models/PostType.h>
@@ -82,6 +80,3 @@ public:
 }
 }
 }
-
-
-#endif

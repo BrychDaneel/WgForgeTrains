@@ -1,5 +1,5 @@
-#ifndef _RUNNER_H_
-#define _RUNNER_H_
+#pragma once
+
 
 #include <string>
 #include <client/TCPTrainClient.h>
@@ -38,6 +38,3 @@ namespace tiger
         };
     }
 }
-
-
-#endif

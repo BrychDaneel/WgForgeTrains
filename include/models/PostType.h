@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_POST_TYPE_H_
-#define _TIGER_TRAINS_MODELS_POST_TYPE_H_
 
 
 namespace tiger{
@@ -21,6 +19,3 @@ enum class PostType{
 }
 }
 }
-
-
-#endif
