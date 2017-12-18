@@ -13,7 +13,7 @@ TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port)
     :tcpSession(name, addr, port), convertor(),playerModel(new PlayerModel())
 {
     logger = el::Loggers::getLogger("TCPClient");
-    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "TCPClient.log");
+    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "logs/TCPClient.log");
 }
 
 TCPTrainClient::~TCPTrainClient()
