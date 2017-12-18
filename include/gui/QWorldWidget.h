@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_GUI_WORLD_WIDGET_H_
-#define _TIGER_TRAINS_GUI_WORLD_WIDGET_H_
 
 
 #include <QWidget>
@@ -10,16 +8,19 @@
 #include <QMouseEvent>
 
 
-namespace tiger {
-namespace trains {
-namespace gui {
+namespace tiger
+{
+namespace trains
+{
+namespace gui
+{
 
 
-class QWorldWidget : public QWidget{
-
+class QWorldWidget : public QWidget
+{
 private:
 
-    world::World* world;
+    world::World *world;
 
     float rectHeight = 100;
     float rectWidth = 100;
@@ -28,7 +29,7 @@ private:
 
 public:
 
-    QWorldWidget(world::World* world);
+    explicit QWorldWidget(world::World *world);
 
     void setRectWidth(float width);
     float getRectWidth() const;
@@ -38,15 +39,16 @@ public:
 
 protected:
 
-    void mouseMoveEvent(QMouseEvent* event);
-    void paintEvent(QPaintEvent* event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
 
-    void drawLines(QPainter* painter);
-    void drawPoints(QPainter* painter);
-    void drawPosts(QPainter* painter);
-    void drawTrains(QPainter* painter);
-    void drawTick(QPainter* painter);
-    void drawGameOver(QPainter* painter);
+    void drawLines(QPainter *painter);
+    void drawPoints(QPainter *painter);
+    void drawPosts(QPainter *painter);
+    void drawTrains(QPainter *painter);
+    void drawTick(QPainter *painter);
+    void drawScore(QPainter *painter);
+    void drawGameOver(QPainter *painter);
 
 };
 
@@ -54,6 +56,3 @@ protected:
 }
 }
 }
-
-
-#endif

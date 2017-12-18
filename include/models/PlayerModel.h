@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_PLAYER_MODEL_H_
-#define _TIGER_TRAINS_MODELS_PLAYER_MODEL_H_
 
 
 #include <string>
@@ -9,13 +7,16 @@
 using std::string;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class PlayerModel{
-
+class PlayerModel
+{
 private:
 
     string idx;
@@ -33,13 +34,9 @@ public:
     void setIdx(const string idx);
     void setHome(const int home);
     void setName(const string name);
-
 };
 
 
 }
 }
 }
-
-
-#endif

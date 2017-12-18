@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_JSON_MODEL_CONVERTOR_H_
-#define _TIGER_TRAINS_MODELS_JSON_MODEL_CONVERTOR_H_
 
 
 #include <convertors/IModelConvertor.h>
@@ -14,22 +12,27 @@
 #include <convertors/ICoordsMapReader.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-class ModelConvertor : public IModelConvertor{
+class ModelConvertor : public IModelConvertor
+{
 
 private:
 
-    IDynamicMapReader* dynamicMapReader;
-    IMoveWriter* moveWriter;
-    IPlayerReader* playerReader;
-    IStaticMapReader* staticMapReader;
-    IUpgradeWriter* upgradeWriter;
-    ICoordsMapReader* coordMapReader;
+    IDynamicMapReader *dynamicMapReader;
+    IMoveWriter *moveWriter;
+    IPlayerReader *playerReader;
+    IStaticMapReader *staticMapReader;
+    IUpgradeWriter *upgradeWriter;
+    ICoordsMapReader *coordMapReader;
 
 public:
 
@@ -37,16 +40,16 @@ public:
 
     ~ModelConvertor();
 
-    int readStaticMap(const char* buffer, const int bufferSize, models::StaticMap* staticMap);
-    int readDynamicMap(const char* buffer, const int bufferSize, models::DynamicMap* dynamicMap);
-    int readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel);
-    int writeMove(const models::MoveModel* move, char* buffer, int* bufferSize);
-    int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
+    int readStaticMap(const char *buffer, const int bufferSize, models::StaticMap *staticMap);
+    int readDynamicMap(const char *buffer, const int bufferSize, models::DynamicMap *dynamicMap);
+    int readPlayer(const char *buffer, const int bufferSize, models::PlayerModel *playerModel);
+    int writeMove(const models::MoveModel *move, char *buffer, int *bufferSize);
+    int writeUpgrade(const models::UpgradeModel *upgrade, char *buffer, int *bufferSize);
 
-    int readCoordsMap(const char* buffer, const int bufferSize, models::CoordsMap* coordsMap);
+    int readCoordsMap(const char *buffer, const int bufferSize, models::CoordsMap *coordsMap);
 
     int getLastErrorCode();
-    const std::string& getLastErrorMessage();
+    const std::string &getLastErrorMessage();
 
 private:
 
@@ -60,6 +63,3 @@ private:
 }
 }
 }
-
-
-#endif

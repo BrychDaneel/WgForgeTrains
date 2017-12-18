@@ -5,27 +5,30 @@
 #include <world/Town.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
-namespace events{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+namespace events
+{
 
 
-class HijackersAssaultEvent : public BaseEvent{
-
+class HijackersAssaultEvent : public BaseEvent
+{
 public:
 
-    HijackersAssaultEvent(){}
-    HijackersAssaultEvent(const models::EventModel& model, Town* source);
+    HijackersAssaultEvent() {}
+    HijackersAssaultEvent(const models::EventModel &model, Town *source);
 
-    Town* getSource() const;
+    Town *getSource() const;
     int getHijackersPower() const;
 
 private:
 
-    Town* source;
+    Town *source;
     int hijackersPower;
-
 };
 
 

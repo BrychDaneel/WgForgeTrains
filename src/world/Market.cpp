@@ -1,17 +1,24 @@
 #include <world/Market.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+#define MIN(a,b) ((a)<(b)?(a):(b))
 
 
-Market::Market() : BasePost(){
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+
+
+Market::Market() : BasePost()
+{
 }
 
 
-Market::Market(const models::PostModel& model, World* world) :
-    BasePost(model, world)
+Market::Market(const models::PostModel &model, World *world)
+    : BasePost(model, world)
 {
     product = model.getProduct();
     replenishment = model.getReplenishment();
@@ -19,7 +26,8 @@ Market::Market(const models::PostModel& model, World* world) :
 }
 
 
-void Market::update(const models::PostModel& model){
+void Market::update(const models::PostModel &model)
+{
     BasePost::update(model);
     product = model.getProduct();
     replenishment = model.getReplenishment();
@@ -27,18 +35,35 @@ void Market::update(const models::PostModel& model){
 }
 
 
-int Market::getProduct() const{
+int Market::getProduct() const
+{
     return product;
 }
 
 
-int Market::getReplenishment() const{
+int Market::getReplenishment() const
+{
     return replenishment;
 }
 
 
-int Market::getProductCapacity() const{
+int Market::getProductCapacity() const
+{
     return productCapacity;
+}
+
+
+int Market::predictProduct(int delta, int visitTime) const
+{
+    int pr = product;
+
+    if (visitTime != -1 && delta < visitTime)
+    {
+        pr = 0;
+        delta -= visitTime;
+    }
+
+    return MIN(productCapacity, pr + delta * replenishment);
 }
 
 
