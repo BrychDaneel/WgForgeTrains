@@ -4,9 +4,9 @@
 using namespace tiger::trains::network;
 
 
-TCPSession::TCPSession(const char *name, const char *servAddr, int port):name(name), servAddr(servAddr), port(port)
+TCPSession::TCPSession(const char *name, const char *servAddr, int port, const char *gameName, const int playersNum)
+    : name(name), servAddr(servAddr), port(port), gameName(gameName), playersNum(playersNum)
 {
-
 }
 
 TCPSession::~TCPSession()
@@ -23,15 +23,21 @@ ResposeMessage *TCPSession::login()
     }
 
     char buffer[255];
-    size_t len = sprintf(buffer, "{\n \"name\": \"%s\"\n}", name);
+
+    size_t len;
+
+    len = sprintf(buffer, "{\"name\": \"%s\", \"game\": \"%s\", \"num_players\": %d}",
+                  name, gameName, playersNum);
+
     char sendBuffer[8+len];
+
     uint32_t cmd = 1;
 
     memcpy(sendBuffer, &cmd, 4);
     memcpy(sendBuffer + 4, &len, 4);
     memcpy(sendBuffer + 8, buffer, len);
 
-    bool retVal = send(sendBuffer, len + 8);
+    int retVal = send(sendBuffer, len + 8);
 
     if (!retVal)
         return nullptr;

@@ -83,6 +83,11 @@ int Town::getNextLevelPrice() const
     return nextLevelPrice;
 }
 
+bool Town::isReadyToUpgrade() const
+{
+    return true;
+}
+
 
 bool Town::upgrade() const
 {

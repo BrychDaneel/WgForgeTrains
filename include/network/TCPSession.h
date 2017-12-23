@@ -20,7 +20,8 @@ class TCPSession
 {
 public:
 
-    TCPSession(const char *name,const char *servAddr, int port);
+    TCPSession(const char *name,const char *servAddr, int port,
+               const char *gameName, const int playersNum);
     virtual ~TCPSession();
     ResposeMessage *login();
     void logout();
@@ -31,6 +32,8 @@ private:
     const char *name;
     const char *servAddr;
     int port;
+    const char *gameName = nullptr;
+    const int playersNum = 0;
     TCPClient tcpClient;
 
 

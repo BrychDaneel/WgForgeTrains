@@ -251,6 +251,11 @@ std::vector<Train *> Train::getPosibleCollisions(const models::MoveModel *move)
     return res;
 }
 
+bool Train::isReadyToUpgrade() const
+{
+    return player->getHome()->getPoint() == getPoint();
+}
+
 
 }
 }
