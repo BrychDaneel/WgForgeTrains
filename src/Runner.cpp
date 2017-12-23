@@ -61,6 +61,8 @@ void Runner::run()
         trainClient.getDynamicMap(dynamicMap);
         world.update(*dynamicMap);
 
+        if (world.isGameOver())
+            break;
 
         if (bot != nullptr)
             bot->step();

@@ -7,6 +7,7 @@
 #include <ai/TrainGoalPredictor.h>
 #include <algorithm>
 #include <cmath>
+#include <easylogging++/easylogging++.h>
 
 
 
@@ -115,6 +116,9 @@ int TrainAI::calculateProducts(int tick, world::IPost *post)
 bool TrainAI::needHome(int len)
 {
 
+    if (train->getGoods() == 0)
+        return false;
+
     const world::Town *homeTown = (world::Town *)train->getPlayer()->getHome();
 
     if (type == models::GoodType::PRODUCT)
@@ -122,6 +126,7 @@ bool TrainAI::needHome(int len)
         int predict = homeTown->getProduct() - (int)std::ceil(dec_product*len);
         int maxLen = predict / homeTown->getPopulation();
         int curProduct = train->getGoods();
+
 
         if (maxLen < len)
             return true;
@@ -164,16 +169,22 @@ void TrainAI::calculatePath(const world::World &world)
     const world::Point *startPoint = train->getLine()->getStartPont();
     int lenToStart = train->getPosition();
 
-    minLen[startPoint] = lenToStart;
-    ancestors[startPoint] = startPoint;
-    setMinLen.insert({lenToStart, startPoint});
+    if (lenToStart != train->getLine()->getLenght())
+    {
+        minLen[startPoint] = lenToStart;
+        ancestors[startPoint] = startPoint;
+        setMinLen.insert({lenToStart, startPoint});
+    }
 
     const world::Point *endPoint = train->getLine()->getEndPont();
     int lenToEnd = train->getLine()->getLenght() - train->getPosition();
 
-    minLen[endPoint] = lenToEnd;
-    ancestors[endPoint] = endPoint;
-    setMinLen.insert({lenToEnd, endPoint});
+    if (train->getPosition() != 0)
+    {
+        minLen[endPoint] = lenToEnd;
+        ancestors[endPoint] = endPoint;
+        setMinLen.insert({lenToEnd, endPoint});
+    }
 
 
     while (!setMinLen.empty())
@@ -205,6 +216,8 @@ void TrainAI::makeOwnBusyLines(const world::World &world)
 {
     CollisionAllower allower;
 
+    ownBusy.clear();
+
     for (auto busyLine : *busyLines)
     {
         if (busyLine.first != id)
@@ -215,13 +228,12 @@ void TrainAI::makeOwnBusyLines(const world::World &world)
 
     for(auto trainA : world.getTrainList())
     {
-        if (trainA != train)
+
+        if (allower.isCollisionAllow(train, trainA))
         {
-            if (allower.isCollisionAllow(train, trainA))
-            {
-                ownBusy.insert(trainA->getLine());
-            }
+            ownBusy.insert(trainA->getLine());
         }
+
     }
 
     for(auto post : world.getPostList())
@@ -365,13 +377,19 @@ void TrainAI::changeCurrentBusy()
     }
 
     currentBusy.clear();
+    LOG(INFO) << "ON " <<busyLines->size();
+    const world::Town *homeTown = (world::Town *)train->getPlayer()->getHome();
 
     for (auto line : currentPath[1]->getEdges())
     {
-        if (line->getAnotherPoint(currentPath[1]) == currentPath[0])
+//if (line->getAnotherPoint(currentPath[1]) == currentPath[0])
+        if (currentPath[1] != homeTown->getPoint())
         {
             currentBusy.push_back({id, line});
             busyLines->insert(currentBusy.back());
         }
     }
+
+    LOG(INFO) << "OFF " << busyLines->size();
+
 }
