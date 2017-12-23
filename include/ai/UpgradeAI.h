@@ -24,7 +24,7 @@ class UpgradeAI: public IBotSegment
     world::Town *town;
     const world::World *world;
     const int RESERV_ARMOR = 0;
-    std::queue<world::IUpgradeble *> upgradeQueue;
+    std::vector<std::pair<world::IUpgradeble *, int>> upgradeQueue;  // <target, level>
 
 public:
     explicit UpgradeAI(const world::World *world);

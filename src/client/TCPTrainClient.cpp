@@ -9,11 +9,12 @@ using namespace tiger::trains::client;
 using namespace tiger::trains::models;
 using namespace tiger::trains;
 
-TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port)
-    :tcpSession(name, addr, port), convertor(),playerModel(new PlayerModel())
+
+TCPTrainClient::TCPTrainClient(const char *name, const char *addr, int port, const char *gameName, const int playersNum)
+    : tcpSession(name, addr, port, gameName, playersNum), convertor(),playerModel(new PlayerModel())
 {
     logger = el::Loggers::getLogger("TCPClient");
-    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, "logs/TCPClient.log");
+    el::Loggers::reconfigureLogger("TCPClient", el::ConfigurationType::Filename, LOGGER_FILE);
 }
 
 TCPTrainClient::~TCPTrainClient()
@@ -28,10 +29,16 @@ int TCPTrainClient::login()
 
 //  network::ResposeMessage *message = tcpSession.login();
     if (message == nullptr)
+    {
+        lastErrorMessage = "unknown error";
         return (int)TCPTrainClient::ErrorType::UNKOWN_ERROR;
+    }
 
     if (message->result != 0)
+    {
+        lastErrorMessage = errorMessages[message->result];
         return message->result;
+    }
 
     logger->info(" %v\n %v", "login", message->data);
     int retVal = convertor.readPlayer(message->data, message->dataLength, playerModel);
@@ -54,10 +61,18 @@ int TCPTrainClient::login()
 
 
 
-    if (!retVal)
+    if (retVal)
+    {
+        lastErrorMessage = convertor.getLastErrorMessage();
         return (int)TCPTrainClient::ErrorType::JSON_NO_PARSE;
+    }
 
     return (int)TCPTrainClient::ErrorType::OKEY;
+}
+
+std::string TCPTrainClient::getLastErrorMessage() const
+{
+    return lastErrorMessage;
 }
 
 

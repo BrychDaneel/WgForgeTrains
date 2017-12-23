@@ -10,6 +10,8 @@
 #include "network/ResposeMessage.h"
 #include <memory>
 
+#define LOGGER_FILE "logs/TCPClient.log"
+
 
 namespace tiger
 {
@@ -34,7 +36,8 @@ public:
         NOT_SEND = 8
     };
 
-    TCPTrainClient(const char *name, const char *addr, int port);
+    TCPTrainClient(const char *name, const char *addr, int port,
+                   const char *gameName, const int playersNum);
     virtual ~TCPTrainClient();
     models::PlayerModel *getMyPlayer() const;
     int getStaticMap(models::StaticMap *staticMap);
@@ -46,12 +49,20 @@ public:
     int upgrade(const models::UpgradeModel &upgradeModel);
     int login();
 
+    std::string getLastErrorMessage() const;
+
 private:
+
+    const char *errorMessages[8] = {"", "BAD_COMMAND", "RESOURCE_NOT_FOUND", "PATH_NOT_FOUND", "ACCESS_DENIED",
+                                    "JSON_NO_PARSE", "UNKOWN_ERROR", "NOT_SEND"
+                                   };
 
     mutable network::TCPSession tcpSession;
     convertors::json::ModelConvertor convertor;
     models::PlayerModel *playerModel;
     el::Logger *logger;
+
+    std::string lastErrorMessage;
 
 };
 

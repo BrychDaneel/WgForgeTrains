@@ -15,14 +15,14 @@ UpgradeAI::UpgradeAI(const world::World *world) : world(world)
     town = static_cast<world::Town *>(world->getPlayerList()[0]->getHome());
 
     for (world::Train *train : world->getPlayerList()[0]->getTrains())
-        upgradeQueue.push(train);
+        upgradeQueue.push_back(std::make_pair(train, 2));
 
-    upgradeQueue.push(town);
+    upgradeQueue.push_back(std::make_pair(town, 2));
 
     for (world::Train *train : world->getPlayerList()[0]->getTrains())
-        upgradeQueue.push(train);
+        upgradeQueue.push_back(std::make_pair(train, 3));
 
-    upgradeQueue.push(town);
+    upgradeQueue.push_back(std::make_pair(town, 3));
 }
 
 
@@ -30,16 +30,27 @@ void UpgradeAI::step()
 {
     int ar = town->getArrmor();
 
-    while (!upgradeQueue.empty() && ar - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR)
-    {
-        ar -= upgradeQueue.front()->getNextLevelPrice();
+    if (upgradeQueue.empty())
+        return;
 
-        if (upgradeQueue.front()->upgrade())
-            upgradeQueue.pop();
-        else
-            LOG(ERROR) << "Can't apply update that coasts " << upgradeQueue.front()->getNextLevelPrice()
-                       << " when have " << ar + upgradeQueue.front()->getNextLevelPrice();
+    auto p = upgradeQueue.begin();
+
+    while (p != upgradeQueue.end())
+    {
+        world::IUpgradeble *target = p->first;
+        int level = p->second;
+
+        if (target->getLevel() + 1 == level &&
+                target->getNextLevelPrice() < ar &&
+                target->isReadyToUpgrade())
+        {
+            target->upgrade();
+            ar -= target->getNextLevelPrice();
+        }
+
+        p++;
     }
+
 }
 
 

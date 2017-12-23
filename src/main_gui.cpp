@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 {
     QApplication application(argc, argv);
 
-    Runner runner("Tiger", "wgforge-srv.wargaming.net", 443);
+    Runner runner("Tiger", "wgforge-srv.wargaming.net", 443, "TigersGame", 2);
 
 
     ai::ComplexBot complexBot;
