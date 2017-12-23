@@ -48,7 +48,7 @@ bool TCPSocket::connect(uint32_t addr, int port)
     return retVal == 0 ? true : false;
 }
 
-int TCPSocket::send(const uint8_t *buffer, size_t bufferSize)
+int TCPSocket::send(const char *buffer, size_t bufferSize)
 {
 #ifdef  DEBUG
     printf("%s  :  %i", buffer, maxBytes);
@@ -59,14 +59,14 @@ int TCPSocket::send(const uint8_t *buffer, size_t bufferSize)
     {
         if (bufferSize > 0 && buffer != nullptr)
         {
-            bytesSend = ::send(pSocket,(const char *)buffer, bufferSize, 0);
+            bytesSend = ::send(pSocket, buffer, bufferSize, 0);
         }
     }
 
     return bytesSend;
 }
 
-int TCPSocket::recv(uint8_t *buffer, size_t maxBytes = 1)
+int TCPSocket::recv(char *buffer, size_t maxBytes = 1)
 {
 #ifdef DEBUG
     printf("%s  :  %i", buffer, maxBytes);
@@ -75,7 +75,7 @@ int TCPSocket::recv(uint8_t *buffer, size_t maxBytes = 1)
 
     if (isSocketValid())
     {
-        bytesRecieved = ::recv(pSocket, (char *)buffer, maxBytes, 0);
+        bytesRecieved = ::recv(pSocket, buffer, maxBytes, 0);
     }
 
     return bytesRecieved;

@@ -72,7 +72,7 @@ int TCPTrainClient::getStaticMap(StaticMap *staticMap)
 {
     char buffer[BUFF_SIZE] = "{\n \"layer\": 0\n}";
     size_t len = strlen(buffer);
-    uint8_t sendBuffer[OFFSET_2 + len];
+    char sendBuffer[OFFSET_2 + len];
     uint32_t cmd = 10;
 
     memcpy(sendBuffer, &cmd, OFFSET_SIZE);
@@ -107,7 +107,7 @@ int TCPTrainClient::getDynamicMap(DynamicMap *dynamicMap)
 {
     char buffer[BUFF_SIZE] = "{\n \"layer\": 1\n}";
     size_t len = strlen(buffer);
-    uint8_t sendBuffer[OFFSET_2 + len];
+    char sendBuffer[OFFSET_2 + len];
     uint32_t cmd = 10;
 
     memcpy(sendBuffer, &cmd, OFFSET_SIZE);
@@ -148,7 +148,7 @@ void TCPTrainClient::turn()
 
     uint32_t cmd = 5;
     size_t len = 2;
-    uint8_t sendBuffer[OFFSET_2 + len];
+    char sendBuffer[OFFSET_2 + len];
     const char *js = "{}";
 
     memcpy(sendBuffer, &cmd, OFFSET_SIZE);
@@ -172,7 +172,7 @@ int TCPTrainClient::move(const models::MoveModel &move)
     uint32_t cmd = 3;
 
     convertor.writeMove(&move, buffer, &len);
-    uint8_t sendBuffer[len + OFFSET_2];
+    char sendBuffer[len + OFFSET_2];
     memcpy(sendBuffer, &cmd, OFFSET_SIZE);
     memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
     memcpy(sendBuffer + OFFSET_2, buffer, len);
@@ -193,7 +193,7 @@ int TCPTrainClient::getCoordinate(models::CoordsMap *coordsMap)
     char buffer[BUFF_SIZE] = "{\n \"layer\": 10\n}";
     size_t len = strlen(buffer);
 
-    uint8_t sendBuffer[8+len];
+    char sendBuffer[8+len];
     uint32_t cmd = 10;
 
     memcpy(sendBuffer, &cmd, OFFSET_SIZE);
@@ -233,7 +233,7 @@ int TCPTrainClient::upgrade(const UpgradeModel &upgradeModel)
     uint32_t cmd = 4;
 
     convertor.writeUpgrade(&upgradeModel, buffer, &len);
-    uint8_t sendBuffer[len + OFFSET_2];
+    char sendBuffer[len + OFFSET_2];
     memcpy(sendBuffer, &cmd, OFFSET_SIZE);
     memcpy(sendBuffer + OFFSET_1, &len, OFFSET_SIZE);
     memcpy(sendBuffer + OFFSET_2, buffer, len);

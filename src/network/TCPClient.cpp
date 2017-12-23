@@ -34,7 +34,7 @@ bool TCPClient::connect(const char *addr, int port)
     return tcpSocket.connect(ntohl(addrInt32), port);
 }
 
-int TCPClient::send(const uint8_t *buffer, size_t bufferSize)
+int TCPClient::send(const char *buffer, size_t bufferSize)
 {
     size_t sent = 0;
     int lastSent = 0;
@@ -51,7 +51,7 @@ int TCPClient::send(const uint8_t *buffer, size_t bufferSize)
     return lastSent == -1 ? -1 : sent;
 }
 
-int TCPClient::recv(uint8_t *buffer, size_t maxBytes)
+int TCPClient::recv(char *buffer, size_t maxBytes)
 {
     size_t received = 0;
     int lastReceived = 0;

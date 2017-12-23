@@ -24,7 +24,7 @@ public:
     virtual ~TCPSession();
     ResposeMessage *login();
     void logout();
-    bool send(const uint8_t *buffer, size_t bufferSize);
+    bool send(const char *buffer, size_t bufferSize);
     ResposeMessage *recv();
 
 private:
