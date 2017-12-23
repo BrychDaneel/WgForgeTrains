@@ -81,12 +81,17 @@ HEADERS += \
     include/world/Storage.h \
     include/ai/CollisionAllower.h \
     include/ai/IBot.h \
-    include/ai/IBotSegment.h \
     include/ai/TrainAI.h \
     include/ai/TrainGoalPredictor.h \
     include/ai/UpgradeAI.h \
     include/ai/ComplexBot.h \
-    include/world/IUpgradeble.h
+    include/world/IUpgradeble.h \
+    include/ai/ISubBot.h \
+    include/ai/Barrier.h \
+    include/ai/HomeChecker.h \
+    include/ai/LineBlocker.h \
+    include/ai/PathCalculator.h \
+    include/ai/BotSharedData.h
 
 SOURCES += \
     src/client/TCPTrainClient.cpp \
@@ -135,7 +140,12 @@ SOURCES += \
     src/world/Storage.cpp \
     src/ai/TrainAI.cpp \
     src/ai/UpgradeAI.cpp \
-    src/ai/ComplexBot.cpp
+    src/ai/ComplexBot.cpp \
+    src/ai/Barrier.cpp \
+    src/ai/HomeChecker.cpp \
+    src/ai/LineBlocker.cpp \
+    src/ai/PathCalculator.cpp \
+    src/ai/BotSharedData.cpp
 
 DISTFILES += \
     style.astylerc

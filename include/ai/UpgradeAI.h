@@ -2,7 +2,7 @@
 
 
 #include <CommandSender.h>
-#include <ai/IBotSegment.h>
+#include <ai/ISubBot.h>
 #include <world/World.h>
 #include <world/IUpgradeble.h>
 #include <vector>
@@ -18,7 +18,7 @@ namespace ai
 {
 
 
-class UpgradeAI: public IBotSegment
+class UpgradeAI: public ISubBot
 {
 
     world::Town *town;
