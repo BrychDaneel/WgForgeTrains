@@ -50,6 +50,7 @@ private:
     int tickNum = 0;
 
     std::map<Player *, int> scoreMap;
+    std::map<std::string, int> nameScoreMap;
 
     std::map<int, IPost *> postMap;
     std::map<std::string, Player *> playerMap;
@@ -134,6 +135,7 @@ public:
     bool isGameOver();
 
     int getScore(Player *player);
+    std::map<std::string, int> getScoreMap();
 };
 
 
