@@ -74,7 +74,7 @@ void Runner::run()
 
         if (world.getPlayerList().size() < (size_t)playersNum)
         {
-            sleep(1000);
+            sleep(1);
             continue;
         }
 
