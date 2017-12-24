@@ -202,10 +202,12 @@ void QWorldWidget::drawScore(QPainter *painter)
     QString text;
 
     for (world::Player *player : world->getPlayerList())
+    {
         if (text != "")
             text += "     ";
-        else
-            text += QString("%1: %2").arg(player->getName().c_str()).arg(player->getScore());
+
+        text += QString("%1: %2").arg(player->getName().c_str()).arg(player->getScore());
+    }
 
     painter->drawText(textRect, Qt::AlignCenter, text);
 }
