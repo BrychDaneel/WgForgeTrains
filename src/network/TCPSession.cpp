@@ -11,16 +11,17 @@ TCPSession::TCPSession(const char *name, const char *servAddr, int port):name(na
 
 TCPSession::~TCPSession()
 {
-   logout();
+    logout();
 }
 
-ResposeMessage* TCPSession::login()
+ResposeMessage *TCPSession::login()
 {
 
     if (!tcpClient.connect(servAddr, port))
     {
-       return nullptr;
+        return nullptr;
     }
+
     char buffer[255];
     size_t len = sprintf(buffer, "{\n \"name\": \"%s\"\n}", name);
     uint8_t sendBuffer[8+len];
@@ -30,9 +31,10 @@ ResposeMessage* TCPSession::login()
     memcpy(sendBuffer + 4, &len, 4);
     memcpy(sendBuffer + 8, buffer, len);
 
-    size_t retVal = send(sendBuffer, len + 8);
+    bool retVal = send(sendBuffer, len + 8);
 
-
+    if (!retVal)
+        return nullptr;
 
     return recv();
 
@@ -60,11 +62,12 @@ bool TCPSession::send(const uint8_t *buffer, size_t bufferSize)
     return retVal == -1 ? false : true;
 }
 
-ResposeMessage* TCPSession::recv()
+ResposeMessage *TCPSession::recv()
 {
     int retVal;
     uint8_t firstBuffer[4];
     retVal = tcpClient.recv(firstBuffer, 4);
+
     if (retVal == -1)
     {
         return nullptr;
@@ -74,11 +77,13 @@ ResposeMessage* TCPSession::recv()
     ResposeMessage *message = new ResposeMessage();
     memcpy(&message->result, firstBuffer, 4);
     retVal = tcpClient.recv(firstBuffer, 4);
+
     if (retVal == -1)
     {
         delete message;
         return nullptr;
     }
+
     memcpy(&message->dataLength, firstBuffer, 4);
 
     uint8_t secondBuffer[message->dataLength];

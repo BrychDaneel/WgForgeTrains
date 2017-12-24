@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_WORLD_POINT_H_
-#define _TIGER_TRAINS_WORLD_POINT_H_
 
 
 #include <world/World.h>
@@ -9,21 +7,25 @@
 #include <vector>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
 class World;
 class Line;
 class IPost;
+class Train;
 
 
-class Point{
-
+class Point
+{
 private:
 
-    World* owner;
+    World *owner;
     int idx;
     int x = 0;
     int y = 0;
@@ -31,17 +33,19 @@ private:
 public:
 
     Point();
-    Point(const models::PointModel& model, World* world);
+    Point(const models::PointModel &model, World *world);
 
-    World* getWorld() const;
+    World *getWorld() const;
 
     int getIdx() const;
     int getX() const;
     int getY() const;
 
-    IPost* getPost() const;
-    const std::vector<Line*>& getEdges() const;
-    const std::vector<Point*> getNeighboards() const;
+    IPost *getPost() const;
+    const std::vector<Line *> &getEdges() const;
+    const std::vector<Point *> getNeighboards() const;
+
+    const std::vector<Train *> getTrains() const;
 
     void setX(const int x);
     void setY(const int y);
@@ -52,6 +56,3 @@ public:
 }
 }
 }
-
-
-#endif

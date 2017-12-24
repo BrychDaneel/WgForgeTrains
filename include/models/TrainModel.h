@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_TRAIN_MODEL_H_
-#define _TIGER_TRAINS_MODELS_TRAIN_MODEL_H_
 
 
 #include <models/SpeedType.h>
@@ -13,25 +11,28 @@
 using std::string;
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class TrainModel{
-
+class TrainModel
+{
 private:
 
     int idx = 0;
     int lineIdx = 0;
     string playerIdx;
     int position = 0;
+    SpeedType speed = SpeedType::STOP;
     int goodsCapacity = 0;
     int goods = 0;
     GoodType goodsType = GoodType::NONE;
     int level = 0;
     int nextLevelPrice;
-    SpeedType speed = SpeedType::STOP;
 
     std::vector<EventModel> eventList;
 
@@ -46,7 +47,7 @@ public:
 
     int getIdx() const;
     int getLineIdx() const;
-    const string& getPlayerIdx() const;
+    const string &getPlayerIdx() const;
     int getPosition() const;
     int getGoodsCapacity() const;
     GoodType getGoodsType() const;
@@ -66,15 +67,12 @@ public:
     void setLevel(const int level);
     void setNextLevelPrice(const int nextLevelPrice);
 
-    void addEvent(const EventModel& event);
+    void addEvent(const EventModel &event);
     void clearEventList();
-    const std::vector<EventModel>& getEventList() const;
+    const std::vector<EventModel> &getEventList() const;
 };
 
 
 }
 }
 }
-
-
-#endif

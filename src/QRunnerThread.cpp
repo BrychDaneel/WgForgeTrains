@@ -1,21 +1,25 @@
 #include <QRunnerThread.h>
 
 
-namespace tiger{
-namespace trains{
+namespace tiger
+{
+namespace trains
+{
 
 
-QRunnerThred::QRunnerThred(Runner* runner, QObject* ppw) : QThread(ppw), runner(runner){
-
+QRunnerThred::QRunnerThred(Runner *runner, QObject *ppw) : QThread(ppw), runner(runner)
+{
 }
 
 
-void QRunnerThred::run(){
+void QRunnerThred::run()
+{
     runner->run();
 }
 
 
-void QRunnerThred::shutDown(){
+void QRunnerThred::shutDown()
+{
     runner->shutDown();
 }
 

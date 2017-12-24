@@ -19,6 +19,9 @@ void CommandSender::turn()
 }
 
 
-void CommandSender::upgrade(const models::UpgradeModel& upgrade){
-    client->upgrade(upgrade);
+bool CommandSender::upgrade(const models::UpgradeModel &upgrade)
+{
+
+    int retVal = client->upgrade(upgrade);
+    return (retVal == 0 ? true : false);
 }

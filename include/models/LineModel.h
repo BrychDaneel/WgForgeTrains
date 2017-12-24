@@ -1,15 +1,16 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_LINE_MODEL_H_
-#define _TIGER_TRAINS_MODELS_LINE_MODEL_H_
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class LineModel{
-
+class LineModel
+{
 private:
 
     int idx = 0;
@@ -31,13 +32,9 @@ public:
     void setLength(const int lenght);
     void setStartPoint(const int startPoint);
     void setEndPoint(const int endPoint);
-
 };
 
 
 }
 }
 }
-
-
-#endif

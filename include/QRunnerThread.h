@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _TIGER_TRAINS_Q_RUNNER_THREAD_H_
-#define _TIGER_TRAINS_Q_RUNNER_THREAD_H_
 
 
 #include <QThread>
@@ -8,20 +6,23 @@
 #include <Runner.h>
 
 
-namespace tiger{
-namespace trains{
+namespace tiger
+{
+namespace trains
+{
 
 
-class QRunnerThred : public QThread{
+class QRunnerThred : public QThread
+{
     Q_OBJECT
 
 private:
 
-    Runner* runner;
+    Runner *runner;
 
 public:
 
-    QRunnerThred(Runner* runner, QObject* ppw = 0);
+    QRunnerThred(Runner *runner, QObject *ppw = 0);
     void run();
     void shutDown();
 
@@ -30,6 +31,3 @@ public:
 
 }
 }
-
-
-#endif

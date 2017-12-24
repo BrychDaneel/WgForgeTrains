@@ -1,18 +1,20 @@
 #pragma once
-#ifndef _TIGER_TRAINS_WORLD_TOWN_H_
-#define _TIGER_TRAINS_WORLD_TOWN_H_
 
 
 #include <world/BasePost.h>
+#include <world/IUpgradeble.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-class Town : public BasePost{
-
+class Town : public BasePost, public IUpgradeble
+{
 private:
 
     int arrmor;
@@ -30,8 +32,8 @@ public:
 
     Town();
 
-    Town(const models::PostModel& model, World* world);
-    void update(const models::PostModel& model);
+    Town(const models::PostModel &model, World *world);
+    void update(const models::PostModel &model);
 
     int getArrmor() const;
     int getPopulation() const;
@@ -44,14 +46,12 @@ public:
     int getLevel() const;
     int getNextLevelPrice() const;
 
-    void upgrade() const;
+    bool upgrade() const;
 
+    int predictProduct(int delta) const;
 };
 
 
 }
 }
 }
-
-
-#endif

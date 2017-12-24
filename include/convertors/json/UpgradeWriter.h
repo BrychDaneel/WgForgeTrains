@@ -1,23 +1,26 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_JSON_UPGRADE_WRITER_H_
-#define _TIGER_TRAINS_MODELS_JSON_UPGRADE_WRITER_H_
 
 
 #include <convertors/IUpgradeWriter.h>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 
-struct UpgradeWriter : public IUpgradeWriter{
+struct UpgradeWriter : public IUpgradeWriter
+{
 
-    int writeUpgrade(const models::UpgradeModel* upgrade, char* buffer, int* bufferSize);
+    int writeUpgrade(const models::UpgradeModel *upgrade, char *buffer, int *bufferSize);
 
     int getLastErrorCode();
-    const std::string& getLastErrorMessage();
+    const std::string &getLastErrorMessage();
 
 private:
 
@@ -31,8 +34,3 @@ private:
 }
 }
 }
-
-
-#endif
-
-
