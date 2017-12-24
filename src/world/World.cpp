@@ -123,7 +123,7 @@ void World::update(const models::DynamicMap &dynamicMap)
             models::PlayerModel playerModel;
             playerModel.setName(trainModel.getPlayerIdx());
             playerModel.setIdx(trainModel.getPlayerIdx());
-            playerModel.setHome(playerList[0]->getHome()->getPoint()->getIdx());
+            playerModel.setHome(playerList[0]->getHome()->getIdx());
             Player *player = new Player(playerModel, this);
             playerMap[playerModel.getIdx()] = player;
             playerOfName[playerModel.getName()] = player;

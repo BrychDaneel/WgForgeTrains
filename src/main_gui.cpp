@@ -18,7 +18,35 @@ int main(int argc, char *argv[])
 {
     QApplication application(argc, argv);
 
-    Runner runner("Daneel", "wgforge-srv.wargaming.net", 443, "TigersGame", 2);
+    const char *login = "Tiger";
+    const char *host = "wgforge-srv.wargaming.net";
+    int port = 443;
+    const char *gameName = "TigersGame";
+    int playersNum = 4;
+
+    if (argc > 5)
+    {
+        login = argv[1];
+        host = argv[2];
+        port = atoi(argv[3]);
+        gameName = argv[4];
+        playersNum = atoi(argv[5]);
+
+        if (!port)
+        {
+            std::cerr << "Invalid port." << std::endl;
+            return -1;
+        }
+
+        if (!playersNum)
+        {
+            std::cerr << "Invalid players num." << std::endl;
+            return -1;
+        }
+    }
+
+    Runner runner(login, host, port, gameName, playersNum);
+
 
 
     ai::ComplexBot complexBot;
