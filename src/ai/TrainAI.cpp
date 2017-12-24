@@ -19,7 +19,7 @@ using namespace tiger::trains::ai;
 
 TrainAI::TrainAI(BotSharedData *data, models::GoodType type, world::Train *train)
     : sharedData(data), type(type), train(train), lineBlocker(data->getBlockLines(), train, type),
-      pathCalculator(train), lastPoint(nullptr), nextPoint(nullptr)
+      pathCalculator(train, data), lastPoint(nullptr), nextPoint(nullptr)
 {
     id = train->getIdx();
 }

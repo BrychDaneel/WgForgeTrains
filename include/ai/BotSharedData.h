@@ -3,6 +3,8 @@
 #include <set>
 #include <world/World.h>
 #include <ai/HomeChecker.h>
+#include <ai/LineBlock.h>
+#include <ai/Barrier.h>
 
 namespace tiger
 {
@@ -16,12 +18,16 @@ class BotSharedData
 public:
     BotSharedData();
 
-    std::set<std::pair<int, const world::Line *> > *getBlockLines();
-
+    void init(const world::World *world);
+    std::set<std::pair<int, LineBlock> > *getBlockLines();
+    bool doMove(const world::Point *point, const world::Line *line);
+    bool canMove(const world::Point *point, const world::Line *line);
     HomeChecker *getCheker();
 
+
 private:
-    std::set<std::pair<int, const world::Line *>> blockLines;
+    std::set<std::pair<int, LineBlock> > blockLines;
+    std::map<const world::Point *, Barrier> barrierMap;
     HomeChecker cheker;
 
 };

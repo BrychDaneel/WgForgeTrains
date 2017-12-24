@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
     const char *login = "Tiger";
     const char *host = "wgforge-srv.wargaming.net";
     int port = 443;
-    const char *gameName = "TigersGame";
-    int playersNum = 4;
+    const char *gameName = "TigersGame2";
+    int playersNum = 1;
 
     if (argc > 5)
     {

@@ -91,7 +91,8 @@ HEADERS += \
     include/ai/HomeChecker.h \
     include/ai/LineBlocker.h \
     include/ai/PathCalculator.h \
-    include/ai/BotSharedData.h
+    include/ai/BotSharedData.h \
+    include/ai/LineBlock.h
 
 SOURCES += \
     src/client/TCPTrainClient.cpp \

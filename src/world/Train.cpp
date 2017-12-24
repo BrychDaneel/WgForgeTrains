@@ -1,4 +1,5 @@
 #include <world/Train.h>
+
 #include <easylogging++/easylogging++.h>
 #include <cmath>
 
@@ -165,6 +166,7 @@ std::vector<Train *> Train::getPosibleCollisions(const models::MoveModel *move)
 {
     int pos = position;
     const Line *lin = line;
+
 
     if (move!=nullptr)
     {

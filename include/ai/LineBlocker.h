@@ -2,6 +2,7 @@
 
 #include <set>
 #include <world/World.h>
+#include <ai/LineBlock.h>
 
 namespace tiger
 {
@@ -13,7 +14,7 @@ namespace ai
 class LineBlocker
 {
 public:
-    LineBlocker(std::set<std::pair<int, const world::Line *>> *blockLines, world::Train *train,
+    LineBlocker(std::set<std::pair<int, LineBlock> > *blockLines, world::Train *train,
                 models::GoodType type);
     void makeOwnBlockLines();
     void changeCurrentBlock(const world::Point *point);
@@ -22,12 +23,14 @@ public:
 
 
 private:
-    std::set<std::pair<int, const world::Line *>> *blockLines;
+    std::set<std::pair<int, LineBlock> > *blockLines;
     world::Train *train;
     models::GoodType type;
 
-    std::set<const world::Line *> ownBlockLine;
-    std::vector<std::pair<int, const world::Line *>> currentBlock;
+    std::set<LineBlock> ownBlockLine;
+    std::vector<std::pair<int,LineBlock> > currentBlock;
+
+
 
 
 
@@ -35,6 +38,7 @@ private:
 
 
 };
+
 
 
 

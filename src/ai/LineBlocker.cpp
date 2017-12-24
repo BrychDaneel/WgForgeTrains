@@ -6,7 +6,7 @@
 using namespace tiger::trains::ai;
 using namespace tiger::trains;
 
-LineBlocker::LineBlocker(std::set<std::pair<int, const world::Line *> > *blockLines,
+LineBlocker::LineBlocker(std::set<std::pair<int, LineBlock> > *blockLines,
                          world::Train *train, models::GoodType type):
     blockLines(blockLines), train(train), type(type)
 {
@@ -35,7 +35,7 @@ void LineBlocker::makeOwnBlockLines()
 
         if (allower.isCollisionAllow(train, trainA))
         {
-            ownBlockLine.insert(trainA->getLine());
+            ownBlockLine.insert({trainA->getLine(),trainA->getLine()->getStartPont()});
         }
 
     }
@@ -49,7 +49,7 @@ void LineBlocker::makeOwnBlockLines()
 
         for (auto line : post->getPoint()->getEdges())
         {
-            ownBlockLine.insert(line);
+            ownBlockLine.insert({line, line->getStartPont()});
         }
     }
 }
@@ -70,7 +70,7 @@ void LineBlocker::changeCurrentBlock(const world::Point *point)
 
         if (point != homeTown->getPoint())
         {
-            currentBlock.push_back({train->getIdx(), line});
+            currentBlock.push_back({train->getIdx(), {line, line->getStartPont()} });
             blockLines->insert(currentBlock.back());
         }
     }
@@ -80,7 +80,7 @@ void LineBlocker::changeCurrentBlock(const world::Point *point)
 
 bool LineBlocker::contain(const world::Line *line)
 {
-    return ownBlockLine.count(line) == 0 ? false : true;
+    return ownBlockLine.count({line, line->getStartPont()}) == 0 ? false : true;
 }
 
 void LineBlocker::changeType(models::GoodType type)

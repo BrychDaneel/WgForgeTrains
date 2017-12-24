@@ -20,6 +20,7 @@ void ComplexBot::init(world::World *world)
 {
     this->world = world;
 
+    sharedData.init(world);
 
     trainA = new TrainAI(&sharedData, models::GoodType::PRODUCT    ,
                          world->getPlayerList()[0]->getTrains()[1]);
