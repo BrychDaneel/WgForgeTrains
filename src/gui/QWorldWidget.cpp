@@ -193,7 +193,7 @@ void QWorldWidget::drawTick(QPainter *painter)
 void QWorldWidget::drawScore(QPainter *painter)
 {
     QFont font = painter->font();
-    font.setPixelSize(width() / 40);
+    font.setPixelSize(width() / 50);
     painter->setFont(font);
     painter->setPen(QPen(Qt::yellow, 0));
 
@@ -202,10 +202,17 @@ void QWorldWidget::drawScore(QPainter *painter)
     QString text;
 
     for (world::Player *player : world->getPlayerList())
+    {
         if (text != "")
             text += "     ";
-        else
-            text += QString("%1: %2").arg(player->getName().c_str()).arg(player->getScore());
+
+        QString name = QString(player->getName().c_str());
+
+        if (name.size() > 10)
+            name = name.left(10);
+
+        text += QString("%1: %2").arg(name).arg(player->getScore());
+    }
 
     painter->drawText(textRect, Qt::AlignCenter, text);
 }

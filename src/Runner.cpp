@@ -72,6 +72,9 @@ void Runner::run()
         if (world.isGameOver())
             break;
 
+        if (world.getPlayerList().size() < (size_t)playersNum)
+            continue;
+
         if (bot != nullptr)
             bot->step();
 

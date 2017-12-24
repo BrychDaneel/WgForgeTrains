@@ -118,6 +118,19 @@ void World::update(const models::DynamicMap &dynamicMap)
 
     for (models::TrainModel trainModel : dynamicMap.getTrainList())
     {
+        if (playerMap.find(trainModel.getPlayerIdx()) == playerMap.end())
+        {
+            models::PlayerModel playerModel;
+            playerModel.setName(trainModel.getPlayerIdx());
+            playerModel.setIdx(trainModel.getPlayerIdx());
+            playerModel.setHome(playerList[0]->getHome()->getIdx());
+            Player *player = new Player(playerModel, this);
+            playerMap[playerModel.getIdx()] = player;
+            playerOfName[playerModel.getName()] = player;
+            playerList.push_back(player);
+            homes[player] = playerModel.getHome();
+        }
+
         if (trainMap.find(trainModel.getIdx()) == trainMap.end())
         {
             Train *train = new Train(trainModel, this);
@@ -353,5 +366,6 @@ bool World::isGameOver()
 
 int World::getScore(Player *player)
 {
-    return scoreMap[player];
+    //return scoreMap[player];
+    return 0;
 }
