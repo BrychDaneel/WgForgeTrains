@@ -153,12 +153,21 @@ void QWorldWidget::drawTrains(QPainter *painter)
     font.setPixelSize(1);
     painter->setFont(font);
 
-    painter->setBrush(Qt::red);
-    painter->setPen(QPen(Qt::red, 0));
 
     for (world::Train *train : world->getTrainList())
         if (train->getLine() != nullptr)
         {
+            if (train->getPlayer() == world->getPlayerList()[0])
+            {
+                painter->setBrush(Qt::darkGray);
+                painter->setPen(QPen(Qt::darkGray, 0));
+            }
+            else
+            {
+                painter->setBrush(Qt::red);
+                painter->setPen(QPen(Qt::red, 0));
+            }
+
             world::Line *line = train->getLine();
 
             QPointF lpoint1(line->getStartPont()->getX(), line->getStartPont()->getY());
@@ -201,17 +210,17 @@ void QWorldWidget::drawScore(QPainter *painter)
 
     QString text;
 
-    for (world::Player *player : world->getPlayerList())
+    for (auto pair : world->getScoreMap())
     {
         if (text != "")
             text += "     ";
 
-        QString name = QString(player->getName().c_str());
+        QString name = QString(pair.first.c_str());
 
         if (name.size() > 10)
             name = name.left(10);
 
-        text += QString("%1: %2").arg(name).arg(player->getScore());
+        text += QString("%1: %2").arg(name).arg(pair.second);
     }
 
     painter->drawText(textRect, Qt::AlignCenter, text);
