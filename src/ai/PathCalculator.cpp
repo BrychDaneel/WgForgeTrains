@@ -27,7 +27,7 @@ void PathCalculator::calculate(LineBlocker &blocker)
 
         for (auto line : minPoint->getEdges())
         {
-            if (blocker.contain(line))
+            if (blocker.contain({line, minPoint}))
                 continue;
 
             const world::Point *another = line->getAnotherPoint(minPoint);
@@ -106,7 +106,7 @@ void PathCalculator::startOnPoint(LineBlocker &blocker, std::set<std::pair<int, 
 
     for (auto line : point->getEdges())
     {
-        if (blocker.contain(line) || !sharedData->canMove(point, line))
+        if (blocker.contain({line, point}) || !sharedData->canMove(point, line))
             continue;
 
         move.setLineIdx(line->getIdx());

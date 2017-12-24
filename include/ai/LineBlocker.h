@@ -17,8 +17,8 @@ public:
     LineBlocker(std::set<std::pair<int, LineBlock> > *blockLines, world::Train *train,
                 models::GoodType type);
     void makeOwnBlockLines();
-    void changeCurrentBlock(const world::Point *point);
-    bool contain(const world::Line *line);
+    void changeCurrentBlock(const std::vector<const world::Point *> &points);
+    bool contain(LineBlock lineBlock);
     void changeType(models::GoodType type);
 
 

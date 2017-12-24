@@ -34,7 +34,7 @@ void TrainAI::step()
 
     if (currentPath.size() > 1 && train->getPoint() == currentPath[0])
     {
-        lineBlocker.changeCurrentBlock(currentPath[1]);
+        lineBlocker.changeCurrentBlock(currentPath);
         lastPoint = currentPath[0];
         currentPath.erase(currentPath.begin());
         makeMove();

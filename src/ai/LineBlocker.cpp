@@ -54,7 +54,7 @@ void LineBlocker::makeOwnBlockLines()
     }
 }
 
-void LineBlocker::changeCurrentBlock(const world::Point *point)
+void LineBlocker::changeCurrentBlock(const std::vector<const world::Point *> &points)
 {
     for (auto block : currentBlock)
     {
@@ -65,22 +65,29 @@ void LineBlocker::changeCurrentBlock(const world::Point *point)
 
     const world::Town *homeTown = (world::Town *)train->getPlayer()->getHome();
 
-    for (auto line : point->getEdges())
+    for (auto line : points[1]->getEdges())
     {
 
-        if (point != homeTown->getPoint())
+        if (line->getAnotherPoint(points[1]) == points[0])
         {
-            currentBlock.push_back({train->getIdx(), {line, line->getStartPont()} });
+            currentBlock.push_back({train->getIdx(), {line, points[0]} });
             blockLines->insert(currentBlock.back());
         }
+
+        if (points.size() > 2 && line->getAnotherPoint(points[1]) == points[0])
+        {
+            currentBlock.push_back({train->getIdx(), {line, points[1]} });
+            blockLines->insert(currentBlock.back());
+        }
+
     }
 
 
 }
 
-bool LineBlocker::contain(const world::Line *line)
+bool LineBlocker::contain(LineBlock lineBlock)
 {
-    return ownBlockLine.count({line, line->getStartPont()}) == 0 ? false : true;
+    return ownBlockLine.count(lineBlock) == 0 ? false : true;
 }
 
 void LineBlocker::changeType(models::GoodType type)
