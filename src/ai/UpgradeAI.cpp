@@ -51,7 +51,7 @@ void UpgradeAI::step()
         int level = upgradeVector[i].second;
 
         if (target->getLevel() + 1 == level &&
-                target->getNextLevelPrice() < ar &&
+                target->getNextLevelPrice() < ar - RESERV_ARMOR &&
                 target->isReadyToUpgrade())
         {
             target->upgrade();

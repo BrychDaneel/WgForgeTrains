@@ -23,7 +23,7 @@ class UpgradeAI: public ISubBot
 
     world::Town *town;
     const world::World *world;
-    const int RESERV_ARMOR = 0;
+    const int RESERV_ARMOR = 20;
     std::queue<std::vector<std::pair<world::IUpgradeble *, int>>> upgradeQueue;  // <target, level>
 
 public:
