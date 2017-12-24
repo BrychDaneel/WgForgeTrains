@@ -41,7 +41,7 @@ void UpgradeAI::step()
     if (upgradeQueue.empty())
         return;
 
-    std::vector<std::pair<world::IUpgradeble *, int>> upgradeVector = upgradeQueue.front();
+    std::vector<std::pair<world::IUpgradeble *, int>> &upgradeVector = upgradeQueue.front();
 
     int i = 0;
 
