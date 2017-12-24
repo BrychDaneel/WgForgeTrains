@@ -18,7 +18,7 @@ using namespace tiger::trains::ai;
 
 
 TrainAI::TrainAI(BotSharedData *data, models::GoodType type, world::Train *train)
-    : sharedData(data), type(type), train(train), lineBlocker(data->getBlockLines(), train, type),
+    : sharedData(data), type(type), train(train), lineBlocker(train, type, data),
       pathCalculator(train, data), lastPoint(nullptr), nextPoint(nullptr)
 {
     id = train->getIdx();
@@ -133,7 +133,8 @@ void TrainAI::makePath(const world::World &world)
         for (auto post : world.getPostList())
         {
             if (post->getPostType() != getPostTypeByGood(type)
-                    || pathCalculator.getMinLen(post->getPoint()) == INT_MAX)
+                    || pathCalculator.getMinLen(post->getPoint()) == INT_MAX
+                    || train->getPoint() == post->getPoint())
                 continue;
 
             int tempLen = pathCalculator.getMinLen(post->getPoint())*2

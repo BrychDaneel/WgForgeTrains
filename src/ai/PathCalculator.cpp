@@ -27,7 +27,7 @@ void PathCalculator::calculate(LineBlocker &blocker)
 
         for (auto line : minPoint->getEdges())
         {
-            if (blocker.contain({line, minPoint}))
+            if (blocker.contain({line, minPoint}) || !sharedData->canMove(minPoint, line))
                 continue;
 
             const world::Point *another = line->getAnotherPoint(minPoint);
@@ -120,7 +120,7 @@ void PathCalculator::startOnPoint(LineBlocker &blocker, std::set<std::pair<int, 
 
         for (auto otherTrain : train->getPosibleCollisions(&move))
         {
-            if (!allower.isCollisionAllow(train, otherTrain) &&
+            if (!allower.isCollisionAllow(train, otherTrain) ||
                     train->getPlayer() != otherTrain->getPlayer())
             {
                 canMove = false;
@@ -148,7 +148,7 @@ void PathCalculator::startOnLine(std::set<std::pair<int, const world::Point *> >
 
     for (auto otherTrain : train->getPosibleCollisions(&move))
     {
-        if (!allower.isCollisionAllow(train, otherTrain) &&
+        if (!allower.isCollisionAllow(train, otherTrain) ||
                 train->getPlayer() != otherTrain->getPlayer())
         {
             canBack = false;
@@ -170,7 +170,7 @@ void PathCalculator::startOnLine(std::set<std::pair<int, const world::Point *> >
 
     for (auto otherTrain : train->getPosibleCollisions(&move))
     {
-        if (!allower.isCollisionAllow(train, otherTrain) &&
+        if (!allower.isCollisionAllow(train, otherTrain) ||
                 train->getPlayer() != otherTrain->getPlayer())
         {
             canForward = false;

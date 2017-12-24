@@ -6,11 +6,10 @@
 using namespace tiger::trains::ai;
 using namespace tiger::trains;
 
-LineBlocker::LineBlocker(std::set<std::pair<int, LineBlock> > *blockLines,
-                         world::Train *train, models::GoodType type):
-    blockLines(blockLines), train(train), type(type)
+LineBlocker::LineBlocker(world::Train *train, models::GoodType type, BotSharedData *data)
+    : train(train), type(type), sharedData(data)
 {
-
+    blockLines = sharedData->getBlockLines();
 }
 
 void LineBlocker::makeOwnBlockLines()
@@ -65,18 +64,30 @@ void LineBlocker::changeCurrentBlock(const std::vector<const world::Point *> &po
 
     const world::Town *homeTown = (world::Town *)train->getPlayer()->getHome();
 
+
     for (auto line : points[1]->getEdges())
     {
 
         if (line->getAnotherPoint(points[1]) == points[0])
         {
+            if (sharedData->doMove(points[0], line))
+            {
+                currentBlock.push_back({train->getIdx(), {line, points[1]} });
+                blockLines->insert(currentBlock.back());
+            }
+        }
+
+        if (line->getAnotherPoint(points[1]) == points[2])
+        {
             currentBlock.push_back({train->getIdx(), {line, points[0]} });
             blockLines->insert(currentBlock.back());
         }
 
-        if (points.size() > 2 && line->getAnotherPoint(points[1]) == points[0])
+        if (line->getAnotherPoint(points[1]) != points[2] &&
+                line->getAnotherPoint(points[1]) != points[0] &&
+                points[1] != homeTown->getPoint())
         {
-            currentBlock.push_back({train->getIdx(), {line, points[1]} });
+            currentBlock.push_back({train->getIdx(), {line, line->getAnotherPoint(points[1])} });
             blockLines->insert(currentBlock.back());
         }
 
