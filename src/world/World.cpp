@@ -161,7 +161,10 @@ void World::update(const models::DynamicMap &dynamicMap)
     scoreMap.clear();
 
     for (auto it : dynamicMap.getScoreMap())
+    {
         scoreMap[getPlayerByName(it.first)] = it.second;
+        nameScoreMap[it.first] = it.second;
+    }
 }
 
 
@@ -368,4 +371,9 @@ int World::getScore(Player *player)
 {
     //return scoreMap[player];
     return 0;
+}
+
+std::map<std::string, int> World::getScoreMap()
+{
+    return nameScoreMap;
 }

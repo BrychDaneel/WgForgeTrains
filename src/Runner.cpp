@@ -73,7 +73,10 @@ void Runner::run()
             break;
 
         if (world.getPlayerList().size() < (size_t)playersNum)
+        {
+            sleep(1000);
             continue;
+        }
 
         if (bot != nullptr)
             bot->step();
