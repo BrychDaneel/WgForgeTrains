@@ -121,7 +121,7 @@ void World::update(const models::DynamicMap &dynamicMap)
         if (playerMap.find(trainModel.getPlayerIdx()) == playerMap.end())
         {
             models::PlayerModel playerModel;
-            playerModel.setName("DNO");
+            playerModel.setName(trainModel.getPlayerIdx());
             playerModel.setIdx(trainModel.getPlayerIdx());
             playerModel.setHome(playerList[0]->getHome()->getPoint()->getIdx());
             Player *player = new Player(playerModel, this);
