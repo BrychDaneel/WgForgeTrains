@@ -52,7 +52,7 @@ void ComplexBot::init(world::World *world)
 void ComplexBot::step()
 {
     //world::Town *home = (world::Town *)world->getPlayerList()[0]->getHome();
-    sharedData.getInPoints()->clear();
+
 
     for (ISubBot *subBot : listSubBot)
         subBot->step();

@@ -49,8 +49,15 @@ void TrainAI::step()
 
     else
     {
+        if (currentPath.size() == 1)
+        {
+            int i = 2;
+        }
+
         if (!currentPath.empty() && train->getPoint() != currentPath[0])
             makeMove();
+
+
     }
 
 }
@@ -84,12 +91,40 @@ void TrainAI::makeMove()
 
         if (train->getPosition() + 1 == train->getLine()->getLenght())
         {
-            sharedData->getInPoints()->insert(currentPath[0]);
+            if (!sharedData->getInPoints()->count(currentPath[0]))
+                sharedData->getInPoints()->insert(currentPath[0]);
+            else
+            {
+
+                int stopLen = train->getPosition() - 1;
+                bool stoped = false;
+
+                while (!stoped && stopLen > 0)
+                {
+                    stoped = true;
+
+                    for (auto otherTrain : train->getLine()->getTrains())
+                    {
+                        if (otherTrain->getPosition() == stopLen)
+                        {
+                            otherTrain->setMove(models::MoveModel(otherTrain->getLine()->getIdx(),
+                                                                  otherTrain->getIdx(),
+                                                                  models::SpeedType::STOP));
+                            --stopLen;
+
+                            stoped = false;
+                        }
+
+                    }
+                }
+
+                speed = models::SpeedType::STOP;
+            }
         }
 
-        if (train->getPosition() == 0)
+        if (train->getPoint())
         {
-            sharedData->getInPoints()->erase(currentPath[0]);
+            sharedData->getInPoints()->erase(train->getPoint());
         }
     }
     else
@@ -98,12 +133,41 @@ void TrainAI::makeMove()
 
         if (train->getPosition() == 1)
         {
-            sharedData->getInPoints()->insert(currentPath[0]);
+            if (!sharedData->getInPoints()->count(currentPath[0]))
+                sharedData->getInPoints()->insert(currentPath[0]);
+            else
+            {
+                int stopLen = 2;
+                bool stoped = false;
+
+                while (!stoped && stopLen < train->getLine()->getLenght())
+                {
+                    stoped = true;
+
+                    for (auto otherTrain : train->getLine()->getTrains())
+                    {
+                        if (otherTrain->getPosition() == stopLen)
+                        {
+                            otherTrain->setMove(models::MoveModel(otherTrain->getLine()->getIdx(),
+                                                                  otherTrain->getIdx(),
+                                                                  models::SpeedType::STOP));
+
+                            ++stopLen;
+
+                            stoped = false;
+                        }
+
+                    }
+                }
+
+                speed = models::SpeedType::STOP;
+
+            }
         }
 
-        if (train->getPosition() == currentLine->getLenght())
+        if (train->getPoint())
         {
-            sharedData->getInPoints()->erase(currentPath[0]);
+            sharedData->getInPoints()->erase(train->getPoint());
         }
 
     }

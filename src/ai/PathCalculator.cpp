@@ -120,7 +120,7 @@ void PathCalculator::startOnPoint(LineBlocker &blocker, std::set<std::pair<int, 
 
         for (auto otherTrain : train->getPosibleCollisions(&move))
         {
-            if (!allower.isCollisionAllow(train, otherTrain) ||
+            if (!allower.isCollisionAllow(train, otherTrain) &&
                     train->getPlayer() != otherTrain->getPlayer())
             {
                 canMove = false;
@@ -148,7 +148,7 @@ void PathCalculator::startOnLine(std::set<std::pair<int, const world::Point *> >
 
     for (auto otherTrain : train->getPosibleCollisions(&move))
     {
-        if (!allower.isCollisionAllow(train, otherTrain) ||
+        if (!allower.isCollisionAllow(train, otherTrain) &&
                 train->getPlayer() != otherTrain->getPlayer())
         {
             canBack = false;
@@ -159,35 +159,10 @@ void PathCalculator::startOnLine(std::set<std::pair<int, const world::Point *> >
     {
         int lenToStart = train->getLine()->getLenght();
 
-        if (lenToStart == 1 && sharedData->getInPoints()->count(startPoint) != 0)
-        {
-            int stopLen = 1;
-            bool stoped = false;
-
-            while (!stoped && stopLen < train->getLine()->getLenght())
-            {
-                stoped = true;
-
-                for (auto otherTrain : train->getLine()->getTrains())
-                {
-                    if (otherTrain->getPosition() == stopLen)
-                    {
-                        otherTrain->setMove(models::MoveModel(otherTrain->getLine()->getIdx(),
-                                                              otherTrain->getIdx(),
-                                                              models::SpeedType::STOP));
-
-                        ++stopLen;
-
-                        stoped = false;
-                    }
-
-                }
-            }
-        }
-
         minLen[startPoint] = lenToStart;
         ancestors[startPoint] = startPoint;
         setMinLen.insert({lenToStart, startPoint});
+
     }
 
 
@@ -197,7 +172,7 @@ void PathCalculator::startOnLine(std::set<std::pair<int, const world::Point *> >
 
     for (auto otherTrain : train->getPosibleCollisions(&move))
     {
-        if (!allower.isCollisionAllow(train, otherTrain) ||
+        if (!allower.isCollisionAllow(train, otherTrain) &&
                 train->getPlayer() != otherTrain->getPlayer())
         {
             canForward = false;
@@ -211,33 +186,9 @@ void PathCalculator::startOnLine(std::set<std::pair<int, const world::Point *> >
     {
         int lenToEnd = train->getLine()->getLenght() - train->getPosition();
 
-        if (lenToEnd == 1 && sharedData->getInPoints()->count(endPoint) != 0)
-        {
-            int stopLen = train->getPosition();
-            bool stoped = false;
-
-            while (!stoped && stopLen > 0)
-            {
-                stoped = true;
-
-                for (auto otherTrain : train->getLine()->getTrains())
-                {
-                    if (otherTrain->getPosition() == stopLen)
-                    {
-                        otherTrain->setMove(models::MoveModel(otherTrain->getLine()->getIdx(),
-                                                              otherTrain->getIdx(),
-                                                              models::SpeedType::STOP));
-                        ++stopLen;
-
-                        stoped = false;
-                    }
-
-                }
-            }
-        }
-
         minLen[endPoint] = lenToEnd;
         ancestors[endPoint] = endPoint;
         setMinLen.insert({lenToEnd, endPoint});
+
     }
 }
