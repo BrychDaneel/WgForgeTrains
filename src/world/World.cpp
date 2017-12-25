@@ -88,6 +88,7 @@ void World::fillEventsHistory(const size_t size)
 
 void World::update(const models::DynamicMap &dynamicMap)
 {
+
     for (models::PostModel postModel : dynamicMap.getPostList())
     {
         if (postMap.find(postModel.getIdx()) == postMap.end())
@@ -108,6 +109,7 @@ void World::update(const models::DynamicMap &dynamicMap)
                 gameOver = true;
 
             post->addEvent(event);
+            tickNum = event->getTick();
             fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
         }
@@ -152,6 +154,7 @@ void World::update(const models::DynamicMap &dynamicMap)
                 gameOver = true;
 
             train->addEvent(event);
+            tickNum = event->getTick();
             fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
         }
