@@ -35,6 +35,7 @@ void LineBlocker::makeOwnBlockLines()
         if (allower.isCollisionAllow(train, trainA))
         {
             ownBlockLine.insert({trainA->getLine(),trainA->getLine()->getStartPont()});
+            ownBlockLine.insert({trainA->getLine(),trainA->getLine()->getEndPont()});
         }
 
     }
@@ -104,6 +105,12 @@ bool LineBlocker::contain(LineBlock lineBlock)
 void LineBlocker::changeType(models::GoodType type)
 {
     this->type = type;
+}
+
+void LineBlocker::addBlockLine(std::pair<int, LineBlock> block)
+{
+    currentBlock.push_back(block);
+    blockLines->insert(block);
 }
 
 tiger::trains::models::PostType LineBlocker::getPostTypeByGood(tiger::trains::models::GoodType type)

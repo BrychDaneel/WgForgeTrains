@@ -20,6 +20,7 @@ public:
     void changeCurrentBlock(const std::vector<const world::Point *> &points);
     bool contain(LineBlock lineBlock);
     void changeType(models::GoodType type);
+    void addBlockLine(std::pair<int, LineBlock> block);
 
 
 private:

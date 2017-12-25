@@ -53,6 +53,7 @@ void ComplexBot::step()
 {
     //world::Town *home = (world::Town *)world->getPlayerList()[0]->getHome();
 
+    sharedData.clear(world);
 
     for (ISubBot *subBot : listSubBot)
         subBot->step();
