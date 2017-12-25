@@ -37,6 +37,7 @@ private:
     models::GoodType goodsType;
     int level;
     int nextLevelPrice;
+    models::MoveModel moveModel;
 
 public:
 
@@ -62,6 +63,8 @@ public:
     int getNextLevelPrice() const;
 
     void move(Line *line, models::SpeedType speed);
+    void setMove(models::MoveModel move);
+    models::MoveModel getMove() const;
 
     void addEvent(IEvent *event);
     void clearEvents();

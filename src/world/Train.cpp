@@ -120,6 +120,16 @@ void Train::move(Line *line, models::SpeedType speed)
     owner->getCommandSender()->move(moveModel);
 }
 
+void Train::setMove(models::MoveModel move)
+{
+    this->moveModel = move;
+}
+
+models::MoveModel Train::getMove() const
+{
+    return moveModel;
+}
+
 
 void Train::addEvent(IEvent *event)
 {
