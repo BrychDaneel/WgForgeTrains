@@ -57,6 +57,10 @@ void ComplexBot::step()
     for (ISubBot *subBot : listSubBot)
         subBot->step();
 
+    for (world::Train *train : world->getPlayerList()[0]->getTrains())
+        if (train->getMove() != nullptr)
+            world->getCommandSender()->move(*train->getMove());
+
 }
 
 

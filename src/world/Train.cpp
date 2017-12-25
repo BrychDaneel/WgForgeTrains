@@ -40,6 +40,12 @@ void Train::update(models::TrainModel model)
     goodsType = model.getGoodsType();
     level = model.getLevel();
     nextLevelPrice = model.getNextLevelPrice();
+
+    if (moveModel != nullptr)
+    {
+        delete moveModel;
+        moveModel = nullptr;
+    }
 }
 
 
@@ -122,10 +128,10 @@ void Train::move(Line *line, models::SpeedType speed)
 
 void Train::setMove(models::MoveModel move)
 {
-    this->moveModel = move;
+    this->moveModel = new models::MoveModel(move);
 }
 
-models::MoveModel Train::getMove() const
+models::MoveModel *Train::getMove() const
 {
     return moveModel;
 }
