@@ -92,7 +92,8 @@ HEADERS += \
     include/ai/LineBlocker.h \
     include/ai/PathCalculator.h \
     include/ai/BotSharedData.h \
-    include/ai/LineBlock.h
+    include/ai/LineBlock.h \
+    include/ai/SwitchAI.h
 
 SOURCES += \
     src/client/TCPTrainClient.cpp \
@@ -146,7 +147,8 @@ SOURCES += \
     src/ai/HomeChecker.cpp \
     src/ai/LineBlocker.cpp \
     src/ai/PathCalculator.cpp \
-    src/ai/BotSharedData.cpp
+    src/ai/BotSharedData.cpp \
+    src/ai/SwitchAI.cpp
 
 DISTFILES += \
     style.astylerc

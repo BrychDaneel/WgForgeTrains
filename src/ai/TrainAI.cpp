@@ -68,6 +68,16 @@ void TrainAI::changeType(models::GoodType type)
     this->type = type;
 }
 
+models::GoodType TrainAI::getType()
+{
+    return type;
+}
+
+world::Train *TrainAI::getTrain()
+{
+    return train;
+}
+
 void TrainAI::makeMove()
 {
 

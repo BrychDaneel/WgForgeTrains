@@ -29,6 +29,8 @@ public:
     void step();
 
     void changeType(models::GoodType type);
+    models::GoodType getType();
+    world::Train *getTrain();
 
 private:
 
