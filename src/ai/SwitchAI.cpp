@@ -64,7 +64,7 @@ void SwitchAI::step()
 
         if (canSwitch(bot) && needProductCompacity > 0 && armorBots.size() > 1)
         {
-            armorBots.erase(productBots.begin() + i);
+            armorBots.erase(armorBots.begin() + i);
             bot->changeType(models::GoodType::PRODUCT);
             productBots.push_back(bot);
         }
