@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
     const char *login = "Tiger228";
     const char *host = "localhost";
     int port = 2000;
-    const char *gameName = "TigersGame";
-    int playersNum = 4;
+    const char *gameName = "TigersGame23";
+    int playersNum = 1;
 
     if (argc > 5)
     {
