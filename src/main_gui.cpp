@@ -18,11 +18,13 @@ int main(int argc, char *argv[])
 {
     QApplication application(argc, argv);
 
-    const char *login = "Tiger2";
-    const char *host = "192.168.249.228";
+
+    const char *login = "Tiger228";
+    const char *host = "localhost";
     int port = 2000;
     const char *gameName = "TigersGame";
-    int playersNum = 2;
+    int playersNum = 4;
+
 
     if (argc > 5)
     {

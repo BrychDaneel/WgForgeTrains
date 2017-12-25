@@ -22,6 +22,21 @@ void BotSharedData::init(const world::World *world)
                       });
 }
 
+void BotSharedData::clear(world::World *world)
+{
+    for (auto train : world->getTrainList())
+    {
+        if (trainInPoints.count(train) == 1 && !train->getEvents().empty() &&
+                train->getEvents().back()->getTick() >= world->getTickNum() - 3)
+        {
+
+            inPoints.erase(trainInPoints[train]);
+            trainInPoints.erase(train);
+        }
+
+    }
+}
+
 std::set<std::pair<int, LineBlock> > *BotSharedData::getBlockLines()
 {
     return &blockLines;
@@ -46,6 +61,11 @@ bool BotSharedData::canMove(const world::Point *point, const world::Line *line)
 std::set<const world::Point *> *BotSharedData::getInPoints()
 {
     return &inPoints;
+}
+
+std::map<const world::Train *, const world::Point *> *BotSharedData::getTrainInPoints()
+{
+    return &trainInPoints;
 }
 
 HomeChecker *BotSharedData::getCheker()

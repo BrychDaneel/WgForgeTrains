@@ -102,7 +102,11 @@ void TrainAI::makeMove()
         if (train->getPosition() + 1 == train->getLine()->getLenght())
         {
             if (!sharedData->getInPoints()->count(currentPath[0]))
+            {
                 sharedData->getInPoints()->insert(currentPath[0]);
+                sharedData->getTrainInPoints()->insert({train, currentPath[0]});
+
+            }
             else
             {
 
@@ -135,6 +139,7 @@ void TrainAI::makeMove()
         if (train->getPoint())
         {
             sharedData->getInPoints()->erase(train->getPoint());
+            sharedData->getTrainInPoints()->erase(train);
         }
     }
     else
@@ -144,7 +149,13 @@ void TrainAI::makeMove()
         if (train->getPosition() == 1)
         {
             if (!sharedData->getInPoints()->count(currentPath[0]))
+            {
                 sharedData->getInPoints()->insert(currentPath[0]);
+                sharedData->getTrainInPoints()->insert({train, currentPath[0]});
+
+
+
+            }
             else
             {
                 int stopLen = 2;
@@ -178,6 +189,8 @@ void TrainAI::makeMove()
         if (train->getPoint())
         {
             sharedData->getInPoints()->erase(train->getPoint());
+            sharedData->getTrainInPoints()->erase(train);
+
         }
 
     }
@@ -261,10 +274,10 @@ void TrainAI::makePath(const world::World &world)
 
         }
 
-        if (lastPoint != homeTown->getPoint() || maxProductByTick > homeTown->getPopulation() -  killer)
-            break;
+//        if (lastPoint != homeTown->getPoint() || maxProductByTick > homeTown->getPopulation() -  killer)
+        break;
 
-        killer++;
+//        killer++;
     }
 
     if (tempNext == nullptr)

@@ -21,8 +21,8 @@ public:
 
 
 private:
-    const double dec_product =  0.0001;
-    const double dec_armor = 0.0001;
+    const double dec_product =  0.08;
+    const double dec_armor = 0.08;
 
 };
 

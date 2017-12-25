@@ -19,10 +19,12 @@ public:
     BotSharedData();
 
     void init(const world::World *world);
+    void clear(world::World *world);
     std::set<std::pair<int, LineBlock> > *getBlockLines();
     bool doMove(const world::Point *point, const world::Line *line);
     bool canMove(const world::Point *point, const world::Line *line);
     std::set<const world::Point *> *getInPoints();
+    std::map<const world::Train *,const world::Point *> *getTrainInPoints();
 
     HomeChecker *getCheker();
 
@@ -31,6 +33,7 @@ private:
     std::set<const world::Point *> inPoints;
     std::set<std::pair<int, LineBlock> > blockLines;
     std::map<const world::Point *, Barrier> barrierMap;
+    std::map<const world::Train *,const world::Point *> trainInPoints;
     HomeChecker cheker;
 
 };
