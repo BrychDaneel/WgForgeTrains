@@ -27,7 +27,7 @@ void BotSharedData::clear(world::World *world)
     for (auto train : world->getTrainList())
     {
         if (trainInPoints.count(train) == 1 && !train->getEvents().empty() &&
-                train->getEvents().back()->getTick() >= world->getTickNum() - 1)
+                train->getEvents().back()->getTick() >= world->getTickNum() - 3)
         {
 
             inPoints.erase(trainInPoints[train]);
