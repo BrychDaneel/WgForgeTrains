@@ -22,13 +22,13 @@ public:
     std::set<std::pair<int, LineBlock> > *getBlockLines();
     bool doMove(const world::Point *point, const world::Line *line);
     bool canMove(const world::Point *point, const world::Line *line);
-    std::set<world::Point *> *getInPoints();
+    std::set<const world::Point *> *getInPoints();
 
     HomeChecker *getCheker();
 
 
 private:
-    std::set<world::Point *> inPoints;
+    std::set<const world::Point *> inPoints;
     std::set<std::pair<int, LineBlock> > blockLines;
     std::map<const world::Point *, Barrier> barrierMap;
     HomeChecker cheker;

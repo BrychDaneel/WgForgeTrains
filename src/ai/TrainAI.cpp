@@ -27,9 +27,15 @@ TrainAI::TrainAI(BotSharedData *data, models::GoodType type, world::Train *train
 void TrainAI::step()
 {
 
+
+
     lineBlocker.makeOwnBlockLines();
     makeGoalPredict(*train->getWorld());
     pathCalculator.calculate(lineBlocker);
+
+    if (train->getMove() != nullptr)
+        return;
+
     makePath(*train->getWorld());
 
     if (currentPath.size() > 1 && train->getPoint() == currentPath[0])
@@ -73,9 +79,34 @@ void TrainAI::makeMove()
     models::SpeedType speed;
 
     if (currentLine->getEndPont() == currentPath[0])
+    {
         speed = models::SpeedType::FORWARD;
+
+        if (train->getPosition() + 1 == train->getLine()->getLenght())
+        {
+            sharedData->getInPoints()->insert(currentPath[0]);
+        }
+
+        if (train->getPosition() == 0)
+        {
+            sharedData->getInPoints()->erase(currentPath[0]);
+        }
+    }
     else
+    {
         speed = models::SpeedType::REVERSE;
+
+        if (train->getPosition() == 1)
+        {
+            sharedData->getInPoints()->insert(currentPath[0]);
+        }
+
+        if (train->getPosition() == currentLine->getLenght())
+        {
+            sharedData->getInPoints()->erase(currentPath[0]);
+        }
+
+    }
 
     train->move(currentLine, speed);
 }
@@ -134,7 +165,7 @@ void TrainAI::makePath(const world::World &world)
         {
             if (post->getPostType() != getPostTypeByGood(type)
                     || pathCalculator.getMinLen(post->getPoint()) == INT_MAX
-                    || train->getPoint() == post->getPoint())
+               )//  || train->getPoint() == post->getPoint())
                 continue;
 
             int tempLen = pathCalculator.getMinLen(post->getPoint())*2

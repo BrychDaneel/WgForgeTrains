@@ -43,7 +43,7 @@ bool BotSharedData::canMove(const world::Point *point, const world::Line *line)
     return barrierMap[point].canMove(line);
 }
 
-std::set<world::Point *> *BotSharedData::getInPoints()
+std::set<const world::Point *> *BotSharedData::getInPoints()
 {
     return &inPoints;
 }

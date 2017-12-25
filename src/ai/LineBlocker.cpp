@@ -83,13 +83,13 @@ void LineBlocker::changeCurrentBlock(const std::vector<const world::Point *> &po
             blockLines->insert(currentBlock.back());
         }
 
-        if (line->getAnotherPoint(points[1]) != points[2] &&
-                line->getAnotherPoint(points[1]) != points[0] &&
-                points[1] != homeTown->getPoint())
-        {
-            currentBlock.push_back({train->getIdx(), {line, line->getAnotherPoint(points[1])} });
-            blockLines->insert(currentBlock.back());
-        }
+        /* if (line->getAnotherPoint(points[1]) != points[2] &&
+                 line->getAnotherPoint(points[1]) != points[0] &&
+                 points[1] != homeTown->getPoint())
+         {
+             currentBlock.push_back({train->getIdx(), {line, line->getAnotherPoint(points[1])} });
+             blockLines->insert(currentBlock.back());
+         }*/
 
     }
 
