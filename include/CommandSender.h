@@ -1,29 +1,28 @@
-#ifndef _COMMAND_SENDER_H_
-#define _COMMAND_SENDER_H_
+#pragma once
+
 
 #include <world/ICommandSender.h>
 #include <client/ITrainClient.h>
 
 namespace tiger
 {
-    namespace trains
-    {
+namespace trains
+{
 
-        class CommandSender: public world::ICommandSender
-        {
-            public:
-                explicit CommandSender(client::ITrainClient *client);
-                void move(const models::MoveModel& move);
-                void upgrade(const models::UpgradeModel& upgrade);
-                void turn();
 
-            private:
+class CommandSender: public world::ICommandSender
+{
+public:
+    explicit CommandSender(client::ITrainClient *client);
+    void move(const models::MoveModel &move);
+    bool upgrade(const models::UpgradeModel &upgrade);
+    void turn();
 
-                client::ITrainClient *client;
-        };
+private:
 
-    }
+    client::ITrainClient *client;
+};
+
+
 }
-
-
-#endif
+}

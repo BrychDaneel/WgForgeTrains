@@ -1,46 +1,57 @@
 #include <models/PlayerModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-PlayerModel::PlayerModel(){
+PlayerModel::PlayerModel()
+{
 }
 
 
-PlayerModel::PlayerModel(const string idx, const int home, const string name) :
-    idx(idx), home(home), name(name){
+PlayerModel::PlayerModel(const string idx, const int home, const string name)
+    : idx(idx), home(home), name(name)
+{
 }
 
 
-const string PlayerModel::getIdx() const{
+const string PlayerModel::getIdx() const
+{
     return idx;
 }
 
 
-int PlayerModel::getHome() const{
+int PlayerModel::getHome() const
+{
     return home;
 }
 
 
-const string PlayerModel::getName() const{
+const string PlayerModel::getName() const
+{
     return name;
 }
 
 
-void PlayerModel::setIdx(const string idx){
+void PlayerModel::setIdx(const string idx)
+{
     this->idx = idx;
 }
 
 
-void PlayerModel::setHome(const int home){
+void PlayerModel::setHome(const int home)
+{
     this->home = home;
 }
 
 
-void PlayerModel::setName(const string name){
+void PlayerModel::setName(const string name)
+{
     this->name = name;
 }
 

@@ -4,10 +4,14 @@
 #include <nlohmann/json.hpp>
 
 
-namespace tiger{
-namespace trains{
-namespace convertors{
-namespace json{
+namespace tiger
+{
+namespace trains
+{
+namespace convertors
+{
+namespace json
+{
 
 /*
  * Errors:
@@ -17,30 +21,39 @@ namespace json{
  * 3 - value error
  * 4 - player is empty
  */
-int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::PlayerModel* playerModel){
+int PlayerReader::readPlayer(const char *buffer, const int bufferSize, models::PlayerModel *playerModel)
+{
     string str;
-    try{
+
+    try
+    {
         str.assign(buffer, bufferSize);
     }
-    catch (...){
+    catch (...)
+    {
         lastErrorCode = 1;
         lastErrorMessage = "Can't conver buffer to string";
         return lastErrorCode;
     }
 
     nlohmann::json j;
-    try{
+
+    try
+    {
         j = nlohmann::json::parse(str);
     }
-    catch (const nlohmann::json::parse_error& e){
+    catch (const nlohmann::json::parse_error &e)
+    {
         lastErrorCode = 2;
         lastErrorMessage = e.what();
         return lastErrorCode;
     }
 
-    try{
+    try
+    {
 
-        if (j.find("home") != j.end() && j["home"].is_null()){
+        if (j.find("home") != j.end() && j["home"].is_null())
+        {
             lastErrorCode = 4;
             lastErrorMessage = "Player is empty";
             return lastErrorCode;
@@ -51,12 +64,14 @@ int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::P
         playerModel->setName(j["name"]);
 
     }
-    catch(const nlohmann::json::type_error& e){
+    catch(const nlohmann::json::type_error &e)
+    {
         lastErrorCode = 3;
         lastErrorMessage = e.what();
         return lastErrorCode;
     }
-    catch(...){
+    catch(...)
+    {
         lastErrorCode = -1;
         lastErrorMessage = "Unknown parse data error.";
         return lastErrorCode;
@@ -67,12 +82,14 @@ int PlayerReader::readPlayer(const char* buffer, const int bufferSize, models::P
 }
 
 
-int PlayerReader::getLastErrorCode(){
+int PlayerReader::getLastErrorCode()
+{
     return lastErrorCode;
 }
 
 
-const std::string& PlayerReader::getLastErrorMessage(){
+const std::string &PlayerReader::getLastErrorMessage()
+{
     return lastErrorMessage;
 }
 

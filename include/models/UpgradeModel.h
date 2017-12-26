@@ -1,18 +1,19 @@
 #pragma once
-#ifndef _TIGER_TRAINS_MODELS_UPGRADE_MODEL_H_
-#define _TIGER_TRAINS_MODELS_UPGRADE_MODEL_H_
 
 
 #include <vector>
 
 
-namespace tiger{
-namespace trains{
-namespace models{
+namespace tiger
+{
+namespace trains
+{
+namespace models
+{
 
 
-class UpgradeModel{
-
+class UpgradeModel
+{
 private:
 
     std::vector<int> trainIdxList;
@@ -21,24 +22,19 @@ private:
 public:
 
     UpgradeModel();
-    UpgradeModel(const std::vector<int>& trainIdxList, const std::vector<int>& postIdxList);
+    UpgradeModel(const std::vector<int> &trainIdxList, const std::vector<int> &postIdxList);
 
-    const std::vector<int>& getTrainIdxList() const;
-    const std::vector<int>&  getPostIdxList() const;
+    const std::vector<int> &getTrainIdxList() const;
+    const std::vector<int>  &getPostIdxList() const;
 
     void clearTrainIdxList();
     void clearPostIdxList();
 
     void addTrainIdx(const int idx);
     void addPostIdx(const int idx);
-
 };
 
 
 }
 }
 }
-
-
-#endif
-

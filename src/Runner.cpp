@@ -5,17 +5,19 @@
 #include <models/CoordsMap.h>
 #include <CommandSender.h>
 #include <memory>
+#include <easylogging++/easylogging++.h>
 
 using namespace tiger::trains;
 
 
-Runner::Runner(const char *name, const char *addr, int port)
-    :name(name), addr(addr), port(port), world(),bot(nullptr)
+Runner::Runner(const char *name, const char *addr, int port, const char *gameName, const int playersNum)
+    : name(name), addr(addr), port(port), gameName(gameName), playersNum(playersNum), world(),bot(nullptr)
 {
 
 }
 
-world::World* Runner::getWorld(){
+world::World *Runner::getWorld()
+{
     return &world;
 }
 
@@ -25,21 +27,23 @@ void Runner::setBot(ai::IBot *bot)
 }
 
 
-void shutDown(){
-
-}
-
-
 void Runner::run()
 {
-    client::TCPTrainClient trainClient(name, addr, port);
+    client::TCPTrainClient trainClient(name, addr, port, gameName, playersNum);
 
     doRun = true;
     int retVal = trainClient.login();
+
+    if (retVal)
+    {
+        LOG(ERROR) << "Login error: " << trainClient.getLastErrorMessage();
+        return;
+    }
+
     CommandSender commandSender(&trainClient);
 
     std::vector<models::PlayerModel> models;
-    models::PlayerModel * player = trainClient.getMyPlayer();
+    models::PlayerModel *player = trainClient.getMyPlayer();
     models::StaticMap *staticMap = new models::StaticMap();
     models::CoordsMap coordsMap;
 
@@ -65,6 +69,14 @@ void Runner::run()
         trainClient.getDynamicMap(dynamicMap);
         world.update(*dynamicMap);
 
+        if (world.isGameOver())
+            break;
+
+        if (world.getPlayerList().size() < (size_t)playersNum)
+        {
+            sleep(1);
+            continue;
+        }
 
         if (bot != nullptr)
             bot->step();
@@ -75,11 +87,10 @@ void Runner::run()
         world.tick();
     }
 
-
-
 }
 
 
-void Runner::shutDown(){
+void Runner::shutDown()
+{
     doRun = false;
 }

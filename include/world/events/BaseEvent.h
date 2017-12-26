@@ -6,29 +6,32 @@
 #include <models/EventModel.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
-namespace events{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
+namespace events
+{
 
 
-class BaseEvent : public IEvent{
-
+class BaseEvent : public IEvent
+{
 public:
 
-    BaseEvent(){}
-    BaseEvent(const models::EventModel& model, World* world);
+    BaseEvent() {}
+    BaseEvent(const models::EventModel &model, World *world);
 
     virtual models::EventType getType() const;
     virtual int getTick() const;
-    virtual World* getWorld() const;
+    virtual World *getWorld() const;
 
 protected:
 
-    World* world;
+    World *world;
     int tick;
     models::EventType type;
-
 };
 
 

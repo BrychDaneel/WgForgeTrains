@@ -1,20 +1,26 @@
 #include <world/BasePost.h>
 
 
-namespace tiger{
-namespace trains{
-namespace world{
+namespace tiger
+{
+namespace trains
+{
+namespace world
+{
 
 
-BasePost::~BasePost(){
+BasePost::~BasePost()
+{
 }
 
 
-BasePost::BasePost(){
+BasePost::BasePost()
+{
 }
 
 
-BasePost::BasePost(const models::PostModel& model, World* world){
+BasePost::BasePost(const models::PostModel &model, World *world)
+{
     owner = world;
     name = model.getName();
     idx = model.getIdx();
@@ -22,48 +28,57 @@ BasePost::BasePost(const models::PostModel& model, World* world){
 }
 
 
-int BasePost::getIdx() const{
+int BasePost::getIdx() const
+{
     return idx;
 }
 
 
-void BasePost::update(const models::PostModel& model){
+void BasePost::update(const models::PostModel &model)
+{
     name = model.getName();
     idx = model.getIdx();
 }
 
 
-Point* BasePost::getPoint() const{
+Point *BasePost::getPoint() const
+{
     return owner->getPointOfPost(this);
 }
 
 
-World* BasePost::getWorld() const{
+World *BasePost::getWorld() const
+{
     return owner;
 }
 
 
-const std::string& BasePost::getName() const{
+const std::string &BasePost::getName() const
+{
     return name;
 }
 
 
-models::PostType BasePost::getPostType() const{
+models::PostType BasePost::getPostType() const
+{
     return type;
 }
 
 
-void BasePost::addEvent(IEvent* event){
+void BasePost::addEvent(IEvent *event)
+{
     eventsHistory.push_back(event);
 }
 
 
-void BasePost::clearEvents(){
+void BasePost::clearEvents()
+{
     eventsHistory.clear();
 }
 
 
-const std::vector<IEvent*>& BasePost::getEvents() const{
+const std::vector<IEvent *> &BasePost::getEvents() const
+{
     return eventsHistory;
 }
 

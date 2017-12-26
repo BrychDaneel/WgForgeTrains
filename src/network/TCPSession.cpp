@@ -4,35 +4,43 @@
 using namespace tiger::trains::network;
 
 
-TCPSession::TCPSession(const char *name, const char *servAddr, int port):name(name), servAddr(servAddr), port(port)
+TCPSession::TCPSession(const char *name, const char *servAddr, int port, const char *gameName, const int playersNum)
+    : name(name), servAddr(servAddr), port(port), gameName(gameName), playersNum(playersNum)
 {
-
 }
 
 TCPSession::~TCPSession()
 {
-   logout();
+    logout();
 }
 
-ResposeMessage* TCPSession::login()
+ResposeMessage *TCPSession::login()
 {
 
     if (!tcpClient.connect(servAddr, port))
     {
-       return nullptr;
+        return nullptr;
     }
+
     char buffer[255];
-    size_t len = sprintf(buffer, "{\n \"name\": \"%s\"\n}", name);
-    uint8_t sendBuffer[8+len];
+
+    size_t len;
+
+    len = sprintf(buffer, "{\"name\": \"%s\", \"game\": \"%s\", \"num_players\": %d}",
+                  name, gameName, playersNum);
+
+    char sendBuffer[8+len];
+
     uint32_t cmd = 1;
 
     memcpy(sendBuffer, &cmd, 4);
     memcpy(sendBuffer + 4, &len, 4);
     memcpy(sendBuffer + 8, buffer, len);
 
-    size_t retVal = send(sendBuffer, len + 8);
+    int retVal = send(sendBuffer, len + 8);
 
-
+    if (!retVal)
+        return nullptr;
 
     return recv();
 
@@ -42,7 +50,7 @@ ResposeMessage* TCPSession::login()
 
 void TCPSession::logout()
 {
-    uint8_t sendBuffer[8];
+    char sendBuffer[8];
     uint32_t cmd = 2;
     size_t len = 0;
 
@@ -54,17 +62,18 @@ void TCPSession::logout()
     tcpClient = TCPClient();
 }
 
-bool TCPSession::send(const uint8_t *buffer, size_t bufferSize)
+bool TCPSession::send(const char *buffer, size_t bufferSize)
 {
     int retVal = tcpClient.send(buffer, bufferSize);
     return retVal == -1 ? false : true;
 }
 
-ResposeMessage* TCPSession::recv()
+ResposeMessage *TCPSession::recv()
 {
     int retVal;
-    uint8_t firstBuffer[4];
+    char firstBuffer[4];
     retVal = tcpClient.recv(firstBuffer, 4);
+
     if (retVal == -1)
     {
         return nullptr;
@@ -74,14 +83,16 @@ ResposeMessage* TCPSession::recv()
     ResposeMessage *message = new ResposeMessage();
     memcpy(&message->result, firstBuffer, 4);
     retVal = tcpClient.recv(firstBuffer, 4);
+
     if (retVal == -1)
     {
         delete message;
         return nullptr;
     }
+
     memcpy(&message->dataLength, firstBuffer, 4);
 
-    uint8_t secondBuffer[message->dataLength];
+    char secondBuffer[message->dataLength];
     retVal = tcpClient.recv(secondBuffer, message->dataLength);
 
     message->data = new char[message->dataLength + 1];
