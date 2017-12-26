@@ -105,7 +105,8 @@ void World::update(const models::DynamicMap &dynamicMap)
             IPost *post = postMap[postModel.getIdx()];
             IEvent *event = EventFactory::createEvent(eventModel, post);
 
-            if (event->getType() == models::EventType::GAME_OVER)
+            if (event->getType() == models::EventType::GAME_OVER
+                    && playerList[0]->getHome() == post)
                 gameOver = true;
 
             post->addEvent(event);
@@ -150,8 +151,7 @@ void World::update(const models::DynamicMap &dynamicMap)
             Train *train = trainMap[trainModel.getIdx()];
             IEvent *event = EventFactory::createEvent(eventModel, train);
 
-            if (event->getType() == models::EventType::GAME_OVER)
-                gameOver = true;
+
 
             train->addEvent(event);
             tickNum = event->getTick();

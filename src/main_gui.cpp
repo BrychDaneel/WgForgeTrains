@@ -19,11 +19,11 @@ int main(int argc, char *argv[])
     QApplication application(argc, argv);
 
 
-    const char *login = "Tiger";
+    const char *login = "tiger";
     const char *host = "wgforge-srv.wargaming.net";
     int port = 443;
-    const char *gameName = "TigersGame3";
-    int playersNum = 1;
+    const char *gameName = "wg-forge3";
+    int playersNum = 4;
 
 
     if (argc > 5)
