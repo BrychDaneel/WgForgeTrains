@@ -44,11 +44,17 @@ set(SOURCE
     src/models/PostModel.cpp
     src/models/MoveModel.cpp
     src/client/TCPTrainClient.cpp
+    src/ai/HomeChecker.cpp
+    src/ai/SwitchAI.cpp
     src/ai/TrainAI.cpp
     src/ai/TrainGoalPredictor.cpp
+    src/ai/LineBlocker.cpp
+    src/ai/BotSharedData.cpp
     src/ai/ComplexBot.cpp
     src/ai/UpgradeAI.cpp
+    src/ai/PathCalculator.cpp
     src/ai/CollisionAllower.cpp
+    src/ai/Barrier.cpp
     src/network/TCPSession.cpp
     src/network/TCPSocket.cpp
     src/network/TCPClient.cpp
