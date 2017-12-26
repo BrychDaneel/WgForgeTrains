@@ -49,10 +49,6 @@ void TrainAI::step()
 
     else
     {
-        if (currentPath.size() == 1)
-        {
-            int i = 2;
-        }
 
         if (!currentPath.empty() && train->getPoint() != currentPath[0])
             makeMove();
@@ -103,8 +99,11 @@ void TrainAI::makeMove()
         {
             if (!sharedData->getInPoints()->count(currentPath[0]))
             {
-                sharedData->getInPoints()->insert(currentPath[0]);
-                sharedData->getTrainInPoints()->insert({train, currentPath[0]});
+                if (currentPath[0] != train->getPlayer()->getHome()->getPoint())
+                {
+                    sharedData->getInPoints()->insert(currentPath[0]);
+                    sharedData->getTrainInPoints()->insert({train, currentPath[0]});
+                }
 
             }
             else
@@ -130,6 +129,20 @@ void TrainAI::makeMove()
                         }
 
                     }
+
+                    if (stopLen == 0)
+                    {
+                        for (auto otherTrain : train->getWorld()->getTrainList())
+                        {
+                            if (otherTrain->getPoint() == train->getLine()->getStartPont())
+                            {
+                                otherTrain->setMove(models::MoveModel(otherTrain->getLine()->getIdx(),
+                                                                      otherTrain->getIdx(),
+                                                                      models::SpeedType::STOP));
+
+                            }
+                        }
+                    }
                 }
 
                 speed = models::SpeedType::STOP;
@@ -138,8 +151,11 @@ void TrainAI::makeMove()
 
         if (train->getPoint())
         {
-            sharedData->getInPoints()->erase(train->getPoint());
-            sharedData->getTrainInPoints()->erase(train);
+            if (train->getPoint() != train->getPlayer()->getHome()->getPoint())
+            {
+                sharedData->getInPoints()->erase(train->getPoint());
+                sharedData->getTrainInPoints()->erase(train);
+            }
         }
     }
     else
@@ -150,9 +166,11 @@ void TrainAI::makeMove()
         {
             if (!sharedData->getInPoints()->count(currentPath[0]))
             {
-                sharedData->getInPoints()->insert(currentPath[0]);
-                sharedData->getTrainInPoints()->insert({train, currentPath[0]});
-
+                if (currentPath[0] != train->getPlayer()->getHome()->getPoint())
+                {
+                    sharedData->getInPoints()->insert(currentPath[0]);
+                    sharedData->getTrainInPoints()->insert({train, currentPath[0]});
+                }
 
 
             }
@@ -179,7 +197,22 @@ void TrainAI::makeMove()
                         }
 
                     }
+
+                    if (stopLen == train->getLine()->getLenght())
+                    {
+                        for (auto otherTrain : train->getWorld()->getTrainList())
+                        {
+                            if (otherTrain->getPoint() == train->getLine()->getEndPont())
+                            {
+                                otherTrain->setMove(models::MoveModel(otherTrain->getLine()->getIdx(),
+                                                                      otherTrain->getIdx(),
+                                                                      models::SpeedType::STOP));
+                            }
+                        }
+                    }
                 }
+
+
 
                 speed = models::SpeedType::STOP;
 
@@ -188,8 +221,11 @@ void TrainAI::makeMove()
 
         if (train->getPoint())
         {
-            sharedData->getInPoints()->erase(train->getPoint());
-            sharedData->getTrainInPoints()->erase(train);
+            if (train->getPoint() != train->getPlayer()->getHome()->getPoint())
+            {
+                sharedData->getInPoints()->erase(train->getPoint());
+                sharedData->getTrainInPoints()->erase(train);
+            }
 
         }
 

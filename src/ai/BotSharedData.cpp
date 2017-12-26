@@ -12,6 +12,7 @@ BotSharedData::BotSharedData()
 
 void BotSharedData::init(const world::World *world)
 {
+    cheker.setHome((world::Town *)world->getPlayerList()[0]->getHome());
     const world::Point *point = world->getPlayerList()[0]->getHome()->getPoint();
     barrierMap.insert({point,Barrier(point)});
     barrierMap[point].setLines(point->getEdges());
@@ -26,7 +27,7 @@ void BotSharedData::clear(world::World *world)
 {
     for (auto train : world->getTrainList())
     {
-        if (trainInPoints.count(train) == 1 && !train->getEvents().empty() &&
+        if (trainInPoints.count(train) != 0 && !train->getEvents().empty() &&
                 train->getEvents().back()->getTick() >= world->getTickNum() - 3)
         {
 
@@ -34,7 +35,12 @@ void BotSharedData::clear(world::World *world)
             trainInPoints.erase(train);
         }
 
+        if (train->getPoint() == train->getPlayer()->getHome()->getPoint())
+            cheker.comeHome(train);
+
     }
+
+    cheker.blockHome(inPoints);
 }
 
 std::set<std::pair<int, LineBlock> > *BotSharedData::getBlockLines()

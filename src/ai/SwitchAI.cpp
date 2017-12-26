@@ -28,8 +28,11 @@ SwitchAI::SwitchAI(const world::World *world, const std::vector<TrainAI *> &trai
 void SwitchAI::step()
 {
     int population = static_cast<world::Town *>(world->getPlayerList()[0]->getHome())->getPopulation();
+    int needProductCompacity;
+    int level = static_cast<world::Town *>(world->getPlayerList()[0]->getHome())->getLevel();
 
-    int needProductCompacity = 60 * population;
+    needProductCompacity = 60 *(population + level - 1);
+
 
     for (TrainAI *bot : productBots)
         if (!canSwitch(bot))
