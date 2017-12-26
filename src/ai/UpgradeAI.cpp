@@ -12,15 +12,25 @@ namespace ai
 
 UpgradeAI::UpgradeAI(const world::World *world) : world(world)
 {
-    world::Train *train0 = world->getPlayerList()[0]->getTrains()[0];
-    world::Train *train1 = world->getPlayerList()[0]->getTrains()[1];
+
+    std::vector<std::pair<world::IUpgradeble *, int>> upgradeVector;
+
     town = static_cast<world::Town *>(world->getPlayerList()[0]->getHome());
-    upgradeQueue.push(train0);
-    upgradeQueue.push(train1);
-    upgradeQueue.push(town);
-    upgradeQueue.push(train0);
-    upgradeQueue.push(train1);
-    upgradeQueue.push(town);
+
+    for (world::Train *train : world->getPlayerList()[0]->getTrains())
+        upgradeVector.push_back(std::make_pair(train, 2));
+
+    upgradeVector.push_back(std::make_pair(town, 2));
+
+    upgradeQueue.push(upgradeVector);
+    upgradeVector.clear();
+
+    for (world::Train *train : world->getPlayerList()[0]->getTrains())
+        upgradeVector.push_back(std::make_pair(train, 3));
+
+    upgradeVector.push_back(std::make_pair(town, 3));
+
+    upgradeQueue.push(upgradeVector);
 }
 
 
@@ -28,16 +38,33 @@ void UpgradeAI::step()
 {
     int ar = town->getArrmor();
 
-    while (!upgradeQueue.empty() && ar - upgradeQueue.front()->getNextLevelPrice() >= RESERV_ARMOR)
-    {
-        ar -= upgradeQueue.front()->getNextLevelPrice();
+    if (upgradeQueue.empty())
+        return;
 
-        if (upgradeQueue.front()->upgrade())
-            upgradeQueue.pop();
+    std::vector<std::pair<world::IUpgradeble *, int>> &upgradeVector = upgradeQueue.front();
+
+    int i = 0;
+
+    while (i < upgradeVector.size())
+    {
+        world::IUpgradeble *target = upgradeVector[i].first;
+        int level = upgradeVector[i].second;
+
+        if (target->getLevel() + 1 == level &&
+                target->getNextLevelPrice() < ar - RESERV_ARMOR &&
+                target->isReadyToUpgrade())
+        {
+            target->upgrade();
+            ar -= target->getNextLevelPrice();
+            upgradeVector.erase(upgradeVector.begin() + i);
+        }
         else
-            LOG(ERROR) << "Can't apply update that coasts " << upgradeQueue.front()->getNextLevelPrice()
-                       << " when have " << ar + upgradeQueue.front()->getNextLevelPrice();
+            i++;
     }
+
+    if (upgradeVector.empty())
+        upgradeQueue.pop();
+
 }
 
 

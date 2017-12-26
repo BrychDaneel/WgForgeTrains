@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <string>
 #include <client/TCPTrainClient.h>
 #include <world/World.h>
@@ -17,13 +18,15 @@ private:
     const char *name;
     const char *addr;
     int port;
+    const char *gameName;
+    int playersNum;
     world::World world;
     ai::IBot *bot;
     bool doRun;
 
 
 public:
-    Runner(const char *name, const char *addr, int port);
+    Runner(const char *name, const char *addr, int port, const char *gameName, const int playersNum);
 
     void setBot(ai::IBot *bot);
 
@@ -41,4 +44,3 @@ public:
 
 }
 }
-

@@ -88,6 +88,7 @@ void World::fillEventsHistory(const size_t size)
 
 void World::update(const models::DynamicMap &dynamicMap)
 {
+
     for (models::PostModel postModel : dynamicMap.getPostList())
     {
         if (postMap.find(postModel.getIdx()) == postMap.end())
@@ -104,10 +105,12 @@ void World::update(const models::DynamicMap &dynamicMap)
             IPost *post = postMap[postModel.getIdx()];
             IEvent *event = EventFactory::createEvent(eventModel, post);
 
-            if (event->getType() == models::EventType::GAME_OVER)
+            if (event->getType() == models::EventType::GAME_OVER
+                    && playerList[0]->getHome() == post)
                 gameOver = true;
 
             post->addEvent(event);
+            tickNum = event->getTick();
             fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
         }
@@ -118,6 +121,19 @@ void World::update(const models::DynamicMap &dynamicMap)
 
     for (models::TrainModel trainModel : dynamicMap.getTrainList())
     {
+        if (playerMap.find(trainModel.getPlayerIdx()) == playerMap.end())
+        {
+            models::PlayerModel playerModel;
+            playerModel.setName(trainModel.getPlayerIdx());
+            playerModel.setIdx(trainModel.getPlayerIdx());
+            playerModel.setHome(playerList[0]->getHome()->getIdx());
+            Player *player = new Player(playerModel, this);
+            playerMap[playerModel.getIdx()] = player;
+            playerOfName[playerModel.getName()] = player;
+            playerList.push_back(player);
+            homes[player] = playerModel.getHome();
+        }
+
         if (trainMap.find(trainModel.getIdx()) == trainMap.end())
         {
             Train *train = new Train(trainModel, this);
@@ -135,10 +151,10 @@ void World::update(const models::DynamicMap &dynamicMap)
             Train *train = trainMap[trainModel.getIdx()];
             IEvent *event = EventFactory::createEvent(eventModel, train);
 
-            if (event->getType() == models::EventType::GAME_OVER)
-                gameOver = true;
+
 
             train->addEvent(event);
+            tickNum = event->getTick();
             fillEventsHistory(event->getTick() + 1);
             eventsHistory[event->getTick()].push_back(event);
         }
@@ -148,7 +164,10 @@ void World::update(const models::DynamicMap &dynamicMap)
     scoreMap.clear();
 
     for (auto it : dynamicMap.getScoreMap())
+    {
         scoreMap[getPlayerByName(it.first)] = it.second;
+        nameScoreMap[it.first] = it.second;
+    }
 }
 
 
@@ -353,5 +372,11 @@ bool World::isGameOver()
 
 int World::getScore(Player *player)
 {
-    return scoreMap[player];
+    //return scoreMap[player];
+    return 0;
+}
+
+std::map<std::string, int> World::getScoreMap()
+{
+    return nameScoreMap;
 }

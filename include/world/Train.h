@@ -37,6 +37,7 @@ private:
     models::GoodType goodsType;
     int level;
     int nextLevelPrice;
+    models::MoveModel *moveModel = nullptr;
 
 public:
 
@@ -62,6 +63,8 @@ public:
     int getNextLevelPrice() const;
 
     void move(Line *line, models::SpeedType speed);
+    void setMove(models::MoveModel move);
+    models::MoveModel *getMove() const;
 
     void addEvent(IEvent *event);
     void clearEvents();
@@ -70,6 +73,8 @@ public:
     bool upgrade() const;
 
     std::vector<Train *> getPosibleCollisions(const models::MoveModel *move=nullptr);
+
+    bool isReadyToUpgrade() const;
 };
 
 

@@ -13,11 +13,11 @@ namespace ai
 {
 
 
-class IBotSegment
+class ISubBot
 {
 public:
 
-    virtual ~IBotSegment() {}
+    virtual ~ISubBot() {}
     virtual void step() = 0;
 
 };

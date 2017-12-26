@@ -1,4 +1,5 @@
 #include <world/Train.h>
+
 #include <easylogging++/easylogging++.h>
 #include <cmath>
 
@@ -39,6 +40,12 @@ void Train::update(models::TrainModel model)
     goodsType = model.getGoodsType();
     level = model.getLevel();
     nextLevelPrice = model.getNextLevelPrice();
+
+    if (moveModel != nullptr)
+    {
+        delete moveModel;
+        moveModel = nullptr;
+    }
 }
 
 
@@ -119,6 +126,16 @@ void Train::move(Line *line, models::SpeedType speed)
     owner->getCommandSender()->move(moveModel);
 }
 
+void Train::setMove(models::MoveModel move)
+{
+    this->moveModel = new models::MoveModel(move);
+}
+
+models::MoveModel *Train::getMove() const
+{
+    return moveModel;
+}
+
 
 void Train::addEvent(IEvent *event)
 {
@@ -165,6 +182,7 @@ std::vector<Train *> Train::getPosibleCollisions(const models::MoveModel *move)
 {
     int pos = position;
     const Line *lin = line;
+
 
     if (move!=nullptr)
     {
@@ -249,6 +267,11 @@ std::vector<Train *> Train::getPosibleCollisions(const models::MoveModel *move)
             res.push_back(train);
 
     return res;
+}
+
+bool Train::isReadyToUpgrade() const
+{
+    return player->getHome()->getPoint() == getPoint();
 }
 
 

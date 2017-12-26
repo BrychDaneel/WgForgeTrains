@@ -1,6 +1,7 @@
 #include <ai/ComplexBot.h>
 #include <ai/TrainAI.h>
 #include <ai/UpgradeAI.h>
+#include <ai/SwitchAI.h>
 
 
 namespace tiger
@@ -20,17 +21,34 @@ void ComplexBot::init(world::World *world)
 {
     this->world = world;
 
+    sharedData.init(world);
 
-    trainA = new TrainAI(&busyLines, models::GoodType::PRODUCT,
-                         world->getPlayerList()[0]->getTrains()[1]);
-    listBotSegment.push_back(trainA);
+    std::vector<TrainAI *> trainsAI;
 
-    trainB = new TrainAI(&busyLines, models::GoodType::ARMOR,
-                         world->getPlayerList()[0]->getTrains()[0]);
-    listBotSegment.push_back(trainB);
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::PRODUCT    ,
+                                   world->getPlayerList()[0]->getTrains()[1]));
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::PRODUCT,
+                                   world->getPlayerList()[0]->getTrains()[0]));
 
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::ARMOR,
+                                   world->getPlayerList()[0]->getTrains()[2]));
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::ARMOR,
+                                   world->getPlayerList()[0]->getTrains()[3]));
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::PRODUCT,
+                                   world->getPlayerList()[0]->getTrains()[4]));
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::PRODUCT,
+                                   world->getPlayerList()[0]->getTrains()[5]));
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::ARMOR    ,
+                                   world->getPlayerList()[0]->getTrains()[6]));
+    trainsAI.push_back(new TrainAI(&sharedData, models::GoodType::ARMOR    ,
+                                   world->getPlayerList()[0]->getTrains()[7]));
 
-    listBotSegment.push_back(new UpgradeAI(world));
+    listSubBot.push_back(new SwitchAI(world, trainsAI));
+
+    for (ISubBot *bot : trainsAI)
+        listSubBot.push_back(bot);
+
+    listSubBot.push_back(new UpgradeAI(world));
 }
 
 
@@ -38,8 +56,14 @@ void ComplexBot::step()
 {
     //world::Town *home = (world::Town *)world->getPlayerList()[0]->getHome();
 
-    for (IBotSegment *subBot : listBotSegment)
+    sharedData.clear(world);
+
+    for (ISubBot *subBot : listSubBot)
         subBot->step();
+
+    for (world::Train *train : world->getPlayerList()[0]->getTrains())
+        if (train->getMove() != nullptr)
+            world->getCommandSender()->move(*train->getMove());
 
 }
 

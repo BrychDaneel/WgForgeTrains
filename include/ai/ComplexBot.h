@@ -1,13 +1,14 @@
 #pragma once
 
 
-#include <ai/IBotSegment.h>
+#include <ai/ISubBot.h>
 #include <ai/TrainAI.h>
 #include <map>
 #include <vector>
 #include <set>
 #include <world/World.h>
 #include <ai/IBot.h>
+#include <ai/BotSharedData.h>
 
 
 namespace tiger
@@ -27,9 +28,9 @@ public:
     void step();
     ~ComplexBot()
     {
-        for (auto botSegment : listBotSegment)
+        for (auto subBot : listSubBot)
         {
-            delete botSegment;
+            delete subBot;
         }
     }
 
@@ -37,8 +38,8 @@ private:
 
     world::World *world;
 
-    std::vector<IBotSegment * > listBotSegment;
-    std::set<std::pair<int ,const world::Line *>> busyLines;
+    std::vector<ISubBot * > listSubBot;
+    BotSharedData sharedData;
     TrainAI *trainA;
     TrainAI *trainB;
 
