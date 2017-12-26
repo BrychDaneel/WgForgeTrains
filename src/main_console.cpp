@@ -22,11 +22,12 @@ int main(int argc, char *argv[]){
     int playersNum = 4;
 
     if (argc > 1){
-        if (argc > 4){
+        if (argc != 6){
             std::cerr << "Wrong number of arguments." << std::endl;
-            std::cerr << "Usage:  console (login) (host) (port)" << std::endl;
+            std::cerr << "Usage:  console (login) (host) (port) (game) (playersNum)" << std::endl;
             return -1;
         }
+
         login = argv[1];
         host = argv[2];
         port = atoi(argv[3]);
